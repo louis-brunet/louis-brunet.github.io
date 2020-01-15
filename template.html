@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>CV - Louis BRUNET</title>
+	<link rel="stylesheet" type="text/css" href="css/TEMPLATE.css">
+</head>
+<body onresize="resizeMenu()">
+	
+	<nav id="topnav">
+		<img id="menu-icon" src="img/menu-closed.png" open="false" onclick="toggleMenu()">
+		<a id="lien-accueil" href="index.html">Accueil</a>
+		<a id="lien-cv" href="cv.html">CV</a>
+		<a id="lien-realisations" class="onglet-courant" href="#">Réalisations</a>
+		<a id="lien-contact" href="contact.html">Contact</a>
+	</nav>
+	
+	<section onclick="hideMobileMenu()">
+		<section class="main">
+			<div id="titre">Realisations</div>
+		</section>
+
+
+		<footer>
+			<span class="footer-infos">Louis BRUNET -- 21 décembre 2019</span>
+			<img src="img/logoiut.jpg">
+		</footer>
+	</section>
+
+	<div id="top-btn"  onclick="toTop()">
+		<img id="top-arrow" src="img/up-arrow-white.png">
+	</div>
+
+	<script src="js/TEMPLATE.js"></script>
+</body>
+</html>

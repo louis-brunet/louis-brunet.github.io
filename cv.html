@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>CV - Louis BRUNET</title>
+	<link rel="stylesheet" type="text/css" href="css/cv.css">
+</head>
+<body onresize="resizeMenu()">
+	
+	<nav id="topnav">
+		<img alt="Menu icon" id="menu-icon" src="img/menu-closed.png" data-open="false" onclick="toggleMenu()">
+		<a id="lien-accueil" href="index.html">Accueil</a>
+		<div class="dropdown">
+			<a id="lien-cv" class="onglet-courant" href="cv.html">CV</a>
+			<div class="dropdown-content">
+				<a href="#formation">Formation</a>
+				<a href="#xp-pro">Expériences profesionnelles</a>
+				<a href="#outils">Outils</a>
+				<a href="#xp-perso">Expériences personnelles</a>
+				<a href="#langues">Langues</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a id="lien-realisations" href="realisations.html">Réalisations</a>
+			<div class="dropdown-content">
+				<a href="realisations.html#scolaire">Cadre scolaire</a>
+				<a href="realisations.html#perso">Projets personnels</a>
+			</div>
+		</div>
+		<a id="lien-contact" href="contact.html">Contact</a>
+	</nav>
+	
+	<section onclick="hideMobileMenu()">
+		<section class="main">
+			<div id="titre">Curriculum Vitae</div>
+			<div id="imprimable">	
+				<a href="pdf/cv.pdf">Version imprimable</a>
+			</div>
+			<div class="content">
+				<div class="card" id="formation">
+					<div class="card-title">Formation</div>
+					<div class="card" id="dut">
+						<div class="card-entry-date"><p>2019 - 2020</p></div>
+						<div class="card-entry-content">
+							<span class="card-entry-description">
+								Première année de 
+								<span class="card-entry-title">DUT Informatique</span>
+							</span>
+							<span class="card-entry-location">IUT de Sénart-Fontainebleau, UPEC (Université Paris-Est Créteil)</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-entry-date"><p>2018 - 2019</p></div>
+						<div class="card-entry-content">
+							<span class="card-entry-title">Classes préparatoires intégrées</span>
+							<span class="card-entry-description">Département Sciences et Techniques pour l'Ingénieur</span>
+							<span class="card-entry-location">INSA (Institut National des Sciences Appliquées) Rennes</span>
+						</div>
+					</div>
+					<div class="card" id="mcgill">
+						<div class="card-entry-date"><p>2017 - 2018</p></div>
+						<div class="card-entry-content">
+							<span class="card-entry-description">
+								Première année de 
+								<span class="card-entry-title">Bachelor of Computer Science</span>
+							</span>
+							<span class="card-entry-location">McGill, Montréal (Canada)</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-entry-date"><p>2017</p></div>
+						<div class="card-entry-content">
+							<span class="card-entry-title">Baccalauréat S option internationale anglophone</span>
+							<span class="card-entry-description">Mention bien</span>
+							<span class="card-entry-location">Lycée François 1<sup>er</sup>, Fontainebleau</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" id="xp-pro">
+					<div class="card-title">Expérience professionnelle</div>
+					<div class="card">
+						<div class="card-entry-date"><p>Depuis fév. 2018,</p><p>oct. 2015 - juin 2017</p></div>
+						<div class="card-entry-content">
+							<span class="card-entry-title">Cours particuliers hebdomadaires</span>
+							<span class="card-entry-description">Cours en français et anglais de mathématiques et physique-chimie pour collégiens <strong>anglophones</strong> et non anglophones</span>
+							<span class="card-entry-location">Fontainebleau</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-entry-date"><p>Sep. - nov 2019,</p><p>juillet 2019,</p><p>juin 2018</p></div>
+						<div class="card-entry-content">
+							<span class="card-entry-title">Vendeur</span>
+							<span class="card-entry-description">En boulangerie et sur les marchés</span>
+							<span class="card-entry-location">Les Petits Pains de Mathilde, Fontainebleau</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-entry-date"><p>Juin 2019,</p></div>
+						<div class="card-entry-content">
+							<span class="card-entry-title">Opérateur de saisie</span>
+							<div class="card-entry-description"><p>Mise à jour de bases de données selon les rapports reçus</p><p>Utilisation de Word, Excel, Qualtrics.com</p></div>
+							<span class="card-entry-location">INSEAD (Institut Européen d'Administration des Affaires), Fontainebleau</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" id="outils">
+					<div class="card-title">Outils utilisés</div>
+					<div class="card" id="informatique">
+						<div class="card-entry-content">
+							<div class="card-entry-title">Compétences informatiques</div>
+							<div class="card-entry-description">
+								<p>
+									<em>Programmation - </em> impérative avec <strong>C</strong>, objet avec <strong>Java</strong>, scripts <strong>bash</strong>
+								</p>
+								<p>
+									<em>Web - </em>  HTML5, CSS3, JavaScript
+								</p>
+								<p>
+									<em>Bases de données - </em>  SQL92 (bases)
+								</p>
+								<p>
+									<em>Environnements de Développement Intégrés - </em>  <strong>Eclipse</strong>, Android Studio
+								</p>
+								<p>
+									<em>Systèmes d'exploitation - </em>  Windows 10, Archlinux
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="card" id="bureautique">
+						<div class="card-entry-content">
+							<div class="card-entry-title">Outils bureautiques</div>
+							<div class="card-entry-description">
+								<p>
+									<em>Microsoft Office - </em>  <strong>Excel</strong>, Word, PowerPoint
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--<a class="card" id="realisations" href="realisations.html">
+					<h3>Réalisations informatiques</h3>
+				</a>-->
+			<!--</div>
+			<div class="content">-->
+				<div class="card" id="xp-perso">
+					<div class="card-title">Expériences personnelles</div>
+					<div class="card">
+						<div class="card-entry-content">
+							<span class="card-entry-description">Apprentissage en <span class="card-entry-title">autodidacte</span> de techniques et langages de programmation</span>
+							<span class="card-entry-location">e.g. les librairies <strong>LIBGDX</strong> et <strong>Swing</strong> de Java, développement d'applications Android</span>
+							<div id="github">
+								<a href="https://www.github.com/louis-brunet/code">Projets personnels</a>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-entry-content">
+							<span class="card-entry-title">Délégué aux Model United Nations (MUN)</span>
+							<div class="card-entry-description">Simulation des nations unies (ONU) entre lycées internationnaux. <p>Interventions dans plusieurs conférences&nbsp;:</p></div>
+							<span class="card-entry-location">SAIMUN, Irlande, 2015; THIMUN, Pays-Bas, 2016; PAMUN, Paris, 2017</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-entry-content">
+							<span class="card-entry-description">Vécu dans <span class="card-entry-title">quatre pays différents</span></span>
+							<span class="card-entry-location">USA (3 ans en immersion dans l'Ohio), Canada (Montréal), France, Belgique</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" id="langues">
+					<div class="card-title">Langues</div>
+					<div class="card">
+						<div class="card-entry-content">
+							<span class="card-entry-title">Anglais</span>
+							<div class="card-entry-description">
+								<ul>
+									<li><strong>Bilingue</strong></li>
+									<li>Vécu dans deux pays anglophones, pendant 4 ans </li>
+									<li>5 ans de cours en France en section anglophone (de 4<sup>ème</sup> à Terminale)</li>
+									<li>IGCSE Litterature & IGCSE Language (diplômes de Cambridge)</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-entry-content">
+							<span class="card-entry-title">Espagnol</span>
+							<span class="card-entry-description">Scolaire (niveau B1)</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<span class="footer-infos">Louis BRUNET<br>14 janvier 2020<br>&copy; Copyright 2019</span>
+			<img src="img/logoiut.jpg" alt="Logo IUT Sénart-Fontainebleau">
+		</footer>
+	</section>
+
+	<div id="top-btn"  onclick="toTop()">
+		<img id="top-arrow" src="img/up-arrow-white.png" alt="Haut de page">
+	</div>
+	<script src="js/cv.js"></script>
+</body>
+</html>

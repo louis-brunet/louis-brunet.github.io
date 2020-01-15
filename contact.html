@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Réalisations - Louis BRUNET</title>
+	<link rel="stylesheet" type="text/css" href="css/contact.css">
+</head>
+<body onresize="resizeMenu()">
+	
+	<nav id="topnav">
+		<img alt="Menu icon" id="menu-icon" src="img/menu-closed.png" data-open="false" onclick="toggleMenu()">
+		<a id="lien-accueil" href="index.html">Accueil</a>
+		<div class="dropdown">
+			<a id="lien-cv" href="cv.html">CV</a>
+			<div class="dropdown-content">
+				<a href="cv.html#formation">Formation</a>
+				<a href="cv.html#xp-pro">Expériences profesionnelles</a>
+				<a href="cv.html#outils">Outils</a>
+				<a href="cv.html#xp-perso">Expériences personnelles</a>
+				<a href="cv.html#langues">Langues</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a id="lien-realisations" href="realisations.html">Réalisations</a>
+			<div class="dropdown-content">
+				<a href="realisations.html#scolaire">Cadre scolaire</a>
+				<a href="realisations.html#perso">Projets personnels</a>
+			</div>
+		</div>
+		<a id="lien-contact" class="onglet-courant" href="contact.html">Contact</a>
+	</nav>
+	
+	<section onclick="hideMobileMenu()">
+		<section class="main">
+			<div id="titre">Contact</div>
+
+			<div class="content">
+				<div class="card">
+					<div class="card-title">Mes coordonnées</div>
+
+					<div class="card">
+						<img src="img/contact-phone.png" class="card-entry-icon" alt="Icone - téléphone">
+						<div class="card-entry-text">06 17 03 67 10</div>
+					</div>
+					<div class="card">
+						<img src="img/contact-email.png" class="card-entry-icon" alt="Icone - email">
+						<div class="card-entry-text"><a href="mailto:123louisb@gmail.com">123louisb@gmail.com</a></div>
+					</div>
+					<div class="card">
+						<img src="img/contact-location.png" class="card-entry-icon" alt="Icone - location">
+						<div class="card-entry-text">41 avenue Franklin Roosevelt<br>77210 Avon</div>
+					</div>
+					<div class="card">
+						<img src="img/contact-linkedin.png" class="card-entry-icon" alt="Icone - LinkeIn">
+						<div class="card-entry-text"><a href="https://www.linkedin.com">LinkedIn</a></div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-title">Formulaire de contact</div>
+					
+					<div class="card">
+						<form action=".php">
+							<select id="mr" name="mr">
+						    	<option value="m">M.</option>
+						    	<option value="mme">Mme.</option>
+							</select>
+							
+							<label for="fname">Prénom</label>
+							<input type="text" id="fname" name="firstname" placeholder="Votre prénom..">
+
+							<label for="lname">Nom *</label>
+							<input type="text" id="lname" name="lastname" placeholder="Votre nom.." required>
+
+							<label for="email">Email *</label>
+							<input type="email" id="email" name="email" placeholder="Votre adresse email.." required>
+
+							<label for="sujet">Message *</label>
+							<textarea id="sujet" name="sujet" placeholder="À quel sujet voulez vous me contacter ?" required></textarea>
+
+							<label>* : Champs obligatoire</label>
+							<input type="submit" value="Envoyer">
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<footer>
+			<span class="footer-infos">Louis BRUNET<br>14 janvier 2020<br>&copy; Copyright 2019</span>
+			<img src="img/logoiut.jpg" alt="Logo de l'IUT de Sénart-Fontainebleau">
+		</footer>
+	</section>
+
+	<script src="js/contact.js"></script>
+</body>
+</html>

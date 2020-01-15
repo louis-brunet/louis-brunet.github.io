@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Réalisations - Louis BRUNET</title>
+	<link rel="stylesheet" type="text/css" href="css/realisations.css">
+</head>
+<body onresize="resizeMenu()">
+	
+	<nav id="topnav">
+		<img alt="Menu icon" id="menu-icon" src="img/menu-closed.png" data-open="false" onclick="toggleMenu()">
+		<a id="lien-accueil" href="index.html">Accueil</a>
+		<div class="dropdown">
+			<a id="lien-cv" href="cv.html">CV</a>
+			<div class="dropdown-content">
+				<a href="cv.html#formation">Formation</a>
+				<a href="cv.html#xp-pro">Expériences profesionnelles</a>
+				<a href="cv.html#outils">Outils</a>
+				<a href="cv.html#xp-perso">Expériences personnelles</a>
+				<a href="cv.html#langues">Langues</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<a id="lien-realisations" class="onglet-courant" href="#">Réalisations</a>
+			<div class="dropdown-content">
+				<a href="#scolaire">Cadre scolaire</a>
+				<a href="#perso">Projets personnels</a>
+			</div>
+		</div>
+		<a id="lien-contact" href="contact.html">Contact</a>
+	</nav>
+	
+	<section onclick="hideMobileMenu()">
+		<section class="main">
+			<div id="titre">Réalisations</div>
+
+			<div class="content">
+				<div class="card" id="scolaire">
+					<div class="card-title">Cadre Scolaire</div>
+					<div class="content">
+						<div class="card" >
+							
+							<div class="card-entry-title">
+								Snake
+								<div class="card-entry-language">C / <em>Bibliothèque graphique de l'IUT</em></div>
+							</div>  
+							
+
+							<div class="git">
+								<a href="https://dwarves.iut-fbleau.fr/git/brunet/PT11_APL2019">Code source</a>
+							</div>
+
+							<div class="card-entry-gallery" id="snake-gallery" data-current="one"> 
+								<img class="gallery-btn previous" data-active="false" id="snake-previous" src="img/left-arrow-inactive.png" onclick="prevImg('snake')" alt="Boutton 'revenir en arrière'">
+
+								<img class="card-entry-img one" src="img/snake-start.png" alt="Capture d'écran - début du jeu">
+								<img class="card-entry-img two" src="img/snake-pause.png" alt="Capture d'écran - jeu en pause">
+								<img class="card-entry-img three" src="img/snake-obstacles.jpg" alt="Capture d'écran - milieu de partie, obstacles créés">
+								<img class="card-entry-img four" src="img/snake-records.png" alt="Capture d'écran - saisie du nom associé au record atteint">
+								<img class="card-entry-img five last" src="img/snake-perdu.png" alt="Capture d'écran - jeu perdu">
+
+								<img class="gallery-btn next" data-active="true" id="snake-next" src="img/right-arrow.png" onclick="nextImg('snake')" alt="Boutton 'prochaine image'">
+							</div>
+
+							<div class="card-entry-description">
+								<ul class="desc">
+									<li><div>Fonctionnalités</div>
+										<ul class="fonctionnalites">
+											<li>
+												<div>Règles classiques du <em>Snake</em> :</div>
+												<ul>
+													<li>Le serpent avance d'une case par <em>frame</em>, sa taille augmente de deux cases par pomme mangée</li>
+													<li>Le score actuel du joueur, ainsi que le temps restant à la partie, sont visibles en bas de l'écran de jeu</li>
+												</ul>
+											</li>
+											<li>
+												<div>Variantes</div>
+												<ul class="variantes">
+													<li>La vitesse de jeu est accélérée au fil de la partie</li>
+													<li>Un obstacle (feu de bois) est généré pour trois pommes mangées</li>
+													<li>Le top 10 des records atteints est enregistré sur la machine</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+
+									<li><div>Systèmes compatibles</div> 
+										<ul class="systemes">
+											<li>Linux</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+						<div class="card" >
+							
+							<div class="card-entry-title">Site personnel
+								<div class="card-entry-language">HTML5, CSS3, JavaScript</div>
+							</div>
+
+							<div class="git">
+								<a href="https://dwarves.iut-fbleau.fr/git/brunet/projetwims1_brunet">Code source</a>
+							</div>
+
+							<img class="card-entry-img one" src="img/accueil-site.JPG" alt="Page d'accueil du site">
+							<div class="card-entry-description">
+								<ul class="desc">
+									<li>
+										<div>Fonctionnalités</div>
+										<ul class="fonctionnalites">
+											<li>
+												Réalisé pour l'apprentissage du développement web à l'IUT de Sénart-Fontainebleau
+											</li>
+											<li>Contient une page d'accueil et des pages pour mon CV, mes réalisations informatiques, et pour me contacter</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="card" id="perso">
+					<div class="card-title">Projets personnels</div>
+
+					<div class="content">
+						<div class="card" id="echecs">
+							<!-- <div class="card-entry-content"> -->
+								<div class="card-entry-title">Échecs
+									<div class="card-entry-language">Java / <em>Swing</em></div>
+								</div>
+
+								<div class="git">
+									<a href="https://github.com/louis-brunet/code/tree/master/JAVA/eclipse/Chess2/src">Code source</a>
+								</div>
+
+								<div class="card-entry-gallery" id="chess-gallery" data-current="one"> 
+									<img class="gallery-btn previous" data-active="false" id="chess-previous" src="img/left-arrow-inactive.png" onclick="prevImg('chess')" alt="Boutton 'revenir en arrière'">
+
+									<img class="card-entry-img one" src="img/chess-start.JPG" alt="Capture d'écran - début du jeu">
+									<img class="card-entry-img two" src="img/chess-promotion.JPG" alt="Capture d'écran - promotion d'un pion">
+									<img class="card-entry-img three" src="img/chess-check.JPG" alt="Capture d'écran - roi en échec">
+									<img class="card-entry-img four" src="img/chess-captured-check.JPG" alt="Capture d'écran - pièces capturées, roi en échec">
+									<img class="card-entry-img five last" src="img/chess-win.JPG" alt="Capture d'écran - jeu gagné">
+
+									<img class="gallery-btn next" data-active="true" id="chess-next" src="img/right-arrow.png" onclick="nextImg('chess')" alt="Boutton 'prochaine image'">
+								</div>
+
+								<div class="card-entry-description">
+									<ul class="desc">
+										<li>
+											<div>Fonctionnalités</div>
+											<ul class="fonctionnalites">
+												<li>
+													<div>Partie d'échecs entre deux joueurs locaux :</div>
+													<ul>
+														<li>Règles classiques des échecs -- les joueurs peuvent effectuer un déplacement seulement si celui-ci est autorisé</li>
+														<li>Possibilité d'annuler le dernier déplacement ou de recommencer la partie</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li><div>Systèmes compatibles</div> 
+											<ul class="systemes">
+												<li>Windows</li><li>Linux</li><li>macOs</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							<!-- </div> -->
+						</div>
+						<div class="card">
+							<!-- <div class="card-entry-content"> -->
+								<div class="card-entry-title">Space Invaders
+									<div class="card-entry-language">Java / <em>Swing</em></div>
+								</div>
+
+								<div class="git">
+									<a href="https://github.com/louis-brunet/code/tree/master/JAVA/eclipse/SpaceInvaders/src">Code source</a>
+								</div>
+
+
+
+								<img class="card-entry-img one" src="img/space-invaders.JPG" alt="Partie de Space Invaders">
+								<div class="card-entry-description">
+									<ul class="desc">
+										<li>
+											<div>Fonctionnalités</div>
+											<ul class="fonctionnalites">
+												<li>
+													<div>
+														Partie classique de <em>Space Invaders</em> :
+													</div>
+													<ul>
+														<li>Le joueur a trois vies, son score augmente en fonction des ennemis et projectiles détruits</li>
+														<li>La prochaine vague d'ennemis arrive quand le joueur détruit tous les ennemis d'une vague</li>
+														<li>Les bunkers sont détruits seulement par les projectiles ennemis</li>	
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li><div>Systèmes compatibles</div> 
+											<ul class="systemes">
+												<li>Windows</li><li>Linux</li><li>macOs</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							<!-- </div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+
+		<footer>
+			<span class="footer-infos">Louis BRUNET<br>14 janvier 2020<br>&copy; Copyright 2019</span>
+			<img src="img/logoiut.jpg" alt="Logo de l'IUT">
+		</footer>
+	</section>
+
+	<div id="top-btn"  onclick="toTop()">
+		<img id="top-arrow" src="img/up-arrow-white.png" alt="Flèche vers le haut">
+	</div>
+	<script src="js/realisations.js"></script>
+</body>
+</html>
