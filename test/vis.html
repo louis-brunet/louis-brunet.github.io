@@ -65,7 +65,7 @@
 </head>
 <body>
   <p id="title">Suivi longitudinal de Monsieur ___ ____</p>
-  <div class="btn" onclick="hideAllEmptySpace(31)">Hide empty space</div>
+  <div id="btn" class="btn" onclick="hideAllEmptySpace(31)">Clique moi pour cacher les dates vides à plus de 31 jours de tout item</div>
   <div id="visualization"></div>
 
   <script>
@@ -79,12 +79,12 @@
     // note that months are zero-based in the JavaScript Date object, so month 3 is April
     var items = new vis.DataSet([
       {id: 0, group: 0, className: 'path-t', content: 'T', title: 'Pathologie T', start: new Date(2014, 3, 17)},
-      {id: 1, group: 0, className: 'path-nt', content: 'NT1', title: 'Pathologie NT1',  start: new Date(2014, 5, 17)},
-      {id: 2, group: 0, className: 'path-nt', content: 'NT2', title: 'Pathologie NT2',  start: new Date(2014, 6, 25)},
+      {id: 1, group: 0, className: 'path-nt', content: 'Cir', title: 'Cir',  start: new Date(2014, 5, 17)},
+      {id: 2, group: 0, className: 'path-nt', content: 'Nash', title: 'Nash',  start: new Date(2014, 6, 25)},
       {id: 3, group: 1, className: 'examen', content: '<p>Hémoglobine=1</p><p>SGOT=2</p><p><span class="val-anormale">Biluribine totale=5</span></p><p>Taux de prothrombine=4</p>', start: new Date(2014, 4, 17)},
       {id: 4, group: 1, className: 'examen', content: 'Hémoglobine=2', start: new Date(2014, 5, 17)},
       {id: 5, group: 1, className: 'examen', content: '<span class="val-anormale">Hémoglobine=5</span>', start: new Date(2014, 7, 17)},
-      {id: 6, group: 1, className: 'examen', content: 'Hémoglobine=3', start: new Date(2015, 10, 10)},
+      {id: 6, group: 1, className: 'examen', content: 'Hémoglobine=3', start: new Date(2016, 1, 10)},
       {id: 7, group: 2, className: 'path-t', content: 'Res', title: 'Res | Traitement T',  start: new Date(2014, 4, 17)},
       {id: 8, group: 2, className: 'path-nt', content: 'MO', title: 'MO | Traitement NT',  start: new Date(2014, 6, 17)},
       {id: 9, group: 2, className: 'path-nt', content: 'RF', title: 'RF | Traitement NT',  start: new Date(2014, 7, 5)},
@@ -93,8 +93,10 @@
       {id: 12, group: 2, className: 'path-nt', content: 'TC-f', title: 'TC fin | Traitement NT',  start: new Date(2014, 9, 23)},
       {id: 13, group: 2, className: 'path-nt', content: 'CEL', title: 'CEL | Traitement NT',  start: new Date(2014, 9, 10)},
       {id: 14, group: 0, className: 'path-fin', content: 'T', title: 'Fin pathologie T', start: new Date(2014, 4, 25)},
-      {id: 15, group: 0, className: 'path-fin', content: 'NT1', title: 'Fin pathologie NT1', start: new Date(2014, 9, 25)},
-      {id: 16, group: 0, className: 'path-fin', content: 'NT2', title: 'Fin pathologie NT2', start: new Date(2015, 0, 5)}
+      {id: 15, group: 0, className: 'path-fin', content: 'Cir', title: 'Fin Cir', start: new Date(2014, 9, 25)},
+      {id: 16, group: 0, className: 'path-fin', content: 'Nash', title: 'Fin Nash', start: new Date(2015, 0, 5)},
+      {id: 17, group: 0, className: 'path-fin', content: 'Hépat', title: 'Fin Hépat', start: new Date(2015, 4, 13)},
+      {id: 18, group: 0, className: 'path-nt', content: 'Hépat', title: 'Hépat',  start: new Date(2014, 11, 25)}
     ]);
 
     // create visualization
@@ -180,8 +182,7 @@
 
     // TODO: hide all dates that are more than **tolerance** days away from any item
     function hideAllEmptySpace (tolerance) {
-      // For each item except for first and last items :  
-        // if is not first or last item hideEmptySpaceAroundItem(item, tolerance)
+      // For each item except for first and last items : hideEmptySpaceAroundItem(item, tolerance)
       let firstDate = timeline.getItemRange().min;
       let lastDate = timeline.getItemRange().max;
       items.get({
@@ -196,6 +197,7 @@
       // hide space after last item until present date
       hideEmptySpaceUntilNow(tolerance);
 
+      document.getElementById('btn').style.display = 'none';
       redrawTimeline();
     }
 
