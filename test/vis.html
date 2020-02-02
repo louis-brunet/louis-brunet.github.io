@@ -17,8 +17,8 @@
   <div id="nb-btn" class="btn" onclick="incrementItems('CHC');incrementItems('RCP');incrementItems('Cs');this.style.display='none';">Clique moi pour numéroter les pathologies CHC et les consultations RCP et Cs si elles sont dupliquées</div>
   
   <label>Tolérance (jours) : </label>
-  <input id="tolerance" type="number" value="31">
-  <span class="btn" onclick="hideAllEmptySpace(document.getElementById('tolerance').value)">Rafraichir</span>
+  <input id="tolerance" type="number" value="31" min="1" onkeydown = "if (event.keyCode == 13) document.getElementById('tolerance-btn').click()">
+  <span id="tolerance-btn" class="btn" onclick="hideAllEmptySpace(document.getElementById('tolerance').value)">Rafraichir</span>
   <div id="visualization"></div>
 
   
