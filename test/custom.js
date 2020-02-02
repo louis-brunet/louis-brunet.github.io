@@ -34,7 +34,8 @@ var items = new vis.DataSet([
   {id: 19, group: 0, className: 'path-t', content: 'CHC', title: 'CHC', start: new Date(2019, 0, 1)},
   {id: 20, group: 3, className: 'consultation', content: 'RCP', title: 'RCP', start: new Date(2015, 7, 23)},
   {id: 21, group: 3, className: 'consultation', content: 'Cs', title: 'Cs', start: new Date(2019, 0, 14)},
-  {id: 22, group: 3, className: 'consultation', content: 'Cs', title: 'Cs', start: new Date(2016, 4, 8)}
+  {id: 22, group: 3, className: 'consultation', content: 'Cs', title: 'Cs', start: new Date(2016, 4, 8)},
+  {id: 23, group: 3, className: 'consultation', content: 'Cs', title: 'Cs', start: new Date(2013, 3, 30)}
 ]);
 
 
