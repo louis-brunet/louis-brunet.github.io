@@ -166,7 +166,7 @@ function redrawTimeline() {
   timeline = new vis.Timeline(container, items, groups, options);
 }
 
-// Rename all items containing 'content: $string' to show increment based on time
+// Rename all items containing 'content: $string' to show chronological increment
 // (e.g. CHC 1, CHC 2, ...)
 function incrementItems(string) {
   let matchedItems = items.get({
@@ -174,7 +174,16 @@ function incrementItems(string) {
       return (i.content == string);
     }
   });
-  if (matchedItems.length <= 1) return;
+  // boolean, does matchedItems contain an item with className 'path-fin' ?
+  let hasPathFin = false;
+  for (var i = 0; i < matchedItems.length; i++) {
+    if(matchedItems[i].className == 'path-fin') {
+      hasPathFin = true;
+      break;
+    }
+  }
+
+  if (matchedItems.length <= 1 || (hasPathFin && matchedItems.length <= 2)) return;
 
   // Sort array chronologically
   matchedItems.sort(
