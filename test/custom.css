@@ -1,0 +1,69 @@
+body, html {
+      font-family: arial, sans-serif;
+      font-size: 9pt;
+    }
+
+    #title {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #visualization {
+      box-sizing: border-box;
+      width: 100%;
+      height: 300px;
+    }
+
+    .vis-item {
+      padding: 10px 5px;
+      text-align: center;
+      border-color: rgba(0,0,0,0.5);
+    }
+
+    .vis-item.path-t {
+      background-color: rgba(255, 0, 0, 1);
+    }
+
+    .vis-item.path-nt {
+      background-color: rgba(255, 165, 0, 1);
+    }
+
+    .vis-item.path-fin {
+      background-color: rgba(100,200,100,1);
+    }
+
+    .vis-item.traitement {
+      background-color: rgba(130, 130, 130, 1);
+      color: white;
+    }
+
+    .vis-item.examen {
+      background-color: rgba(180, 180, 255, 1);
+    }
+
+    .vis-item.consultation {
+      background-color: rgba(243,243,76, 1);
+    }
+
+    /*.val-anormale {
+      color: red;
+    }
+
+    .vis-item p {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }*/
+
+    .btn {
+      background-color: red;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      padding: 10px;
+      margin: auto;
+      cursor: pointer;
+      text-align: center;
+      max-width: 250px;
+    }
+
+    #nb-btn {
+      background-color: green;
+    }
