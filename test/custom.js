@@ -107,7 +107,8 @@ request.onload = function () {
         parsedItem.group = 2;
         break;
       case 'traitement-s':
-      parsedItem.group = 
+        parsedItem.group = 6;
+        break;
     }
 
     if (parsedData[i].hasOwnProperty('end')) {

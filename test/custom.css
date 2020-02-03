@@ -70,6 +70,11 @@ body, html {
       border-color: rgba(156,156,48, 0.5);
     }
 
+    .vis-item.comp {
+      background-color: white;
+      color: rgba(180,180, 0,1);
+      border-color: rgba(180,180, 0,0.5);
+    }
    /* .vis-dot.path-fin {
       border-color: rgba(0,100,0,0.3);
     }*/
