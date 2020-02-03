@@ -10,39 +10,34 @@
 	"start":"2013-05-31",
 	"end":"2015-02-03"
 },
-
 {
 	"content":"Cir",
 	"className":"path-nt",
-	"start":"2016-05-31"
+	"start":"2016-05-31",
+	"end":"2016-05-31"
 },
-
 {
 	"content":"Asc",
 	"className":"comp",
 	"start":"2017-05-15",
 	"end":"2017-07-31"
 },
-
 {
 	"content":"CHC",
 	"className":"path-t",
 	"start":"2018-10-15",
 	"end":"2018-12-30"
 },
-
 {
 	"content":"RCP", 
 	"className":"consultation",
 	"start":"2018-10-30"
 },
-
 {
 	"content":"TDM", 
 	"className":"examen",
 	"start":"2018-10-15"
 },
-
 {
 	"content":"Pbh", 
 	"className":"examen",
@@ -59,38 +54,48 @@
 	"className":"examen",
 	"start":"2019-03-30"
 },
-
 {
 	"content":"tdm", 
 	"className":"examen",
 	"start":"2019-06-30"
 },
-
 {
 	"content":"CHC",
 	"className":"path-t",
 	"start":"2019-06-30",
 	"end":""
 },
-
 {
 	"content":"RCP", 
 	"className":"consultation",
 	"start":"2019-07-10"
 },
-
 {
 	"content":"CEL", 
 	"className":"traitement-l",
 	"start":"2019-07-30"
 },
-
+{
+	"content":"CEL", 
+	"className":"traitement-l",
+	"start":"2019-08-30"
+},
+{
+	"content":"CEL", 
+	"className":"traitement-l",
+	"start":"2019-09-30"
+},
+{
+	"content":"TC", 
+	"className":"traitement-s",
+	"start":"2019-09-30",
+	"end":""
+},
 {
 	"content":"TDM", 
 	"className":"examen",
 	"start":"2019-10-15"
 },
-
 {
 	"content":"RCP", 
 	"className":"consultation",
@@ -98,7 +103,7 @@
 },
 
 {
-	"content":"TC", 
+	"content":"TDM", 
 	"className":"examen",
-	"start":"2019-11-15"
-}]
+	"start":"2020-02-01"
+},
