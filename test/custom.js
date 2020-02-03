@@ -119,7 +119,6 @@ request.onload = function () {
 
   }
 
-  alert('loaded items : ' + loadedItems);
   items = new vis.DataSet(loadedItems);
   timeline = new vis.Timeline(container, items, groups, options);
 //hideAllEmptySpace(document.getElementById('tolerance').value);
