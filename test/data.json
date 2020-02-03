@@ -46,7 +46,8 @@
 {
 	"content":"RF", 
 	"className":"traitement-l",
-	"start":"2018-11-25"
+	"start":"2018-11-25",
+	"end":"2018-11-25"
 },
 
 {
@@ -73,17 +74,20 @@
 {
 	"content":"CEL", 
 	"className":"traitement-l",
-	"start":"2019-07-30"
+	"start":"2019-07-30",
+	"end":"2019-07-30"
 },
 {
 	"content":"CEL", 
 	"className":"traitement-l",
-	"start":"2019-08-30"
+	"start":"2019-08-30",
+	"end":"2019-08-30"
 },
 {
 	"content":"CEL", 
 	"className":"traitement-l",
-	"start":"2019-09-30"
+	"start":"2019-09-30",
+	"end":"2019-09-30"
 },
 {
 	"content":"TC", 

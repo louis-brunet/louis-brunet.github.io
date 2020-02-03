@@ -111,7 +111,7 @@ request.onload = function () {
         break;
     }
 
-    if (parsedData[i].hasOwnProperty('end')) {
+    if (parsedData[i].hasOwnProperty('end') && parsedData[i].end != parsedData[i].start) {
       if(parsedData[i].end != "")
         parsedItem.end = new Date(parsedData[i].end);
       else {
