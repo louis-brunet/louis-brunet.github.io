@@ -4,16 +4,17 @@
 
 var groups = new vis.DataSet([
       {id: 0, content: 'Pathologies tumorales', value: 2},
-      {id: 1, content: 'Examens', value: 6},
-      {id: 2, content: 'Traitements', value: 4},
+      {id: 1, content: 'Examens', value: 7},
+      {id: 2, content: 'Traitements locaux', value: 4},
       {id: 3, content: 'Consultations', value: 1},
       {id: 4, content: 'Pathologies non tumorales', value: 3},
-      {id: 5, content: 'Complications', value: 5}
+      {id: 5, content: 'Complications', value: 6},
+      {id: 6, content: 'Traitements systémiques', value: 5}
     ]);
 
 // create a dataset with items
 // note that months are zero-based in the JavaScript Date object, so month 3 is April
-var items = new vis.DataSet([
+/*var items = new vis.DataSet([
   {id: 0, group: 0, className: 'path-t', content: 'CHC', title: 'CHC', start: new Date(2014, 3, 17)},
   {id: 1, group: 4, className: 'path-nt', content: 'Nash', title: 'Nash',  start: new Date(2014, 5, 17)},
   {id: 2, group: 4, className: 'path-nt', content: 'Cir', title: 'Cir',  start: new Date(2013, 3, 25)},
@@ -38,7 +39,7 @@ var items = new vis.DataSet([
   {id: 21, group: 3, className: 'consultation', content: 'Cs', title: 'Cs', start: new Date(2019, 0, 14)},
   {id: 22, group: 3, className: 'consultation', content: 'Cs', title: 'Cs', start: new Date(2016, 4, 8)},
   {id: 23, group: 3, className: 'consultation', content: 'Cs', title: 'Cs', start: new Date(2013, 3, 30)}
-]);
+]);*/
 
 
 // create visualization
@@ -102,9 +103,11 @@ request.onload = function () {
       case 'comp':
         parsedItem.group = 5;
         break;
-      case 'traitement':
+      case 'traitement-l':
         parsedItem.group = 2;
         break;
+      case 'traitement-s':
+      parsedItem.group = 
     }
 
     if (parsedData[i].hasOwnProperty('end')) {
