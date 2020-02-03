@@ -108,7 +108,7 @@ request.onload = function () {
     }
 
     if (parsedData[i].hasOwnProperty('end')) {
-      if(parsedData[i] != "")
+      if(parsedData[i].end != "")
         parsedItem.end = new Date(parsedData[i].end);
       else {
         parsedItem.end = new Date();
@@ -136,14 +136,13 @@ hideAllEmptySpace(document.getElementById('tolerance').value);
 
 function hideEmptySpaceUntilNow (tolerance) {
   // find oldest item's date
-  let oldestDate = timeline.getItemRange().max;
+  let oldestDate = new Date(timeline.getItemRange().max);
   
   let offset = 1000 * 60 * 60 * 24 * tolerance;
   oldestDate.setTime(oldestDate.getTime() + offset);
 
   let now = new Date();
   if (oldestDate.getTime() < now.getTime()) {
-
     options.hiddenDates.push({start: oldestDate, end: now});
   }
 }
@@ -218,7 +217,12 @@ function lowerLimit(item, msTolerance) {
 }
 
 function upperLimit(item, msTolerance) {
-  return item.start.getTime() + msTolerance;
+  if(item.hasOwnProperty('end')) {
+    return item.end.getTime() + msTolerance;
+  } else {
+    return item.start.getTime() + msTolerance;
+  }
+
 }
 
 // Destroy and redraw timeline
