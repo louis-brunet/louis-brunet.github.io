@@ -1,0 +1,15 @@
+[{
+	"id":0,
+	"group":1,
+	"className":"examen",
+	"content":"IRM",
+	"start":"2014-5-17"	
+},
+{
+	"id":2,
+	"group":0,
+	"className":"path-t",
+	"content":"CHC",
+	"start":"2014-4-17",
+	"end":"2014-5-25"	
+}]
