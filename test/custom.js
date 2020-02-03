@@ -125,7 +125,7 @@ request.onload = function () {
 
   items = new vis.DataSet(loadedItems);
   timeline = new vis.Timeline(container, items, groups, options);
-//hideAllEmptySpace(document.getElementById('tolerance').value);
+  hideAllEmptySpace(document.getElementById('tolerance').value);
 
 }
 
