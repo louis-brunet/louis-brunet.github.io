@@ -4,18 +4,19 @@
 
 var groups = new vis.DataSet([
       {id: 0, content: 'Pathologies tumorales', value: 2},
-      {id: 1, content: 'Examens', value: 5},
+      {id: 1, content: 'Examens', value: 6},
       {id: 2, content: 'Traitements', value: 4},
       {id: 3, content: 'Consultations', value: 1},
-      {id: 4, content: 'Pathologies non tumorales', value: 3}
+      {id: 4, content: 'Pathologies non tumorales', value: 3},
+      {id: 5, content: 'Complications', value: 5}
     ]);
 
 // create a dataset with items
 // note that months are zero-based in the JavaScript Date object, so month 3 is April
 var items = new vis.DataSet([
   {id: 0, group: 0, className: 'path-t', content: 'CHC', title: 'CHC', start: new Date(2014, 3, 17)},
-  {id: 1, group: 4, className: 'path-nt', content: 'Cir', title: 'Cir',  start: new Date(2014, 5, 17)},
-  {id: 2, group: 4, className: 'path-nt', content: 'Nash', title: 'Nash',  start: new Date(2013, 3, 25)},
+  {id: 1, group: 4, className: 'path-nt', content: 'Nash', title: 'Nash',  start: new Date(2014, 5, 17)},
+  {id: 2, group: 4, className: 'path-nt', content: 'Cir', title: 'Cir',  start: new Date(2013, 3, 25)},
   {id: 3, group: 1, className: 'examen', content: 'IRM', start: new Date(2014, 4, 17)},
   {id: 4, group: 1, className: 'examen', content: 'TDM', start: new Date(2018, 0, 17)},
   {id: 5, group: 1, className: 'examen', content: 'Bio', start: new Date(2014, 7, 17)},
@@ -28,8 +29,8 @@ var items = new vis.DataSet([
   {id: 12, group: 2, className: 'traitement', content: 'TC-f', title: 'TC fin | Traitement NT',  start: new Date(2014, 9, 23)},
   {id: 13, group: 2, className: 'traitement', content: 'CEL', title: 'CEL | Traitement NT',  start: new Date(2014, 9, 10)},
   {id: 14, group: 0, className: 'path-fin', content: 'CHC', title: 'Fin CHC', start: new Date(2014, 4, 25)},
-  {id: 15, group: 4, className: 'path-fin', content: 'Cir', title: 'Fin Cir', start: new Date(2014, 11, 25)},
-  {id: 16, group: 4, className: 'path-fin', content: 'Nash', title: 'Fin Nash', start: new Date(2014, 0, 5)},
+  {id: 15, group: 4, className: 'path-fin', content: 'Nash', title: 'Fin Nash', start: new Date(2014, 11, 25)},
+  {id: 16, group: 5, className: 'complications', content: 'Asc', title: 'Asc', start: new Date(2014, 9, 31)},
   {id: 17, group: 4, className: 'path-fin', content: 'Hépat', title: 'Fin Hépat', start: new Date(2015, 7, 13)},
   {id: 18, group: 4, className: 'path-nt', content: 'Hépat', title: 'Hépat',  start: new Date(2014, 9, 25)},
   {id: 19, group: 0, className: 'path-t', content: 'CHC', title: 'CHC', start: new Date(2019, 0, 1)},
