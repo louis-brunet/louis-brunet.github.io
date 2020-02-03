@@ -47,7 +47,7 @@ body, html {
       border-bottom: 50px solid #555;*/
     }
 
-    .vis-item.traitement {
+    .vis-item.traitement-l, .vis-item.traitement-s {
       /*background-color: rgba(130, 130, 130, 1);*/
       background-color: white;
       color: rgba(130, 130, 130, 1);
