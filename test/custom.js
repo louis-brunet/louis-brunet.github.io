@@ -66,21 +66,70 @@ var options = {
 };
 
 // Chargement des données
+var timeline;
+let loadedItems = [];
 let url = 'https://louis-brunet.github.io/test/data.json';
 let request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
 request.send();
 request.onload = function () {
-  const data = request.response;
+  const parsedData = request.response;
 
-  alert('Data found : ' + data);
+  for (var i = 0; i < parsedData.length; i++) {
+    let parsedItem = {
+      id: i,
+      group: null,
+      className: parsedData[i].className,
+      content: parsedData[i].content,
+      title: parsedData[i].content,
+      start: new Date(parsedData[i].start)
+    };
+
+    switch (parsedItem.className) {
+      case 'consultation':
+        parsedItem.group = 3;
+        break;
+      case 'path-t':
+        parsedItem.group = 0;
+        break;
+      case 'path-nt':
+        parsedItem.group = 4;
+        break;
+      case 'examen':
+        parsedItem.group = 1;
+        break;
+      case 'comp':
+        parsedItem.group = 5;
+        break;
+      case 'traitement':
+        parsedItem.group = 2;
+        break;
+    }
+
+    if (parsedData[i].hasOwnProperty('end')) {
+      if(parsedData[i] != "")
+        parsedItem.end = new Date(parsedData[i].end);
+      else {
+        parsedItem.end = new Date();
+      }
+    }
+
+    loadedItems.push(parsedItem);
+
+  }
+
+  alert('loaded items : ' + loadedItems);
+  items = new vis.DataSet(loadedItems);
+  timeline = new vis.Timeline(container, items, groups, options);
+//hideAllEmptySpace(document.getElementById('tolerance').value);
+
 }
 
 // Affichage
-var timeline = new vis.Timeline(container, items, groups, options);
+/*var timeline = new vis.Timeline(container, loadedItems, groups, options);
 hideAllEmptySpace(document.getElementById('tolerance').value);
-
+*/
 
 /**
  * FONCTIONS
@@ -88,9 +137,7 @@ hideAllEmptySpace(document.getElementById('tolerance').value);
 
 function hideEmptySpaceUntilNow (tolerance) {
   // find oldest item's date
-  // convoluted, use forEach() instead ?
   let oldestDate = timeline.getItemRange().max;
-  /*let oldestItem = oldItems[oldItems.length];*/
   
   let offset = 1000 * 60 * 60 * 24 * tolerance;
   oldestDate.setTime(oldestDate.getTime() + offset);
@@ -235,15 +282,4 @@ function incrementAll(items, currItem, startCount, endCount) {
   let nextItem = items[nbItemsRead];
   
   incrementAll(items, nextItem, startCount, endCount);
-}
-
-// Read file named at given URL
-// Return formatted Array of objects 
-function getData(url) {
-  let res = [];
-
-  
-
-
-  return res;
 }
