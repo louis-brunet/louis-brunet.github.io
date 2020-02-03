@@ -124,9 +124,9 @@ request.onload = function () {
   }
 
   items = new vis.DataSet(loadedItems);
+  incrementPathologiesConsultations();
   timeline = new vis.Timeline(container, items, groups, options);
   hideAllEmptySpace(document.getElementById('tolerance').value);
-
 }
 
 // Affichage
@@ -312,10 +312,24 @@ function incrementAll(items, currItem, startCount, endCount) {
     console.log('ERROR @ incrementAll() : className not recognized, aborting');
     return;
   }
+  currItem.title = currItem.content;
+
   let nbItemsRead = startCount + endCount - 2;
   if (items.length == nbItemsRead) return;
 
   let nextItem = items[nbItemsRead];
   
   incrementAll(items, nextItem, startCount, endCount);
+}
+
+// Increment all path & consultations if duplicated 
+function incrementPathologiesConsultations() {
+  items.get({
+    filter: function (i) {
+      if (i.className == 'path-t' || i.className == 'path-nt' || i.className == 'consultation' ) {
+        incrementItems(i.content);
+      }
+      return false;
+    }
+  });
 }

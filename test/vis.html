@@ -12,9 +12,8 @@
 </head>
 
 <body>
-  <p id="title">Suivi longitudinal de Monsieur ___ ____</p>
+  <p id="title">Suivi longitudinal de Monsieur <span id="fname">___</span> <span id="lname">____</span></p>
 
-  <div id="nb-btn" class="btn" onclick="incrementItems('CHC');incrementItems('RCP');incrementItems('Cs');this.style.display='none';">Clique moi pour numéroter les pathologies CHC et les consultations RCP et Cs si elles sont dupliquées</div>
   
   <label>Tolérance (jours) : </label>
   <input id="tolerance" type="number" value="31" min="1" onkeydown = "if (event.keyCode == 13) document.getElementById('tolerance-btn').click()">
