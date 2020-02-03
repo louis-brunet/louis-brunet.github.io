@@ -97,7 +97,7 @@ body, html {
       background-color: green;
     }
 
-    .triangle {
+    .triangle{
       width: 0;
   height: 0;
   border-left: 25px solid transparent;

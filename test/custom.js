@@ -65,6 +65,18 @@ var options = {
   end: initEnd
 };
 
+// Chargement des données
+let url = 'https://louis-brunet.github.io/test/data.json';
+let request = new XMLHttpRequest();
+request.open('GET', url);
+request.responseType = 'json';
+request.send();
+request.onload = function () {
+  const data = request.response;
+
+  alert('Data found : ' + data);
+}
+
 // Affichage
 var timeline = new vis.Timeline(container, items, groups, options);
 hideAllEmptySpace(document.getElementById('tolerance').value);
@@ -225,4 +237,13 @@ function incrementAll(items, currItem, startCount, endCount) {
   incrementAll(items, nextItem, startCount, endCount);
 }
 
+// Read file named at given URL
+// Return formatted Array of objects 
+function getData(url) {
+  let res = [];
 
+  
+
+
+  return res;
+}
