@@ -159,21 +159,36 @@ function hideEmptySpaceAroundItem (item, tolerance) {
   let closestUpperLimit = new Date(1970,0,1);
   items.get({
     filter: function (i) {
-      let itemUpperLimit = upperLimit(i, msTolerance);
-      if(itemUpperLimit > closestUpperLimit.getTime() && itemUpperLimit < limitHigh){
-        closestUpperLimit.setTime(itemUpperLimit);
+      let itemStartUpperLimit = upperLimit(i, msTolerance);
+      if(itemStartUpperLimit > closestUpperLimit.getTime() && itemStartUpperLimit < limitHigh){
+        closestUpperLimit.setTime(itemStartUpperLimit);
+      } 
+      if(i.hasOwnProperty('end')) {
+        let itemEndUpperLimit = endUpperLimit(i, msTolerance);
+        if(itemEndUpperLimit > closestUpperLimit.getTime() && itemEndUpperLimit < limitHigh){
+          closestUpperLimit.setTime(itemEndUpperLimit);
+        } 
       }
+
       return false;
     }
   });
+
+
   
   // find closest lower limit from items that started before
   let closestLowerLimit = new Date();
   items.get({
     filter: function (i) {
-      let itemLowerLimit = lowerLimit(i, msTolerance);
-      if(itemLowerLimit < closestLowerLimit.getTime() && itemLowerLimit > limitLow){
-        closestLowerLimit.setTime(itemLowerLimit);
+      let itemStartLowerLimit = lowerLimit(i, msTolerance);
+      if(itemStartLowerLimit < closestLowerLimit.getTime() && itemStartLowerLimit > limitLow){
+        closestLowerLimit.setTime(itemStartLowerLimit);
+      } 
+      if(i.hasOwnProperty('end')) {
+        let itemEndLowerLimit = endLowerLimit(i, msTolerance);
+        if(itemEndLowerLimit < closestLowerLimit.getTime() && itemEndLowerLimit > limitLow){
+          closestLowerLimit.setTime(itemEndLowerLimit);
+        } 
       }
       return false;
     }
@@ -183,9 +198,13 @@ function hideEmptySpaceAroundItem (item, tolerance) {
   // delete range between those limits if necessary
   if(closestUpperLimit < limitLow) {
     options.hiddenDates.push({start: closestUpperLimit, end: limitLow});
+
+    //alert('FOR ITEM : '+ item.content+'\nPUSHING RANGE : '+closestUpperLimit+' TO ' + new Date(limitLow));
   }
   if(closestLowerLimit > limitHigh) {
     options.hiddenDates.push({start: limitHigh, end: closestLowerLimit});
+
+    //alert('FOR ITEM : '+ item.content+'\nPUSHING RANGE : '+new Date(limitHigh)+' TO ' + closestLowerLimit);
   }
 }
 
@@ -217,14 +236,24 @@ function lowerLimit(item, msTolerance) {
 }
 
 function upperLimit(item, msTolerance) {
+  return item.start.getTime() + msTolerance;
+}
+
+function endLowerLimit(item, msTolerance) {
+  if(item.hasOwnProperty('end')) {
+    return item.end.getTime() - msTolerance;
+  } else {
+    return lowerLimit(item, msTolerance);
+  }
+}
+
+function endUpperLimit(item, msTolerance) {
   if(item.hasOwnProperty('end')) {
     return item.end.getTime() + msTolerance;
   } else {
-    return item.start.getTime() + msTolerance;
+    return lowerLimit(item, msTolerance);
   }
-
 }
-
 // Destroy and redraw timeline
 function redrawTimeline() {
   timeline.destroy();
