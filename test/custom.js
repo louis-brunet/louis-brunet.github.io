@@ -76,8 +76,14 @@ request.responseType = 'json';
 request.send();
 request.onload = function () {
   const parsedData = request.response;
+  let i = 0;
+  if(parsedData[0].hasOwnProperty('nom')) {
+    i = 1;
+    document.getElementById('fname').innerHtml = parsedData[0].prenom;
+    document.getElementById('lname').innerHtml = parsedData[0].nom;
+  }
 
-  for (var i = 0; i < parsedData.length; i++) {
+  for (; i < parsedData.length; i++) {
     let parsedItem = {
       id: i,
       group: null,
@@ -111,7 +117,7 @@ request.onload = function () {
     }
 
     if (parsedData[i].hasOwnProperty('end') && parsedData[i].end != parsedData[i].start) {
-      if(parsedData[i].end != "")
+      if(parsedData[i].end != "" && parsedData[i].end != " ")
         parsedItem.end = new Date(parsedData[i].end);
       else {
         parsedItem.end = new Date();
@@ -119,7 +125,6 @@ request.onload = function () {
     }
 
     if (parsedData[i].hasOwnProperty('text') ){
-      //TODO
       parsedItem.title = parsedData[i].text;
     } else {
       parsedItem.title = parsedItem.content;
@@ -131,14 +136,12 @@ request.onload = function () {
 
   items = new vis.DataSet(loadedItems);
   incrementContents();
+
+  // AFfichage
   timeline = new vis.Timeline(container, items, groups, options);
   hideAllEmptySpace(document.getElementById('tolerance').value);
 }
 
-// Affichage
-/*var timeline = new vis.Timeline(container, loadedItems, groups, options);
-hideAllEmptySpace(document.getElementById('tolerance').value);
-*/
 
 /**
  * FONCTIONS
@@ -314,7 +317,6 @@ function incrementAll(items, currItem, startCount, endCount) {
     currItem.content = currItem.content + ' ' + startCount;
     startCount++;
   }
-  currItem.title = currItem.content;
 
   let nbItemsRead = startCount + endCount - 2;
   if (items.length == nbItemsRead) return;
