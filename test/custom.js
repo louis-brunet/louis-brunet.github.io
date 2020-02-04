@@ -79,8 +79,10 @@ request.onload = function () {
   let i = 0;
   if(parsedData[0].hasOwnProperty('nom')) {
     i = 1;
-    document.getElementById('fname').innerHtml = parsedData[0].prenom;
-    document.getElementById('lname').innerHtml = parsedData[0].nom;
+    document.getElementById('fname').innerHTML = parsedData[0].prenom;
+    document.getElementById('lname').innerHTML = parsedData[0].nom;
+    
+    document.getElementById('civilite').innerHTML = (parsedData[0].sexe == 'h') ? 'Monsieur' : 'Madame';
   }
 
   for (; i < parsedData.length; i++) {
