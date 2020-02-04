@@ -119,6 +119,12 @@ request.onload = function () {
       }
     }
 
+    if (parsedData[i].hasOwnProperty('title') {
+      //TODO
+    } else {
+      parsedItem.title = parsedItem.content;
+    }
+
     loadedItems.push(parsedItem);
 
   }
