@@ -52,7 +52,8 @@ request.onload = function () {
     document.getElementById('fname').innerHTML = parsedData[0].prenom;
     document.getElementById('lname').innerHTML = parsedData[0].nom;
     
-    document.getElementById('civilite').innerHTML = (parsedData[0].sexe == 'h') ? 'Monsieur' : 'Madame';
+    document.getElementById('civilite').innerHTML =
+     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Monsieur' : 'Madame';
   }
 
   for (; i < parsedData.length; i++) {
