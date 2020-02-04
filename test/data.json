@@ -17,16 +17,34 @@
 	"end":"2016-05-31"
 },
 {
+	"content":"Bio",
+	"className":"examen",
+	"start":"2016-03-31",
+	"end":"2016-03-31",
+	"text":"Bilirubine T=11.3 µmol/l ; AFP=4.4 ng/ml ;Creatinémie=93.0 µmol/l ;Albumine=33.0 g/L TP=85 % ; Plaquettes=66.0 mm3"
+},
+{
+	"content":"Cli",
+	"className":"examen",
+	"start":"2016-03-10",
+	"end":"2016-03-10",
+	"text":"IMC=32 (obésité modéré) ; OMS=0"
+},
+
+
+{
 	"content":"Asc",
 	"className":"comp",
 	"start":"2017-05-15",
-	"end":"2017-07-31"
+	"end":"2017-07-31",
+	"text":"traité par ponction"
 },
 {
 	"content":"CHC",
 	"className":"path-t",
 	"start":"2018-10-15",
-	"end":"2018-12-30"
+	"end":"2018-12-30",
+	"text":"VIII=10mm"
 },
 {
 	"content":"RCP", 
@@ -41,13 +59,15 @@
 {
 	"content":"Pbh", 
 	"className":"examen",
-	"start":"2018-11-05"
+	"start":"2018-11-05",
+	"text":"S=1, A=2,F=4"
 },
 {
 	"content":"RF", 
-	"className":"traitement-l",
+	"className":"traitement-t",
 	"start":"2018-11-25",
-	"end":"2018-11-25"
+	"end":"2018-11-25",
+	"text":"VIII"
 },
 
 {
@@ -64,8 +84,24 @@
 	"content":"CHC",
 	"className":"path-t",
 	"start":"2019-06-30",
-	"end":""
+	"end":" ",
+	"text":"V=11 ; V=3 ; VI=10 ; VII=9"
 },
+{
+	"content":"Bio",
+	"className":"examen",
+	"start":"2019-06-31",
+	"end":"2019-06-31",
+	"text":"Bilirubine T=11.3 µmol/l ; AFP=951 ng/ml ;Creatinémie=93.0 µmol/l ;Albumine=55.0 g/L TP=85 % ; Plaquettes=66.0 mm3"
+},
+{
+	"content":"Cli",
+	"className":"examen",
+	"start":"2019-06-30",
+	"end":"2019-06-30",
+	"text":"IMC=22 (corpulence normale) ; OMS=1"
+},
+
 {
 	"content":"RCP", 
 	"className":"consultation",
@@ -75,25 +111,33 @@
 	"content":"CEL", 
 	"className":"traitement-l",
 	"start":"2019-07-30",
-	"end":"2019-07-30"
+	"end":"2019-07-30",
+	"text":"V"
+
 },
 {
 	"content":"CEL", 
 	"className":"traitement-l",
 	"start":"2019-08-30",
-	"end":"2019-08-30"
+	"end":"2019-08-30",
+	"text":"V,VI"
+
 },
 {
 	"content":"CEL", 
 	"className":"traitement-l",
 	"start":"2019-09-30",
-	"end":"2019-09-30"
+	"end":"2019-09-30",
+	"text":"VII"
+
 },
 {
 	"content":"TC", 
 	"className":"traitement-s",
 	"start":"2019-09-30",
-	"end":""
+	"end":"",
+	"text":"Sorafenib"
+
 },
 {
 	"content":"TDM", 
@@ -111,3 +155,4 @@
 	"className":"examen",
 	"start":"2020-02-01"
 }]
+

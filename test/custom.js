@@ -83,7 +83,6 @@ request.onload = function () {
       group: null,
       className: parsedData[i].className,
       content: parsedData[i].content,
-      title: parsedData[i].content,
       start: new Date(parsedData[i].start)
     };
 
@@ -119,8 +118,9 @@ request.onload = function () {
       }
     }
 
-    if (parsedData[i].hasOwnProperty('title') {
+    if (parsedData[i].hasOwnProperty('text') ){
       //TODO
+      parsedItem.title = parsedData[i].text;
     } else {
       parsedItem.title = parsedItem.content;
     }
@@ -130,7 +130,7 @@ request.onload = function () {
   }
 
   items = new vis.DataSet(loadedItems);
-  incrementPathologiesConsultations();
+  incrementContents();
   timeline = new vis.Timeline(container, items, groups, options);
   hideAllEmptySpace(document.getElementById('tolerance').value);
 }
@@ -307,16 +307,12 @@ function incrementItems(string) {
 // increment oldest to newest
 // counts start at 1
 function incrementAll(items, currItem, startCount, endCount) {
-  if(currItem.className == 'path-t' || currItem.className == 'consultation') {
-    currItem.content = currItem.content + ' ' + startCount;
-    startCount++;
-  } else if(currItem.className == 'path-fin') {
+  if(currItem.className == 'path-fin') {
     currItem.content = currItem.content + ' ' + endCount;
     endCount++;
-  }
-  else {
-    console.log('ERROR @ incrementAll() : className not recognized, aborting');
-    return;
+  } else {
+    currItem.content = currItem.content + ' ' + startCount;
+    startCount++;
   }
   currItem.title = currItem.content;
 
@@ -329,12 +325,11 @@ function incrementAll(items, currItem, startCount, endCount) {
 }
 
 // Increment all path & consultations if duplicated 
-function incrementPathologiesConsultations() {
+function incrementContents() {
   items.get({
     filter: function (i) {
-      if (i.className == 'path-t' || i.className == 'path-nt' || i.className == 'consultation' ) {
-        incrementItems(i.content);
-      }
+      incrementItems(i.content);
+      
       return false;
     }
   });
