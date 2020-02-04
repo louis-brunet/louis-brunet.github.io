@@ -2,15 +2,14 @@
 	"nom":"BRUNET",
 	"prenom":"Louis",
 	"ipp":"012345",
-	"ddn":"6789",
+	"ddn":"2000-02-17",
 	"sexe":"h"
 },
 {
 	"content":"OH",
 	"className":"path-nt",
 	"start":"2014-03-31",
-	"end":"2017-02-03",
-	"link":"cv.pdf"
+	"end":"2017-02-03"
 },
 {
 	"content":"VHC",
@@ -57,7 +56,8 @@
 {
 	"content":"RCP", 
 	"className":"consultation",
-	"start":"2018-10-30"
+	"start":"2018-10-30",
+	"link":"cv.pdf"
 },
 {
 	"content":"TDM", 
@@ -72,7 +72,7 @@
 },
 {
 	"content":"RF", 
-	"className":"traitement-t",
+	"className":"traitement-l",
 	"start":"2018-11-25",
 	"end":"2018-11-25",
 	"text":"VIII"

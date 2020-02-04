@@ -104,6 +104,7 @@ request.onload = function () {
 
     if(parsedData[i].hasOwnProperty('link')) {
       parsedItem.link = parsedData[i].link;
+      alert(parsedItem.content + ' : link added ' + parsedItem.link);
     }
 
 
@@ -316,9 +317,11 @@ function incrementContents() {
   });
 }
 
+
+// Open link on selected item
 function onSelect(properties) {
-  let selectedItem = items.get(properties.items);
-  if(selectedItem.hasOwnProperty('link')){
-    window.open(selectedItem.link);
+  let selectedItems = items.get(properties.items);
+  if(selectedItems[0].hasOwnProperty('link')){
+    window.open(selectedItems[0].link);
   }
 }
