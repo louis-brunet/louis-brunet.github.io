@@ -105,7 +105,6 @@ request.onload = function () {
 
     if(parsedData[i].hasOwnProperty('link')) {
       parsedItem.link = parsedData[i].link;
-      alert(parsedItem.content + ' : link added ' + parsedItem.link);
     }
 
 
