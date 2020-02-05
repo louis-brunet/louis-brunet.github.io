@@ -285,7 +285,7 @@ function createItem(parsedItem, id) {
       break;
   }
 
-  if (parsedItem.hasOwnProperty('end') && parsedItem.end != parsedItem.start) {
+  if (parsedItem.hasOwnProperty('end') && (parsedItem['end'] != parsedItem['start'])) {
     if(parsedItem.end != "" && parsedItem.end != " ")
       res.end = new Date(parsedItem.end);
     else {

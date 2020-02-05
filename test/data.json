@@ -28,7 +28,10 @@
 	"className":"examen",
 	"start":"2016-03-31",
 	"end":"2016-03-31",
-	"text":"Bilirubine T=11.3 µmol/l ; AFP=4.4 ng/ml ;Creatinémie=93.0 µmol/l ;Albumine=33.0 g/L TP=85 % ; Plaquettes=66.0 mm3"
+	"text":{
+		"normal":"Bilirubine T=11.3 µmol/l;AFP=4.4 ng/ml ;Creatinémie=93.0 µmol/l",
+		"anormal":"Albumine=33.0 g/L TP=85 %;Plaquettes=66.0 mm3"
+	}
 },
 {
 	"content":"Cli",
@@ -98,9 +101,12 @@
 {
 	"content":"Bio",
 	"className":"examen",
-	"start":"2019-06-31",
-	"end":"2019-06-31",
-	"text":"Bilirubine T=11.3 µmol/l ; AFP=951 ng/ml ;Creatinémie=93.0 µmol/l ;Albumine=55.0 g/L TP=85 % ; Plaquettes=66.0 mm3"
+	"start":"2019-06-30",
+	"end":"2019-06-30",
+	"text":{
+		"normal":"Bilirubine T=11.3 µmol/l ; AFP=951 ng/ml ;Creatinémie=93.0 µmol/l ;",
+		"anormal":"Albumine=55.0 g/L TP=85 % ; Plaquettes=66.0 mm3"
+	}
 },
 {
 	"content":"Cli",
