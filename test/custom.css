@@ -75,6 +75,10 @@ body, html {
       color: rgba(180,180, 0,1);
       border-color: rgba(180,180, 0,0.5);
     }
+
+    .link {
+      cursor: pointer;
+    }
    /* .vis-dot.path-fin {
       border-color: rgba(0,100,0,0.3);
     }*/

@@ -105,6 +105,7 @@ request.onload = function () {
 
     if(parsedData[i].hasOwnProperty('link')) {
       parsedItem.link = parsedData[i].link;
+      parsedItem.className = parsedItem.className + ' link';
     }
 
 
@@ -325,3 +326,4 @@ function onSelect(properties) {
     window.open(selectedItems[0].link);
   }
 }
+
