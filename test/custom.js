@@ -33,14 +33,15 @@ var options = {
   editable: false,
   multiselect: false,
   hiddenDates: [],
-  end: initEnd
+  end: initEnd,
+  dataAttributes: ['dataId', 'tooltip']
 };
 
 // Chargement des données
 var timeline;
 let loadedItems = [];
 let url = 'https://louis-brunet.github.io/test/data.json';
-let request = new XMLHttpRequest();
+var request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
 request.send();
@@ -255,6 +256,7 @@ function onSelect(properties) {
 function createItem(parsedItem, id) {
   let res = {
     id: id,
+    dataId: id,
     group: null,
     className: parsedItem.className,
     content: parsedItem.content,
@@ -297,7 +299,7 @@ function createItem(parsedItem, id) {
     // res.title = parsedItem.text;
 
     res.className = res.className + ' tooltip';
-    res.tooltip = parsedItem.text;
+    res['tooltip'] = parsedItem.text;
   } else {
     res.title = res.content;
   }
@@ -337,21 +339,72 @@ function createTimeline() {
   timeline.on('select', onSelect);
   
   hideAllEmptySpace(document.getElementById('tolerance').value);
-  createTooltips();
+  //createTooltips();
 }
 
 // TODO
 function createTooltips() {
-  let containers = document.querySelectorAll(".tooltip");
+  // Array of objects {id, tooltip}
+  let tooltips = items.get({
+    fields: ['id','tooltip'],
+    filter: function (i) {
+      return i.hasOwnProperty('tooltip');
+    }
+  });
 
-  for (var i = 0; i < containers.length; i++) {
-     // Créer sous-élément .tooltip-text contenant le texte à afficher
-     /*let node = document.createElement("DIV");
-     let textnode =*/  // TODO https://www.w3schools.com/jsref/met_node_appendchild.asp
-     // Valeurs normales
-     let valNorm = containers[i].tooltip.normal.split(';');
+  let containers = document.querySelectorAll(".vis-box.tooltip, .vis-range.tooltip");
+  
+  for (var i = 0; i < tooltips.length; i++) {
+    for (var j = 0; j < containers.length; j++) {
+      
+      if(tooltips[i].id == containers[j].dataset.dataid ){
+        // Créer sous-élément .tooltip-text contenant le texte à afficher
+        let valNorm;
+        let valAnorm;
+        if(tooltips[i].tooltip.hasOwnProperty('normal')){
+          // Valeurs normales
+          valNorm = tooltips[i].tooltip.normal.split(';');
+
+        } else if(typeof tooltips[i].tooltip === "string") {
+          valNorm = tooltips[i].tooltip;
+        }
 
 
-     // Valeurs anormales
+        if(tooltips[i].tooltip.hasOwnProperty('anormal')){
+          // Valeurs anormales
+          let valAnorm = tooltips[i].tooltip.anormal.split(';');
+        }
+
+        //alert(tooltips[i].id + ': found container (amongst '+containers.length+
+          //'), \nparsed \n[' + valNorm + ',\n' + valAnorm +']');
+        
+        // create string w/ inner HTML for tooltip-text
+        let normStr = "TESTCONTENT";
+
+        // create sub-element
+        let node = document.createElement('SPAN');
+        node.className = 'tooltip-text';
+        let normNode = document.createElement('SPAN');
+        normNode.className = 'tooltip-norm';
+
+        for (var i = 0; i < valNorm.length; i++) {
+          let normValue = document.createElement('SPAN');
+          normValue.className = 'tooltip-val';
+
+          let text = document.createTextNode(valNorm[i]);
+          normValue.appendChild(text);
+          normNode.appendChild(normValue);
+        }
+
+        node.appendChild(normNode);
+        containers[j].appendChild(node);
+
+        break;
+      }
+     
    } 
+
+  }
+
+  
 }

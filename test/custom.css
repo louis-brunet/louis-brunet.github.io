@@ -79,6 +79,12 @@ body, html {
     .link {
       cursor: pointer;
     }
+
+    .tooltip-text {
+      max-width: 30px;
+    }
+
+   
    /* .vis-dot.path-fin {
       border-color: rgba(0,100,0,0.3);
     }*/
