@@ -294,7 +294,10 @@ function createItem(parsedItem, id) {
   }
 
   if (parsedItem.hasOwnProperty('text') ){
-    res.title = parsedItem.text;
+    // res.title = parsedItem.text;
+
+    res.className = res.className + ' tooltip';
+    res.tooltip = parsedItem.text;
   } else {
     res.title = res.content;
   }
@@ -331,7 +334,24 @@ function createTimeline() {
 
   // AFfichage
   timeline = new vis.Timeline(container, items, groups, options);
-  hideAllEmptySpace(document.getElementById('tolerance').value);
-
   timeline.on('select', onSelect);
+  
+  hideAllEmptySpace(document.getElementById('tolerance').value);
+  createTooltips();
+}
+
+// TODO
+function createTooltips() {
+  let containers = document.querySelectorAll(".tooltip");
+
+  for (var i = 0; i < containers.length; i++) {
+     // Créer sous-élément .tooltip-text contenant le texte à afficher
+     /*let node = document.createElement("DIV");
+     let textnode =*/  // TODO https://www.w3schools.com/jsref/met_node_appendchild.asp
+     // Valeurs normales
+     let valNorm = containers[i].tooltip.normal.split(';');
+
+
+     // Valeurs anormales
+   } 
 }
