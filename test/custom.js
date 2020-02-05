@@ -44,84 +44,8 @@ let request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
 request.send();
-request.onload = function () {
-  const parsedData = request.response;
-  let i = 0;
-  if(parsedData[0].hasOwnProperty('nom')) {
-    i = 1;
-    document.getElementById('fname').innerHTML = parsedData[0].prenom;
-    document.getElementById('lname').innerHTML = parsedData[0].nom;
-    
-    document.getElementById('civilite').innerHTML =
-     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Monsieur' : 'Madame';
-  }
 
-  for (; i < parsedData.length; i++) {
-    let parsedItem = {
-      id: i,
-      group: null,
-      className: parsedData[i].className,
-      content: parsedData[i].content,
-      start: new Date(parsedData[i].start)
-    };
-
-    switch (parsedItem.className) {
-      case 'consultation':
-        parsedItem.group = 3;
-        break;
-      case 'path-t':
-        parsedItem.group = 0;
-        break;
-      case 'path-nt':
-        parsedItem.group = 4;
-        break;
-      case 'examen':
-        parsedItem.group = 1;
-        break;
-      case 'comp':
-        parsedItem.group = 5;
-        break;
-      case 'traitement-l':
-        parsedItem.group = 2;
-        break;
-      case 'traitement-s':
-        parsedItem.group = 6;
-        break;
-    }
-
-    if (parsedData[i].hasOwnProperty('end') && parsedData[i].end != parsedData[i].start) {
-      if(parsedData[i].end != "" && parsedData[i].end != " ")
-        parsedItem.end = new Date(parsedData[i].end);
-      else {
-        parsedItem.end = new Date();
-      }
-    }
-
-    if (parsedData[i].hasOwnProperty('text') ){
-      parsedItem.title = parsedData[i].text;
-    } else {
-      parsedItem.title = parsedItem.content;
-    }
-
-    if(parsedData[i].hasOwnProperty('link')) {
-      parsedItem.link = parsedData[i].link;
-      parsedItem.className = parsedItem.className + ' link';
-    }
-
-
-    loadedItems.push(parsedItem);
-
-  }
-
-  items = new vis.DataSet(loadedItems);
-  incrementContents();
-
-  // AFfichage
-  timeline = new vis.Timeline(container, items, groups, options);
-  hideAllEmptySpace(document.getElementById('tolerance').value);
-
-  timeline.on('select', onSelect);
-}
+request.onload = createTimeline; 
 
 
 /**
@@ -327,3 +251,87 @@ function onSelect(properties) {
   }
 }
 
+
+function createItem(parsedItem, id) {
+  let res = {
+    id: id,
+    group: null,
+    className: parsedItem.className,
+    content: parsedItem.content,
+    start: new Date(parsedItem.start)
+  };
+
+  switch (res.className) {
+    case 'consultation':
+      res.group = 3;
+      break;
+    case 'path-t':
+      res.group = 0;
+      break;
+    case 'path-nt':
+      res.group = 4;
+      break;
+    case 'examen':
+      res.group = 1;
+      break;
+    case 'comp':
+      res.group = 5;
+      break;
+    case 'traitement-l':
+      res.group = 2;
+      break;
+    case 'traitement-s':
+      res.group = 6;
+      break;
+  }
+
+  if (parsedItem.hasOwnProperty('end') && parsedItem.end != parsedItem.start) {
+    if(parsedItem.end != "" && parsedItem.end != " ")
+      res.end = new Date(parsedItem.end);
+    else {
+      res.end = new Date();
+    }
+  }
+
+  if (parsedItem.hasOwnProperty('text') ){
+    res.title = parsedItem.text;
+  } else {
+    res.title = res.content;
+  }
+
+  if(parsedItem.hasOwnProperty('link')) {
+    res.link = parsedItem.link;
+    res.className = res.className + ' link';
+  }
+
+  return res;
+}
+
+function createTimeline() {
+  const parsedData = request.response;
+  let i = 0;
+  if(parsedData[0].hasOwnProperty('nom')) {
+    i = 1;
+    document.getElementById('fname').innerHTML = parsedData[0].prenom;
+    document.getElementById('lname').innerHTML = parsedData[0].nom;
+    
+    document.getElementById('civilite').innerHTML =
+     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Monsieur' : 'Madame';
+  }
+
+  for (; i < parsedData.length; i++) {
+    let parsedItem = createItem(parsedData[i], i);
+
+    loadedItems.push(parsedItem);
+
+  }
+
+  items = new vis.DataSet(loadedItems);
+  incrementContents();
+
+  // AFfichage
+  timeline = new vis.Timeline(container, items, groups, options);
+  hideAllEmptySpace(document.getElementById('tolerance').value);
+
+  timeline.on('select', onSelect);
+}
