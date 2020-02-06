@@ -11,9 +11,11 @@
 </head>
 
 <body>
-  <div class="btn" onclick="createTooltips()">Tooltips</div>
+  <div id="tooltips-btn" class="btn" onclick="createTooltips();document.getElementById('tooltips-btn').style.display = 'none';">
+    Tooltips
+  </div>
 
-  <p id="title">Suivi longitudinal de <span id="civilite">Monsieur</span> <span id="fname">___</span> <span id="lname">____</span></p>
+  <p id="title">Suivi longitudinal de <span id="civilite">Monsieur</span> <span id="fname">___</span> <span id="lname">____</span> - <span id="ipp"></span></p>
 
   
   <div class="tolerance">

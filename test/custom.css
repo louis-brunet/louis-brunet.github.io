@@ -79,12 +79,62 @@ body, html {
     .link {
       cursor: pointer;
     }
-
-    .tooltip-text {
-      max-width: 30px;
+    .vis-box.tooltip, .vis-range.tooltip {
+      z-index: 99;
     }
 
-   
+    .tooltip:hover .tooltip-text {
+      display: block;
+      /*flex-wrap: wrap;
+      flex-flow: row;
+      justify-content: space-between;*/
+    }
+
+    .tooltip-text {
+      box-sizing: border-box;
+      max-width: 30px;
+      display: none;
+      position: absolute;
+      background-color: black;
+      color: #fff;
+      padding: 5px;
+      border-radius: 6px;
+      min-width: 140px;
+      margin-left: -70px;
+
+      z-index: 99;
+      text-align: center;
+      bottom: 120%; 
+      left: 50%;
+
+/*      overflow: visible;
+*/    }
+
+    /*.tooltip .tooltiptext::after {
+      content: " ";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent black transparent;
+    }*/
+
+    .tooltip-norm, .tooltip-anorm {
+      /*display: flex;
+      flex-wrap: wrap;
+      flex-flow: row;
+      justify-content: space-between;*/
+      max-width: 100%;
+    }
+    .tooltip-anorm {
+      color: red;
+    }
+    
+    /*.tooltip-text * {
+      outline: 1px solid magenta;
+    }*/
    /* .vis-dot.path-fin {
       border-color: rgba(0,100,0,0.3);
     }*/

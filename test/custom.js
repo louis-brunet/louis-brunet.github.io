@@ -49,6 +49,15 @@ request.send();
 request.onload = createTimeline; 
 
 
+var tooltipsCreated = false;
+setInterval(function() {
+  if((!tooltipsCreated) && document.querySelectorAll('.vis-item').length > 1) {
+    createTooltips();
+    document.getElementById('tooltips-btn').style.display = 'none';
+    tooltipsCreated = true;
+  }
+},1500);
+
 /**
  * FONCTIONS
  */
@@ -301,7 +310,7 @@ function createItem(parsedItem, id) {
     res.className = res.className + ' tooltip';
     res['tooltip'] = parsedItem.text;
   } else {
-    res.title = res.content;
+    res.title = res.content; // TODO remove ?
   }
 
   if(parsedItem.hasOwnProperty('link')) {
@@ -322,6 +331,7 @@ function createTimeline() {
     
     document.getElementById('civilite').innerHTML =
      (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Monsieur' : 'Madame';
+    document.getElementById('ipp').innerHTML = parsedData[0].ipp;
   }
 
   for (; i < parsedData.length; i++) {
@@ -353,45 +363,65 @@ function createTooltips() {
   });
 
   let containers = document.querySelectorAll(".vis-box.tooltip, .vis-range.tooltip");
-  
-  for (var i = 0; i < tooltips.length; i++) {
-    for (var j = 0; j < containers.length; j++) {
+/*  
+  containers.forEach(function(cont){
+    cont.addEventListener("mouseover",function(e) {
+      timeline.setSelection([]);
+      timeline.setSelection(cont.dataset.dataid);
+    });
+  });
+*/
+  for (let i = 0; i < tooltips.length; i++) {
+    for (let j = 0; j < containers.length; j++) {
       
       if(tooltips[i].id == containers[j].dataset.dataid ){
         // Créer sous-élément .tooltip-text contenant le texte à afficher
-        let valNorm;
-        let valAnorm;
+        var valNorm;
+        var valAnorm;
         if(tooltips[i].tooltip.hasOwnProperty('normal')){
           // Valeurs normales
           valNorm = tooltips[i].tooltip.normal.split(';');
 
         } else if(typeof tooltips[i].tooltip === "string") {
-          valNorm = tooltips[i].tooltip;
+          valNorm = [tooltips[i].tooltip];
         }
 
 
         if(tooltips[i].tooltip.hasOwnProperty('anormal')){
           // Valeurs anormales
-          let valAnorm = tooltips[i].tooltip.anormal.split(';');
+          valAnorm = tooltips[i].tooltip.anormal.split(';');
         }
 
-        //alert(tooltips[i].id + ': found container (amongst '+containers.length+
-          //'), \nparsed \n[' + valNorm + ',\n' + valAnorm +']');
-        
-        // create string w/ inner HTML for tooltip-text
-        let normStr = "TESTCONTENT";
-
         // create sub-element
-        let node = document.createElement('SPAN');
+        let node = document.createElement('div');
         node.className = 'tooltip-text';
-        let normNode = document.createElement('SPAN');
+        
+        // Val anormales
+        if(valAnorm != undefined && tooltips[i].tooltip['anormal'] ) {
+          let anormNode = document.createElement('div');
+          anormNode.className = 'tooltip-anorm';
+
+          for (let k = 0; k < valAnorm.length; k++) {
+            let anormValue = document.createElement('div');
+            anormValue.className = 'tooltip-val';
+
+            let text = document.createTextNode(valAnorm[k]);
+            anormValue.appendChild(text);
+            anormNode.appendChild(anormValue);
+          }
+          node.appendChild(anormNode);
+        }else if(containers[j].dataset.dataid == 15){
+          alert('pb'+tooltips[i].tooltip.anormal+'\n'+tooltips[i].tooltip.anormal.split(';')+'\n'+valAnorm);
+        }
+        // Val normales
+        let normNode = document.createElement('div');
         normNode.className = 'tooltip-norm';
 
-        for (var i = 0; i < valNorm.length; i++) {
-          let normValue = document.createElement('SPAN');
+        for (let k = 0; k < valNorm.length; k++) {
+          let normValue = document.createElement('div');
           normValue.className = 'tooltip-val';
 
-          let text = document.createTextNode(valNorm[i]);
+          let text = document.createTextNode(valNorm[k]);
           normValue.appendChild(text);
           normNode.appendChild(normValue);
         }
