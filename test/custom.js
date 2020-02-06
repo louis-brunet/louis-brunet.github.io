@@ -39,7 +39,6 @@ var options = {
 
 // Chargement des données
 var timeline;
-let loadedItems = [];
 let url = 'https://louis-brunet.github.io/test/data.json';
 var request = new XMLHttpRequest();
 request.open('GET', url);
@@ -51,8 +50,8 @@ request.onload = createTimeline;
 
 var tooltipsCreated = false;
 setInterval(function() {
-  if((!tooltipsCreated) && document.querySelectorAll('.vis-item').length > 1) {
-    createTooltips();
+  if((!tooltipsCreated) && document.querySelectorAll('.tooltip').length > 1) {
+    createAllTooltips();
     tooltipsCreated = true;
   }
 },1500);
@@ -186,6 +185,7 @@ function redrawTimeline() {
   timeline.destroy();
   timeline = new vis.Timeline(container, items, groups, options);
   timeline.on('select', onSelect);
+  tooltipsCreated = false;
 }
 
 // Rename all items containing 'content: $string' to show chronological increment
@@ -323,6 +323,52 @@ function createItem(parsedItem, id) {
 
 function createTimeline() {
   const parsedData = request.response;
+
+  loadData(parsedData);
+
+  incrementContents();
+
+  // AFfichage
+  timeline = new vis.Timeline(container, items, groups, options);
+  timeline.on('select', onSelect);
+  
+  hideAllEmptySpace(document.getElementById('tolerance').value);
+}
+
+// TODO
+function createAllTooltips() {
+  // Array of objects {id, className, tooltip}
+  let tooltips = items.get({
+    fields: ['id','className','tooltip'],
+    filter: function (i) {
+      return i.hasOwnProperty('tooltip');
+    }
+  });
+
+  let containers = document.querySelectorAll(".vis-box.tooltip, .vis-range.tooltip");
+  
+
+  setSelectOnHover(containers);
+
+  for (let i = 0; i < tooltips.length; i++) {
+    for (let j = 0; j < containers.length; j++) {
+      
+      if(tooltips[i].id == containers[j].dataset.dataid ){
+        // Créer sous-élément .tooltip-text contenant le texte à afficher
+        createTooltip(tooltips[i], containers[j]);
+
+        break;
+      }
+     
+   } 
+
+  }
+
+  
+}
+
+function loadData(parsedData) {
+  let loadedItems = [];
   let i = 0;
   if(parsedData[0].hasOwnProperty('nom')) {
     i = 1;
@@ -342,102 +388,72 @@ function createTimeline() {
   }
 
   items = new vis.DataSet(loadedItems);
-  incrementContents();
-
-  // AFfichage
-  timeline = new vis.Timeline(container, items, groups, options);
-  timeline.on('select', onSelect);
-  
-  hideAllEmptySpace(document.getElementById('tolerance').value);
-  //createTooltips();
 }
 
-// TODO
-function createTooltips() {
-  // Array of objects {id, className, tooltip}
-  let tooltips = items.get({
-    fields: ['id','className','tooltip'],
-    filter: function (i) {
-      return i.hasOwnProperty('tooltip');
-    }
-  });
-
-  let containers = document.querySelectorAll(".vis-box.tooltip, .vis-range.tooltip");
-  
+function setSelectOnHover(containers) {
   containers.forEach(function(cont){
     cont.addEventListener("mouseover",function(e) {
       timeline.setSelection([]);
       timeline.setSelection(cont.dataset.dataid);
     });
   });
+}
 
-  for (let i = 0; i < tooltips.length; i++) {
-    for (let j = 0; j < containers.length; j++) {
-      
-      if(tooltips[i].id == containers[j].dataset.dataid ){
-        // Créer sous-élément .tooltip-text contenant le texte à afficher
-        var valNorm;
-        var valAnorm;
-        if(tooltips[i].tooltip.hasOwnProperty('normal')){
-          // Valeurs normales
-          valNorm = tooltips[i].tooltip.normal.split(';');
+function createTooltip(tooltipObj, container) {
+  var valNorm;
+  var valAnorm;
+  if(tooltipObj.tooltip.hasOwnProperty('normal')){
+    // Valeurs normales
+    valNorm = tooltipObj.tooltip.normal.split(';');
 
-        } else if(typeof tooltips[i].tooltip === "string") {
-          valNorm = [tooltips[i].tooltip];
-        }
-
-
-        if(tooltips[i].tooltip.hasOwnProperty('anormal')){
-          // Valeurs anormales
-          valAnorm = tooltips[i].tooltip.anormal.split(';');
-        }
-
-        // create sub-element
-        let node = document.createElement('div');
-        node.className = 'tooltip-text';
-        
-        // Val anormales
-        if(valAnorm != undefined && tooltips[i].tooltip['anormal'] ) {
-          let anormNode = document.createElement('div');
-          anormNode.className = 'tooltip-anorm';
-
-          for (let k = 0; k < valAnorm.length; k++) {
-            let anormValue = document.createElement('div');
-            anormValue.className = 'tooltip-val';
-
-            let text = document.createTextNode(valAnorm[k]);
-            anormValue.appendChild(text);
-            anormNode.appendChild(anormValue);
-          }
-          node.appendChild(anormNode);
-        }
-        // Val normales
-        let normNode = document.createElement('div');
-        normNode.className = 'tooltip-norm';
-
-        for (let k = 0; k < valNorm.length; k++) {
-          let normValue = document.createElement('div');
-          normValue.className = 'tooltip-val';
-
-          let text = document.createTextNode(valNorm[k]);
-          normValue.appendChild(text);
-          normNode.appendChild(normValue);
-        }
-
-        if(tooltips[i].className.includes('consultation') ||
-         tooltips[i].className.includes('path-t') ) {
-          node.className += ' down';
-        } else node.className += ' up';
-
-        node.appendChild(normNode);
-        containers[j].appendChild(node);
-
-        break;
-      }
-     
-   } 
-
+  } else if(typeof tooltipObj.tooltip === "string") {
+    valNorm = [tooltipObj.tooltip];
   }
 
+
+  if(tooltipObj.tooltip.hasOwnProperty('anormal')){
+    // Valeurs anormales
+    valAnorm = tooltipObj.tooltip.anormal.split(';');
+  }
+
+  // create sub-element
+  let node = document.createElement('div');
+  node.className = 'tooltip-text';
   
+  // Val anormales
+  if(valAnorm != undefined && tooltipObj.tooltip['anormal'] ) {
+    let anormNode = document.createElement('div');
+    anormNode.className = 'tooltip-anorm';
+
+    for (let k = 0; k < valAnorm.length; k++) {
+      let anormValue = document.createElement('div');
+      anormValue.className = 'tooltip-val';
+
+      let text = document.createTextNode(valAnorm[k]);
+      anormValue.appendChild(text);
+      anormNode.appendChild(anormValue);
+    }
+    node.appendChild(anormNode);
+  }
+  // Val normales
+  let normNode = document.createElement('div');
+  normNode.className = 'tooltip-norm';
+
+  for (let k = 0; k < valNorm.length; k++) {
+    let normValue = document.createElement('div');
+    normValue.className = 'tooltip-val';
+
+    let text = document.createTextNode(valNorm[k]);
+    normValue.appendChild(text);
+    normNode.appendChild(normValue);
+  }
+
+  if(tooltipObj.className.includes('consultation') ||
+   tooltipObj.className.includes('path-t') ) {
+    node.className += ' down';
+  } else node.className += ' up';
+
+  node.appendChild(normNode);
+  container.appendChild(node);
+
 }
