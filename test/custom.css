@@ -93,14 +93,16 @@ body, html {
 .tooltip-text {
   box-sizing: border-box;
   max-width: 30px;
-  display: none;
-  background-color: black;
-  color: #fff;
+  display: none;/*
+  background-color: rgba(230,230,230,0.8);*/
+  background-color: rgba(255,255,255,0.9);
+  color: #333;
   padding: 5px;
   border-radius: 6px;
   min-width: 140px;
   margin-left: -70px;
   text-align: center;
+  border: 1px solid black;
   
 
   position: absolute;
@@ -115,8 +117,12 @@ body, html {
 .tooltip-text.down {
   top: 120%; 
   left: 50%;
-} 
+}
 
+.tooltip-val {
+  /*border-bottom: 1px solid rgba(0,0,0,0.3);
+  box-sizing: border-box;*/
+}
 /*.tooltip .tooltiptext::after {
   content: " ";
   position: absolute;
