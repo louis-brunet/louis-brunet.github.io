@@ -53,7 +53,6 @@ var tooltipsCreated = false;
 setInterval(function() {
   if((!tooltipsCreated) && document.querySelectorAll('.vis-item').length > 1) {
     createTooltips();
-    document.getElementById('tooltips-btn').style.display = 'none';
     tooltipsCreated = true;
   }
 },1500);
