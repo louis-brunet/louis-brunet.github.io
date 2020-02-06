@@ -185,6 +185,7 @@ function endUpperLimit(item, msTolerance) {
 function redrawTimeline() {
   timeline.destroy();
   timeline = new vis.Timeline(container, items, groups, options);
+  timeline.on('select', onSelect);
 }
 
 // Rename all items containing 'content: $string' to show chronological increment
@@ -353,23 +354,23 @@ function createTimeline() {
 
 // TODO
 function createTooltips() {
-  // Array of objects {id, tooltip}
+  // Array of objects {id, className, tooltip}
   let tooltips = items.get({
-    fields: ['id','tooltip'],
+    fields: ['id','className','tooltip'],
     filter: function (i) {
       return i.hasOwnProperty('tooltip');
     }
   });
 
   let containers = document.querySelectorAll(".vis-box.tooltip, .vis-range.tooltip");
-/*  
+  
   containers.forEach(function(cont){
     cont.addEventListener("mouseover",function(e) {
       timeline.setSelection([]);
       timeline.setSelection(cont.dataset.dataid);
     });
   });
-*/
+
   for (let i = 0; i < tooltips.length; i++) {
     for (let j = 0; j < containers.length; j++) {
       
@@ -409,8 +410,6 @@ function createTooltips() {
             anormNode.appendChild(anormValue);
           }
           node.appendChild(anormNode);
-        }else if(containers[j].dataset.dataid == 15){
-          alert('pb'+tooltips[i].tooltip.anormal+'\n'+tooltips[i].tooltip.anormal.split(';')+'\n'+valAnorm);
         }
         // Val normales
         let normNode = document.createElement('div');
@@ -424,6 +423,11 @@ function createTooltips() {
           normValue.appendChild(text);
           normNode.appendChild(normValue);
         }
+
+        if(tooltips[i].className.includes('consultation') ||
+         tooltips[i].className.includes('path-t') ) {
+          node.className += ' down';
+        } else node.className += ' up';
 
         node.appendChild(normNode);
         containers[j].appendChild(node);
