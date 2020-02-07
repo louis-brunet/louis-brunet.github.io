@@ -15,7 +15,7 @@ var groups = new vis.DataSet([
 // create visualization
 var container = document.getElementById('visualization');
 
-// calculate end date (now + 6 months)
+// calculate end date (now + 1 month)
 let now = new Date();
 let offsetEndMonths = 1;
 let initEnd = now.getTime() + offsetEndMonths * 1000*60*60*24*30.42; 
