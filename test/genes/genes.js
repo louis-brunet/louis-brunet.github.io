@@ -2,9 +2,7 @@
  * INITIALISATION DE LA TIMELINE
  */
 
-var groups = [
-      {id: 1, content: 'component 1', value: 1}
-    ];
+var groups = [];
 
 // create visualization
 var container = document.getElementById('visualization');
@@ -36,9 +34,10 @@ var options = {
   },
   timeAxis: {
       scale: 'millisecond',
-      step: 10000
+      step: 5000
     },
-  showMajorLabels: false
+  showMajorLabels: false,
+  stack: false
 };
 
 // Chargement des données
@@ -53,7 +52,6 @@ request.send();
 
 request.onload = createTimeline; 
 
-
 /**
  * FONCTIONS
  */
@@ -64,7 +62,10 @@ function createTimeline() {
   loadData(parsedData);
 
   // AFfichage
-  timeline = new vis.Timeline(container, items, groups, options);  
+  timeline = new vis.Timeline(container, items, groups, options); 
+  timeline.on('rangechange', function() {
+    exonsAligned = false;
+  }); 
 }
 
 
@@ -96,7 +97,8 @@ function loadComponent(component, exonArray) {
   groups.push(
     {
       id: groupId,
-      content: '<'+component.type+'>\n'+component.ref,
+   //   content: component.type + ' ' + component.ref,
+      content: '<div class="comp-type">&lt;'+component.type+'></div>' + '<div class="comp-ref">'+component.ref+'</div>',
       value: groupId
     });
 
@@ -107,6 +109,8 @@ function loadComponent(component, exonArray) {
     let createdItem = createItem(exon, groupId, component.type, exonArray.length);
     exonArray.push(createdItem);
   }  
+
+  // create lines to link ranges (items w/ CSS height: 0)
 }
 
 function createItem(exon, groupId, compType, nbItems) {
@@ -122,3 +126,16 @@ function createItem(exon, groupId, compType, nbItems) {
   
   return item;
 }
+
+// function alignExons() {
+// 	let rangeItems = document.querySelectorAll('.vis-range');
+
+// 	// Align
+// 	for (let i = 0; i < rangeItems.length; i++) {
+// 		const element = rangeItems[i];
+		
+// 		element.style.top = '5px';
+// 	}
+
+//   return rangeItems.length > 0;
+// }

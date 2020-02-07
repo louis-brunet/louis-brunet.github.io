@@ -1,2 +1,14 @@
-#visualization {
+
+
+.comp-type {
+    color: red;
+}
+
+.comp-ref {
+    color: rgb(160, 160, 160);
+}
+
+.label {
+    font-weight: bold;
+    margin-left: 20px;;
 }
