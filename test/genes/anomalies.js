@@ -36,7 +36,7 @@ var aOptions = {
 
 var aTimeline;
 var aItems = [];
-let aRequest = new XMLHttpRequest();
+var aRequest = new XMLHttpRequest();
 aRequest.open('GET', aUrl);
 aRequest.responseType = 'json';
 aRequest.send();
