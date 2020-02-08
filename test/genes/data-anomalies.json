@@ -25,7 +25,7 @@
 	"pnomen":	"p-nomen-text",
 	"cnomen":	"c-nomen-text"
 },{
-    "patient":	"ABCD",
+    "patient":	"111213",
 	"ch":		"ch-text",
 	"gene":		"AXIN1",
 	"start":	"345000",
@@ -38,7 +38,7 @@
 	"pnomen":	"p-nomen-text",
 	"cnomen":	"c-nomen-text"
 },{
-    "patient":	"EFGH",
+    "patient":	"141516",
 	"ch":		"ch-text",
 	"gene":		"AXIN1",
 	"start":	"340000",

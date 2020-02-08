@@ -57,3 +57,32 @@
 .card .label {
     color: black;
 }
+
+.vis-range.anomalie-item, .vis-box.anomalie-item {
+    background-color: white;
+}
+
+.somatic, .fa, .up, .hyper {
+    border-color: red;
+    color: red;
+}
+
+.germline, .hd {
+    border-color: orange;
+    color: orange;
+}
+
+.gain, .down, .hypo {
+    border-color: blue;
+    color: blue;
+}
+
+.no-diff {
+    border-color: black;
+    color: black;
+}
+
+.perte {
+    border-color: green;
+    color: green;
+}

@@ -98,13 +98,13 @@ function loadAnomalie(parsedItem, itemArray) {
 		case 'perte':
 		case 'P':
 		case 'p':
-			item.className = 'p';
+			item.className = 'perte';
 			item.content = 'P';
 			break;
 		case 'gain':
 		case 'g':
 		case 'G':
-			item.className = 'g';
+			item.className = 'gain';
 			item.content = 'G';
 			break;
 		case 'up':
@@ -130,8 +130,8 @@ function loadAnomalie(parsedItem, itemArray) {
 
 	}
 
-	if(parsedItem.famille = 'mutation') {
-		item.className = parsedItem.soustype;
+	if(parsedItem.famille == 'mutation') {
+		item.className += ' ' + parsedItem.soustype;
 		switch(parsedItem.type) {
 			case 'snp':
 				item.content = 'S';
@@ -146,8 +146,10 @@ function loadAnomalie(parsedItem, itemArray) {
 	}
 
 	if(parsedItem.end != parsedItem.start) {
-		item.end = parsedItem.end;
+		item.end = new Date(parseInt(parsedItem.end));
 	}
 
+
+	item.className += ' anomalie-item';
 	itemArray.push(item);
 }
