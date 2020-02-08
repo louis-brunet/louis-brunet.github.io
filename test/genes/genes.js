@@ -2,6 +2,7 @@
  * Entrée json
  */
 var sUrl = 'https://louis-brunet.github.io/test/genes/data-struct.json';
+var url = 'https://louis-brunet.github.io/test/genes/data.json';
 
 /**
  * INITIALISATION DE LA TIMELINE
@@ -56,14 +57,32 @@ sRequest.send();
 
 sRequest.onload = createStructureTimeline; 
 
+
+
+var timeline;
+var items = [];
+var request = new XMLHttpRequest();
+request.open('GET', url);
+request.responseType = 'json';
+request.send();
+request.onload = createTimeline;
+
 /**
  * FONCTIONS
  */
 
+function createTimeline() {
+	loadData(request.response);
+}
+
+function loadData(parsedData){
+	loadStructureData(parsedData, items);
+}
+
 function createStructureTimeline() {
 	const parsedData = sRequest.response;
 
-	loadData(parsedData);
+	loadStructureData(parsedData);
 
 	// AFfichage
 	sTimeline = new vis.Timeline(sContainer, sItems, sGroups, sOptions); 
@@ -72,8 +91,7 @@ function createStructureTimeline() {
 
 
 
-function loadData(parsedData) {
-	let loadedItems = [];
+function loadStructureData(parsedData, loadedItems) {
 
 	document.getElementById('name').innerHTML = parsedData.name;
 	document.getElementById('ch').innerHTML = parsedData.ch;

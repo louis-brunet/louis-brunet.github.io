@@ -57,14 +57,14 @@ function createAnomaliesTimeline(){
 /**
  * Parse json data
  * Fill aItems array with created anomolies
- * @param jsonData 
+ * @param parsedArray 
  */
-function loadAnomaliesData(jsonData) {
+function loadAnomaliesData(parsedArray) {
 	let loadedItems = [];
 
-	if(Array.isArray(jsonData) ) {
-		for (let i = 0; i < jsonData.length; i++) {
-			loadAnomalie(jsonData[i], loadedItems);
+	if(Array.isArray(parsedArray) ) {
+		for (let i = 0; i < parsedArray.length; i++) {
+			loadAnomalie(parsedArray[i], loadedItems);
 		}
 	}
 
