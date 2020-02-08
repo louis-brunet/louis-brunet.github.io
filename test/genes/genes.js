@@ -187,9 +187,9 @@ function loadAnomalie(parsedItem, itemArray) {
 		}
 	}
 
-	if(parsedItem.end != parsedItem.start) {
+	//if(parsedItem.end != parsedItem.start) {
 		item.end = new Date(parseInt(parsedItem.end));
-	}
+	//}
 
 
 	item.className += ' anomalie-item';
