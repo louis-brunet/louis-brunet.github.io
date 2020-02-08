@@ -1,4 +1,9 @@
 /**
+ * Entrée json
+ */
+var sUrl = 'https://louis-brunet.github.io/test/genes/data-struct.json';
+
+/**
  * INITIALISATION DE LA TIMELINE
  */
 
@@ -34,7 +39,7 @@ var sOptions = {
   },
   timeAxis: {
       scale: 'millisecond',
-      step: 10000
+      step: 5000
     },
   showMajorLabels: false,
   stack: false
