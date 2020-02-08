@@ -8,10 +8,10 @@ var aUrl = 'https://louis-brunet.github.io/test/genes/data-anomalies.json';
  * Création de la timeline
  */
 var aGroups = new vis.DataSet([
-	{id: 0, content: 'Mutations', value: 0},
-	{id: 1, content: 'Copy number', value: 1},
-	{id: 2, content: 'Expression', value: 2},
-	{id: 3, content: 'Méthylation', value: 3}
+	{id: 0, content: 'Mut', value: 0},
+	{id: 1, content: 'CNv', value: 1},
+	{id: 2, content: 'Exp', value: 2},
+	{id: 3, content: 'Mét', value: 3}
 ]);
 var aContainer = document.getElementById('anomalies');
 var aOptions = {
@@ -54,6 +54,11 @@ function createAnomaliesTimeline(){
     aTimeline = new vis.Timeline(aContainer, aItems, aGroups, aOptions);
 }
 
+/**
+ * Parse json data
+ * Fill aItems array with created anomolies
+ * @param jsonData 
+ */
 function loadAnomaliesData(jsonData) {
 	let loadedItems = [];
 
@@ -66,6 +71,12 @@ function loadAnomaliesData(jsonData) {
 	aItems = new vis.DataSet(loadedItems);
 }
 
+/**
+ * Create item from parsedItem,
+ * put it in itemArray
+ * @param  parsedItem 
+ * @param  itemArray 
+ */
 function loadAnomalie(parsedItem, itemArray) {
 	let item = {
 		id: itemArray.length,
