@@ -35,9 +35,7 @@ var sOptions = {
     
     minorLabels: {millisecond:'SSSSSS'}*/
   },
-  orientation: {
-    axis: 'top'
-  },
+  orientation: 'top',
   timeAxis: {
       scale: 'millisecond',
       step: 5000
@@ -47,15 +45,15 @@ var sOptions = {
 };
 
 // Chargement des données
-var sTimeline;
+// var sTimeline;
 
-var sItems = [];
-let sRequest = new XMLHttpRequest();
-sRequest.open('GET', sUrl);
-sRequest.responseType = 'json';
-sRequest.send();
+// var sItems = [];
+// let sRequest = new XMLHttpRequest();
+// sRequest.open('GET', sUrl);
+// sRequest.responseType = 'json';
+// sRequest.send();
 
-sRequest.onload = createStructureTimeline; 
+// sRequest.onload = createStructureTimeline; 
 
 
 
@@ -73,12 +71,130 @@ request.onload = createTimeline;
 
 function createTimeline() {
 	loadData(request.response);
+
+	sGroups = new vis.DataSet(sGroups);
+	timeline = new vis.Timeline(sContainer, items, sGroups, sOptions);
 }
 
 function loadData(parsedData){
 	loadStructureData(parsedData, items);
+	sGroups.push(
+		{id: 1000, content: 'Mut', value: 1000},
+		{id: 1001, content: 'CNv', value: 1001},
+		{id: 1002, content: 'Exp', value: 1002},
+		{id: 1003, content: 'Mét', value: 1003}
+	);
+	loadAnomaliesData(parsedData.anomalies, items);
+	items = new vis.DataSet(items);
 }
 
+function loadAnomaliesData(parsedArray, loadedItems) {
+	if(Array.isArray(parsedArray) ) {
+		for (let i = 0; i < parsedArray.length; i++) {
+			loadAnomalie(parsedArray[i], loadedItems);
+		}
+	}
+}
+
+/**
+ * Create item from parsedItem,
+ * put it in itemArray
+ * @param  parsedItem 
+ * @param  itemArray 
+ */
+function loadAnomalie(parsedItem, itemArray) {
+	let item = {
+		id: itemArray.length,
+		group: null,
+		content: null,
+		start: new Date(parseInt(parsedItem.start))
+	};
+
+	switch(parsedItem.famille) {
+		case 'mutation':
+			item.group = 1000;
+			break;
+		case 'copy':
+			item.group = 1001;
+			break;
+		case'expr':
+			item.group = 1002;
+			break
+		case'meth':
+			item.group = 1003;
+			break
+	}
+
+	switch (parsedItem.type) {
+		case 'fa':
+		case 'FA':
+			item.className = 'fa';
+			item.content = 'FA';
+			break;
+		case 'hd':
+		case 'HD':
+			item.className = 'hd';
+			item.content = 'HD';
+			break;
+		case 'perte':
+		case 'P':
+		case 'p':
+			item.className = 'perte';
+			item.content = 'P';
+			break;
+		case 'gain':
+		case 'g':
+		case 'G':
+			item.className = 'gain';
+			item.content = 'G';
+			break;
+		case 'up':
+			item.className = 'up';
+			item.content = 'up';
+			break;
+		case 'down':
+			item.className = 'down';
+			item.content = 'down';
+			break;
+		case 'no-diff':
+		case 'nodiff':
+			item.className = 'no-diff';
+			item.content = 'nodiff';
+			break;
+		case 'hyper':
+			item.className = 'hyper';
+			item.content = 'hyper';
+			break;
+		case 'hypo':
+			item.className = 'hypo';
+			item.content = 'hypo';
+			break;
+
+	}
+
+	if(parsedItem.famille == 'mutation') {
+		item.className += ' ' + parsedItem.soustype;
+		switch(parsedItem.type) {
+			case 'snp':
+				item.content = 'S';
+				break;
+			case 'ins':
+				item.content = 'I';
+				break;
+			case 'del':
+				item.content = 'D';
+				break;
+		}
+	}
+
+	if(parsedItem.end != parsedItem.start) {
+		item.end = new Date(parseInt(parsedItem.end));
+	}
+
+
+	item.className += ' anomalie-item';
+	itemArray.push(item);
+}
 function createStructureTimeline() {
 	const parsedData = sRequest.response;
 
@@ -88,8 +204,6 @@ function createStructureTimeline() {
 	sTimeline = new vis.Timeline(sContainer, sItems, sGroups, sOptions); 
 	 
 }
-
-
 
 function loadStructureData(parsedData, loadedItems) {
 
@@ -106,9 +220,6 @@ function loadStructureData(parsedData, loadedItems) {
 			loadComponent(parsedData.components[i], loadedItems);
 		}
 	}
-
-	sItems = new vis.DataSet(loadedItems);
-	sGroups = new vis.DataSet(sGroups);
 }
 
 function loadComponent(component, exonArray) {

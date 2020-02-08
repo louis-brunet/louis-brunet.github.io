@@ -34,14 +34,14 @@ var aOptions = {
 	stack: false
 };
 
-var aTimeline;
-var aItems = [];
-var aRequest = new XMLHttpRequest();
-aRequest.open('GET', aUrl);
-aRequest.responseType = 'json';
-aRequest.send();
+// var aTimeline;
+// var aItems = [];
+// var aRequest = new XMLHttpRequest();
+// aRequest.open('GET', aUrl);
+// aRequest.responseType = 'json';
+// aRequest.send();
 
-aRequest.onload = createAnomaliesTimeline; 
+// aRequest.onload = createAnomaliesTimeline; 
 
  /**
   * Fonctions
