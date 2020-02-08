@@ -106,7 +106,7 @@ function loadAnomalie(parsedItem, itemArray) {
 	let item = {
 		id: itemArray.length,
 		group: null,
-		content: null,
+		content: '',
 		start: new Date(parseInt(parsedItem.start))
 	};
 
@@ -129,45 +129,45 @@ function loadAnomalie(parsedItem, itemArray) {
 		case 'fa':
 		case 'FA':
 			item.className = 'fa';
-			item.content = 'FA';
+			//item.content = 'FA';
 			break;
 		case 'hd':
 		case 'HD':
 			item.className = 'hd';
-			item.content = 'HD';
+			//item.content = 'HD';
 			break;
 		case 'perte':
 		case 'P':
 		case 'p':
 			item.className = 'perte';
-			item.content = 'P';
+			//item.content = 'P';
 			break;
 		case 'gain':
 		case 'g':
 		case 'G':
 			item.className = 'gain';
-			item.content = 'G';
+			//item.content = 'G';
 			break;
 		case 'up':
 			item.className = 'up';
-			item.content = 'up';
+			//item.content = 'up';
 			break;
 		case 'down':
 			item.className = 'down';
-			item.content = 'down';
+			//item.content = 'down';
 			break;
 		case 'no-diff':
 		case 'nodiff':
 			item.className = 'no-diff';
-			item.content = 'nodiff';
+			//item.content = 'nodiff';
 			break;
 		case 'hyper':
 			item.className = 'hyper';
-			item.content = 'hyper';
+			//item.content = 'hyper';
 			break;
 		case 'hypo':
 			item.className = 'hypo';
-			item.content = 'hypo';
+			//item.content = 'hypo';
 			break;
 
 	}
