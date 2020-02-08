@@ -1,4 +1,4 @@
-{
+[{
     "patient":	"0123456",
 	"ch":		"ch-text",
 	"gene":		"AXIN1",
@@ -11,4 +11,17 @@
 	"gnomen":	"g-nomen-text",
 	"pnomen":	"p-nomen-text",
 	"cnomen":	"c-nomen-text"
-}
+},{
+    "patient":	"78910",
+	"ch":		"ch-text",
+	"gene":		"AXIN1",
+	"start":	"290000",
+	"end":		"290100",
+	"strand":	"+/-",
+	"famille":	"copy",
+	"type":		"fa",
+	"soustype":	"100",
+	"gnomen":	"g-nomen-text",
+	"pnomen":	"p-nomen-text",
+	"cnomen":	"c-nomen-text"
+}]

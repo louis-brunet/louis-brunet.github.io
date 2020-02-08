@@ -35,3 +35,19 @@
     border: 1px solid;
     margin-top: -8px;
 }
+
+.card {
+    border: 5px solid green;
+    border-radius: 10px;
+    background-color: green;
+    padding: 5px;
+    margin-top: 30px;
+}
+
+#structure, #anomalies {
+    background-color: white;
+}
+
+.card .label {
+    color: white;
+}
