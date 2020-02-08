@@ -16,12 +16,10 @@ var aOptions = {
 	multiselect: false,
 	format: {
 		minorLabels: function(date, scale, step) {
-			return date.toDate().getTime();
+			return ''+ date.toDate().getTime();
 		}
 	},
-	orientation: {
-		axis: 'top'
-	},
+	orientation: 'top',
 	timeAxis: {
 		scale: 'millisecond',
 		step: 10000
@@ -60,15 +58,15 @@ function loadAnomaliesData(jsonData) {
 		}
 	}
 
-	sItems = new vis.DataSet(loadedItems);
+	aItems = new vis.DataSet(loadedItems);
 }
 
-loadAnomalie(parsedItem, itemArray) {
+function loadAnomalie(parsedItem, itemArray) {
 	let item = {
 		id: itemArray.length,
 		group: null,
 		content: null,
-		start: parsedItem.start
+		start: new Date(parseInt(parsedItem.start))
 	};
 
 	switch(parsedItem.famille) {
@@ -87,16 +85,68 @@ loadAnomalie(parsedItem, itemArray) {
 	}
 
 	switch (parsedItem.type) {
-		
+		case 'fa':
+		case 'FA':
+			item.className = 'fa';
+			item.content = 'FA';
+			break;
+		case 'hd':
+		case 'HD':
+			item.className = 'hd';
+			item.content = 'HD';
+			break;
+		case 'perte':
+		case 'P':
+		case 'p':
+			item.className = 'p';
+			item.content = 'P';
+			break;
+		case 'gain':
+		case 'g':
+		case 'G':
+			item.className = 'g';
+			item.content = 'G';
+			break;
+		case 'up':
+			item.className = 'up';
+			item.content = 'up';
+			break;
+		case 'down':
+			item.className = 'down';
+			item.content = 'down';
+			break;
+		case 'no-diff':
+			item.className = 'no-diff';
+			item.content = 'nodiff';
+			break;
+		case 'hyper':
+			item.className = 'hyper';
+			item.content = 'hyper';
+			break;
+		case 'hypo':
+			item.className = 'hypo';
+			item.content = 'hypo';
+			break;
+
 	}
 
 	if(parsedItem.famille = 'mutation') {
-		switch(parsedItem.soustype) {
-			case 'somatic':
+		item.className = parsedItem.soustype;
+		switch(parsedItem.type) {
+			case 'snp':
+				item.content = 'S';
 				break;
-			case 'germline':
+			case 'ins':
+				item.content = 'I';
+				break;
+			case 'del':
+				item.content = 'D';
 				break;
 		}
+	}
+
+	if(parsedItem.end != parsedItem.start) {
+		item.end = parsedItem.end;
 	}
 
 	itemArray.push(item);

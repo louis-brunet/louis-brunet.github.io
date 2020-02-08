@@ -123,6 +123,7 @@ function createItem(exon, groupId, compType, nbItems) {
 		end: new Date(parseInt(period[1]))
 	};
 
+	item.className += ' struct-item';
 
 	return item;
 }

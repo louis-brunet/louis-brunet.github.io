@@ -24,4 +24,30 @@
 	"gnomen":	"g-nomen-text",
 	"pnomen":	"p-nomen-text",
 	"cnomen":	"c-nomen-text"
+},{
+    "patient":	"ABCD",
+	"ch":		"ch-text",
+	"gene":		"AXIN1",
+	"start":	"345000",
+	"end":		"351000",
+	"strand":	"+/-",
+	"famille":	"expr",
+	"type":		"down",
+	"soustype":	"99",
+	"gnomen":	"g-nomen-text",
+	"pnomen":	"p-nomen-text",
+	"cnomen":	"c-nomen-text"
+},{
+    "patient":	"EFGH",
+	"ch":		"ch-text",
+	"gene":		"AXIN1",
+	"start":	"340000",
+	"end":		"343000",
+	"strand":	"+/-",
+	"famille":	"meth",
+	"type":		"hyper",
+	"soustype":	"75",
+	"gnomen":	"g-nomen-text",
+	"pnomen":	"p-nomen-text",
+	"cnomen":	"c-nomen-text"
 }]

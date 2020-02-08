@@ -8,6 +8,10 @@
     color: blue;
 }
 
+/* .vis-label {
+    font-size: 80%;
+} */
+
 .comp-ref {
     color: rgb(160, 160, 160);
 }
@@ -25,29 +29,31 @@
     margin-left: 20px;;
 }
 
-.vis-range.line {
+.struct-item.vis-range.line {
     max-height: 2px;
     margin-top: -18px;
 }
 
-.vis-range {
+.struct-item.vis-range {
     background-color: white;
     border: 1px solid;
     margin-top: -8px;
 }
 
 .card {
-    border: 5px solid green;
+    border: 1px solid black; 
     border-radius: 10px;
-    background-color: green;
+    background-color: rgb(220, 220, 220);
     padding: 5px;
     margin-top: 30px;
 }
 
 #structure, #anomalies {
     background-color: white;
+    border-radius: 8px;
+    font-size: small;
 }
 
 .card .label {
-    color: white;
+    color: black;
 }
