@@ -45,7 +45,7 @@ var sTimeline;
 
 var sItems = [];
 let sUrl = 'https://louis-brunet.github.io/test/genes/data-struct.json';
-var sRequest = new XMLHttpRequest();
+let sRequest = new XMLHttpRequest();
 sRequest.open('GET', sUrl);
 sRequest.responseType = 'json';
 sRequest.send();
