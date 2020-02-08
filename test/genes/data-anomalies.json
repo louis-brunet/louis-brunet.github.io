@@ -1,0 +1,14 @@
+{
+    "patient":	"0123456",
+	"ch":		"ch-text",
+	"gene":		"AXIN1",
+	"start":	"290388",
+	"end":		"290388",
+	"strand":	"+/-",
+	"famille":	"mutation",
+	"type":		"snp",
+	"soustype":	"germline",
+	"gnomen":	"g-nomen-text",
+	"pnomen":	"p-nomen-text",
+	"cnomen":	"c-nomen-text"
+}

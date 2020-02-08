@@ -1,14 +1,37 @@
 
 
-.comp-type {
-    color: red;
+.protein_coding {
+    color: rgb(255, 165, 0);
+}
+
+.retained_intron, .process_transcript {
+    color: blue;
 }
 
 .comp-ref {
     color: rgb(160, 160, 160);
 }
 
+.vis-range.protein_coding {
+    border-color: rgba(255, 165, 0, 0.8);
+}
+
+.vis-range.retained_intron, .vis-range.process_transcript {
+    border-color: rgba(0, 0, 255, 0.8);
+}
+
 .label {
     font-weight: bold;
     margin-left: 20px;;
+}
+
+.vis-range.line {
+    max-height: 2px;
+    margin-top: -18px;
+}
+
+.vis-range {
+    background-color: white;
+    border: 1px solid;
+    margin-top: -8px;
 }
