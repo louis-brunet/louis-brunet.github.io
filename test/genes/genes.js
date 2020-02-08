@@ -41,7 +41,7 @@ var sOptions = {
 //     },
   showMajorLabels: false,
   stack: false,
-  min: new Date(0,0,1)
+  min: new Date(0)
 };
 
 // Chargement des données
@@ -195,15 +195,6 @@ function loadAnomalie(parsedItem, itemArray) {
 	item.className += ' anomalie-item';
 	itemArray.push(item);
 }
-function createStructureTimeline() {
-	const parsedData = sRequest.response;
-
-	loadStructureData(parsedData);
-
-	// AFfichage
-	sTimeline = new vis.Timeline(sContainer, sItems, sGroups, sOptions); 
-	 
-}
 
 function loadStructureData(parsedData, loadedItems) {
 
@@ -228,7 +219,7 @@ function loadComponent(component, exonArray) {
 	sGroups.push(
 		{
 			id: groupId,
-			content: '<div class="comp-type '+component.type+'">&lt;'+component.type+'&gt;</div>' + '<div class="comp-ref">'+component.ref+'</div>',
+			content: '<div class="comp-type ' + component.type+'">&lt;'+component.type+'&gt;</div>' + (component.hasOwnProperty('ref') ? '<div class="comp-ref">'+component.ref+'</div>' : ''),
 			value: groupId
 		});
 
