@@ -60,7 +60,13 @@
 
 .vis-range.anomalie-item, .vis-box.anomalie-item {
     background-color: white;
+    text-align: center;
 }
+
+/* .anomalie-item.vis-item-content {
+    min-width: 100%;
+    text-align: center;
+} */
 
 .somatic, .fa, .up, .hyper {
     border-color: red;

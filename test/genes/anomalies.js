@@ -22,7 +22,7 @@ var aOptions = {
 	orientation: 'top',
 	timeAxis: {
 		scale: 'millisecond',
-		step: 10000
+		step: 5000
 	},
 	showMajorLabels: false,
 	stack: false
@@ -116,6 +116,7 @@ function loadAnomalie(parsedItem, itemArray) {
 			item.content = 'down';
 			break;
 		case 'no-diff':
+		case 'nodiff':
 			item.className = 'no-diff';
 			item.content = 'nodiff';
 			break;
