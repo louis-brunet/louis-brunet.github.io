@@ -11,7 +11,7 @@ var aGroups = new vis.DataSet([
 	{id: 0, content: 'Mutations', value: 0},
 	{id: 1, content: 'Copy number', value: 1},
 	{id: 2, content: 'Expression', value: 2},
-	{id: 3, content: 'Méthyilation', value: 3}
+	{id: 3, content: 'Méthylation', value: 3}
 ]);
 var aContainer = document.getElementById('anomalies');
 var aOptions = {
