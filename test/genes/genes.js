@@ -28,20 +28,20 @@ var sOptions = {
   hiddenDates: [],
   format: {
     minorLabels: function(date, scale, step) {
-      //alert('date : '+date+'\nscale : '+scale+'\nstep : '+step);
 
-      return date.toDate().getTime();
+      return date.toDate().getTime()/1000 +' Kb';
     }/*,
     
     minorLabels: {millisecond:'SSSSSS'}*/
   },
   orientation: 'top',
-  timeAxis: {
-      scale: 'millisecond',
-      step: 5000
-    },
+//   timeAxis: {
+//       scale: 'millisecond',
+//       step: 5000
+//     },
   showMajorLabels: false,
-  stack: false
+  stack: false,
+  min: new Date(0,0,1)
 };
 
 // Chargement des données
