@@ -109,7 +109,10 @@
         "strand":	"+/-",
         "famille":	"copy",
         "type":		"fa",
-        "soustype":	"100"
+        "soustype":	"100",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     },{
         "patient":	"78910",
         "ch":		"ch-text",
@@ -119,7 +122,10 @@
         "strand":	"+/-",
         "famille":	"copy",
         "type":		"hd",
-        "soustype":	"50"
+        "soustype":	"50",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     },{
         "patient":	"78910",
         "ch":		"ch-text",
@@ -129,7 +135,10 @@
         "strand":	"+/-",
         "famille":	"copy",
         "type":		"gain",
-        "soustype":	"75"
+        "soustype":	"75",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     },{
         "patient":	"111213",
         "ch":		"ch-text",
@@ -139,7 +148,10 @@
         "strand":	"+/-",
         "famille":	"expr",
         "type":		"up",
-        "soustype":	"10"
+        "soustype":	"10",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     },{
         "patient":	"111213",
         "ch":		"ch-text",
@@ -149,7 +161,10 @@
         "strand":	"+/-",
         "famille":	"expr",
         "type":		"no-diff",
-        "soustype":	"50"
+        "soustype":	"50",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     },{
         "patient":	"111213",
         "ch":		"ch-text",
@@ -159,7 +174,10 @@
         "strand":	"+/-",
         "famille":	"expr",
         "type":		"down",
-        "soustype":	"99"
+        "soustype":	"99",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     },{
         "patient":	"141516",
         "ch":		"ch-text",
@@ -169,7 +187,10 @@
         "strand":	"+/-",
         "famille":	"meth",
         "type":		"hypo",
-        "soustype":	"50"
+        "soustype":	"50",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     },{
         "patient":	"141516",
         "ch":		"ch-text",
@@ -179,6 +200,9 @@
         "strand":	"+/-",
         "famille":	"meth",
         "type":		"hyper",
-        "soustype":	"75"
+        "soustype":	"75",
+        "so":       "SO:0001576",
+        "colonne8": "CHC2452T",
+        "colonne9": "miseq"
     }]
 }

@@ -200,6 +200,15 @@ function loadAnomalie(parsedItem, itemArray) {
 		item.dataso = parsedItem.so;
 	}
 
+	if(parsedItem.hasOwnProperty('colonne8')) {
+		item.datacolonne8 = parsedItem.colonne8;
+	}
+
+	if(parsedItem.hasOwnProperty('colonne9')) {
+		item.datacolonne9 = parsedItem.colonne9;
+	}
+	
+
 
 	item.className += ' anomalie-item';
 	itemArray.push(item);
@@ -273,11 +282,11 @@ function createTooltip(item, container) {
 
 	if(item.hasOwnProperty('dataso')) {
 		let lineStr = item.dataso.split(':')[1];
-		if(item.hasOwnProperty('colonne9')){
-			lineStr = item.colonne9 + ', ' + lineStr;
+		if(item.hasOwnProperty('datacolonne9')){
+			lineStr = item.datacolonne9 + ', ' + lineStr;
 		}
-		if(item.hasOwnProperty('colonne8')){
-			lineStr = item.colonne8 + ', ' + lineStr;
+		if(item.hasOwnProperty('datacolonne8')){
+			lineStr = item.datacolonne8 + ', ' + lineStr;
 		}
 		tooltipNode.appendChild(createTooltipDiv('', lineStr, 'tooltip-last-line'));
 		
