@@ -14,6 +14,7 @@ p#title {
 
 .protein_coding.noref {
     color: red;
+    border-color: red;
 }
 
 .retained_intron, .process_transcript {
@@ -86,8 +87,8 @@ p#title {
 }
 
 .type-germline, .vis-selected.type-germline, .type-hd, .vis-selected.type-hd {
-    border-color: orange;
-    color: orange;
+    border-color: orangered;
+    color: orangered;
 }
 
 .type-gain, .vis-selected.type-gain, .type-down, .vis-selected.type-down, .type-hypo, .vis-selected.type-hypo {

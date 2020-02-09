@@ -313,6 +313,9 @@ function loadComponent(component, exonArray) {
 	for (let i = 0; i < exons.length; i++) {
 		const exon = exons[i];
 		let createdItem = createItem(exon, groupId, component.type, exonArray.length);
+		if(createdItem.className.includes('protein_coding') && ! component.hasOwnProperty('ref')) {
+			createdItem.className += ' noref';
+		}
 		exonArray.push(createdItem);
 	}  
 
