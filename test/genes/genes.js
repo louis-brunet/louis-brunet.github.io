@@ -273,10 +273,12 @@ function createTooltip(item, container) {
 
 	if(item.hasOwnProperty('dataso')) {
 		let lineStr = item.dataso.split(':')[1];
-		if(item.hasOwnProperty('colonne9'))
+		if(item.hasOwnProperty('colonne9')){
 			lineStr = item.colonne9 + ', ' + lineStr;
-		if(item.hasOwnProperty('colonne8'))
+		}
+		if(item.hasOwnProperty('colonne8')){
 			lineStr = item.colonne8 + ', ' + lineStr;
+		}
 		tooltipNode.appendChild(createTooltipDiv('', lineStr, 'tooltip-last-line'));
 		
 		let soUrl = ' http://www.sequenceontology.org/browser/current_release/term/SO:' + item.dataso.split(':')[1];
