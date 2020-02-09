@@ -372,12 +372,16 @@ function loadData(parsedData) {
   let i = 0;
   if(parsedData[0].hasOwnProperty('nom')) {
     i = 1;
-    document.getElementById('fname').innerHTML = parsedData[0].prenom;
-    document.getElementById('lname').innerHTML = parsedData[0].nom;
+    document.getElementById('fname').innerHTML = '<strong>'+parsedData[0].prenom+'</strong>';
+    document.getElementById('lname').innerHTML = '<strong>'+parsedData[0].nom+'</strong>';
     
-    document.getElementById('civilite').innerHTML =
-     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Monsieur' : 'Madame';
-    document.getElementById('ipp').innerHTML = parsedData[0].ipp;
+    document.getElementById('sexe').innerHTML =
+     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Masculin' : 'Féminin';
+    document.getElementById('ipp').innerHTML = '<strong>'+parsedData[0].ipp+'</strong>';
+    document.getElementById('ddn').innerHTML = parsedData[0].ddn;
+
+    let age = new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
+    document.getElementById('age').innerHTML = '('+ age +' ans)';
   }
 
   for (; i < parsedData.length; i++) {
@@ -456,4 +460,19 @@ function createTooltip(tooltipObj, container) {
   node.appendChild(normNode);
   container.appendChild(node);
 
+}
+
+
+
+/**
+ * Afficher une capture d'ecran du graphe
+ */
+function capture() {
+	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
+		document.getElementById('output-card').style.display = 'block';
+		// Export the canvas to its data URI representation
+		var base64image = canvas.toDataURL("image/jpeg");
+		// Display image in #output element
+		document.getElementById('output').src = base64image;
+	});
 }

@@ -12,7 +12,7 @@
 
 <body>
 
-  <p id="title">Suivi longitudinal de <span id="civilite">Monsieur</span> <span id="fname">___</span> <span id="lname">____</span> - <span id="ipp"></span></p>
+  <!-- <p id="title">Suivi longitudinal de <span id="civilite">Monsieur</span> <span id="fname">___</span> <span id="lname">____</span> - <span id="ipp"></span></p> -->
 
   
   <div class="tolerance">
@@ -22,9 +22,26 @@
   		<img class="btn" src="https://img.icons8.com/metro/26/000000/refresh.png" alt="Rafraichir">
   	</span>
   </div>
-  <div id="visualization"></div>
 
+  <div id="to-capture">
+    <p id="title">
+      <span id="ipp">ipp</span>
+      <span id="lname">nom</span>
+      <span id="fname">prénom</span>
+      <span id="sexe">sexe</span>
+      <span id="ddn">ddn</span>
+      <span id="age">age</span>
+    </p>
+    <div id="visualization"></div>
+  </div>
+
+  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+  <div class="card" id="output-card">
+    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <img id="output">
+  </div>
   
   <script src="custom.js"></script>
+  <script type="text/javascript" src="html2canvas.min.js"></script>
 </body>
 </html>

@@ -8,6 +8,14 @@ p#title {
     text-align:  center;
 }
 
+a {
+    transition: color 0.5s;
+}
+
+a:hover {
+    color: red;
+}
+
 .protein_coding {
     color: rgb(255, 165, 0);
 }
@@ -113,23 +121,30 @@ p#title {
 
 
 .anomalie-item:hover .tooltip-text {
-    display: block;
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
   }
   
 .tooltip-text {
-    box-sizing: border-box;
-    display: none;
+    /* box-sizing: border-box; */
+    /* display: none; */    
+    transition: opacity 0.3s, visibility 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    
     background-color: white;
     padding: 5px;
     border-radius: 6px;
-    min-width: 180px;
-    margin-left: -90px;
+    min-width: 220px;
+    margin-left: -110px;
     text-align: center;
     border: 1px solid;
 
-    bottom: 110%; 
+    bottom: 120%; 
     left: 50%;
     position: absolute;
+
 }
 
 .tooltip-label {
@@ -154,10 +169,6 @@ p#title {
     border: none;
 }
 
-#cap-btn:active {
-    /* background-color: rgb(15, 26, 190); */
-}
-
 #close-btn {
     font-weight: bold;
     background-color: red;
@@ -165,6 +176,10 @@ p#title {
     float: right;
     margin-bottom: 4px;
     border: none;
+}
+
+button {
+    transition: box-shadow 0.6s linear;
 }
 
 button:focus {

@@ -418,11 +418,23 @@ function createLineItem(exonItem, nextExonItem, nbItems) {
  * Afficher une capture d'ecran du graphe
  */
 function capture() {
+	// hide tooltips
+	let tooltips = document.querySelectorAll('.tooltip-text');
+	tooltips.forEach(function (t) {
+		t.style.display = 'none';
+	});
+
+	// Display screencap of #to-capture elem
 	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
 		document.getElementById('output-card').style.display = 'block';
 		// Export the canvas to its data URI representation
 		var base64image = canvas.toDataURL("image/jpeg");
 		// Display image in #output element
 		document.getElementById('output').src = base64image;
+	});
+
+	// show tooltips
+	tooltips.forEach(function (t) {
+		t.style.display = 'block';
 	});
 }
