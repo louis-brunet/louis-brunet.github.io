@@ -5,6 +5,7 @@ body {
 p#title {
     font-size: 90%;
     margin-bottom: 0;
+    text-align:  center;
 }
 
 .protein_coding {
@@ -53,7 +54,6 @@ p#title {
 }
 
 .card {
-    border: 1px solid black; 
     border-radius: 10px;
     background-color: rgb(220, 220, 220);
     padding: 10px;
@@ -137,4 +137,39 @@ p#title {
 
 .tooltip-val {
     color: black;
+}
+
+#cap-btn {
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(200, 200, 200);
+    right: 0;
+    position: absolute;
+}
+
+#close-btn {
+    font-weight: bold;
+    background-color: red;
+    color: white;
+    float: right;
+    margin-bottom: 4px;
+}
+
+button:focus {
+    outline:none;
+}
+
+#output-card {
+    display:none;
+    margin: 4px;
+}
+
+#output {
+    border: 2px solid black;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.vis-timeline {
+    border: none;
 }

@@ -6,8 +6,12 @@ body {
 	background-color: #e5f4ea;
 	font-family: arial;
 	text-align: center;
-	background-image: url("../img/background-tile2.png");
-	background-size: 32px 32px;
+	/* background-image: url("../img/background-tile2.png");
+	background-size: 32px 32px; */
+	
+	background-image: url("../img/keyboard.jpg");
+	background-size: cover;
+	background-position: center;
 }
 
 nav {
@@ -95,9 +99,6 @@ a.onglet-courant {
 	border: 1px solid rgb(71, 48, 10);
 	border-radius: 10px;
 	background-color: rgba(235,243,250, 0.4);
-	background-image: url("../img/keyboard.jpg");
-	background-size: cover;
-	background-position: center;
 }
 
 
@@ -108,7 +109,7 @@ a.onglet-courant {
 	color: /*#1F4E79*/rgba(229, 244, 234, 1);
 	font-size: 200%;
 	margin-bottom: 10px;
-
+	text-shadow: 2px 2px 4px black;
 }
 
 .main .content {
@@ -176,8 +177,10 @@ a.onglet-courant {
 .card.description img {
 	max-width: 100%;
 	max-height: 300px;
-	border-radius: 50px;
+	border-radius: 50%;
 	flex-shrink: 0;
+	border: 6px solid #1F4E79;
+	align-self: center;
 }
 
 .content > .card {

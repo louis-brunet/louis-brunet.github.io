@@ -363,3 +363,17 @@ function createLineItem(exonItem, nextExonItem, nbItems) {
 		end: nextExonItem.start
 	};
 }
+
+
+/**
+ * Afficher une capture d'ecran du graphe
+ */
+function capture() {
+	html2canvas(document.getElementById('visualization')).then(function(canvas) {
+		document.getElementById('output-card').style.display = 'block';
+		// Export the canvas to its data URI representation
+		var base64image = canvas.toDataURL("image/jpeg");
+		// Display image in #output element
+		document.getElementById('output').src = base64image;
+	});
+}

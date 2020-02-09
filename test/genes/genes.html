@@ -6,7 +6,8 @@
 
   <script src="../vis-timeline-graph2d.min.js"></script>
   <link href="../vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
-  
+  <script type="text/javascript" src="../html2canvas.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="genes.css">
 </head>
 
@@ -20,16 +21,17 @@
     <span class="label">Réf. : </span><a href="" id="ref">http://www.ensembl.org/</a>
   </p>
 
+  <hr>
+
   <div class="card">
     <div id="visualization"></div>
   </div>
-
-  <!-- <div class="card">
-    <div class="label">Anomalies : </div>
-    <div id="anomalies"></div>
-  </div> -->
+  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+  <div class="card" id="output-card">
+    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <img id="output">
+  </div>
   
   <script src="genes.js"></script>
-  <!-- <script src="anomalies.js"></script> -->
 </body>
 </html>
