@@ -196,6 +196,10 @@ function loadAnomalie(parsedItem, itemArray) {
 		item.datacnomen = parsedItem.cnomen;
 	}
 
+	if(parsedItem.hasOwnProperty('so')) {
+		item.dataso = parsedItem.so;
+	}
+
 
 	item.className += ' anomalie-item';
 	itemArray.push(item);
@@ -267,6 +271,22 @@ function createTooltip(item, container) {
 		tooltipNode.appendChild(createTooltipDiv('C nomen : ', item.datacnomen, 'tooltip-cnomen'));
 	}
 
+	if(item.hasOwnProperty('dataso')) {
+		let lineStr = item.dataso.split(':')[1];
+		if(item.hasOwnProperty('colonne9'))
+			lineStr = item.colonne9 + ', ' + lineStr;
+		if(item.hasOwnProperty('colonne8'))
+			lineStr = item.colonne8 + ', ' + lineStr;
+		tooltipNode.appendChild(createTooltipDiv('', lineStr, 'tooltip-last-line'));
+		
+		let soUrl = ' http://www.sequenceontology.org/browser/current_release/term/SO:' + item.dataso.split(':')[1];
+		let linkNode = document.createElement('a');
+		linkNode.className = 'tooltip-link';
+		linkNode.href = soUrl;
+		linkNode.appendChild(document.createTextNode('Sequence ontology'));
+		tooltipNode.appendChild(linkNode);
+	}
+
 	container.appendChild(tooltipNode);
 }
 
@@ -276,7 +296,9 @@ function createTooltip(item, container) {
 function createTooltipDiv(label, text, className) {
 	let res = document.createElement('div');
 	res.className = className;
-	res.appendChild(createSpan(label, 'tooltip-label'));
+	if(label != '') {
+		res.appendChild(createSpan(label, 'tooltip-label'));
+	}
 	res.appendChild(createSpan(text, 'tooltip-val'));
 	return res;
 }
