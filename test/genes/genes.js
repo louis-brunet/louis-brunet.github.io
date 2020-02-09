@@ -7,13 +7,12 @@ var url = 'https://louis-brunet.github.io/test/genes/data.json';
  * INITIALISATION DE LA TIMELINE
  */
 
-var groups = [];
-var GROUP_MUT = 1000;
-var GROUP_CNV = 1001;
-var GROUP_EXPR = 1002;
-var GROUP_METH = 1003;
+var GROUP_MUT = 10000;
+var GROUP_CNV = 10001;
+var GROUP_EXPR = 10002;
+var GROUP_METH = 10003;
 
-// create visualization
+var groups = [];
 var container = document.getElementById('visualization');
 
 

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Matrix | Synthèse</title>
+
+  <script src="../vis-timeline-graph2d.min.js"></script>
+  <link href="../vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  
+  <link rel="stylesheet" type="text/css" href="matrix.css">
+</head>
+
+<body>
+  <div id="to-capture">
+    
+    <p id="title">
+
+    </p>
+    
+    <hr>
+    
+    <div class="card">
+      <div id="visualization"></div>
+    </div>
+  </div>
+  
+  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+  
+  <div class="card" id="output-card">
+    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <img id="output">
+  </div>
+  
+  <script src="matrix.js"></script>
+  <script type="text/javascript" src="../html2canvas.min.js"></script>
+</body>
+</html>
