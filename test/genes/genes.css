@@ -2,12 +2,17 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-#title {
+p#title {
     font-size: 90%;
+    margin-bottom: 0;
 }
 
 .protein_coding {
     color: rgb(255, 165, 0);
+}
+
+.protein_coding.noref {
+    color: red;
 }
 
 .retained_intron, .process_transcript {
@@ -51,11 +56,11 @@ body {
     border: 1px solid black; 
     border-radius: 10px;
     background-color: rgb(220, 220, 220);
-    padding: 5px;
-    margin-top: 30px;
+    padding: 10px;
+    margin-top: 10px;
 }
 
-#structure, #anomalies {
+#visualization {
     background-color: white;
     border-radius: 8px;
     font-size: small;
@@ -75,31 +80,61 @@ body {
     text-align: center;
 } */
 
-.somatic, .fa, .up, .hyper {
+.type-somatic, .vis-selected.type-somatic, .type-fa, .vis-selected.type-fa, .type-up, .vis-selected.type-up, .type-hyper, .vis-selected.type-hyper {
     border-color: red;
     color: red;
 }
 
-.germline, .hd {
+.type-germline, .vis-selected.type-germline, .type-hd, .vis-selected.type-hd {
     border-color: orange;
     color: orange;
 }
 
-.gain, .down, .hypo {
+.type-gain, .vis-selected.type-gain, .type-down, .vis-selected.type-down, .type-hypo, .vis-selected.type-hypo {
     border-color: blue;
     color: blue;
 }
 
-.no-diff {
+.type-no-diff, .vis-selected.type-no-diff {
     border-color: black;
     color: black;
 }
 
-.perte {
+.type-perte, .vis-selected.type-perte {
     border-color: green;
     color: green;
 }
 
 .vis-odd.vis-minor {
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(250, 250, 250);
+}
+
+
+
+.anomalie-item:hover .tooltip-text {
+    display: block;
+  }
+  
+.tooltip-text {
+    box-sizing: border-box;
+    display: none;
+    background-color: white;
+    padding: 5px;
+    border-radius: 6px;
+    min-width: 180px;
+    margin-left: -90px;
+    text-align: center;
+    border: 1px solid;
+
+    bottom: 120%; 
+    left: 50%;
+    position: absolute;
+}
+
+.tooltip-label {
+    font-weight: bold;
+}
+
+.tooltip-val {
+    color: black;
 }

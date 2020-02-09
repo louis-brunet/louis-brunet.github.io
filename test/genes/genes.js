@@ -1,62 +1,51 @@
 /**
  * Entrée json
  */
-var sUrl = 'https://louis-brunet.github.io/test/genes/data-struct.json';
 var url = 'https://louis-brunet.github.io/test/genes/data.json';
 
 /**
  * INITIALISATION DE LA TIMELINE
  */
 
-var sGroups = [];
+var groups = [];
+var GROUP_MUT = 1000;
+var GROUP_CNV = 1001;
+var GROUP_EXPR = 1002;
+var GROUP_METH = 1003;
 
 // create visualization
-var sContainer = document.getElementById('structure');
+var container = document.getElementById('visualization');
 
 
-var sOptions = {
-  // option groupOrder can be a property name or a sort function
-  // the sort function must compare two groups and return a value
-  //     > 0 when a > b
-  //     < 0 when a < b
-  //       0 when a == b
-  groupOrder: function (a, b) {
-    return a.value - b.value;
-  },
-  editable: false,
-  multiselect: false,
-  hiddenDates: [],
-  format: {
-    minorLabels: function(date, scale, step) {
+var options = {
+	// option groupOrder can be a property name or a sort function
+	// the sort function must compare two groups and return a value
+	//     > 0 when a > b
+	//     < 0 when a < b
+	//       0 when a == b
+	groupOrder: function (a, b) {
+		return a.value - b.value;
+	},
+	editable: false,
+	multiselect: false,
+	hiddenDates: [],
+	format: {
+	minorLabels: function(date, scale, step) {
 
-      return date.toDate().getTime()/1000 +' Kb';
-    }/*,
-    
-    minorLabels: {millisecond:'SSSSSS'}*/
-  },
-  orientation: 'top',
-//   timeAxis: {
-//       scale: 'millisecond',
-//       step: 5000
-//     },
-  showMajorLabels: false,
-  stack: false,
-  min: new Date(0)
+		return date.toDate().getTime()/1000 +' Kb';
+	},
+	majorLabels: function(date, scale, step) {
+		return date.toDate().getTime()/1000 +' Kb';
+	}
+	},
+	showMajorLabels: false,
+	stack: false,
+	orientation: 'top',
+	min: new Date(0),
+	dataAttributes: ['dataid']
 };
 
 // Chargement des données
-// var sTimeline;
-
-// var sItems = [];
-// let sRequest = new XMLHttpRequest();
-// sRequest.open('GET', sUrl);
-// sRequest.responseType = 'json';
-// sRequest.send();
-
-// sRequest.onload = createStructureTimeline; 
-
-
-
 var timeline;
 var items = [];
 var request = new XMLHttpRequest();
@@ -65,28 +54,45 @@ request.responseType = 'json';
 request.send();
 request.onload = createTimeline;
 
-/**
+
+// Création des tooltips
+var tooltipsCreated = false;
+setInterval(function() {
+	if((!tooltipsCreated) && document.querySelectorAll('.anomalie-item').length > 1) {
+		createTooltips();
+		tooltipsCreated = true;
+	}
+},1500);
+
+
+/******************
  * FONCTIONS
  */
+
 
 function createTimeline() {
 	loadData(request.response);
 
-	sGroups = new vis.DataSet(sGroups);
-	timeline = new vis.Timeline(sContainer, items, sGroups, sOptions);
+	groups = new vis.DataSet(groups);
+	timeline = new vis.Timeline(container, items, groups, options);
 }
 
 function loadData(parsedData){
 	loadStructureData(parsedData, items);
-	sGroups.push(
-		{id: 1000, content: 'Mut', value: 1000},
-		{id: 1001, content: 'CNv', value: 1001},
-		{id: 1002, content: 'Exp', value: 1002},
-		{id: 1003, content: 'Mét', value: 1003}
+	groups.push(
+		{id: GROUP_MUT, content: 'Mut.', value: GROUP_MUT},
+		{id: GROUP_CNV, content: 'CNv', value: GROUP_CNV},
+		{id: GROUP_EXPR, content: 'Exp.', value: GROUP_EXPR},
+		{id: GROUP_METH, content: 'Mét.', value: GROUP_METH}
 	);
 	loadAnomaliesData(parsedData.anomalies, items);
 	items = new vis.DataSet(items);
 }
+
+
+/****
+ * FCTS - ANOMALIES
+ */
 
 function loadAnomaliesData(parsedArray, loadedItems) {
 	if(Array.isArray(parsedArray) ) {
@@ -97,94 +103,87 @@ function loadAnomaliesData(parsedArray, loadedItems) {
 }
 
 /**
- * Create item from parsedItem,
+ * Create exploitable item based on parsedItem,
  * put it in itemArray
- * @param  parsedItem 
- * @param  itemArray 
  */
 function loadAnomalie(parsedItem, itemArray) {
 	let item = {
 		id: itemArray.length,
+		dataid: itemArray.length,
 		group: null,
 		content: '',
-		start: new Date(parseInt(parsedItem.start))
+		start: new Date(parseInt(parsedItem.start)),
+		datatype: parsedItem.type,
+		datasoustype: parsedItem.soustype,
+		datagnomen: parsedItem.gnomen,
+		datapnomen: parsedItem.pnomen,
+		datacnomen: parsedItem.cnomen
 	};
 
 	switch(parsedItem.famille) {
 		case 'mutation':
-			item.group = 1000;
+			item.group = GROUP_MUT;
 			break;
 		case 'copy':
-			item.group = 1001;
+			item.group = GROUP_CNV;
 			break;
 		case'expr':
-			item.group = 1002;
+			item.group = GROUP_EXPR;
 			break
 		case'meth':
-			item.group = 1003;
+			item.group = GROUP_METH;
 			break
 	}
 
 	switch (parsedItem.type) {
 		case 'fa':
 		case 'FA':
-			item.className = 'fa';
+			item.className = 'type-fa';
 			//item.content = 'FA';
 			break;
 		case 'hd':
 		case 'HD':
-			item.className = 'hd';
+			item.className = 'type-hd';
 			//item.content = 'HD';
 			break;
 		case 'perte':
 		case 'P':
 		case 'p':
-			item.className = 'perte';
+			item.className = 'type-perte';
 			//item.content = 'P';
 			break;
 		case 'gain':
 		case 'g':
 		case 'G':
-			item.className = 'gain';
+			item.className = 'type-gain';
 			//item.content = 'G';
 			break;
 		case 'up':
-			item.className = 'up';
+			item.className = 'type-up';
 			//item.content = 'up';
 			break;
 		case 'down':
-			item.className = 'down';
+			item.className = 'type-down';
 			//item.content = 'down';
 			break;
 		case 'no-diff':
 		case 'nodiff':
-			item.className = 'no-diff';
+			item.className = 'type-no-diff';
 			//item.content = 'nodiff';
 			break;
 		case 'hyper':
-			item.className = 'hyper';
+			item.className = 'type-hyper';
 			//item.content = 'hyper';
 			break;
 		case 'hypo':
-			item.className = 'hypo';
+			item.className = 'type-hypo';
 			//item.content = 'hypo';
 			break;
 
 	}
 
 	if(parsedItem.famille == 'mutation') {
-		item.className += ' ' + parsedItem.soustype;
-		switch(parsedItem.type) {
-			case 'snp':
-				item.content = 'S';
-				break;
-			case 'ins':
-				item.content = 'I';
-				break;
-			case 'del':
-				item.content = 'D';
-				break;
-		}
+		item.className += ' type-' + parsedItem.soustype;
 	}
 
 	//if(parsedItem.end != parsedItem.start) {
@@ -195,6 +194,92 @@ function loadAnomalie(parsedItem, itemArray) {
 	item.className += ' anomalie-item';
 	itemArray.push(item);
 }
+
+function createTooltips() {
+	// Find items w/ className contains anomalie-item
+	let tooltipItems = items.get({
+		filter: function(i) {
+			return i.className.includes('anomalie-item');
+		}
+	});
+
+	// Find corresponding tooltip containers in DOM
+	let tooltipContainers = document.querySelectorAll('.vis-range.anomalie-item, .vis-box.anomalie-item');
+
+	// Set select on hover for all containers to keep tooltip above all items
+	setSelectOnHover(tooltipContainers);
+
+	// For each (tooltip item, container) where item.id == container.dataset.
+	// create tooltip w/ item data
+	for (let i = 0; i < tooltipItems.length; i++) {
+		for (let j = 0; j < tooltipContainers.length; j++) {  
+			if(tooltipItems[i].id == tooltipContainers[j].dataset.dataid ){
+				createTooltip(tooltipItems[i], tooltipContainers[j]);
+
+				break;
+			}
+	   } 
+	}
+}
+
+function setSelectOnHover(containers) {
+	containers.forEach(function(cont){
+		cont.addEventListener('mouseover',function(e) {
+			timeline.setSelection([]);
+			timeline.setSelection(cont.dataset.dataid);
+		});
+	});
+}
+
+/**
+ * Create DOM elements in container based on item's properties
+ */
+function createTooltip(item, container) {
+	let tooltipNode = document.createElement('div');
+	tooltipNode.className = 'tooltip-text';
+
+
+	let positionStr = item.start.getTime().toString();
+	if(item.hasOwnProperty('end')) {
+		positionStr += ' - ' + item.end.getTime().toString();
+	}
+	tooltipNode.appendChild(createTooltipDiv('Position : ', positionStr, 'tooltip-position'));
+
+	let typeStr = item.datatype;
+	tooltipNode.appendChild(createTooltipDiv('Type : ', typeStr, 'tooltip-type'));
+	
+	let soustypeStr = item.datasoustype;
+	tooltipNode.appendChild(createTooltipDiv('Sous-type : ', soustypeStr, 'tooltip-soustype'));
+
+	tooltipNode.appendChild(createTooltipDiv('G nomen : ', item.datagnomen, 'tooltip-gnomen'));
+	tooltipNode.appendChild(createTooltipDiv('P nomen : ', item.datapnomen, 'tooltip-pnomen'));
+	tooltipNode.appendChild(createTooltipDiv('C nomen : ', item.datacnomen, 'tooltip-cnomen'));
+
+	container.appendChild(tooltipNode);
+}
+
+/**
+ * Return new div Element containing a label span and a val span
+ */
+function createTooltipDiv(label, text, className) {
+	let res = document.createElement('div');
+	res.className = className;
+	res.appendChild(createSpan(label, 'tooltip-label'));
+	res.appendChild(createSpan(text, 'tooltip-val'));
+	return res;
+}
+
+function createSpan(text, className) {
+	let res = document.createElement('span');
+	res.className = className;
+	res.appendChild(document.createTextNode(text));
+	return res;
+}
+
+
+/****
+ * FCTS - STRUCTURE
+ */
 
 function loadStructureData(parsedData, loadedItems) {
 
@@ -215,11 +300,11 @@ function loadStructureData(parsedData, loadedItems) {
 
 function loadComponent(component, exonArray) {
 	// create component group
-	let groupId = sGroups.length + 1;
-	sGroups.push(
+	let groupId = groups.length + 1;
+	groups.push(
 		{
 			id: groupId,
-			content: '<div class="comp-type ' + component.type+'">&lt;'+component.type+'&gt;</div>' + (component.hasOwnProperty('ref') ? '<div class="comp-ref">'+component.ref+'</div>' : ''),
+			content: '<div class="comp-type ' + component.type + (component.hasOwnProperty('ref') ? '':' noref' )+'">&lt;'+component.type+'&gt;</div>' + (component.hasOwnProperty('ref') ? '<div class="comp-ref">'+component.ref+'</div>' : ''),
 			value: groupId
 		});
 
