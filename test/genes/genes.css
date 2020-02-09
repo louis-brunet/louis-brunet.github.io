@@ -140,6 +140,10 @@ p#title {
     color: black;
 }
 
+.tooltip-last-line .tooltip-val {
+    color: blue;
+}
+
 #cap-btn {
     margin: 10px;
     padding: 10px;
