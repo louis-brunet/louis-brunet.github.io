@@ -1,7 +1,6 @@
-
-.main * {
-	/*outline: 1px solid red;
-*/}
+a {
+	transition: color 0.4s, background-color 0.4s;
+}
 
 body {
 	background-color: #e5f4ea;

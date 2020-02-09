@@ -1,7 +1,6 @@
-/*.main * {
-	outline: 1px dashed magenta;
-}*/
-
+a {
+	transition: color 0.4s, background-color 0.4s;
+}
 body {
 	background-color: #e5f4ea;
 	font-family: arial;
@@ -39,6 +38,7 @@ nav a {
 	min-width: 110px;
 	display: none;
 	border-radius: 6px;
+
 }
 
 nav a:hover {

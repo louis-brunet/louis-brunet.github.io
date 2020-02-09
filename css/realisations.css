@@ -1,5 +1,5 @@
-.main * {
-	/*outline: 1px solid magenta;*/
+a {
+	transition: color 0.4s, background-color 0.4s;
 }
 
 body {
