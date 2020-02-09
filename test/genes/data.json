@@ -49,7 +49,7 @@
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
         "cnomen":	"c-nomen-text",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -65,7 +65,7 @@
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
         "cnomen":	"c-nomen-text",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -81,7 +81,7 @@
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
         "cnomen":	"c-nomen-text",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -97,7 +97,7 @@
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
         "cnomen":	"c-nomen-text",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -110,7 +110,7 @@
         "famille":	"copy",
         "type":		"fa",
         "soustype":	"100",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -123,7 +123,7 @@
         "famille":	"copy",
         "type":		"hd",
         "soustype":	"50",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -136,7 +136,7 @@
         "famille":	"copy",
         "type":		"gain",
         "soustype":	"75",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -149,7 +149,7 @@
         "famille":	"expr",
         "type":		"up",
         "soustype":	"10",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -162,7 +162,7 @@
         "famille":	"expr",
         "type":		"no-diff",
         "soustype":	"50",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -175,7 +175,7 @@
         "famille":	"expr",
         "type":		"down",
         "soustype":	"99",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -188,7 +188,7 @@
         "famille":	"meth",
         "type":		"hypo",
         "soustype":	"50",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     },{
@@ -201,7 +201,7 @@
         "famille":	"meth",
         "type":		"hyper",
         "soustype":	"75",
-        "so":       "SO:0001576",
+        "so":       "SO:0001575",
         "colonne8": "CHC2452T",
         "colonne9": "miseq"
     }]
