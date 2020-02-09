@@ -113,11 +113,9 @@ function loadAnomalie(parsedItem, itemArray) {
 		group: null,
 		content: '',
 		start: new Date(parseInt(parsedItem.start)),
+		end: new Date(parseInt(parsedItem.end)),
 		datatype: parsedItem.type,
-		datasoustype: parsedItem.soustype,
-		datagnomen: parsedItem.gnomen,
-		datapnomen: parsedItem.pnomen,
-		datacnomen: parsedItem.cnomen
+		datasoustype: parsedItem.soustype
 	};
 
 	switch(parsedItem.famille) {
@@ -186,9 +184,17 @@ function loadAnomalie(parsedItem, itemArray) {
 		item.className += ' type-' + parsedItem.soustype;
 	}
 
-	//if(parsedItem.end != parsedItem.start) {
-		item.end = new Date(parseInt(parsedItem.end));
-	//}
+	if(parsedItem.hasOwnProperty('gnomen')) {
+		item.datagnomen = parsedItem.gnomen;
+	}
+
+	if(parsedItem.hasOwnProperty('pnomen')) {
+		item.datapnomen = parsedItem.pnomen;
+	}
+
+	if(parsedItem.hasOwnProperty('cnomen')) {
+		item.datacnomen = parsedItem.cnomen;
+	}
 
 
 	item.className += ' anomalie-item';

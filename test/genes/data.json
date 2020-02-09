@@ -97,10 +97,7 @@
         "strand":	"+/-",
         "famille":	"copy",
         "type":		"fa",
-        "soustype":	"100",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"100"
     },{
         "patient":	"78910",
         "ch":		"ch-text",
@@ -110,10 +107,7 @@
         "strand":	"+/-",
         "famille":	"copy",
         "type":		"hd",
-        "soustype":	"50",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"50"
     },{
         "patient":	"78910",
         "ch":		"ch-text",
@@ -123,10 +117,7 @@
         "strand":	"+/-",
         "famille":	"copy",
         "type":		"gain",
-        "soustype":	"75",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"75"
     },{
         "patient":	"111213",
         "ch":		"ch-text",
@@ -136,10 +127,7 @@
         "strand":	"+/-",
         "famille":	"expr",
         "type":		"up",
-        "soustype":	"10",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"10"
     },{
         "patient":	"111213",
         "ch":		"ch-text",
@@ -149,10 +137,7 @@
         "strand":	"+/-",
         "famille":	"expr",
         "type":		"no-diff",
-        "soustype":	"50",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"50"
     },{
         "patient":	"111213",
         "ch":		"ch-text",
@@ -162,10 +147,7 @@
         "strand":	"+/-",
         "famille":	"expr",
         "type":		"down",
-        "soustype":	"99",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"99"
     },{
         "patient":	"141516",
         "ch":		"ch-text",
@@ -175,10 +157,7 @@
         "strand":	"+/-",
         "famille":	"meth",
         "type":		"hypo",
-        "soustype":	"50",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"50"
     },{
         "patient":	"141516",
         "ch":		"ch-text",
@@ -188,9 +167,6 @@
         "strand":	"+/-",
         "famille":	"meth",
         "type":		"hyper",
-        "soustype":	"75",
-        "gnomen":	"g-nomen-text",
-        "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "soustype":	"75"
     }]
 }
