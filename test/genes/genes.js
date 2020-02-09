@@ -283,6 +283,7 @@ function createSpan(text, className) {
 
 function loadStructureData(parsedData, loadedItems) {
 
+	document.getElementById('patient').innerHTML = parsedData.patient;
 	document.getElementById('name').innerHTML = parsedData.name;
 	document.getElementById('ch').innerHTML = parsedData.ch;
 	document.getElementById('start').innerHTML = parsedData.start;
