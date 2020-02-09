@@ -142,9 +142,15 @@ p#title {
 #cap-btn {
     margin: 10px;
     padding: 10px;
-    background-color: rgb(200, 200, 200);
+    background-color: rgb(10, 17, 119);
+    color: white;
     right: 0;
     position: absolute;
+    border: none;
+}
+
+#cap-btn:active {
+    /* background-color: rgb(15, 26, 190); */
 }
 
 #close-btn {
@@ -153,10 +159,15 @@ p#title {
     color: white;
     float: right;
     margin-bottom: 4px;
+    border: none;
 }
 
 button:focus {
     outline:none;
+}
+
+button:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 1);
 }
 
 #output-card {
