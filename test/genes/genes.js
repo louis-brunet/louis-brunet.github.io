@@ -257,9 +257,15 @@ function createTooltip(item, container) {
 	let soustypeStr = item.datasoustype;
 	tooltipNode.appendChild(createTooltipDiv('Sous-type : ', soustypeStr, 'tooltip-soustype'));
 
-	tooltipNode.appendChild(createTooltipDiv('G nomen : ', item.datagnomen, 'tooltip-gnomen'));
-	tooltipNode.appendChild(createTooltipDiv('P nomen : ', item.datapnomen, 'tooltip-pnomen'));
-	tooltipNode.appendChild(createTooltipDiv('C nomen : ', item.datacnomen, 'tooltip-cnomen'));
+	if(item.hasOwnProperty('datagnomen')) {
+		tooltipNode.appendChild(createTooltipDiv('G nomen : ', item.datagnomen, 'tooltip-gnomen'));
+	}
+	if(item.hasOwnProperty('datapnomen')) {
+		tooltipNode.appendChild(createTooltipDiv('P nomen : ', item.datapnomen, 'tooltip-pnomen'));
+	}
+	if(item.hasOwnProperty('datacnomen')) {
+		tooltipNode.appendChild(createTooltipDiv('C nomen : ', item.datacnomen, 'tooltip-cnomen'));
+	}
 
 	container.appendChild(tooltipNode);
 }

@@ -48,7 +48,8 @@
         "soustype":	"germline",
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "cnomen":	"c-nomen-text",
+        "so":       "SO:000157"
     },{
         "patient":	"0123456",
         "ch":		"ch-text",
@@ -61,7 +62,8 @@
         "soustype":	"germline",
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "cnomen":	"c-nomen-text",
+        "so":       "SO:000157"
     },{
         "patient":	"0123456",
         "ch":		"ch-text",
@@ -74,7 +76,8 @@
         "soustype":	"germline",
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "cnomen":	"c-nomen-text",
+        "so":       "SO:000157"
     },{
         "patient":	"0123456",
         "ch":		"ch-text",
@@ -87,7 +90,8 @@
         "soustype":	"somatic",
         "gnomen":	"g-nomen-text",
         "pnomen":	"p-nomen-text",
-        "cnomen":	"c-nomen-text"
+        "cnomen":	"c-nomen-text",
+        "so":       "SO:000157"
     },{
         "patient":	"78910",
         "ch":		"ch-text",
