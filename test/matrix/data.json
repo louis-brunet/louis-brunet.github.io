@@ -98,7 +98,7 @@
 },{
     "patient":	"78910",
     "ch":		"ch-text",
-    "gene":		"AXIN1",
+    "gene":		"AXIN2",
     "start":	"340000",
     "end":		"343000",
     "strand":	"+/-",
@@ -124,7 +124,7 @@
 },{
     "patient":	"111213",
     "ch":		"ch-text",
-    "gene":		"AXIN1",
+    "gene":		"AXIN2",
     "start":	"320000",
     "end":		"322000",
     "strand":	"+/-",
