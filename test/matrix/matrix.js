@@ -1,5 +1,13 @@
 /**
- * JSON ENTRY
+ * INPUT FILE
+ */
+ if (!window.File || !window.FileReader) {
+    alert('The File APIs are not fully supported in this browser.');
+ }
+
+
+/**
+ * DEFAULT JSON ENTRY
  */
  var url = 'https://louis-brunet.github.io/test/matrix/data.json'
 
@@ -17,19 +25,32 @@ var items = new vis.DataSet(); // [{patient: '000', gene: 'nom', nbTotal: 4, nbM
 var avgGenes = new vis.DataSet(); // [{gene, avg}, ... ]
 var avgPatients = new vis.DataSet(); // [{patient, avg}, ... ]
 
+
 var request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
 request.send();
-request.onload = init;
+request.onload = () => init(request.response);
 
 var container = document.getElementById('visualization');
 /**
  * FUNCTIONS 
  */
 
- function init() {
-    if(loadData() == -1) return;
+ function fileSelect(input) {
+     let file = input.files[0];
+
+     let reader = new FileReader();
+
+     reader.readAsText(file);
+
+     reader.onload = function() {
+         init(JSON.parse(reader.result));
+     }
+ }
+
+ function init(dataObj) {
+    if(loadData(dataObj) == -1) return;
     config();
     countRelevantAnomalies();
 
@@ -40,11 +61,14 @@ var container = document.getElementById('visualization');
  /**
   * Load drivers and anomalies
   */
- function loadData() {
-    let response = request.response;
+ function loadData(dataObj) {
+    let response = dataObj;
     // Check if input is array of length 2 and anomalies is array
     if( !Array.isArray(response) || response.length != 2 || !Array.isArray(response[1])){
         alert('wrong format');
+        container.innerHTML = '';
+        document.getElementById('driver-name').innerHTML = '';
+        document.getElementById('driver-genes').innerHTML = '';
         return -1;
     }
     // Load list of available drivers from input array's first element
