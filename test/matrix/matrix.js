@@ -23,6 +23,7 @@ request.responseType = 'json';
 request.send();
 request.onload = init;
 
+var container = document.getElementById('visualization');
 /**
  * FUNCTIONS 
  */
@@ -32,9 +33,8 @@ request.onload = init;
     config();
     countRelevantAnomalies();
 
-    let rowOrder = getRowOrder();  
-    let columnOrder = getColumnOrder(rowOrder[0]); //TODO
-    createGraphic(rowOrder, columnOrder); //TODO
+     //TODO
+    createGraphic(); //TODO
  }
 
  /**
@@ -82,6 +82,8 @@ request.onload = init;
         nom:    d.nom,
         genes:  d.genes.split(';')
     }
+    document.getElementById('driver-name').innerHTML = driver.nom;
+    document.getElementById('driver-genes').innerHTML = driver.genes;
  }
 
  /**
@@ -298,14 +300,236 @@ request.onload = init;
   * Return array of 15 names of patients or genes (depending on rowType),
   * ordered by nbTotal and matching firstRowStr
   */
- function getColumnOrder(firstRowStr) {
+ function getColumnOrder(rowOrder) {
     //TODO
+    let res = [];
+
+    if(ROW_TYPE == 'gene'){
+        // get patients ordered by nbTotal for rowOrder[0]
+        // if less than MAX_ITEMS, add patients for next gene 
+        // until either (15 max patients) or (all genes checked)
+        for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
+            const geneRow = rowOrder[i];
+            let patientsForGene = getOrderedPatients(geneRow);
+            for (let j = 0; j < patientsForGene.length && res.length < MAX_ITEMS; j++) {
+                const patientCol = patientsForGene[j];
+                if(! res.includes(patientCol)) {
+                    res.push(patientCol);
+                }
+            }
+        }  
+    } else {
+        // get genes ordered by nbTotal for rowOrder[0]
+        // if less than MAX_ITEMS, add genes for next patient 
+        // until either (15 max genes) or (all patients checked)
+        for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
+            const patientRow = rowOrder[i];
+            let genesForPatient = getOrderedGenes(patientRow);
+            for (let j = 0; j < genesForPatient.length && res.length < MAX_ITEMS; j++) {
+                const geneCol = genesForPatient[j];
+                if(! res.includes(geneCol)) {
+                    res.push(geneCol);
+                }
+            }
+        }  
+    }
+
+    return res;
+ }
+
+ /**
+  * Return array of patients for geneStr
+  * Ordered by nbTotal descending
+  */
+ function getOrderedPatients(geneStr) {
+    let matched = items.get({
+        fields: ['patient'],
+        filter: i => {
+            return i.gene == geneStr;
+        },
+        order: (a, b) => {
+            return b.nbTotal - a.nbTotal;
+        }
+    });
+
+    let res = [];
+    for (let i = 0; i < matched.length; i++) {
+        const item = matched[i];
+        res.push(item.patient);
+    }
+
+    return res;
+ }
+
+ /**
+  * Return array of genes for patientStr
+  * Ordered by nbTotal descending
+  */
+ function getOrderedGenes(patientStr) {
+    let matched = items.get({
+        fields: ['gene'],
+        filter: i => {
+            return i.patient == patientStr;
+        },
+        order: (a, b) => {
+            return b.nbTotal - a.nbTotal;
+        }
+    });
+
+    let res = [];
+    for (let i = 0; i < matched.length; i++) {
+        const item = matched[i];
+        res.push(item.gene);
+    }
+
+    return res;
  }
 
 
  /**
   * Create graphic based on items DataSet and in the given order
   */
- function createGraphic(rowOrder, columnOrder) {
+ function createGraphic() {
     //TODO
+    //container.innerHTML = 'row order : '+rowOrder+'<br>column order : '+columnOrder;
+    let rowOrder = getRowOrder();  
+    let columnOrder = getColumnOrder(rowOrder);
+    // Create row labels
+    let rowLabelDiv = createRowLabelDiv(rowOrder);
+    container.appendChild(rowLabelDiv);
+    
+    // Create right div including column labels and content div
+    let rightDiv = createDiv('graph-right');
+    let colLabelDiv = createColLabelDiv(columnOrder);
+    rightDiv.appendChild(colLabelDiv);
+
+    let contentDiv = createDiv('graph-content');
+    fillContent(contentDiv, rowOrder, columnOrder);
+    rightDiv.appendChild(contentDiv);
+    container.appendChild(rightDiv);
  }
+
+ function createDiv(className) {
+     let res = document.createElement('div');
+     res.className = className;
+     return res;
+ }
+
+ function createTextDiv(text, className) {
+     let res = document.createElement('div');
+     res.className = className;
+     res.appendChild(document.createTextNode(text));
+     return res;
+ }
+
+ function createRowLabelDiv(rowOrder) {
+    let res = createDiv('graph-row-labels');
+    res.appendChild(createTextDiv(' ', 'graph-label'));
+    for (let i = 0; i < rowOrder.length; i++) {
+        const rowTitle = rowOrder[i];
+        let titleStr = '' + rowTitle;
+        if(ROW_TYPE == 'gene') {
+            titleStr = 'G:' + titleStr;
+        } else {
+            titleStr = 'P:' + titleStr;
+        }
+        res.appendChild(createTextDiv(titleStr, 'graph-label'));
+    }
+    return res;
+ }
+
+ function createColLabelDiv(columnOrder) {
+    let res = createDiv('graph-col-labels graph-row');
+
+    for (let i = 0; i < columnOrder.length; i++) {
+        const columnTitle = columnOrder[i];
+        let titleStr = '' + columnTitle;
+        if(ROW_TYPE == 'gene') {
+            titleStr = 'P:' + titleStr;
+        } else {
+            titleStr = 'G:' + titleStr;
+        }
+        res.appendChild(createTextDiv(titleStr, 'graph-label'));
+    }
+
+    return res;
+ }
+
+ /**
+  * Fill contentDiv with graph-row divs containing graph-item divs containing relevant info
+  */
+ function fillContent(contentDiv, rowOrder, columnOrder) {
+    for (let i = 0; i < rowOrder.length; i++) {
+        const rowTitle = rowOrder[i];
+
+        let newRow = createDiv('graph-row');
+
+        for (let j = 0; j < columnOrder.length; j++) {
+            const colTitle = columnOrder[j];
+            let newItem = createDiv('graph-item');
+
+            let intersectItem = getIntersection(rowTitle, colTitle);
+            
+            // TODO
+
+            newRow.appendChild(newItem);
+
+        }
+
+        contentDiv.appendChild(newRow);
+    }
+ }
+ 
+ /**
+  * Return item matching pair gene, patient or patien, gene (depending on ROW_TYPE)
+  */
+ function getIntersection(rowTitle, colTitle) {
+    let matched = items.get({
+        filter: i => {
+            if(ROW_TYPE == 'gene')
+                return i.gene == rowTitle && i.patient == colTitle;
+            else 
+                return i.gene == colTitle && i.patient == rowTitle;
+        }
+    });
+
+    return matched[0];
+ }
+
+
+/**
+ * Afficher une capture d'ecran du graphe
+ */
+function capture() {
+	// hide tooltips
+	// let tooltips = document.querySelectorAll('.tooltip-text');
+	// tooltips.forEach(function (t) {
+	// 	t.style.display = 'none';
+	// });
+
+	// Display screencap of #to-capture elem
+	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
+		document.getElementById('output-card').style.display = 'block';
+		// Export the canvas to its data URI representation
+		var base64image = canvas.toDataURL("image/jpeg");
+		// Display image in #output element
+		document.getElementById('output').src = base64image;
+	});
+
+	// show tooltips
+	// tooltips.forEach(function (t) {
+	// 	t.style.display = 'block';
+	// });
+}
+
+function toggleRowType() {
+    if(ROW_TYPE == 'gene'){
+        ROW_TYPE = 'patient';
+        document.getElementById('row-type-btn').innerHTML = 'Gènes <--> <strong>Patients</strong>';
+    } else {
+        ROW_TYPE = 'gene';
+        document.getElementById('row-type-btn').innerHTML = '<strong>Gènes</strong> <--> Patients';
+    }
+    container.innerHTML = '';
+    createGraphic();
+}
