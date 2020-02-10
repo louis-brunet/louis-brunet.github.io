@@ -470,7 +470,7 @@ var container = document.getElementById('visualization');
 
             let intersectItem = getIntersection(rowTitle, colTitle);
             
-            // TODO
+            
 
             newRow.appendChild(newItem);
 

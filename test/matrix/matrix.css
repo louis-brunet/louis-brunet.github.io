@@ -10,16 +10,17 @@ body {
     justify-content: left;
 }
 
-.graph-label {
+.graph-label, .graph-item{
     /* min-width: max(7%, 160px); */
     min-height: 50px;
-    min-width: 50px;
+    width: 60px;
     text-align: center;
     line-height: 50px;
-    margin: 5px;
+    margin: 0 0 5px 5px;
     padding: 8px;
     border: 1px solid rgb(150, 150, 150)
 }
+
 
 #visualization {
     display: flex;
