@@ -1,4 +1,5 @@
 body {
+    font-size: 90%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -13,7 +14,7 @@ body {
 .graph-label{
     /* min-width: max(7%, 160px); */
     min-height: 50px;
-    width: 70px;
+    width: 60px;
     text-align: center;
     line-height: 50px;
     margin: 0 0 5px 5px;
@@ -23,7 +24,7 @@ body {
 
 .graph-item {
     min-height: 58px;
-    min-width: 78px;
+    min-width: 68px;
     text-align: center;
     margin: 0 0 5px 5px;
     padding: 4px;
@@ -50,27 +51,33 @@ body {
     background-color: rgba(255, 165, 0, 0.5);
 }
 
-.graph-expr {
-    background-color: rgba(0, 0, 255, 0.5);
+.graph-expr, .graph-meth {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.graph-expr > * {
+.graph-expr > * , .graph-meth > * {
     min-width: 30%;
 }
 
-.graph-expr .up {
+.graph-expr {
+    background-color: rgba(0, 0, 255, 0.5);
+}
+
+.graph-expr .up, .graph-meth .hyper {
     color: red;
 }
 
-.graph-expr .down {
+.graph-expr .down, .graph-meth .hypo {
     color: green;
 }
 
-.graph-meth
+.graph-meth {
+    background-color: rgba(0, 240, 0, 0.5);
+}
+
 
 #visualization {
     display: flex;
@@ -85,8 +92,13 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+
+    transition: box-shadow 0.5s ease-in;
 }
 
+button:hover {
+    box-shadow: 0 0 8px 1px rgba(0,0,0,0.5);
+}
 strong {
     font-weight: bolder;
 }

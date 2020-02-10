@@ -477,6 +477,12 @@ var container = document.getElementById('visualization');
                 exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprDown, 'down'));
                 exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprNodiff, 'nodiff'));
                 newItem.appendChild(exprDiv);
+
+                let methDiv = createDiv('graph-meth');
+                methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHyper, 'hyper'));
+                methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHypo, 'hypo'));
+                methDiv.appendChild(createTextDiv(''+intersectItem.nbMethNodiff, 'nodiff'));
+                newItem.appendChild(methDiv);
             }
 
             newRow.appendChild(newItem);
