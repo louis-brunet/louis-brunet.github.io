@@ -45,6 +45,7 @@ var container = document.getElementById('visualization');
      reader.readAsText(file);
 
      reader.onload = function() {
+         container.innerHTML = '';
          init(JSON.parse(reader.result));
      }
  }

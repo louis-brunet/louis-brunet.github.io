@@ -93,12 +93,17 @@ button {
     border: none;
     cursor: pointer;
 
-    transition: box-shadow 0.5s ease-in;
+    transition: box-shadow 0.3s ease-in;
 }
 
 button:hover {
     box-shadow: 0 0 8px 1px rgba(0,0,0,0.5);
 }
+
+button:focus {
+    outline: none;
+}
+
 strong {
     font-weight: bolder;
 }
