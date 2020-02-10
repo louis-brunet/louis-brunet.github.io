@@ -118,7 +118,15 @@ a:hover {
     background-color: rgb(250, 250, 250);
 }
 
+.vis-range.anomalie-item.non-present {
+    border-color: blue;
+    color: blue;
+}
 
+.anomalie-item.non-present:hover .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+}
 
 .anomalie-item:hover .tooltip-text {
     /* display: block; */

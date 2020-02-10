@@ -183,6 +183,10 @@ function loadAnomalie(parsedItem, itemArray) {
 		item.className += ' type-' + parsedItem.soustype;
 	}
 
+	if(parsedItem.hasOwnProperty('presence') && parsedItem.presence == 'non') {
+		item.className += ' non-present';
+	}
+
 	if(parsedItem.hasOwnProperty('gnomen')) {
 		item.datagnomen = parsedItem.gnomen;
 	}
