@@ -19,9 +19,9 @@ body {
     line-height: 50px;
     margin: 0 0 5px 5px;
     padding: 8px;
-    /* border: 1px solid rgb(150, 150, 150) */
-    background-color: rgb(130,130,130);
-    color: white;
+    outline: 1px solid rgb(150, 150, 150)
+    /* background-color: rgb(130,130,130); */
+    /* color: white; */
 }
 
 .graph-item {
