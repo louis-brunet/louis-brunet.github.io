@@ -469,8 +469,15 @@ var container = document.getElementById('visualization');
             let newItem = createDiv('graph-item');
 
             let intersectItem = getIntersection(rowTitle, colTitle);
-            
-            
+            if(intersectItem) {
+                newItem.appendChild(createTextDiv(''+intersectItem.nbMut, 'graph-mut'));
+                newItem.appendChild(createTextDiv(''+intersectItem.nbCopy, 'graph-copy'));
+                let exprDiv = createDiv('graph-expr');
+                exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprUp, 'up'));
+                exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprDown, 'down'));
+                exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprNodiff, 'nodiff'));
+                newItem.appendChild(exprDiv);
+            }
 
             newRow.appendChild(newItem);
 

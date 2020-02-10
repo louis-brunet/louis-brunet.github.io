@@ -83,9 +83,9 @@
     "colonne8": "CHC2452T",
     "colonne9": "miseq"
 },{
-    "patient":	"78910",
+    "patient":	"0123456",
     "ch":		"ch-text",
-    "gene":		"AXIN1",
+    "gene":		"GENE11",
     "start":	"300000",
     "end":		"301000",
     "strand":	"+/-",

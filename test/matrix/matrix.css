@@ -10,7 +10,7 @@ body {
     justify-content: left;
 }
 
-.graph-label, .graph-item{
+.graph-label{
     /* min-width: max(7%, 160px); */
     min-height: 50px;
     width: 70px;
@@ -21,6 +21,56 @@ body {
     border: 1px solid rgb(150, 150, 150)
 }
 
+.graph-item {
+    min-height: 58px;
+    min-width: 78px;
+    text-align: center;
+    margin: 0 0 5px 5px;
+    padding: 4px;
+    border: 1px solid rgb(150, 150, 150);
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.graph-item > * {
+    min-width: 40%;
+    min-height: 40%;
+    padding: 3%;
+}
+
+.graph-mut {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.graph-copy {
+    background-color: rgba(255, 165, 0, 0.5);
+}
+
+.graph-expr {
+    background-color: rgba(0, 0, 255, 0.5);
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.graph-expr > * {
+    min-width: 30%;
+}
+
+.graph-expr .up {
+    color: red;
+}
+
+.graph-expr .down {
+    color: green;
+}
+
+.graph-meth
 
 #visualization {
     display: flex;
