@@ -537,35 +537,38 @@ var container = document.getElementById('visualization');
 /**
  * Afficher une capture d'ecran du graphe
  */
-function capture() {
-	// hide tooltips
-	// let tooltips = document.querySelectorAll('.tooltip-text');
-	// tooltips.forEach(function (t) {
-	// 	t.style.display = 'none';
-	// });
+// function capture() {
+// 	// hide tooltips
+// 	// let tooltips = document.querySelectorAll('.tooltip-text');
+// 	// tooltips.forEach(function (t) {
+// 	// 	t.style.display = 'none';
+// 	// });
 
-	// Display screencap of #to-capture elem
-	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
-		document.getElementById('output-card').style.display = 'block';
-		// Export the canvas to its data URI representation
-		var base64image = canvas.toDataURL("image/jpeg");
-		// Display image in #output element
-		document.getElementById('output').src = base64image;
-	});
+// 	// Display screencap of #to-capture elem
+// 	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
+// 		document.getElementById('output-card').style.display = 'block';
+// 		// Export the canvas to its data URI representation
+// 		var base64image = canvas.toDataURL("image/jpeg");
+// 		// Display image in #output element
+// 		document.getElementById('output').src = base64image;
+// 	});
 
-	// show tooltips
-	// tooltips.forEach(function (t) {
-	// 	t.style.display = 'block';
-	// });
-}
+// 	// show tooltips
+// 	// tooltips.forEach(function (t) {
+// 	// 	t.style.display = 'block';
+// 	// });
+// }
 
+ /**
+  * Toggle between genes and patients for rows
+  */
 function toggleRowType() {
     if(ROW_TYPE == 'gene'){
         ROW_TYPE = 'patient';
-        document.getElementById('row-type-btn').innerHTML = 'Gènes <--> <strong>Patients</strong>';
+        document.getElementById('row-type-btn').innerHTML = 'Gènes <> <strong>PATIENTS</strong>';
     } else {
         ROW_TYPE = 'gene';
-        document.getElementById('row-type-btn').innerHTML = '<strong>Gènes</strong> <--> Patients';
+        document.getElementById('row-type-btn').innerHTML = '<strong>GENES</strong> <> Patients';
     }
     container.innerHTML = '';
     createGraphic();
