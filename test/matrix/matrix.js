@@ -109,6 +109,9 @@ request.onload = () => init(request.response);
 
          items.add(JSON.parse(reader.result));
 
+         
+         calculateAvgGenes();
+         calculateAvgPatients();
          createGraphic();
          container.style.cursor = 'initial';
      }
@@ -504,8 +507,6 @@ request.onload = () => init(request.response);
   * Create graphic based on items DataSet and in the given order
   */
  function createGraphic() {
-    calculateAvgGenes();
-    calculateAvgPatients();
     let rowOrder = getRowOrder();  
     let columnOrder = getColumnOrder(rowOrder);
     // Empty container
