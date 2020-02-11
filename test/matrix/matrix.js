@@ -557,7 +557,7 @@ request.onload = () => init(request.response);
 
  function createRowLabelDiv(rowOrder) {
     let res = createDiv('graph-row-labels');
-    res.appendChild(createTextDiv(' ', 'graph-label'));
+    res.appendChild(createTextDiv(' ', 'graph-label graph-top-left'));
     for (let i = 0; i < rowOrder.length; i++) {
         const rowTitle = rowOrder[i];
         let titleStr = '' + rowTitle;
