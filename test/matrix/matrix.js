@@ -147,12 +147,14 @@ request.onload = () => init(request.response);
  function init(dataObj) {
     drivers = [];
     emptyAnomalies();
-    if(loadData(dataObj) == -1) return;
-    config();
-    countRelevantAnomalies();
-    calculateAvgGenes();
-    calculateAvgPatients();
-    createGraphic(); //TODO
+    setTimeout( () => {
+        if(loadData(dataObj) == -1) return;
+        config();
+        countRelevantAnomalies();
+        calculateAvgGenes();
+        calculateAvgPatients();
+        createGraphic();
+    }, 500);
  }
 
  /**
@@ -169,7 +171,7 @@ request.onload = () => init(request.response);
         return -1;
     }
     // Load list of available drivers from input array's first element
-    drivers = response[0];
+    loadDrivers(response[0]);
 
     // Load anomalies
     let createdItems = [];
@@ -199,20 +201,39 @@ request.onload = () => init(request.response);
 
  function config() {
     // TODO user choice 
-    setDriver(drivers[0]);
+    setDriver(drivers[0].nom);
     ROW_TYPE = 'gene';
  }
 
  /** 
   * Set driver to d, parsing d for genes
   */
- function setDriver(d) {
+ function setDriver(dName) {
+    let d;
+    for (let i = 0; i < drivers.length; i++) {
+        if(drivers[i].nom == dName) {
+            d = drivers[i];
+        }
+    }
     driver = {
         nom:    d.nom,
         genes:  d.genes.split(';')
     }
     document.getElementById('driver-name').innerHTML = driver.nom;
     document.getElementById('driver-genes').innerHTML = driver.genes;
+ }
+
+ function loadDrivers(driverArray) {
+    drivers = driverArray;
+
+    let driverDiv = document.getElementById('driver-btns');
+    drivers.forEach(d => {
+        let button = document.createElement('button');
+        button.className = 'driver-btn';
+        button.onclick = () => {setDriver(d.nom)};
+        button.appendChild(document.createTextNode(d.nom));
+        driverDiv.appendChild(button);
+    });
  }
 
  /**

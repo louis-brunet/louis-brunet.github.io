@@ -142,8 +142,15 @@ strong {
     display: none;
 }
 
-#cap-btn {
-    float: right;
+#top-btns {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.driver-btn {
+    background-color: rgb(110, 15, 15);
 }
 
 #close-btn {
@@ -175,7 +182,7 @@ strong {
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    animation: spin 1s ease-in-out infinite, widthsmaller 1s ease-in-out infinite;
+    animation: spin 1s ease-in-out infinite;
     margin-left: auto;
     margin-right: auto;
     margin-top: 60px;
@@ -184,14 +191,4 @@ strong {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-@keyframes widthbigger {
-    0%, 100% {
-        border-top-width: 16px;
-    }
-
-    50% {
-        border-top-width: 24px;
-    }
 }

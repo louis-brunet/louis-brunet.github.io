@@ -12,9 +12,11 @@
 
 <body>
   
-  <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
-  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
-  
+  <div id="top-btns">
+    <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
+    <div id="driver-btns"></div>
+    <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+  </div>
   <p>
     <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON"> > Drivers & Anomalies | JSON 
   </p>
