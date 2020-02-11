@@ -66,12 +66,19 @@ request.onload = () => init(request.response);
         for (let i = 0; i < inputLines.length; i++) {
             const line = inputLines[i];
             let lineItems = line.split(';');
+            let fam = removeQuotes(lineItems[2]).toLowerCase();
+            // Continue if item is irrelevant ('nsp' or 'mutation'&'non')
+            let col4 = removeQuotes(lineItems[3]);
+            let irrelevant = col4 == 'nsp' || (fam == 'mutation' && col4 == 'non');
+            if(irrelevant){
+                continue;
+            }
             //TODO
             let item = {};
             item.id = i;
             item.patient = removeQuotes(lineItems[0]);
             item.gene = removeQuotes(lineItems[1]).toUpperCase();
-            item.famille = removeQuotes(lineItems[2]).toLowerCase();
+            item.famille = fam;
             item.type = removeQuotes(lineItems[4]).toLowerCase();
             if(item.type == ''){
                 item.type = 'no-diff';
@@ -103,10 +110,7 @@ request.onload = () => init(request.response);
      reader.readAsText(file);
      document.getElementById('loader').style.display = 'block';
      reader.onload = () => {
-
          emptyAnomalies();
-         // TODO display loading icon
-         //container.innerHTML = 'CALCUL EN COURS';
          
          items.add(JSON.parse(reader.result));
 
@@ -136,6 +140,7 @@ request.onload = () => init(request.response);
     avgGenes = new vis.DataSet();
     avgPatients = new vis.DataSet();
     container.innerHTML = '';
+    document.getElementById('loader').style.display = 'block';
     document.getElementById('row-type-btn').innerHTML = '<strong>GENES</strong> <> Patients';
  }
 
@@ -145,8 +150,8 @@ request.onload = () => init(request.response);
     if(loadData(dataObj) == -1) return;
     config();
     countRelevantAnomalies();
-
-     //TODO
+    calculateAvgGenes();
+    calculateAvgPatients();
     createGraphic(); //TODO
  }
 
@@ -170,6 +175,7 @@ request.onload = () => init(request.response);
     let createdItems = [];
 
     for (let i = 0; i < response[1].length; i++) {
+       let input = response[1][i];
        let anomaly = {
            id:      i,
            patient: response[1][i].patient,
@@ -306,15 +312,15 @@ request.onload = () => init(request.response);
         }
     });
 
-    let total = anomalies.mut.length + anomalies.copy.length + nbExprUp + nbExprDown + nbExprNodiff + nbMethHypo + nbMethHyper + nbMethNodiff;
+    let total = foundAnomalies.mut.length + foundAnomalies.copy.length + nbExprUp + nbExprDown + nbExprNodiff + nbMethHypo + nbMethHyper + nbMethNodiff;
     
     items.add({
         id:             items.length,
         gene:           geneStr,
         patient:        patientStr,
         nbTotal:        total,
-        nbMut:          anomalies.mut.length,
-        nbCopy:         anomalies.copy.length,
+        nbMut:          foundAnomalies.mut.length,
+        nbCopy:         foundAnomalies.copy.length,
         nbExprUp:       nbExprUp,
         nbExprDown:     nbExprDown,
         nbExprNodiff:   nbExprNodiff,
@@ -705,6 +711,11 @@ function capture() {
   * Toggle between genes and patients for rows
   */
 function toggleRowType() {
+    changeRowTypeUI();
+    setTimeout(createGraphic, 300);
+}
+
+function changeRowTypeUI() {
     if(ROW_TYPE == 'gene'){
         ROW_TYPE = 'patient';
         document.getElementById('row-type-btn').innerHTML = 'Gènes <> <strong>PATIENTS</strong>';
@@ -713,5 +724,5 @@ function toggleRowType() {
         document.getElementById('row-type-btn').innerHTML = '<strong>GENES</strong> <> Patients';
     }
     container.innerHTML = '';
-    createGraphic();
+    document.getElementById('loader').style.display = 'block';
 }
