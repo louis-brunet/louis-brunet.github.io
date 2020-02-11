@@ -101,19 +101,21 @@ request.onload = () => init(request.response);
 
      let reader = new FileReader();
      reader.readAsText(file);
+     document.getElementById('loader').style.display = 'block';
      reader.onload = () => {
-         container.style.cursor = 'wait';
 
          emptyAnomalies();
-         container.innerHTML = 'CALCUL EN COURS';
-
+         // TODO display loading icon
+         //container.innerHTML = 'CALCUL EN COURS';
+         
          items.add(JSON.parse(reader.result));
 
          
          calculateAvgGenes();
          calculateAvgPatients();
          createGraphic();
-         container.style.cursor = 'initial';
+         
+         
      }
      
  }
@@ -527,6 +529,7 @@ request.onload = () => init(request.response);
     let columnOrder = getColumnOrder(rowOrder);
     // Empty container
     container.innerHTML = '';
+    document.getElementById('loader').style.display = 'none';
     // Create row labels
     let rowLabelDiv = createRowLabelDiv(rowOrder);
     container.appendChild(rowLabelDiv);
