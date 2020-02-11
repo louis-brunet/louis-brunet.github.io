@@ -168,15 +168,22 @@ request.onload = () => init(request.response);
     let createdItems = [];
 
     for (let i = 0; i < response[1].length; i++) {
-       let item = {
+       let anomaly = {
            id:      i,
            patient: response[1][i].patient,
            gene:    response[1][i].gene,
            famille: response[1][i].famille,
-           type:    response[1][i].type
+           type:    response[1][i].type,
+           soustype:response[1][i].soustype,
+           gnomen:  response[1][i].gnomen,
+           pnomen:  response[1][i].pnomen,
+           cnomen:  response[1][i].cnomen,
+           chc:     response[1][i].chc,
+           start:   response[1][i].start,
+           end:     response[1][i].end
        }
        
-        createdItems.push(item);
+        createdItems.push(anomaly);
     }
     anomalies = new vis.DataSet(createdItems);
  }
@@ -241,24 +248,31 @@ request.onload = () => init(request.response);
         }
     });
 
-    let nbMut = 0;
-    let nbCopy = 0;
     let nbExprUp = 0;
     let nbExprDown = 0;
     let nbExprNodiff = 0;
     let nbMethHypo = 0;
     let nbMethHyper = 0;
     let nbMethNodiff = 0;
+    
+    let foundAnomalies = {
+        mut:    [],
+        expr:   [],
+        copy:   [],
+        meth:   []
+    };
+
     // For each matched anomaly, add 1 to corresponding type count 
     matched.forEach(anom => {
         switch(anom.famille) {
             case 'mutation':
-                nbMut++;
+                foundAnomalies.mut.push(anom);
                 break;
             case 'copy':
-                nbCopy++;
+                foundAnomalies.copy.push(anom);
                 break;
             case 'expr':
+                foundAnomalies.expr.push(anom);
                 switch(anom.type) {
                     case 'up':
                         nbExprUp++;
@@ -273,6 +287,7 @@ request.onload = () => init(request.response);
                 }
                 break;
             case 'meth':
+                foundAnomalies.meth.push(anom);
                 switch(anom.type) {
                     case 'hypo':
                         nbMethHypo++;
@@ -289,21 +304,22 @@ request.onload = () => init(request.response);
         }
     });
 
-    let total = nbMut + nbCopy + nbExprUp + nbExprDown + nbExprNodiff + nbMethHypo + nbMethHyper + nbMethNodiff;
+    let total = anomalies.mut.length + anomalies.copy.length + nbExprUp + nbExprDown + nbExprNodiff + nbMethHypo + nbMethHyper + nbMethNodiff;
     
     items.add({
-        id: items.length,
-        gene: geneStr,
-        patient: patientStr,
-        nbTotal: total,
-        nbMut: nbMut,
-        nbCopy: nbCopy,
-        nbExprUp: nbExprUp,
-        nbExprDown: nbExprDown,
-        nbExprNodiff: nbExprNodiff,
-        nbMethHypo: nbMethHypo,
-        nbMethHyper: nbMethHyper,
-        nbMethNodiff:   nbMethNodiff
+        id:             items.length,
+        gene:           geneStr,
+        patient:        patientStr,
+        nbTotal:        total,
+        nbMut:          anomalies.mut.length,
+        nbCopy:         anomalies.copy.length,
+        nbExprUp:       nbExprUp,
+        nbExprDown:     nbExprDown,
+        nbExprNodiff:   nbExprNodiff,
+        nbMethHypo:     nbMethHypo,
+        nbMethHyper:    nbMethHyper,
+        nbMethNodiff:   nbMethNodiff,
+        anomalies:      foundAnomalies
     });
  }
 
@@ -547,7 +563,6 @@ request.onload = () => init(request.response);
         let titleStr = '' + rowTitle;
         let avgStr = '';
         if(ROW_TYPE == 'gene') {
-            titleStr = 'G:' + titleStr;
             avgStr = Math.trunc(avgGenes.get({
                 fields: ['avg'],
                 filter: item => {
@@ -555,8 +570,7 @@ request.onload = () => init(request.response);
                 }
             })[0].avg * 100) / 100;
         } else {
-            titleStr = 'P:' + titleStr;
-            avgStr = Math.trunc(avgGenes.get({
+            avgStr = Math.trunc(avgPatients.get({
                 fields: ['avg'],
                 filter: item => {
                     return item.patient == rowOrder[i];
@@ -578,7 +592,6 @@ request.onload = () => init(request.response);
         let titleStr = '' + columnTitle;
         let avgStr = '';
         if(ROW_TYPE == 'gene') {
-            titleStr = 'P:' + titleStr;
             avgStr = Math.trunc(avgPatients.get({
                 fields: ['avg'],
                 filter: item => {
@@ -586,8 +599,7 @@ request.onload = () => init(request.response);
                 }
             })[0].avg * 100) / 100;
         } else {
-            titleStr = 'G:' + titleStr;
-            avgStr = Math.trunc(avgPatients.get({
+            avgStr = Math.trunc(avgGenes.get({
                 fields: ['avg'],
                 filter: item => {
                     return item.gene == columnOrder[i];
@@ -604,6 +616,7 @@ request.onload = () => init(request.response);
 
  /**
   * Fill contentDiv with graph-row divs containing graph-item divs containing relevant info
+  * TODO CREATE TOOLTIPS
   */
  function fillContent(contentDiv, rowOrder, columnOrder) {
     for (let i = 0; i < rowOrder.length; i++) {
@@ -630,6 +643,9 @@ request.onload = () => init(request.response);
                 methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHypo, 'hypo'));
                 methDiv.appendChild(createTextDiv(''+intersectItem.nbMethNodiff, 'nodiff'));
                 newItem.appendChild(methDiv);
+
+
+                //TODO CREATE TOOLTIPS
             }
 
             newRow.appendChild(newItem);
