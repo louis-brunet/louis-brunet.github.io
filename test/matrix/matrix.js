@@ -712,7 +712,7 @@ function capture() {
   */
 function toggleRowType() {
     changeRowTypeUI();
-    setTimeout(createGraphic, 300);
+    setTimeout(createGraphic, 20);
 }
 
 function changeRowTypeUI() {
