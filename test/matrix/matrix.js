@@ -15,6 +15,7 @@
 /**
  * CONSTANTS & GLOBAL VARIABLES
  */
+var container = document.getElementById('visualization');
 var MAX_ITEMS = 15;
 var ROW_TYPE; // 'gene' or 'patient'
 var driver; // {nom: 'txt', genes: ['gene1','gene2',...]}
@@ -32,7 +33,6 @@ request.responseType = 'json';
 request.send();
 request.onload = () => init(request.response);
 
-var container = document.getElementById('visualization');
 /**
  * FUNCTIONS 
  */
@@ -340,19 +340,19 @@ var container = document.getElementById('visualization');
 
  function calculateAvgGenes() {
     driver.genes.forEach(gStr => {
-        let exists = avgGenes.get({
-            filter: avg => {
-                return avg.gene == gStr;
-            }
-        }).length > 0;
+        let exists = avgGenes.distinct().includes(gStr);
         if(!exists){
             let total = 0;
             let count = 0;
-            items.forEach(i => {
-                if(i.gene == gStr) {
-                    total += i.nbTotal;
-                    count++;
-                }
+            items.get({
+                filter: i => {
+                    return i.gene == gStr;
+                },
+                fields: ['nbTotal']
+            }).forEach(i => {
+                total += i.nbTotal;
+                count++;
+
             });
             if(count > 0) {
                 let moy = total / count;
@@ -371,22 +371,23 @@ var container = document.getElementById('visualization');
  function calculateAvgPatients() {
      //TODO
     // Find patients with anomalies in relevant genes
-    let matched = items.get({
-        fields: ['patient'],
-        filter: i => {
-            return driver.genes.includes(i.gene);
-        }
-    });
+    let allPatients = items.distinct('patient');
+    // =  items.get({
+    //     fields: ['patient'],
+    //     filter: i => {
+    //         return driver.genes.includes(i.gene);
+    //     }
+    // });
 
     // For each, if it isn't already created, avg all nbTotal in items DataSet
-    matched.forEach(m => {
-        if(avgPatients.distinct('patient').includes(m.patient)) return;
+    allPatients.forEach(pStr => {
+        //if(avgPatients.distinct('patient').includes(m.patient) || ! driver.genes.includes()) return;
         
         let total = 0;
         let count = 0;
         items.get({
             filter: i => {
-                return i.patient == m.patient;
+                return i.patient == pStr;
             },
             fields: ['nbTotal']
         }).forEach(i => {
@@ -400,9 +401,10 @@ var container = document.getElementById('visualization');
             // Add item to avgPatients DataSet
             avgPatients.add({
                 id:         avgPatients.length,
-                patient:    m.patient,
+                patient:    pStr,
                 avg:        moy
             });
+
         }
     });
  }
