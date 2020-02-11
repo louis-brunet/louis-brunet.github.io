@@ -18,12 +18,12 @@
 var MAX_ITEMS = 15;
 var ROW_TYPE; // 'gene' or 'patient'
 var driver; // {nom: 'txt', genes: ['gene1','gene2',...]}
-var drivers = []; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
+var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
 
-var items = new vis.DataSet(); // [{patient: '000', gene: 'nom', nbTotal: 4, nbMut: 1, nbCopy: 3, ... }, ... ]
-var avgGenes = new vis.DataSet(); // [{gene, avg}, ... ]
-var avgPatients = new vis.DataSet(); // [{patient, avg}, ... ]
+var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMut: 1, nbCopy: 3, ... }, ... ]
+var avgGenes; // DataSet [{gene, avg}, ... ]
+var avgPatients; // DataSet [{patient, avg}, ... ]
 
 
 var request = new XMLHttpRequest();
@@ -45,12 +45,85 @@ var container = document.getElementById('visualization');
      reader.readAsText(file);
 
      reader.onload = function() {
-         container.innerHTML = '';
          init(JSON.parse(reader.result));
      }
  }
 
+ //TODO
+ function csvSelect(input) {
+     items = [];
+
+     let file = input.files[0];
+
+     let reader = new FileReader();
+
+     reader.readAsText(file);
+
+     reader.onload = () => {
+        emptyAnomalies();
+
+        let inputLines = reader.result.split('\n');
+        for (let i = 0; i < inputLines.length; i++) {
+            const line = inputLines[i];
+            let lineItems = line.split(';');
+            //TODO
+            let item = {};
+            item.id = i;
+            item.patient = removeQuotes(lineItems[0]);
+            item.gene = removeQuotes(lineItems[1]);
+            item.famille = removeQuotes(lineItems[2]);
+            item.type = removeQuotes(lineItems[4]);
+            if(item.type == ''){
+                item.type = 'no-diff';
+            }
+            if(item.famille == 'expression') {
+                item.famille = 'expr';
+            }
+            if(item.famille == 'methylation') {
+                item.famille = 'meth';
+            }
+            if(item.type == 'Up') {
+                item.type = 'up';
+            }
+            if(item.type == 'Up') {
+                item.type = 'up';
+            }
+
+            anomalies.add(item);
+        }
+        console.log(JSON.stringify(anomalies.get()));
+        let pausehere;
+
+        config();
+        alert('counting anomalies about to start');
+        countRelevantAnomalies(); // WAYYYY TOO COMPLEX FOR LOTS OF DATA
+        alert('count done');
+        createGraphic();
+     };
+ }
+
+ /**
+  * Return a copy of str without any quotes (") 
+  */
+ function removeQuotes(str) {
+    while(str.includes('"')) {
+        str = str.replace('"','');
+    }
+    return str;
+ }
+
+ function emptyAnomalies() {
+    anomalies = new vis.DataSet();
+    items = new vis.DataSet();
+    avgGenes = new vis.DataSet();
+    avgPatients = new vis.DataSet();
+    container.innerHTML = '';
+    document.getElementById('row-type-btn').innerHTML = '<strong>GENES</strong> <> Patients';
+ }
+
  function init(dataObj) {
+    drivers = [];
+    emptyAnomalies();
     if(loadData(dataObj) == -1) return;
     config();
     countRelevantAnomalies();
@@ -60,7 +133,7 @@ var container = document.getElementById('visualization');
  }
 
  /**
-  * Load drivers and anomalies
+  * Load drivers, create anomalies
   */
  function loadData(dataObj) {
     let response = dataObj;
@@ -416,7 +489,6 @@ var container = document.getElementById('visualization');
   */
  function createGraphic() {
     //TODO
-    //container.innerHTML = 'row order : '+rowOrder+'<br>column order : '+columnOrder;
     let rowOrder = getRowOrder();  
     let columnOrder = getColumnOrder(rowOrder);
     // Create row labels

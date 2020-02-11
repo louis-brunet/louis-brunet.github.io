@@ -111,3 +111,7 @@ button:focus {
 strong {
     font-weight: bolder;
 }
+
+#to-hide {
+    display: none;
+}
