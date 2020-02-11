@@ -70,9 +70,9 @@ var container = document.getElementById('visualization');
             let item = {};
             item.id = i;
             item.patient = removeQuotes(lineItems[0]);
-            item.gene = removeQuotes(lineItems[1]);
-            item.famille = removeQuotes(lineItems[2]);
-            item.type = removeQuotes(lineItems[4]);
+            item.gene = removeQuotes(lineItems[1]).toUpperCase();
+            item.famille = removeQuotes(lineItems[2]).toLowerCase();
+            item.type = removeQuotes(lineItems[4]).toLowerCase();
             if(item.type == ''){
                 item.type = 'no-diff';
             }
@@ -81,12 +81,6 @@ var container = document.getElementById('visualization');
             }
             if(item.famille == 'methylation') {
                 item.famille = 'meth';
-            }
-            if(item.type == 'Up') {
-                item.type = 'up';
-            }
-            if(item.type == 'Up') {
-                item.type = 'up';
             }
 
             anomalies.add(item);
@@ -100,6 +94,25 @@ var container = document.getElementById('visualization');
         alert('count done');
         createGraphic();
      };
+ }
+
+ function computedSelect(input) {
+     let file = input.files[0];
+
+     let reader = new FileReader();
+     reader.readAsText(file);
+     reader.onload = () => {
+         container.style.cursor = 'wait';
+
+         emptyAnomalies();
+         container.innerHTML = 'CALCUL EN COURS';
+
+         items.add(JSON.parse(reader.result));
+
+         createGraphic();
+         container.style.cursor = 'initial';
+     }
+     
  }
 
  /**
@@ -300,7 +313,6 @@ var container = document.getElementById('visualization');
  function getRowOrder() {
     let res = []; 
     if(ROW_TYPE == 'gene'){
-        calculateAvgGenes();
         let sorted = avgGenes.get({
             fields:     ['gene'],
             order:      (a, b) => {
@@ -312,7 +324,6 @@ var container = document.getElementById('visualization');
             res.push(sorted[i].gene);
         }
     } else {
-        calculateAvgPatients();
         let sorted = avgPatients.get({
             fields:     ['patient'],
             order:      (a, b) => {
@@ -373,11 +384,14 @@ var container = document.getElementById('visualization');
         
         let total = 0;
         let count = 0;
-        items.forEach(i => {
-            if(i.patient == m.patient) {
-                total += i.nbTotal;
-                count++;
-            }
+        items.get({
+            filter: i => {
+                return i.patient == m.patient;
+            },
+            fields: ['nbTotal']
+        }).forEach(i => {
+            total += i.nbTotal;
+            count++;
         });
 
         if(count > 0) {
@@ -488,9 +502,12 @@ var container = document.getElementById('visualization');
   * Create graphic based on items DataSet and in the given order
   */
  function createGraphic() {
-    //TODO
+    calculateAvgGenes();
+    calculateAvgPatients();
     let rowOrder = getRowOrder();  
     let columnOrder = getColumnOrder(rowOrder);
+    // Empty container
+    container.innerHTML = '';
     // Create row labels
     let rowLabelDiv = createRowLabelDiv(rowOrder);
     container.appendChild(rowLabelDiv);
@@ -525,12 +542,27 @@ var container = document.getElementById('visualization');
     for (let i = 0; i < rowOrder.length; i++) {
         const rowTitle = rowOrder[i];
         let titleStr = '' + rowTitle;
+        let avgStr = '';
         if(ROW_TYPE == 'gene') {
             titleStr = 'G:' + titleStr;
+            avgStr = Math.trunc(avgGenes.get({
+                fields: ['avg'],
+                filter: item => {
+                    return item.gene == rowOrder[i];
+                }
+            })[0].avg * 100) / 100;
         } else {
             titleStr = 'P:' + titleStr;
+            avgStr = Math.trunc(avgGenes.get({
+                fields: ['avg'],
+                filter: item => {
+                    return item.patient == rowOrder[i];
+                }
+            })[0].avg * 100) / 100;
         }
-        res.appendChild(createTextDiv(titleStr, 'graph-label'));
+        let titleDiv = createTextDiv(titleStr, 'graph-label');
+        titleDiv.appendChild(createTextDiv(avgStr, 'graph-label-avg'));
+        res.appendChild(titleDiv);
     }
     return res;
  }
@@ -541,12 +573,27 @@ var container = document.getElementById('visualization');
     for (let i = 0; i < columnOrder.length; i++) {
         const columnTitle = columnOrder[i];
         let titleStr = '' + columnTitle;
+        let avgStr = '';
         if(ROW_TYPE == 'gene') {
             titleStr = 'P:' + titleStr;
+            avgStr = Math.trunc(avgPatients.get({
+                fields: ['avg'],
+                filter: item => {
+                    return item.patient == columnOrder[i];
+                }
+            })[0].avg * 100) / 100;
         } else {
             titleStr = 'G:' + titleStr;
+            avgStr = Math.trunc(avgPatients.get({
+                fields: ['avg'],
+                filter: item => {
+                    return item.gene == columnOrder[i];
+                }
+            })[0].avg * 100) / 100;
         }
-        res.appendChild(createTextDiv(titleStr, 'graph-label'));
+        let titleDiv = createTextDiv(titleStr, 'graph-label');
+        titleDiv.appendChild(createTextDiv(avgStr, 'graph-label-avg'));
+        res.appendChild(titleDiv);
     }
 
     return res;
@@ -610,27 +657,27 @@ var container = document.getElementById('visualization');
 /**
  * Afficher une capture d'ecran du graphe
  */
-// function capture() {
-// 	// hide tooltips
-// 	// let tooltips = document.querySelectorAll('.tooltip-text');
-// 	// tooltips.forEach(function (t) {
-// 	// 	t.style.display = 'none';
-// 	// });
+function capture() {
+	// hide tooltips
+	// let tooltips = document.querySelectorAll('.tooltip-text');
+	// tooltips.forEach(function (t) {
+	// 	t.style.display = 'none';
+	// });
 
-// 	// Display screencap of #to-capture elem
-// 	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
-// 		document.getElementById('output-card').style.display = 'block';
-// 		// Export the canvas to its data URI representation
-// 		var base64image = canvas.toDataURL("image/jpeg");
-// 		// Display image in #output element
-// 		document.getElementById('output').src = base64image;
-// 	});
+	// Display screencap of #to-capture elem
+	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
+		document.getElementById('output-card').style.display = 'block';
+		// Export the canvas to its data URI representation
+		var base64image = canvas.toDataURL("image/jpeg");
+		// Display image in #output element
+		document.getElementById('output').src = base64image;
+	});
 
-// 	// show tooltips
-// 	// tooltips.forEach(function (t) {
-// 	// 	t.style.display = 'block';
-// 	// });
-// }
+	// show tooltips
+	// tooltips.forEach(function (t) {
+	// 	t.style.display = 'block';
+	// });
+}
 
  /**
   * Toggle between genes and patients for rows

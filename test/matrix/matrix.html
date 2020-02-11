@@ -10,12 +10,26 @@
   <link rel="stylesheet" type="text/css" href="matrix.css">
 </head>
 
-<body>
+<body id="body">
   
   <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
-  <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON">
-  <input id="csv-select" onchange="csvSelect(this)" type="file" accept=".csv" title="Anomalies | CSV">
+  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
   
+  <p>
+    <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON"> > Drivers & Anomalies | JSON 
+  </p>
+  <p>
+    <input id="csv-select" onchange="csvSelect(this)" type="file" accept=".csv" title="Anomalies | CSV"> > Anomalies | CSV
+  </p>
+  <p>
+    <input id="computed-select" onchange="computedSelect(this)" type="file" accept=".json" title="Items calculés | JSON"> > Items calculés | JSON
+  </p>
+
+  <div class="card" id="output-card">
+    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <img id="output">
+  </div>
+
   <div id="to-capture">
     
     <p id="title">
@@ -24,17 +38,9 @@
     
     <hr>
     
-    <div class="card">
-      <div id="visualization"></div>
-    </div>
+    <div id="visualization"></div>
+    
   </div>
-  
-  <!-- <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
-  
-  <div class="card" id="output-card">
-    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
-    <img id="output">
-  </div> -->
   
   <script src="matrix.js"></script>
   <script type="text/javascript" src="../html2canvas.min.js"></script>
