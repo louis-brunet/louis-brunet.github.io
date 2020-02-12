@@ -1,16 +1,13 @@
 /**
- * INPUT FILE
- */
- if (!window.File || !window.FileReader) {
-    alert('The File APIs are not fully supported in this browser.');
- }
-
-
-/**
  * DEFAULT JSON ENTRY
  */
- var url = 'https://louis-brunet.github.io/test/matrix/data.json'
+ var url = 'https://louis-brunet.github.io/test/matrix/datanew.json';
 
+
+
+if (!window.File || !window.FileReader) {
+    alert('The File APIs are not fully supported in this browser.');
+ }
 
 /**
  * CONSTANTS & GLOBAL VARIABLES
@@ -67,32 +64,7 @@ request.onload = () => {
         let inputLines = reader.result.split('\n');
         for (let i = 0; i < inputLines.length; i++) {
             const line = inputLines[i];
-            let lineItems = line.split(';');
-            let fam = removeQuotes(lineItems[2]).toLowerCase();
-            // Continue if item is irrelevant ('nsp' or 'mutation'&'non')
-            let col4 = removeQuotes(lineItems[3]);
-            let irrelevant = col4 == 'nsp' || (fam == 'mutation' && col4 == 'non');
-            if(irrelevant){
-                continue;
-            }
-            //TODO
-            let item = {};
-            item.id = i;
-            item.patient = removeQuotes(lineItems[0]);
-            item.gene = removeQuotes(lineItems[1]).toUpperCase();
-            item.famille = fam;
-            item.type = removeQuotes(lineItems[4]).toLowerCase();
-            if(item.type == ''){
-                item.type = 'no-diff';
-            }
-            if(item.famille == 'expression') {
-                item.famille = 'expr';
-            }
-            if(item.famille == 'methylation') {
-                item.famille = 'meth';
-            }
-
-            anomalies.add(item);
+            loadAnomalyCsvFormat(line);
         }
         console.log(JSON.stringify(anomalies.get()));
         let pausehere;
@@ -103,6 +75,50 @@ request.onload = () => {
         alert('count done');
         createGraphic();
      };
+ }
+
+ function loadAnomalyCsvFormat(line) {
+    let lineItems = line.split(';');
+    if(lineItems[1] == undefined){
+        return;
+    }
+    //TODO
+    let item = {};
+    item.id = anomalies.length;
+    item.patient = removeQuotes(lineItems[0]);
+    item.gene = removeQuotes(lineItems[1]).toUpperCase();
+    item.famille = removeQuotes(lineItems[2]).toLowerCase();
+    item.type = removeQuotes(lineItems[4]).toLowerCase();
+    let col6 = removeQuotes(lineItems[5]);
+    if(item.famille == 'mutation' && col6 != '') {
+        item.gnomen = col6;
+    }
+    if(item.type == ''){
+        item.type = 'no-diff';
+    }
+
+    // Skip item if is irrelevant ('nsp' or 'mutation'&'non' or already counted mutation)
+    let col4 = removeQuotes(lineItems[3]);
+    let irrelevant = col4 == 'nsp' || ((item.famille == 'mutation' || item.famille == 'copy number') && col4 == 'non') || (item.famille == 'mutation' && checkIfMutationInAnomalies(item.patient, item.gene, item.type, item.gnomen));
+    if(irrelevant){
+        return;
+    }
+    if(item.famille == 'expression') {
+        item.famille = 'expr';
+    }
+    if(item.famille == 'methylation') {
+        item.famille = 'meth';
+    }
+    if(item.famille == 'copy number') {
+        item.famille = 'copy';
+    }
+
+    let col8 = removeQuotes(lineItems[7]);
+    if(col8 != '') {
+        item.chc = col8;
+    }
+
+    anomalies.add(item);
  }
 
  function computedSelect(input) {
@@ -134,6 +150,25 @@ request.onload = () => {
  }
 
  /**
+  * Check if anomaly is already counted for a patient, gene, famille, type, region
+  * Only using mutation & gnomen for now
+  */
+ function checkIfMutationInAnomalies(pat, gene, type, gnomen) {
+    let quit = false;
+    let matched = anomalies.get({
+        filter: a => {
+            if(!quit && a.famille == 'mutation' && a.gnomen == gnomen && a.patient == pat && a.gene == gene && a.type == type){
+                quit = true;
+                return true;
+            }
+            return false;
+        }
+    });
+    
+    return matched.length > 0;
+ }
+
+ /**
   * Return a copy of str without any quotes (") 
   */
  function removeQuotes(str) {
@@ -160,7 +195,8 @@ request.onload = () => {
     setTimeout( () => {
         if(loadData(dataObj) == -1) return;
         config();
-        recomputeGrapic();
+        countRelevantAnomalies(); // init items dataset
+        recomputeGrapic(); // calculate avgs & redraw graphic
     }, 500);
  }
 
@@ -181,31 +217,33 @@ request.onload = () => {
     loadDrivers(response[0]);
 
     // Load anomalies
-    let createdItems = [];
+    // let createdItems = [];
 
-    for (let i = 0; i < response[1].length; i++) {
-       let input = response[1][i];
-       let anomaly = {
-           id:      i,
-           patient: response[1][i].patient,
-           gene:    response[1][i].gene,
-           famille: response[1][i].famille,
-           type:    response[1][i].type,
-           soustype:response[1][i].soustype,
-           gnomen:  response[1][i].gnomen,
-           pnomen:  response[1][i].pnomen,
-           cnomen:  response[1][i].cnomen,
-           chc:     response[1][i].chc,
-           start:   response[1][i].start,
-           end:     response[1][i].end
-       }
+    // for (let i = 0; i < response[1].length; i++) {
+    //    let input = response[1][i];
+    //    let anomaly = {
+    //        id:      i,
+    //        patient: response[1][i].patient,
+    //        gene:    response[1][i].gene,
+    //        famille: response[1][i].famille,
+    //        type:    response[1][i].type,
+    //        soustype:response[1][i].soustype,
+    //        gnomen:  response[1][i].gnomen,
+    //        pnomen:  response[1][i].pnomen,
+    //        cnomen:  response[1][i].cnomen,
+    //        chc:     response[1][i].chc,
+    //        start:   response[1][i].start,
+    //        end:     response[1][i].end
+    //    }
        
-        createdItems.push(anomaly);
-    }
-    anomalies = new vis.DataSet(createdItems);
+    //     createdItems.push(anomaly);
+    // }
+    anomalies = new vis.DataSet(response[1]);
  }
 
-
+ /**
+  * Set ROW_TYPE to 'gene' & select first driver from drivers
+  */
  function config() {
     // TODO user choice 
     setDriver(drivers[0].nom);
@@ -221,7 +259,6 @@ request.onload = () => {
     container.innerHTML = '';
 
     setTimeout( () => {
-        countRelevantAnomalies();
         calculateAvgGenes();
         calculateAvgPatients();
         createGraphic();
@@ -244,16 +281,34 @@ request.onload = () => {
     }
     document.getElementById('driver-name').innerHTML = driver.nom;
     document.getElementById('driver-genes').innerHTML = driver.genes;
+
+
+    // Replace items dataset with driver's computed items
+    let itemsRequest = new XMLHttpRequest();
+    itemsRequest.open('GET', d.items);
+    itemsRequest.responseType = 'json';
+    itemsRequest.send();
+    itemsRequest.onload = () => {
+        items = new vis.DataSet(itemsRequest.response);
+    }
+    items =  
  }
 
+ /**
+  * Reset drivers array and driver buttons with new drivers
+  * TODO ONCLICK UPDATE ITEMS DATASET WITH RELEVANT COMPUTED ITEMS 
+  */
  function loadDrivers(driverArray) {
     drivers = driverArray;
 
     let driverDiv = document.getElementById('driver-btns');
+    driverDiv.innerHTML = '';
     drivers.forEach(d => {
         let button = document.createElement('button');
         button.className = 'driver-btn';
+        button.id = 'driver-' + d.nom.toLowerCase();
         button.onclick = () => {
+            // TODO UPDATE ITEMS DATASET WITH RELEVANT COMPUTED ITEMS 
             setDriver(d.nom);
         };
         button.appendChild(document.createTextNode(d.nom));
@@ -261,9 +316,10 @@ request.onload = () => {
     });
  }
 
+ 
+
  /**
-  * Initialise items DataSet
-  * TODO? Give each patient and each gene a 'moyenne g/p'?
+  * Initialise the items DataSet from anomalies
   */
  function countRelevantAnomalies() {
     driver.genes.forEach(geneStr => {

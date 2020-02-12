@@ -156,6 +156,11 @@ strong {
     background-color: rgb(110, 15, 15);
 }
 
+.driver-btn.driver-selected {
+    background-color: rgb(231, 199, 157);
+    color: rgb(110, 15, 15);
+}
+
 #close-btn {
     background-color: red;
     color: white;
