@@ -162,11 +162,18 @@ strong {
 }
 
 #close-btn {
+    float: right;
+}
+
+.close-btn {
     background-color: red;
     color: white;
-    float: right;
     padding: 4px;
     margin: 4px;
+}
+
+#filter-wipe-btn {
+    display: none;
 }
 
 #output-card {

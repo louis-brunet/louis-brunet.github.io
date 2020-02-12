@@ -28,12 +28,13 @@
     </p> -->
     <p>
       Filtrer par une liste de patients : <input id="patient-select" accept=".txt,.csv,.json" onchange="patientSelect(this)" type="file"> 
+      <button class="close-btn" id="filter-wipe-btn" onclick="resetFilters(this);this.style.display = 'none'">X</button>
     </p>
     <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
 
   </div>
   <div class="card" id="output-card">
-    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <button class="close-btn" id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
     <img id="output">
   </div>
 

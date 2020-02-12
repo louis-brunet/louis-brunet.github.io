@@ -161,6 +161,7 @@ request.onload = () => {
     reader.onload = () => {
         patientFilter = reader.result.split(';');
         
+        document.getElementById('filter-wipe-btn').style.display = 'inline';
         document.getElementById('nb-patients-span').style.display = 'inline';
         document.getElementById('nb-patients-val').innerHTML = patientFilter.length;
     }
@@ -301,7 +302,7 @@ request.onload = () => {
         genes:  d.genes.split(';')
     }
     document.getElementById('driver-name').innerHTML = driver.nom;
-    document.getElementById('driver-genes').innerHTML = driver.genes;
+    document.getElementById('driver-genes').innerHTML = driver.genes.join(', ');
     document.getElementById('driver-' + d.nom.toLowerCase()).className += ' driver-selected';
 
 
@@ -883,4 +884,8 @@ function changeRowTypeUI() {
     }
     container.innerHTML = '';
     document.getElementById('loader').style.display = 'block';
+}
+
+function resetFilters(input) {
+    patientFilter = [];
 }
