@@ -119,8 +119,8 @@ a:hover {
 }
 
 .vis-range.anomalie-item.non-present {
-    border-color: blue;
-    color: blue;
+    border-color: green;
+    color: green;
 }
 
 .anomalie-item.non-present:hover .tooltip-text {
@@ -211,4 +211,8 @@ button:hover {
 
 .vis-timeline {
     border: none;
+}
+
+.vis-label.group-mut,.vis-label.group-copy,.vis-label.group-expr,.vis-label.group-meth {
+    font-weight: bolder;
 }

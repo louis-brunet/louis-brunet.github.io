@@ -7,10 +7,10 @@ var url = 'https://louis-brunet.github.io/test/genes/data.json';
  * INITIALISATION DE LA TIMELINE
  */
 
-var GROUP_MUT = 10000;
-var GROUP_CNV = 10001;
-var GROUP_EXPR = 10002;
-var GROUP_METH = 10003;
+var GROUP_MUT = 10000000;
+var GROUP_CNV = 10000001;
+var GROUP_EXPR = 10000002;
+var GROUP_METH = 10000003;
 
 var groups = [];
 var container = document.getElementById('visualization');
@@ -79,10 +79,10 @@ function createTimeline() {
 function loadData(parsedData){
 	loadStructureData(parsedData, items);
 	groups.push(
-		{id: GROUP_MUT, content: 'Mut.', value: GROUP_MUT},
-		{id: GROUP_CNV, content: 'CNv', value: GROUP_CNV},
-		{id: GROUP_EXPR, content: 'Exp.', value: GROUP_EXPR},
-		{id: GROUP_METH, content: 'Mét.', value: GROUP_METH}
+		{id: GROUP_MUT, content: 'Mut.', value: GROUP_MUT, className: 'group-mut'},
+		{id: GROUP_CNV, content: 'CNv', value: GROUP_CNV, className: 'group-copy'},
+		{id: GROUP_EXPR, content: 'Exp.', value: GROUP_EXPR, className: 'group-expr'},
+		{id: GROUP_METH, content: 'Mét.', value: GROUP_METH, className: 'group-meth'}
 	);
 	loadAnomaliesData(parsedData.anomalies, items);
 	items = new vis.DataSet(items);
@@ -283,8 +283,8 @@ function createTooltip(item, container) {
 		tooltipNode.appendChild(createTooltipDiv('C nomen : ', item.datacnomen, 'tooltip-cnomen'));
 	}
 
-	if(item.hasOwnProperty('dataso')) {
-		let lineStr = item.dataso.split(':')[1];
+	if((item.className.includes('type-somatic') || item.className.includes('type-germline') || item.className.includes('type-hd') || item.className.includes('type-fa') || item.className.includes('type-gain') || item.className.includes('type-perte')) && item.hasOwnProperty('dataso')) {
+		let lineStr = item.dataso;
 		if(item.hasOwnProperty('datacolonne9')){
 			lineStr = item.datacolonne9 + ', ' + lineStr;
 		}
