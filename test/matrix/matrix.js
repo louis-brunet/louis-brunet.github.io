@@ -291,7 +291,7 @@ request.onload = () => {
     itemsRequest.onload = () => {
         items = new vis.DataSet(itemsRequest.response);
     }
-    items =  
+
  }
 
  /**
