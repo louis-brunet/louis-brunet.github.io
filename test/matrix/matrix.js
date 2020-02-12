@@ -109,9 +109,12 @@ request.onload = () => init(request.response);
      let reader = new FileReader();
      reader.readAsText(file);
 
+     // Config for HCA items
      document.getElementById('loader').style.display = 'block';
      container.innerHTML = '';
+     ROW_TYPE = 'gene';
 
+     // Recreate graphic without computing averages again
      reader.onload = () => {
          emptyAnomalies();
          
