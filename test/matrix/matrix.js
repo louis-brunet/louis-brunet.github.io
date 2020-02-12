@@ -269,6 +269,10 @@ request.onload = () => {
   * Set driver to d, parsing d for genes
   */
  function setDriver(dName) {
+    if(driver) {
+        let btn = document.getElementById('driver-' + driver.nom.toLowerCase());
+        btn.className = btn.className.replace(' driver-selected', '');
+    }
     let d;
     for (let i = 0; i < drivers.length; i++) {
         if(drivers[i].nom == dName) {
@@ -281,6 +285,7 @@ request.onload = () => {
     }
     document.getElementById('driver-name').innerHTML = driver.nom;
     document.getElementById('driver-genes').innerHTML = driver.genes;
+    document.getElementById('driver-' + d.nom.toLowerCase()).className += ' driver-selected';
 
 
     // Replace items dataset with driver's computed items
