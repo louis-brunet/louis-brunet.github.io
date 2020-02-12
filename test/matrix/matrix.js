@@ -108,18 +108,22 @@ request.onload = () => init(request.response);
 
      let reader = new FileReader();
      reader.readAsText(file);
+
      document.getElementById('loader').style.display = 'block';
+     container.innerHTML = '';
+
      reader.onload = () => {
          emptyAnomalies();
          
          items.add(JSON.parse(reader.result));
 
-         
-         calculateAvgGenes();
-         calculateAvgPatients();
-         createGraphic();
-         
-         
+         setDriver('HCA');
+
+         setTimeout(() => {
+            calculateAvgGenes();
+            calculateAvgPatients();
+            createGraphic();
+         }, 400);
      }
      
  }
@@ -147,13 +151,11 @@ request.onload = () => init(request.response);
  function init(dataObj) {
     drivers = [];
     emptyAnomalies();
+    // timeout to refresh UI elements
     setTimeout( () => {
         if(loadData(dataObj) == -1) return;
         config();
-        countRelevantAnomalies();
-        calculateAvgGenes();
-        calculateAvgPatients();
-        createGraphic();
+        recomputeGrapic();
     }, 500);
  }
 
@@ -205,6 +207,18 @@ request.onload = () => init(request.response);
     ROW_TYPE = 'gene';
  }
 
+ function recomputeGrapic() {
+    document.getElementById('loader').style.display = 'block';
+    container.innerHTML = '';
+
+    setTimeout( () => {
+        countRelevantAnomalies();
+        calculateAvgGenes();
+        calculateAvgPatients();
+        createGraphic();
+    }, 400);
+ }
+
  /** 
   * Set driver to d, parsing d for genes
   */
@@ -230,7 +244,10 @@ request.onload = () => init(request.response);
     drivers.forEach(d => {
         let button = document.createElement('button');
         button.className = 'driver-btn';
-        button.onclick = () => {setDriver(d.nom)};
+        button.onclick = () => {
+            setDriver(d.nom);
+            recomputeGrapic();
+        };
         button.appendChild(document.createTextNode(d.nom));
         driverDiv.appendChild(button);
     });
@@ -363,6 +380,9 @@ request.onload = () => init(request.response);
     if(ROW_TYPE == 'gene'){
         let sorted = avgGenes.get({
             fields:     ['gene'],
+            filter:     i => {
+                return driver.genes.includes(i.gene);
+            },
             order:      (a, b) => {
                 return b.avg - a.avg;
             }   
@@ -388,7 +408,7 @@ request.onload = () => init(request.response);
 
  function calculateAvgGenes() {
     driver.genes.forEach(gStr => {
-        let exists = avgGenes.distinct().includes(gStr);
+        let exists = avgGenes.distinct('gene').includes(gStr);
         if(!exists){
             let total = 0;
             let count = 0;
