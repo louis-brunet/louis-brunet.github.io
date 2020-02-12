@@ -113,7 +113,7 @@ body {
     flex-flow: row;
     flex-wrap: nowrap;
     margin: auto;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 button {
