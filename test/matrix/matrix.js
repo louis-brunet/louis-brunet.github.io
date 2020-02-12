@@ -160,6 +160,9 @@ request.onload = () => {
 
     reader.onload = () => {
         patientFilter = reader.result.split(';');
+        
+        document.getElementById('nb-patients-span').style.display = 'inline';
+        document.getElementById('nb-patients-val').innerHTML = patientFilter.length;
     }
  }
 
