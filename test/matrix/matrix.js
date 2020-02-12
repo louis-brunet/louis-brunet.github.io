@@ -394,6 +394,9 @@ request.onload = () => init(request.response);
     } else {
         let sorted = avgPatients.get({
             fields:     ['patient'],
+            filter:     i => {
+                return checkIntersectionsWithDriverGenes(i.patient);
+            },
             order:      (a, b) => {
                 return b.avg - a.avg;
             }   
@@ -404,6 +407,19 @@ request.onload = () => init(request.response);
         }
     }
     return res;
+ }
+
+ function checkIntersectionsWithDriverGenes(pStr) {
+    let bool = false;
+    for (let i = 0; i < driver.genes.length && !bool; i++) {
+        const gStr = driver.genes[i];
+        if(ROW_TYPE == 'gene') 
+            bool = (bool || getIntersection(gStr, pStr) != undefined);
+        else 
+            bool = (bool || getIntersection(pStr, gStr) != undefined);
+    }
+
+    return bool;
  }
 
  function calculateAvgGenes() {
@@ -449,7 +465,7 @@ request.onload = () => init(request.response);
 
     // For each, if it isn't already created, avg all nbTotal in items DataSet
     allPatients.forEach(pStr => {
-        //if(avgPatients.distinct('patient').includes(m.patient) || ! driver.genes.includes()) return;
+        if(avgPatients.distinct('patient').includes(pStr)) return;
         
         let total = 0;
         let count = 0;
@@ -708,14 +724,19 @@ request.onload = () => init(request.response);
  
  /**
   * Return item matching pair gene, patient or patien, gene (depending on ROW_TYPE)
+  * IF GENE IS IN DRIVER'S LIST, else return undefined
   */
  function getIntersection(rowTitle, colTitle) {
     let matched = items.get({
         filter: i => {
-            if(ROW_TYPE == 'gene')
-                return i.gene == rowTitle && i.patient == colTitle;
-            else 
-                return i.gene == colTitle && i.patient == rowTitle;
+            if(driver.genes.includes(i.gene)){
+                if(ROW_TYPE == 'gene')
+                    return i.gene == rowTitle && i.patient == colTitle;
+                else 
+                    return i.gene == colTitle && i.patient == rowTitle;
+            }
+
+            return false;
         }
     });
 
