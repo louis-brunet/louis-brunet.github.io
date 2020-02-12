@@ -14,7 +14,7 @@ if (!window.File || !window.FileReader) {
  */
 var container = document.getElementById('visualization');
 var MAX_ITEMS = 15;
-var ROW_TYPE; // 'gene' or 'patient'
+var ROW_TYPE = 'gene'; // 'gene' or 'patient'
 var driver; // {nom: 'txt', genes: ['gene1','gene2',...]}
 var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
