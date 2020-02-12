@@ -11,30 +11,32 @@
 </head>
 
 <body>
-  
-  <div id="top-btns">
-    <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
-    <div id="driver-btns"></div>
-    <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+  <div id="settings">
+    <div id="top-btns">
+      <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
+      <div id="driver-btns"></div>
+      <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+    </div>
+    <!-- <p>
+      <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON"> > Drivers & Anomalies | JSON 
+    </p>
+    <p>
+      <input id="csv-select" onchange="csvSelect(this)" type="file" accept=".csv" title="Anomalies | CSV"> > Anomalies | CSV
+    </p>
+    <p>
+      <input id="computed-select" onchange="computedSelect(this)" type="file" accept=".json" title="Items calculés HCA | JSON"> > Items calculés | JSON
+    </p> -->
+    <p>
+      Filtrer par une liste de patients : <input id="patient-select" onchange="patientSelect(this)" type="file"> 
+    </p>
+    <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
+
   </div>
-  <!-- <p>
-    <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON"> > Drivers & Anomalies | JSON 
-  </p>
-  <p>
-    <input id="csv-select" onchange="csvSelect(this)" type="file" accept=".csv" title="Anomalies | CSV"> > Anomalies | CSV
-  </p>
-  <p>
-    <input id="computed-select" onchange="computedSelect(this)" type="file" accept=".json" title="Items calculés HCA | JSON"> > Items calculés | JSON
-  </p> -->
-  <p>
-    Filtrer par une liste de patients : <input id="patient-select" onchange="patientSelect(this)" type="file"> 
-  </p>
   <div class="card" id="output-card">
     <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
     <img id="output">
   </div>
 
-  <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
 
   <div id="to-capture">
     
