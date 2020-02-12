@@ -212,6 +212,10 @@ strong {
     padding: 8px;
 }
 
+#settings p {
+    margin-left: 10px;
+}
+
 #nb-patients-span {
     display: none;
     color: blue;
