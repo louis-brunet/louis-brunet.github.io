@@ -567,7 +567,7 @@ request.onload = () => init(request.response);
     let matched = items.get({
         fields: ['gene'],
         filter: i => {
-            return i.patient == patientStr;
+            return i.patient == patientStr && driver.genes.includes(i.gene);
         },
         order: (a, b) => {
             return b.nbTotal - a.nbTotal;
