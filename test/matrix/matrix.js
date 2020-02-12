@@ -548,7 +548,7 @@ request.onload = () => {
 
     // For each, if it isn't already created, avg all nbTotal in items DataSet
     allPatients.forEach(pStr => {
-        if((patientFilter.length > 0 && !patientFilter.includes(i.patient)) || avgPatients.distinct('patient').includes(pStr)) 
+        if((patientFilter.length > 0 && !patientFilter.includes(pStr)) || avgPatients.distinct('patient').includes(pStr)) 
             return;
         
         let total = 0;
