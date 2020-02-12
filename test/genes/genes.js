@@ -54,6 +54,13 @@ request.send();
 request.onload = createTimeline;
 
 
+let today = new Date();
+let day = today.getDate();
+if(day<10) {
+	day = '0'+day;
+} 
+document.getElementById('date-du-jour').innerHTML = day + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+
 // Création des tooltips
 var tooltipsCreated = false;
 setInterval(function() {

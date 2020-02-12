@@ -216,3 +216,11 @@ button:hover {
 .vis-label.group-mut,.vis-label.group-copy,.vis-label.group-expr,.vis-label.group-meth {
     font-weight: bolder;
 }
+
+#date-title {
+    max-width: 80%;
+    text-align: center;
+    font-weight: bold;
+    margin: auto;
+    margin-bottom: 10px;
+}
