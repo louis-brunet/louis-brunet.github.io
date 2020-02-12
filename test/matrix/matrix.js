@@ -19,6 +19,8 @@ var driver; // {nom: 'txt', genes: ['gene1','gene2',...]}
 var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
 
+var patientFilter = [];
+
 var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMut: 1, nbCopy: 3, ... }, ... ]
 var avgGenes = new vis.DataSet(); // DataSet [{gene, avg}, ... ]
 var avgPatients  = new vis.DataSet(); // DataSet [{patient, avg}, ... ]
@@ -147,6 +149,18 @@ request.onload = () => {
          }, 400);
      }
      
+ }
+
+ function patientSelect(input) {
+    let file = input.files[0];
+
+    let reader = new FileReader();
+
+    reader.readAsText(file);
+
+    reader.onload = () => {
+        patientFilter = reader.result.split(';');
+    }
  }
 
  /**
@@ -297,6 +311,8 @@ request.onload = () => {
         items = new vis.DataSet(itemsRequest.response);
     }
 
+    avgGenes = new vis.DataSet();
+    avgPatients = new vis.DataSet();
  }
 
  /**
@@ -464,6 +480,9 @@ request.onload = () => {
         let sorted = avgPatients.get({
             fields:     ['patient'],
             filter:     i => {
+                if(patientFilter.length > 0) {
+                    return patientFilter.includes(i.patient) && checkIntersectionsWithDriverGenes(i.patient);
+                }
                 return checkIntersectionsWithDriverGenes(i.patient);
             },
             order:      (a, b) => {
@@ -499,6 +518,9 @@ request.onload = () => {
             let count = 0;
             items.get({
                 filter: i => {
+                    if(patientFilter.length > 0) {
+                        return patientFilter.includes(i.patient) && i.gene == gStr;
+                    }
                     return i.gene == gStr;
                 },
                 fields: ['nbTotal']
@@ -522,19 +544,12 @@ request.onload = () => {
  }
 
  function calculateAvgPatients() {
-     //TODO
-    // Find patients with anomalies in relevant genes
     let allPatients = items.distinct('patient');
-    // =  items.get({
-    //     fields: ['patient'],
-    //     filter: i => {
-    //         return driver.genes.includes(i.gene);
-    //     }
-    // });
 
     // For each, if it isn't already created, avg all nbTotal in items DataSet
     allPatients.forEach(pStr => {
-        if(avgPatients.distinct('patient').includes(pStr)) return;
+        if((patientFilter.length > 0 && !patientFilter.includes(i.patient)) || avgPatients.distinct('patient').includes(pStr)) 
+            return;
         
         let total = 0;
         let count = 0;
@@ -560,6 +575,9 @@ request.onload = () => {
 
         }
     });
+
+    document.getElementById('nb-patients-span').style.display = 'inline';
+    document.getElementById('nb-patients-val').innerHTML = avgPatients.length;
  }
 
  /**
@@ -612,7 +630,10 @@ request.onload = () => {
     let matched = items.get({
         fields: ['patient'],
         filter: i => {
-            return i.gene == geneStr;
+            if(patientFilter.length > 0) {
+                return patientFilter.includes(i.patient) && i.gene == geneStr;
+            }
+            else return i.gene == geneStr;
         },
         order: (a, b) => {
             return b.nbTotal - a.nbTotal;
@@ -636,6 +657,9 @@ request.onload = () => {
     let matched = items.get({
         fields: ['gene'],
         filter: i => {
+            if(patientFilter.length > 0) {        
+                return patientFilter.includes(i.patient) && i.patient == patientStr && driver.genes.includes(i.gene);
+            }
             return i.patient == patientStr && driver.genes.includes(i.gene);
         },
         order: (a, b) => {

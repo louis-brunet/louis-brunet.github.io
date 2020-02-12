@@ -211,3 +211,8 @@ strong {
     border-radius: 8px;
     padding: 8px;
 }
+
+#nb-patients-span {
+    display: none;
+    color: blue;
+}
