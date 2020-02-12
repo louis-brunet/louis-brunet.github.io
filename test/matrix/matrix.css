@@ -47,6 +47,8 @@ body {
 
 .graph-label-avg {
     color: rgb(100,100,100);
+    font-size: 75%;
+    font-style: italic;
 }
 
 .graph-item {
@@ -170,6 +172,11 @@ strong {
     border-radius: 8px;
     padding: 8px;
     margin: auto;
+}
+
+#create-graph-btn {
+    margin: auto;
+    display: block;
 }
 
 #output {

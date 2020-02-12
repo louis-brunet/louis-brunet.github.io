@@ -31,7 +31,9 @@ var request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
 request.send();
-request.onload = () => init(request.response);
+request.onload = () => {
+    loadDrivers(request.response[0]);
+}
 
 /**
  * FUNCTIONS 
@@ -210,6 +212,10 @@ request.onload = () => init(request.response);
     ROW_TYPE = 'gene';
  }
 
+ /**
+  * Compute averages for genes and patients
+  * Recreate graphic
+  */
  function recomputeGrapic() {
     document.getElementById('loader').style.display = 'block';
     container.innerHTML = '';
@@ -249,7 +255,6 @@ request.onload = () => init(request.response);
         button.className = 'driver-btn';
         button.onclick = () => {
             setDriver(d.nom);
-            recomputeGrapic();
         };
         button.appendChild(document.createTextNode(d.nom));
         driverDiv.appendChild(button);
