@@ -20,8 +20,8 @@ var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
 
 var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMut: 1, nbCopy: 3, ... }, ... ]
-var avgGenes; // DataSet [{gene, avg}, ... ]
-var avgPatients; // DataSet [{patient, avg}, ... ]
+var avgGenes = new vis.DataSet(); // DataSet [{gene, avg}, ... ]
+var avgPatients  = new vis.DataSet(); // DataSet [{patient, avg}, ... ]
 
 
 var request = new XMLHttpRequest();
@@ -196,7 +196,7 @@ request.onload = () => {
         if(loadData(dataObj) == -1) return;
         config();
         countRelevantAnomalies(); // init items dataset
-        recomputeGrapic(); // calculate avgs & redraw graphic
+        recomputeGraphic(); // calculate avgs & redraw graphic
     }, 500);
  }
 
@@ -254,7 +254,7 @@ request.onload = () => {
   * Compute averages for genes and patients
   * Recreate graphic
   */
- function recomputeGrapic() {
+ function recomputeGraphic() {
     document.getElementById('loader').style.display = 'block';
     container.innerHTML = '';
 
