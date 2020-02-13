@@ -202,6 +202,7 @@ strong {
 #create-graph-btn {
     background-color: rgb(230, 149, 0);
     /* color: black; */
+    display: none;
 }
 
 #cap-btn {

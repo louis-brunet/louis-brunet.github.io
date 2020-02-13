@@ -95,13 +95,17 @@ request.onload = () => {
     if(item.famille == 'mutation' && col6 != '') {
         item.gnomen = col6;
     }
+    let col8 = removeQuotes(lineItems[7]);
+    if(col8 != '') {
+        item.chc = col8;
+    }
     if(item.type == ''){
         item.type = 'no-diff';
     }
 
     // Skip item if is irrelevant ('nsp' or 'mutation'&'non' or already counted mutation)
     let col4 = removeQuotes(lineItems[3]);
-    let irrelevant = col4 == 'nsp' || ((item.famille == 'mutation' || item.famille == 'copy number') && col4 == 'non') || (item.famille == 'mutation' && checkIfMutationInAnomalies(item.patient, item.gene, item.type, item.gnomen));
+    let irrelevant = col4 == 'nsp' || ((item.famille == 'mutation' || item.famille == 'copy number') && col4 == 'non') || (item.famille == 'mutation' && checkIfMutationInAnomalies(item.patient, item.gene, item.type, item.gnomen, item.chc));
     if(irrelevant){
         return;
     }
@@ -113,11 +117,6 @@ request.onload = () => {
     }
     if(item.famille == 'copy number') {
         item.famille = 'copy';
-    }
-
-    let col8 = removeQuotes(lineItems[7]);
-    if(col8 != '') {
-        item.chc = col8;
     }
 
     anomalies.add(item);
@@ -176,12 +175,13 @@ request.onload = () => {
   * Check if anomaly is already counted for a patient, gene, famille, type, region
   * Only using mutation & gnomen for now
   */
- function checkIfMutationInAnomalies(pat, gene, type, gnomen) {
+ function checkIfMutationInAnomalies(pat, gene, type, gnomen, chc) {
     let quit = false;
     let matched = anomalies.get({
         filter: a => {
             if(!quit && a.famille == 'mutation' && a.gnomen == gnomen && a.patient == pat && a.gene == gene && a.type == type){
                 quit = true;
+                a.chc += ';' + chc;
                 return true;
             }
             return false;
@@ -320,6 +320,7 @@ request.onload = () => {
     itemsRequest.send();
     itemsRequest.onload = () => {
         items = new vis.DataSet(itemsRequest.response);
+        document.getElementById('create-graph-btn').style.display = 'inline-block';
     }
 
     avgGenes = new vis.DataSet();
