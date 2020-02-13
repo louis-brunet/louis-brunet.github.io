@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Matrix | Synthèse</title>
+
+  <script src="../vis-timeline-graph2d.min.js"></script>
+  <link href="../vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  
+  <link rel="stylesheet" type="text/css" href="matrix.css">
+</head>
+
+<body>
+  <div id="settings">
+    <div id="top-btns">
+      <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
+      <div id="driver-btns"></div>
+      <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+    </div>
+    <!-- <p>
+      <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON"> > Drivers & Anomalies | JSON 
+    </p>
+    <p>
+      <input id="csv-select" onchange="csvSelect(this)" type="file" accept=".csv" title="Anomalies | CSV"> > Anomalies | CSV
+    </p>
+    <p>
+      <input id="computed-select" onchange="computedSelect(this)" type="file" accept=".json" title="Items calculés HCA | JSON"> > Items calculés | JSON
+    </p> -->
+    <p>
+      Filtrer par une liste de patients : <input id="patient-select" accept=".txt,.csv,.json" onchange="patientSelect(this)" type="file"> 
+      <button class="close-btn" id="filter-wipe-btn" onclick="resetFilters(this);this.style.display = 'none'">X</button>
+    </p>
+    <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
+
+  </div>
+  <div class="card" id="output-card">
+    <button class="close-btn" id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <img id="output">
+  </div>
+
+
+  <div id="to-capture">
+    
+    <p id="title">
+      <span id="nb-patients-span">
+        <span class="label">Nombre de patients : </span>
+        <span id="nb-patients-val"></span>
+      </span>
+      <span class="label">Driver : </span><span id="driver-name"></span>
+      <span class="label">Gènes : </span><span id="driver-genes"></span>
+    </p>
+    
+    <hr>
+    
+    <div id="loader"></div>
+    <div id="visualization"></div>
+    
+  </div>
+  
+  <script src="notooltips.js"></script>
+  <script type="text/javascript" src="../html2canvas.min.js"></script>
+</body>
+</html>

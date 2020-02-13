@@ -822,10 +822,10 @@ request.onload = () => {
     methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHypo, 'hypo'));
     methDiv.appendChild(createTextDiv(''+intersectItem.nbMethNodiff, 'nodiff'));
 
-    createTooltip(mutDiv, intersectItem.anomalies.mut);
-    createTooltip(copyDiv, intersectItem.anomalies.copy);
-    createTooltip(exprDiv, intersectItem.anomalies.expr);
-    createTooltip(methDiv, intersectItem.anomalies.meth);
+    // createTooltip(mutDiv, intersectItem.anomalies.mut);
+    // createTooltip(copyDiv, intersectItem.anomalies.copy);
+    // createTooltip(exprDiv, intersectItem.anomalies.expr);
+    // createTooltip(methDiv, intersectItem.anomalies.meth);
 
     itemDiv.appendChild(mutDiv);
     itemDiv.appendChild(copyDiv);
