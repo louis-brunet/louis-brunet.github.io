@@ -75,18 +75,26 @@ body {
 }
 
 .graph-mut {
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.graph-mut .somatic {
+    color: red;
+}
+
+.graph-mut .germline {
+    color: black;
 }
 
 .graph-copy {
     background-color: rgba(255, 165, 0, 0.5);
 }
 
-.graph-expr, .graph-meth {
+.graph-expr, .graph-meth, .graph-mut {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .graph-expr > * , .graph-meth > * {
