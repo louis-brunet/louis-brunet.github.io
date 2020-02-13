@@ -284,11 +284,11 @@ strong {
     padding: 4px 4px 0 4px;
     border-radius: 6px;
     min-width: 220px;
-    margin-left: -110px;
+    /* margin-left: -110px; */
     text-align: center;
 
-    bottom: 120%; 
-    left: 50%;
+    top: 0%; 
+    left: calc(100% + 20px);
     position: absolute;
     z-index: 99;
 
