@@ -7,7 +7,7 @@ a.graph-item {
     text-decoration: none;
 }
 
-#title .label {
+.label {
     font-weight: bold;
     margin-left: 20px;
 }
@@ -158,15 +158,23 @@ strong {
     display: none;
 }
 
-#top-btns, #top-right-btns {
+#top-btns, #top-right-btns, #top-left-btns {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
 }
 
+#driver-btns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
 .driver-btn {
     background-color: rgb(110, 15, 15);
+    flex-shrink: 1;
 }
 
 .driver-btn.driver-selected {
@@ -280,4 +288,8 @@ strong {
 .tooltip-item {
     border-bottom: 1px solid rgb(100, 100, 100);
     padding-bottom: 4px;
+}
+
+#sort-radio-btns {
+    margin-top: 6px;
 }

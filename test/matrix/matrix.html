@@ -15,6 +15,13 @@
     <div id="top-btns">
       <div id="top-left-btns">
         <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
+        <div id="sort-radio-btns">
+          <span class="label">Tri</span>
+          <input id="default-btn" type="radio" name="sorting-btn" value="default" checked>
+          <label for="default-btn">Par défaut</label>
+          <input id="mutations-btn" type="radio" name="sorting-btn" value="mutations"> 
+          <label for="mutations-btn">Par mutations</label>
+        </div>
       </div>
       <div id="driver-btns"></div>
       <div id='top-right-btns'>

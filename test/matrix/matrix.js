@@ -20,6 +20,9 @@ var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
 
 var patientFilter = [];
+var sortByMutations = false;
+var rowOrder = [];
+var columnOrder = [];
 
 var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMutSomatic: 1, nbMutGermline: 1, nbCopy: 3, ... }, ... ]
 var avgGenes = new vis.DataSet(); // DataSet [{gene, avg}, ... ]
@@ -284,10 +287,27 @@ request.onload = () => {
     avgPatients = new vis.DataSet();
 
     setTimeout( () => {
+        setSorting();
+
         calculateAvgGenes();
         calculateAvgPatients();
         createGraphic();
     }, 400);
+ }
+
+ function setSorting() {
+    let sortingBtns = document.getElementsByName('sorting-btn');
+        for (let i = 0; i < sortingBtns.length; i++) {
+            const btn = sortingBtns[i];
+            if(btn.checked == true) {
+                if(btn.value == 'mutations') {
+                    sortByMutations = true;
+                } else if (btn.value == 'default') {
+                    sortByMutations = false;
+                }
+                break;
+            }
+        }
  }
 
  /** 
@@ -480,44 +500,97 @@ request.onload = () => {
  
  /**
   * Analyze items DataSet
-  * Return array of 15 names of genes or patients (depending on rowType),
+  * Return array of MAX_ITEMS names of genes or patients (depending on rowType),
   * ordered by avg
   */
  function getRowOrder() {
     let res = []; 
-    if(ROW_TYPE == 'gene'){
-        let sorted = avgGenes.get({
-            fields:     ['gene'],
-            filter:     i => {
-                return driver.genes.includes(i.gene);
-            },
-            order:      (a, b) => {
-                return b.avg - a.avg;
-            }   
-        });
-
-        for (let i = 0; i < sorted.length && i < 15; i++) {
-            res.push(sorted[i].gene);
+    if(sortByMutations) { 
+        if(ROW_TYPE == 'gene'){
+            getGenesOrder(res);
+        } else {
+            getPatientsOrder(res);
         }
-    } else {
-        let sorted = avgPatients.get({
-            fields:     ['patient'],
-            filter:     i => {
-                if(patientFilter.length > 0) {
-                    return patientFilter.includes(i.patient) && checkIntersectionsWithDriverGenes(i.patient);
-                }
-                return checkIntersectionsWithDriverGenes(i.patient);
-            },
-            order:      (a, b) => {
-                return b.avg - a.avg;
-            }   
-        });
+    }
+    // Otherwise return rows sorted alphabetically if genes, or by patient id value 
+    else {
+        if(ROW_TYPE == 'gene') {
+            res = driver.genes.sort();
+        } else {
+            if(patientFilter.length > 0) {
+                let sorted = patientFilter.sort( (a, b) => {
+                    return parseInt(a) - parseInt(b);
+                });
 
-        for (let i = 0; i < sorted.length && i < 15; i++) {
-            res.push(sorted[i].patient);
+                for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+                    if(checkIntersectionsWithDriverGenes(sorted[i].patient)) {
+                        res.push(sorted[i].patient);
+                    }
+                }
+            } else {
+                let sorted = avgPatients.get({
+                    fields:     ['patient'],
+                    filter:     i => {
+                        return checkIntersectionsWithDriverGenes(i.patient);
+                    },
+                    order:      (a, b) => {
+                        return parseInt(a.patient) - parseInt(b.patient);
+                    }   
+                });
+
+                for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+                    res.push(sorted[i].patient);
+                }
+    
+            }
         }
     }
     return res;
+ }
+
+ /**
+  * Fill resultArr with MAX_ITEMS names of patients ordered by avg
+  */
+ function getPatientsOrder(resultArr) {
+    let sorted = avgPatients.get({
+        fields:     ['patient'],
+        filter:     i => {
+            if(patientFilter.length > 0) {
+                return patientFilter.includes(i.patient) && checkIntersectionsWithDriverGenes(i.patient);
+            }
+            return checkIntersectionsWithDriverGenes(i.patient);
+        },
+        order:      (a, b) => {
+            return b.avg - a.avg;
+        }   
+    });
+
+    for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+        resultArr.push(sorted[i].patient);
+    }
+ }
+
+ /**
+  * Fill resultArr with MAX_ITEMS names of genes ordered by avg
+  */
+ function getGenesOrder(resultArr) {
+    let sorted = avgGenes.get({
+        fields:     ['gene'],
+        filter:     i => {
+            return driver.genes.includes(i.gene);
+        },
+        order:      (a, b) => {
+            return b.avg - a.avg;
+        }   
+    });
+
+    for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+        resultArr.push(sorted[i].gene);
+    }
+ }
+
+ function uniqueFilter(value, index, self) {
+    return self.indexOf(value) === index;
  }
 
  function checkIntersectionsWithDriverGenes(pStr) {
@@ -614,95 +687,107 @@ request.onload = () => {
   * Return array of 15 names of patients or genes (depending on rowType),
   * ordered by nbTotal and matching firstRowStr
   */
- function getColumnOrder(rowOrder) {
-    //TODO
-    let res = [];
+//  function getColumnOrder(rowOrder) {
+//     //TODO
+//     let res = [];
 
-    if(ROW_TYPE == 'gene'){
-        // get patients ordered by nbTotal for rowOrder[0]
-        // if less than MAX_ITEMS, add patients for next gene 
-        // until either (15 max patients) or (all genes checked)
-        for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
-            const geneRow = rowOrder[i];
-            let patientsForGene = getOrderedPatients(geneRow);
-            for (let j = 0; j < patientsForGene.length && res.length < MAX_ITEMS; j++) {
-                const patientCol = patientsForGene[j];
-                if(! res.includes(patientCol)) {
-                    res.push(patientCol);
-                }
-            }
-        }  
-    } else {
-        // get genes ordered by nbTotal for rowOrder[0]
-        // if less than MAX_ITEMS, add genes for next patient 
-        // until either (15 max genes) or (all patients checked)
-        for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
-            const patientRow = rowOrder[i];
-            let genesForPatient = getOrderedGenes(patientRow);
-            for (let j = 0; j < genesForPatient.length && res.length < MAX_ITEMS; j++) {
-                const geneCol = genesForPatient[j];
-                if(! res.includes(geneCol)) {
-                    res.push(geneCol);
-                }
-            }
-        }  
-    }
+//     if(ROW_TYPE == 'gene'){
+//         // get patients ordered by nbTotal for rowOrder[0]
+//         // if less than MAX_ITEMS, add patients for next gene 
+//         // until either (15 max patients) or (all genes checked)
+//         for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
+//             const geneRow = rowOrder[i];
+//             let patientsForGene = getOrderedPatients(geneRow);
+//             for (let j = 0; j < patientsForGene.length && res.length < MAX_ITEMS; j++) {
+//                 const patientCol = patientsForGene[j];
+//                 if(! res.includes(patientCol)) {
+//                     res.push(patientCol);
+//                 }
+//             }
+//         }  
+//     } else {
+//         // get genes ordered by nbTotal for rowOrder[0]
+//         // if less than MAX_ITEMS, add genes for next patient 
+//         // until either (15 max genes) or (all patients checked)
+//         for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
+//             const patientRow = rowOrder[i];
+//             let genesForPatient = getOrderedGenes(patientRow);
+//             for (let j = 0; j < genesForPatient.length && res.length < MAX_ITEMS; j++) {
+//                 const geneCol = genesForPatient[j];
+//                 if(! res.includes(geneCol)) {
+//                     res.push(geneCol);
+//                 }
+//             }
+//         }  
+//     }
 
-    return res;
- }
+//     return res;
+//  }
 
  /**
   * Return array of patients for geneStr
   * Ordered by nbTotal descending
   */
- function getOrderedPatients(geneStr) {
-    let matched = items.get({
-        fields: ['patient'],
-        filter: i => {
-            if(patientFilter.length > 0) {
-                return patientFilter.includes(i.patient) && i.gene == geneStr;
-            }
-            else return i.gene == geneStr;
-        },
-        order: (a, b) => {
-            return b.nbTotal - a.nbTotal;
-        }
-    });
+//  function getOrderedPatients(geneStr) {
+//     let matched = items.get({
+//         fields: ['patient'],
+//         filter: i => {
+//             if(patientFilter.length > 0) {
+//                 return patientFilter.includes(i.patient) && i.gene == geneStr;
+//             }
+//             else return i.gene == geneStr;
+//         },
+//         order: (a, b) => {
+//             return b.nbTotal - a.nbTotal;
+//         }
+//     });
 
-    let res = [];
-    for (let i = 0; i < matched.length; i++) {
-        const item = matched[i];
-        res.push(item.patient);
-    }
+//     let res = [];
+//     for (let i = 0; i < matched.length; i++) {
+//         const item = matched[i];
+//         res.push(item.patient);
+//     }
 
-    return res;
- }
+//     return res;
+//  }
 
  /**
   * Return array of genes for patientStr
   * Ordered by nbTotal descending
   */
- function getOrderedGenes(patientStr) {
-    let matched = items.get({
-        fields: ['gene'],
-        filter: i => {
-            if(patientFilter.length > 0) {        
-                return patientFilter.includes(i.patient) && i.patient == patientStr && driver.genes.includes(i.gene);
-            }
-            return i.patient == patientStr && driver.genes.includes(i.gene);
-        },
-        order: (a, b) => {
-            return b.nbTotal - a.nbTotal;
-        }
-    });
+//  function getOrderedGenes(patientStr) {
+//     let matched = items.get({
+//         fields: ['gene'],
+//         filter: i => {
+//             if(patientFilter.length > 0) {        
+//                 return patientFilter.includes(i.patient) && i.patient == patientStr && driver.genes.includes(i.gene);
+//             }
+//             return i.patient == patientStr && driver.genes.includes(i.gene);
+//         },
+//         order: (a, b) => {
+//             return b.nbTotal - a.nbTotal;
+//         }
+//     });
 
-    let res = [];
-    for (let i = 0; i < matched.length; i++) {
-        const item = matched[i];
-        res.push(item.gene);
-    }
+//     let res = [];
+//     for (let i = 0; i < matched.length; i++) {
+//         const item = matched[i];
+//         res.push(item.gene);
+//     }
 
-    return res;
+//     return res;
+//  }
+
+ function getColumnOrder() {
+     let res = [];
+
+     if(ROW_TYPE == 'gene') {
+        getPatientsOrder(res);
+     } else {
+        getGenesOrder(res);
+     }
+
+     return res;
  }
 
 
@@ -711,7 +796,7 @@ request.onload = () => {
   */
  function createGraphic() {
     let rowOrder = getRowOrder();  
-    let columnOrder = getColumnOrder(rowOrder);
+    let columnOrder = getColumnOrder();
     // Empty container
     container.innerHTML = '';
     document.getElementById('loader').style.display = 'none';
@@ -757,21 +842,27 @@ function createLink(url, className) {
         const rowTitle = rowOrder[i];
         let titleStr = '' + rowTitle;
         let avgStr = '';
+        let item;
         if(ROW_TYPE == 'gene') {
-            avgStr = Math.trunc(avgGenes.get({
+            item = avgGenes.get({
                 fields: ['avg'],
                 filter: item => {
                     return item.gene == rowOrder[i];
                 }
-            })[0].avg * 100) / 100;
+            })[0];
         } else {
-            avgStr = Math.trunc(avgPatients.get({
+            item = avgPatients.get({
                 fields: ['avg'],
                 filter: item => {
                     return item.patient == rowOrder[i];
                 }
-            })[0].avg * 100) / 100;
+            })[0];
         }
+        
+        if(item != undefined && item.hasOwnProperty('avg')) {
+            avgStr = Math.trunc(item.avg * 100) / 100;
+        }
+
         let titleDiv = createTextDiv(titleStr, 'graph-label');
         titleDiv.appendChild(createTextDiv(avgStr, 'graph-label-avg'));
         res.appendChild(titleDiv);
@@ -838,8 +929,8 @@ function createLink(url, className) {
 
  function createIntersectDiv(intersectItem, itemDiv) {
     let mutDiv = createDiv('graph-mut');
-    mutDiv.appendChild(createTextDiv(''+intersectItem.nbMutSomatic, 'somatic'));
-    mutDiv.appendChild(createTextDiv(''+intersectItem.nbMutGermline, 'germline'));
+    let somaticDiv = createTextDiv(''+intersectItem.nbMutSomatic, 'somatic');
+    let germlineDiv = createTextDiv(''+intersectItem.nbMutGermline, 'germline');
     
     let copyDiv = createTextDiv(''+intersectItem.nbCopy, 'graph-copy');
     
@@ -854,7 +945,22 @@ function createLink(url, className) {
     methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHypo, 'hypo'));
     methDiv.appendChild(createTextDiv(''+intersectItem.nbMethNodiff, 'nodiff'));
 
-    createTooltip(mutDiv, intersectItem.anomalies.mut);
+    let anomSomatic = [];
+    let anomGermline = [];
+    for (let i = 0; i < intersectItem.anomalies.mut.length; i++) {
+        const mut = intersectItem.anomalies.mut[i];
+        if(mut.type == 'somatic') {
+            anomSomatic.push(mut)
+        } else if(mut.type == 'germline'){
+            anomGermline.push(mut);
+        }
+    }
+
+
+    createTooltip(somaticDiv, anomSomatic);
+    mutDiv.appendChild(somaticDiv);
+    createTooltip(germlineDiv, anomGermline);
+    mutDiv.appendChild(germlineDiv);
     createTooltip(copyDiv, intersectItem.anomalies.copy);
     createTooltip(exprDiv, intersectItem.anomalies.expr);
     createTooltip(methDiv, intersectItem.anomalies.meth);
@@ -865,6 +971,7 @@ function createLink(url, className) {
     itemDiv.appendChild(methDiv);
  }
 
+ // TODO SEPARATE SOMATIC & GERMLINE
  function createTooltip(div, anomArray) {
     if(anomArray.length > 0) {
         div.className += ' tooltip';
