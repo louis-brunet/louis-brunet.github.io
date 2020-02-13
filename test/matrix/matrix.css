@@ -227,3 +227,35 @@ strong {
     display: none;
     color: blue;
 }
+
+.tooltip:hover .tooltip-text {
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+  }
+
+.tooltip {
+    position: relative;
+}
+  
+.tooltip-text {
+    /* box-sizing: border-box; */
+    /* display: none; */    
+    transition: opacity 0.3s, visibility 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    
+    background-color: white;
+    padding: 5px;
+    border-radius: 6px;
+    min-width: 220px;
+    margin-left: -110px;
+    text-align: center;
+    border: 1px solid;
+
+    bottom: 120%; 
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+
+}

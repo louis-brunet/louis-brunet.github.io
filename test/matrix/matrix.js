@@ -269,12 +269,14 @@ request.onload = () => {
  }
 
  /**
-  * Compute averages for genes and patients
+  * Reset and compute averages for genes and patients
   * Recreate graphic
   */
  function recomputeGraphic() {
     document.getElementById('loader').style.display = 'block';
     container.innerHTML = '';
+    avgGenes = new vis.DataSet();
+    avgPatients = new vis.DataSet();
 
     setTimeout( () => {
         calculateAvgGenes();
@@ -793,22 +795,7 @@ request.onload = () => {
 
             let intersectItem = getIntersection(rowTitle, colTitle);
             if(intersectItem) {
-                newItem.appendChild(createTextDiv(''+intersectItem.nbMut, 'graph-mut'));
-                newItem.appendChild(createTextDiv(''+intersectItem.nbCopy, 'graph-copy'));
-                let exprDiv = createDiv('graph-expr');
-                exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprUp, 'up'));
-                exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprDown, 'down'));
-                exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprNodiff, 'nodiff'));
-                newItem.appendChild(exprDiv);
-
-                let methDiv = createDiv('graph-meth');
-                methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHyper, 'hyper'));
-                methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHypo, 'hypo'));
-                methDiv.appendChild(createTextDiv(''+intersectItem.nbMethNodiff, 'nodiff'));
-                newItem.appendChild(methDiv);
-
-
-                //TODO CREATE TOOLTIPS
+                createIntersectDiv(intersectItem, newItem);
             }
 
             newRow.appendChild(newItem);
@@ -816,6 +803,54 @@ request.onload = () => {
         }
 
         contentDiv.appendChild(newRow);
+    }
+ }
+
+ function createIntersectDiv(intersectItem, itemDiv) {
+    let mutDiv = createTextDiv(''+intersectItem.nbMut, 'graph-mut');
+    
+    let copyDiv = createTextDiv(''+intersectItem.nbCopy, 'graph-copy');
+    
+    let exprDiv = createDiv('graph-expr');
+    exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprUp, 'up'));
+    exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprDown, 'down'));
+    exprDiv.appendChild(createTextDiv(''+intersectItem.nbExprNodiff, 'nodiff'));
+   
+
+    let methDiv = createDiv('graph-meth');
+    methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHyper, 'hyper'));
+    methDiv.appendChild(createTextDiv(''+intersectItem.nbMethHypo, 'hypo'));
+    methDiv.appendChild(createTextDiv(''+intersectItem.nbMethNodiff, 'nodiff'));
+
+    // createTooltip(mutDiv, intersectItem.anomalies.mut);
+    // createTooltip(copyDiv, intersectItem.anomalies.copy);
+    // createTooltip(exprDiv, intersectItem.anomalies.expr);
+    // createTooltip(methDiv, intersectItem.anomalies.meth);
+
+    itemDiv.appendChild(mutDiv);
+    itemDiv.appendChild(copyDiv);
+    itemDiv.appendChild(exprDiv);
+    itemDiv.appendChild(methDiv);
+ }
+
+ function createTooltip(div, anomArray) {
+    if(anomArray.length > 0) {
+        div.className += ' tooltip';
+        let tooltipText = createDiv('tooltip-text');
+        for (let i = 0; i < anomArray.length; i++) {
+            const anom = anomArray[i];
+            let lineStr = anom.famille + ', ' + anom.type
+            if(anom.hasOwnProperty('gnomen')) {
+                lineStr += ', ' + anom.gnomen;
+            }
+            if(anom.hasOwnProperty('chc')) {
+                linStr += ', ' + anom.chc;
+            }
+            tooltipText.appendChild(createTextDiv(lineStr, 'tooltip-item'));
+        }
+
+
+        div.appendChild(tooltipText);
     }
  }
  
@@ -888,4 +923,5 @@ function changeRowTypeUI() {
 
 function resetFilters(input) {
     patientFilter = [];
+    document.getElementById('nb-patients-span').style.display = 'none';
 }
