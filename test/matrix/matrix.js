@@ -730,10 +730,17 @@ request.onload = () => {
  }
 
  function createDiv(className) {
-     let res = document.createElement('div');
-     res.className = className;
-     return res;
- }
+    let res = document.createElement('div');
+    res.className = className;
+    return res;
+}
+
+function createLink(url, className) {
+    let res = document.createElement('a');
+    res.className = className;
+    res.href = url;
+    return res;
+}
 
  function createTextDiv(text, className) {
      let res = document.createElement('div');
@@ -813,7 +820,7 @@ request.onload = () => {
 
         for (let j = 0; j < columnOrder.length; j++) {
             const colTitle = columnOrder[j];
-            let newItem = createDiv('graph-item');
+            let newItem = createLink('https://louis-brunet.github.io/test/genes/genes.html', 'graph-item');
 
             let intersectItem = getIntersection(rowTitle, colTitle);
             if(intersectItem) {
@@ -948,5 +955,5 @@ function changeRowTypeUI() {
 function resetFilters(input) {
     patientFilter = [];
     document.getElementById('nb-patients-span').style.display = 'none';
-    input.value = '';
+    document.getElementById('patient-select').value = ''
 }
