@@ -181,11 +181,14 @@ strong {
 .driver-btn {
     background-color: rgb(110, 15, 15);
     flex-shrink: 1;
+
 }
 
-.driver-btn.driver-selected {
+.driver-btn.driver-selected, .driver-btn:hover {
     background-color: rgb(231, 199, 157);
     color: rgb(110, 15, 15);
+    transition: box-shadow 0.3s ease-in, background-color 0.17s linear, color 0.17s linear;
+
 }
 
 #close-btn {

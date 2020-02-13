@@ -28,7 +28,6 @@ var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMutSomatic: 1
 var avgGenes = new vis.DataSet(); // DataSet [{gene, avg}, ... ]
 var avgPatients  = new vis.DataSet(); // DataSet [{patient, avg}, ... ]
 
-
 var request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
@@ -177,6 +176,7 @@ request.onload = () => {
  /**
   * Check if anomaly is already counted for a patient, gene, famille, type, region
   * Only using mutation & gnomen for now
+  * If found anomaly, add new chc to its chc 
   */
  function checkIfMutationInAnomalies(pat, gene, type, gnomen, chc) {
     let quit = false;
@@ -184,7 +184,12 @@ request.onload = () => {
         filter: a => {
             if(!quit && a.famille == 'mutation' && a.gnomen == gnomen && a.patient == pat && a.gene == gene && a.type == type){
                 quit = true;
-                a.chc += ';' + chc;
+                if(! a.chc.split(';').includes(chc)) a.chc += ';' + chc;
+
+                if(! a.chc.includes(chc)) {
+                    let pause;
+                }
+
                 return true;
             }
             return false;
@@ -211,7 +216,6 @@ request.onload = () => {
     avgPatients = new vis.DataSet();
     container.innerHTML = '';
     document.getElementById('loader').style.display = 'block';
-    document.getElementById('row-type-btn').innerHTML = '<strong>GENES</strong> <> Patients';
  }
 
  function init(dataObj) {
@@ -574,7 +578,7 @@ request.onload = () => {
             return checkIntersectionsWithDriverGenes(i.patient);
         },
         order:      (a, b) => {
-            return b.avg - a.avg;
+            return b.totalSomatic - a.totalSomatic;
         }   
     });
 
@@ -593,7 +597,7 @@ request.onload = () => {
             return driver.genes.includes(i.gene);
         },
         order:      (a, b) => {
-            return b.avg - a.avg;
+            return b.totalSomatic - a.totalSomatic;
         }   
     });
 
@@ -646,9 +650,10 @@ request.onload = () => {
 
                 // Add item to avgGenes DataSet
                 avgGenes.add({
-                    id:     avgGenes.length,
-                    gene:   gStr,
-                    avg:    moy
+                    id:             avgGenes.length,
+                    gene:           gStr,
+                    avg:            moy,
+                    totalSomatic:   total
                 });
             }
         }
@@ -683,9 +688,10 @@ request.onload = () => {
 
             // Add item to avgPatients DataSet
             avgPatients.add({
-                id:         avgPatients.length,
-                patient:    pStr,
-                avg:        moy
+                id:             avgPatients.length,
+                patient:        pStr,
+                avg:            moy,
+                totalSomatic:   total
             });
 
         }
@@ -858,22 +864,22 @@ function createLink(url, className) {
         let item;
         if(ROW_TYPE == 'gene') {
             item = avgGenes.get({
-                fields: ['avg'],
+                fields: ['totalSomatic'],
                 filter: item => {
                     return item.gene == rowOrder[i];
                 }
             })[0];
         } else {
             item = avgPatients.get({
-                fields: ['avg'],
+                fields: ['totalSomatic'],
                 filter: item => {
                     return item.patient == rowOrder[i];
                 }
             })[0];
         }
         
-        if(item != undefined && item.hasOwnProperty('avg')) {
-            avgStr = Math.trunc(item.avg * 100) / 100;
+        if(item != undefined && item.hasOwnProperty('totalSomatic')) {
+            avgStr += item.totalSomatic;
         }
 
         let titleDiv = createTextDiv(titleStr, 'graph-label');
@@ -890,21 +896,28 @@ function createLink(url, className) {
         const columnTitle = columnOrder[i];
         let titleStr = '' + columnTitle;
         let avgStr = '';
+
+        let item;
         if(ROW_TYPE == 'gene') {
-            avgStr = Math.trunc(avgPatients.get({
-                fields: ['avg'],
+            item = avgPatients.get({
+                fields: ['totalSomatic'],
                 filter: item => {
                     return item.patient == columnOrder[i];
                 }
-            })[0].avg * 100) / 100;
+            })[0];
         } else {
-            avgStr = Math.trunc(avgGenes.get({
-                fields: ['avg'],
+            item = avgGenes.get({
+                fields: ['totalSomatic'],
                 filter: item => {
                     return item.gene == columnOrder[i];
                 }
-            })[0].avg * 100) / 100;
+            })[0];
         }
+        
+        if(item != undefined && item.hasOwnProperty('totalSomatic')) {
+            avgStr += item.totalSomatic;
+        }
+
         let titleDiv = createTextDiv(titleStr, 'graph-label');
         titleDiv.appendChild(createTextDiv(avgStr, 'graph-label-avg'));
         res.appendChild(titleDiv);
@@ -915,7 +928,6 @@ function createLink(url, className) {
 
  /**
   * Fill contentDiv with graph-row divs containing graph-item divs containing relevant info
-  * TODO CREATE TOOLTIPS
   */
  function fillContent(contentDiv, rowOrder, columnOrder) {
     for (let i = 0; i < rowOrder.length; i++) {
@@ -984,7 +996,9 @@ function createLink(url, className) {
     itemDiv.appendChild(methDiv);
  }
 
- // TODO SEPARATE SOMATIC & GERMLINE
+ /**
+  * Create tooltip in div containing anomArray's items if anomArray.length > 0
+  */
  function createTooltip(div, anomArray) {
     if(anomArray.length > 0) {
         div.className += ' tooltip';
