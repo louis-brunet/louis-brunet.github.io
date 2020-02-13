@@ -14,13 +14,32 @@
   <div id="settings">
     <div id="top-btns">
       <div id="top-left-btns">
-        <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
+        <!-- <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button> -->
+        <div id="row-type-btns">
+          <div class="label">Lignes</div>
+          <div>
+            <div class="radio">
+              <input id="genes-btn" type="radio" name="row-type-btn" value="gene" checked>
+              <label for="genes-btn">Gènes</label>
+            </div>
+            <div class="radio">
+              <input id="patients-btn" type="radio" name="row-type-btn" value="patient"> 
+              <label for="patients-btn">Patients</label>
+            </div>
+          </div>
+        </div>
         <div id="sort-radio-btns">
-          <span class="label">Tri</span>
-          <input id="default-btn" type="radio" name="sorting-btn" value="default" checked>
-          <label for="default-btn">Par défaut</label>
-          <input id="mutations-btn" type="radio" name="sorting-btn" value="mutations"> 
-          <label for="mutations-btn">Par mutations</label>
+          <div class="label">Tri</div>
+          <div>
+            <div class="radio">
+              <input id="default-btn" type="radio" name="sorting-btn" value="default" checked>
+              <label for="default-btn">Par défaut</label>
+            </div>
+            <div class="radio">
+              <input id="mutations-btn" type="radio" name="sorting-btn" value="mutations"> 
+              <label for="mutations-btn">Par mutations</label>
+            </div>
+          </div>
         </div>
       </div>
       <div id="driver-btns"></div>

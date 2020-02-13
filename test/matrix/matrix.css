@@ -9,9 +9,11 @@ a.graph-item {
 
 .label {
     font-weight: bold;
-    margin-left: 20px;
 }
 
+#title .label {
+    margin-left: 20px;
+}
 
 .graph-row {
     display: flex;
@@ -132,7 +134,7 @@ a.graph-item {
 
 button {
     margin: auto;
-    margin-right: 20px;
+    margin-right: 10px;
     padding: 10px;
     background-color: rgb(10, 17, 119);
     color: white;
@@ -163,6 +165,10 @@ strong {
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
+}
+
+#row-type-btn {
+    flex-shrink: 2;
 }
 
 #driver-btns {
@@ -291,5 +297,20 @@ strong {
 }
 
 #sort-radio-btns {
-    margin-top: 6px;
+    /* outline: 1px dashed green; */
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start; */
+}
+/* #sort-radio-btns > * {
+    outline: 1px dashed magenta;
+} */
+
+.radio {
+    padding: 4px;
+}
+
+.radio input {
+    margin: 0;
 }

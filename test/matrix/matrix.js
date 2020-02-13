@@ -287,7 +287,9 @@ request.onload = () => {
     avgPatients = new vis.DataSet();
 
     setTimeout( () => {
+        setRowType();
         setSorting();
+
 
         calculateAvgGenes();
         calculateAvgPatients();
@@ -295,19 +297,30 @@ request.onload = () => {
     }, 400);
  }
 
+ function setRowType() {
+    let rowTypeBtns = document.getElementsByName('row-type-btn');
+    for (let i = 0; i < rowTypeBtns.length; i++) {
+        const btn = rowTypeBtns[i];
+        if(btn.checked == true) {
+            ROW_TYPE = btn.value;
+            break;
+        }
+    }
+ }
+
  function setSorting() {
     let sortingBtns = document.getElementsByName('sorting-btn');
-        for (let i = 0; i < sortingBtns.length; i++) {
-            const btn = sortingBtns[i];
-            if(btn.checked == true) {
-                if(btn.value == 'mutations') {
-                    sortByMutations = true;
-                } else if (btn.value == 'default') {
-                    sortByMutations = false;
-                }
-                break;
+    for (let i = 0; i < sortingBtns.length; i++) {
+        const btn = sortingBtns[i];
+        if(btn.checked == true) {
+            if(btn.value == 'mutations') {
+                sortByMutations = true;
+            } else if (btn.value == 'default') {
+                sortByMutations = false;
             }
+            break;
         }
+    }
  }
 
  /** 
@@ -523,8 +536,8 @@ request.onload = () => {
                 });
 
                 for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
-                    if(checkIntersectionsWithDriverGenes(sorted[i].patient)) {
-                        res.push(sorted[i].patient);
+                    if(checkIntersectionsWithDriverGenes(sorted[i])) {
+                        res.push(sorted[i]);
                     }
                 }
             } else {
