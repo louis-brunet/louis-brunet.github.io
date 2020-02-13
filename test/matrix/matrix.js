@@ -21,7 +21,7 @@ var anomalies; // DataSet {id, patient, gene, famille, type}
 
 var patientFilter = [];
 
-var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMut: 1, nbCopy: 3, ... }, ... ]
+var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMutSomatic: 1, nbMutGermline: 1, nbCopy: 3, ... }, ... ]
 var avgGenes = new vis.DataSet(); // DataSet [{gene, avg}, ... ]
 var avgPatients  = new vis.DataSet(); // DataSet [{patient, avg}, ... ]
 
@@ -152,6 +152,8 @@ request.onload = () => {
  }
 
  function patientSelect(input) {
+    if(input.value == '') return;
+
     let file = input.files[0];
 
     let reader = new FileReader();
@@ -160,7 +162,10 @@ request.onload = () => {
 
     reader.onload = () => {
         patientFilter = reader.result.split(';');
-        
+        if(patientFilter[0] == '') {
+            patientFilter = [];
+            return;
+        }
         document.getElementById('filter-wipe-btn').style.display = 'inline';
         document.getElementById('nb-patients-span').style.display = 'inline';
         document.getElementById('nb-patients-val').innerHTML = patientFilter.length;
@@ -219,7 +224,7 @@ request.onload = () => {
  }
 
  /**
-  * Load drivers, create anomalies
+  * Load drivers, create anomalies from json created from csv
   */
  function loadData(dataObj) {
     let response = dataObj;
@@ -385,6 +390,8 @@ request.onload = () => {
         }
     });
 
+    let nbMutSomatic = 0;
+    let nbMutGermline = 0;
     let nbExprUp = 0;
     let nbExprDown = 0;
     let nbExprNodiff = 0;
@@ -404,6 +411,14 @@ request.onload = () => {
         switch(anom.famille) {
             case 'mutation':
                 foundAnomalies.mut.push(anom);
+                switch(anom.type) {
+                    case 'somatic': 
+                        nbMutSomatic++;
+                        break;
+                    case 'germline':
+                        nbMutGermline++;
+                        break;
+                }
                 break;
             case 'copy':
                 foundAnomalies.copy.push(anom);
@@ -441,14 +456,15 @@ request.onload = () => {
         }
     });
 
-    let total = foundAnomalies.mut.length + foundAnomalies.copy.length + nbExprUp + nbExprDown + nbExprNodiff + nbMethHypo + nbMethHyper + nbMethNodiff;
+    let total = nbMutSomatic + nbMutGermline + foundAnomalies.copy.length + nbExprUp + nbExprDown + nbExprNodiff + nbMethHypo + nbMethHyper + nbMethNodiff;
     
     items.add({
         id:             items.length,
         gene:           geneStr,
         patient:        patientStr,
         nbTotal:        total,
-        nbMut:          foundAnomalies.mut.length,
+        nbMutSomatic:   nbMutSomatic,
+        nbMutGermline:  nbMutGermline,
         nbCopy:         foundAnomalies.copy.length,
         nbExprUp:       nbExprUp,
         nbExprDown:     nbExprDown,
@@ -516,6 +532,9 @@ request.onload = () => {
     return bool;
  }
 
+ /**
+  * Calculte avg of somatic mutations for each gene
+  */
  function calculateAvgGenes() {
     driver.genes.forEach(gStr => {
         let exists = avgGenes.distinct('gene').includes(gStr);
@@ -529,9 +548,9 @@ request.onload = () => {
                     }
                     return i.gene == gStr;
                 },
-                fields: ['nbTotal']
+                fields: ['nbMutSomatic']
             }).forEach(i => {
-                total += i.nbTotal;
+                total += i.nbMutSomatic;
                 count++;
 
             });
@@ -549,6 +568,9 @@ request.onload = () => {
     });
  }
 
+ /**
+  * Calculte avg of somatic mutations for each patient
+  */
  function calculateAvgPatients() {
     let allPatients = items.distinct('patient');
 
@@ -563,9 +585,9 @@ request.onload = () => {
             filter: i => {
                 return i.patient == pStr;
             },
-            fields: ['nbTotal']
+            fields: ['nbMutSomatic']
         }).forEach(i => {
-            total += i.nbTotal;
+            total += i.nbMutSomatic;
             count++;
         });
 
@@ -807,7 +829,9 @@ request.onload = () => {
  }
 
  function createIntersectDiv(intersectItem, itemDiv) {
-    let mutDiv = createTextDiv(''+intersectItem.nbMut, 'graph-mut');
+    let mutDiv = createDiv('graph-mut');
+    mutDiv.appendChild(createTextDiv(''+intersectItem.nbMutSomatic, 'somatic'));
+    mutDiv.appendChild(createTextDiv(''+intersectItem.nbMutGermline, 'germline'));
     
     let copyDiv = createTextDiv(''+intersectItem.nbCopy, 'graph-copy');
     
@@ -924,4 +948,5 @@ function changeRowTypeUI() {
 function resetFilters(input) {
     patientFilter = [];
     document.getElementById('nb-patients-span').style.display = 'none';
+    input.value = '';
 }

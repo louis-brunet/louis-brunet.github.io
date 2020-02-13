@@ -13,9 +13,14 @@
 <body>
   <div id="settings">
     <div id="top-btns">
-      <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
+      <div id="top-left-btns">
+        <button id="row-type-btn" onclick="toggleRowType()"><strong>GENES</strong> <> Patients</button>
+      </div>
       <div id="driver-btns"></div>
-      <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+      <div id='top-right-btns'>
+        <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
+        <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+      </div>
     </div>
     <!-- <p>
       <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON"> > Drivers & Anomalies | JSON 
@@ -27,14 +32,14 @@
       <input id="computed-select" onchange="computedSelect(this)" type="file" accept=".json" title="Items calculés HCA | JSON"> > Items calculés | JSON
     </p> -->
     <p>
-      Filtrer par une liste de patients : <input id="patient-select" accept=".txt,.csv,.json" onchange="patientSelect(this)" type="file"> 
+      Filtrer par une liste de patients :  
       <button class="close-btn" id="filter-wipe-btn" onclick="resetFilters(this);this.style.display = 'none'">X</button>
+      <input id="patient-select" accept=".txt,.csv,.json" onchange="patientSelect(this)" type="file">
     </p>
-    <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
 
   </div>
   <div class="card" id="output-card">
-    <button class="close-btn" id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <button class="close-btn" id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'inline-block'">X</button>
     <img id="output">
   </div>
 

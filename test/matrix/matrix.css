@@ -119,7 +119,8 @@ body {
 }
 
 button {
-    margin: 10px;
+    margin: auto;
+    margin-right: 20px;
     padding: 10px;
     background-color: rgb(10, 17, 119);
     color: white;
@@ -145,7 +146,7 @@ strong {
     display: none;
 }
 
-#top-btns {
+#top-btns, #top-right-btns {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -187,8 +188,12 @@ strong {
 }
 
 #create-graph-btn {
-    margin: auto;
-    display: block;
+    background-color: rgb(230, 149, 0);
+    /* color: black; */
+}
+
+#cap-btn {
+    background-color: green
 }
 
 #output {
