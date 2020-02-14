@@ -20,6 +20,8 @@ var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
 
 var patientFilter = [];
+var genesFilter = [];
+var allGenes = [];
 var sortByMutations = false;
 var pagesInfo = {
     rows:   {
@@ -59,6 +61,8 @@ request.onload = () => {
 
      reader.onload = function() {
          init(JSON.parse(reader.result));
+         // TODO init items array with all drivers' items
+
      }
  }
 
@@ -194,10 +198,10 @@ request.onload = () => {
         filter: a => {
             if(!quit && a.famille == 'mutation' && a.gnomen == gnomen && a.patient == pat && a.gene == gene && a.type == type){
                 quit = true;
-                if(! a.chc.split(';').includes(chc)) a.chc += ';' + chc;
 
-                if(! a.chc.includes(chc)) {
-                    let pause;
+                if(! a.chc.split(';').includes(chc)) {
+                    let newChc = a.chc + ';' + chc;
+                    setAnomalyChc(a.id, newChc);
                 }
 
                 return true;
@@ -207,6 +211,10 @@ request.onload = () => {
     });
     
     return matched.length > 0;
+ }
+
+ function setAnomalyChc(anomId, newChc) {
+    anomalies.update({id: anomId, chc: newChc});
  }
 
  /**
@@ -255,7 +263,6 @@ request.onload = () => {
     }
     // Load list of available drivers from input array's first element
     loadDrivers(response[0]);
-
     // Load anomalies
     // let createdItems = [];
 
@@ -343,6 +350,66 @@ request.onload = () => {
     }
  }
 
+ function setItems(itemArr) {
+     items = new vis.DataSet(itemArr);
+ }
+
+ /**
+  * Add elements to items DataSet
+  * merge elements that refer to the same intersection
+  */
+ function addItems(itemArr) {
+    if(Array.isArray(itemArr)) {
+        itemArr.forEach( i => {
+            let oldItem;
+            if(ROW_TYPE == 'gene') {
+                oldItem = getIntersection(i.gene, i.patient);
+            } else {
+                oldItem = getIntersection(i.patient, i.gene);
+            }
+            if(oldItem == undefined) {
+                i.id = items.length;
+                items.add(i);
+            } else {
+                let newItem = {
+                    id:             oldItem.id,
+                    gene:           i.gene,
+                    patient:        i.patient,
+                    nbTotal:        i.nbTotal + oldItem.nbTotal,
+                    nbMutSomatic:   i.nbMutSomatic + oldItem.nbMutSomatic,
+                    nbMutGermline:  i.nbMutGermline + oldItem.nbMutGermline,
+                    nbCopy:         i.nbCopy + oldItem.nbCopy,
+                    nbExprUp:       i.nbExprUp +oldItem.nbExprUp,
+                    nbExprDown:     i.nbExprDown + oldItem.nbExprDown,
+                    nbExprNodiff:   i.nbExprNodiff + oldItem.nbExprNodiff,
+                    nbMethHypo:     i.nbMethHypo + oldItem.nbMethHypo,
+                    nbMethHyper:    i.nbMethHyper + oldItem.nbMethHyper,
+                    nbMethNodiff:   i.nbMethNodiff + oldItem.nbMethNodiff,
+                    anomalies:      mergeAnomalies(i.anomalies, oldItem.anomalies)
+                }
+                items.update(newItem);
+            }
+        });
+    }
+}
+
+/**
+ * TODO MERGE MUTATIONS IF SAME GNOMEN,etc.
+ */
+function mergeAnomalies(item1Anomalies, item2Anomalies) {
+    let res = {
+        mut:    [],
+        copy:   item1Anomalies.copy.concat(item2Anomalies.copy),
+        expr:   item1Anomalies.expr.concat(item2Anomalies.expr),
+        meth:   item1Anomalies.meth.concat(item2Anomalies.meth)
+    };
+
+    // TODO MERGE MUTATIONS
+
+    return res;
+}
+
+
  /** 
   * Set driver to d, parsing d for genes
   */
@@ -372,7 +439,7 @@ request.onload = () => {
     itemsRequest.responseType = 'json';
     itemsRequest.send();
     itemsRequest.onload = () => {
-        items = new vis.DataSet(itemsRequest.response);
+        setItems(itemsRequest.response);
         document.getElementById('create-graph-btn').style.display = 'inline-block';
     }
 
@@ -382,7 +449,8 @@ request.onload = () => {
 
  /**
   * Reset drivers array and driver buttons with new drivers
-  * TODO ONCLICK UPDATE ITEMS DATASET WITH RELEVANT COMPUTED ITEMS 
+  * btns onclick : UPDATE ITEMS DATASET WITH RELEVANT COMPUTED ITEMS 
+  * init genes filter select
   */
  function loadDrivers(driverArray) {
     drivers = driverArray;
@@ -394,7 +462,6 @@ request.onload = () => {
         button.className = 'driver-btn';
         button.id = 'driver-' + d.nom.toLowerCase();
         button.onclick = () => {
-            // TODO UPDATE ITEMS DATASET WITH RELEVANT COMPUTED ITEMS 
             setDriver(d.nom);
         };
         button.appendChild(document.createTextNode(d.nom));
@@ -795,117 +862,6 @@ function getCurrentPageOrder(axis) {
 
     return res;
 }
-
- /**
-  * Analyze items DataSet
-  * Return array of 15 names of patients or genes (depending on rowType),
-  * ordered by nbTotal and matching firstRowStr
-  */
-//  function getColumnOrder(rowOrder) {
-//     //TODO
-//     let res = [];
-
-//     if(ROW_TYPE == 'gene'){
-//         // get patients ordered by nbTotal for rowOrder[0]
-//         // if less than MAX_ITEMS, add patients for next gene 
-//         // until either (15 max patients) or (all genes checked)
-//         for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
-//             const geneRow = rowOrder[i];
-//             let patientsForGene = getOrderedPatients(geneRow);
-//             for (let j = 0; j < patientsForGene.length && res.length < MAX_ITEMS; j++) {
-//                 const patientCol = patientsForGene[j];
-//                 if(! res.includes(patientCol)) {
-//                     res.push(patientCol);
-//                 }
-//             }
-//         }  
-//     } else {
-//         // get genes ordered by nbTotal for rowOrder[0]
-//         // if less than MAX_ITEMS, add genes for next patient 
-//         // until either (15 max genes) or (all patients checked)
-//         for (let i = 0; i < rowOrder.length && res.length < MAX_ITEMS; i++) {
-//             const patientRow = rowOrder[i];
-//             let genesForPatient = getOrderedGenes(patientRow);
-//             for (let j = 0; j < genesForPatient.length && res.length < MAX_ITEMS; j++) {
-//                 const geneCol = genesForPatient[j];
-//                 if(! res.includes(geneCol)) {
-//                     res.push(geneCol);
-//                 }
-//             }
-//         }  
-//     }
-
-//     return res;
-//  }
-
- /**
-  * Return array of patients for geneStr
-  * Ordered by nbTotal descending
-  */
-//  function getOrderedPatients(geneStr) {
-//     let matched = items.get({
-//         fields: ['patient'],
-//         filter: i => {
-//             if(patientFilter.length > 0) {
-//                 return patientFilter.includes(i.patient) && i.gene == geneStr;
-//             }
-//             else return i.gene == geneStr;
-//         },
-//         order: (a, b) => {
-//             return b.nbTotal - a.nbTotal;
-//         }
-//     });
-
-//     let res = [];
-//     for (let i = 0; i < matched.length; i++) {
-//         const item = matched[i];
-//         res.push(item.patient);
-//     }
-
-//     return res;
-//  }
-
- /**
-  * Return array of genes for patientStr
-  * Ordered by nbTotal descending
-  */
-//  function getOrderedGenes(patientStr) {
-//     let matched = items.get({
-//         fields: ['gene'],
-//         filter: i => {
-//             if(patientFilter.length > 0) {        
-//                 return patientFilter.includes(i.patient) && i.patient == patientStr && driver.genes.includes(i.gene);
-//             }
-//             return i.patient == patientStr && driver.genes.includes(i.gene);
-//         },
-//         order: (a, b) => {
-//             return b.nbTotal - a.nbTotal;
-//         }
-//     });
-
-//     let res = [];
-//     for (let i = 0; i < matched.length; i++) {
-//         const item = matched[i];
-//         res.push(item.gene);
-//     }
-
-//     return res;
-//  }
-/**
- * 
- */
-// function getColumnOrder() {
-//     let res = [];
-
-//     if(ROW_TYPE == 'gene') {
-//     getPatientsOrder(res);
-//     } else {
-//     getGenesOrder(res);
-//     }
-
-//     return res;
-//  }
-
 
 /**
   * Create graphic based on items DataSet and in the given order
