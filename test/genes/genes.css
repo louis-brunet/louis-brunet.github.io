@@ -149,35 +149,36 @@ a:hover {
 .tooltip-text {
     /* box-sizing: border-box; */
     /* display: none; */    
-    transition: opacity 0.3s, visibility 0.3s;
+    transition: opacity 0.5s, visibility 0.5s;
     opacity: 0;
     visibility: hidden;
     
-    background-color: white;
-    padding: 5px;
+
+    background-color: rgb(220, 220, 220);
+    padding: 4px 4px 4px 4px;
     border-radius: 6px;
-    min-width: 220px;
-    margin-left: -110px;
+    min-width: max-content;
+    /* margin-left: -110px; */
     text-align: center;
-    border: 1px solid;
 
-    bottom: 120%; 
-    left: 50%;
+    top: 0%; 
+    left: calc(100% + 20px);
     position: absolute;
+    z-index: 99;
 
 }
 
-.tooltip-label {
-    font-weight: bold;
+.tooltip-line {
+    margin-bottom: 4px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 2px 4px 2px 4px;
 }
 
-.tooltip-val {
-    color: black;
-}
-
-.tooltip-last-line .tooltip-val {
+.tooltip-last-line {
     color: blue;
 }
+
 
 #top-btns {
     display: flex;

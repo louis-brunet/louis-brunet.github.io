@@ -421,42 +421,55 @@ function createTooltip(item, container) {
 	let tooltipNode = document.createElement('div');
 	tooltipNode.className = 'tooltip-text';
 
+	let lineStr = '';
 
 	let positionStr = item.start.getTime().toString();
 	if(item.hasOwnProperty('end')) {
 		positionStr += ' - ' + item.end.getTime().toString();
 	}
-	tooltipNode.appendChild(createTooltipDiv('Position : ', positionStr, 'tooltip-position'));
+	//tooltipNode.appendChild(createTooltipDiv('Position : ', positionStr, 'tooltip-position'));
+	lineStr += positionStr;
 
 	let typeStr = item.datatype;
-	tooltipNode.appendChild(createTooltipDiv('Type : ', typeStr, 'tooltip-type'));
-	
-	let soustypeStr = item.datasoustype;
-	tooltipNode.appendChild(createTooltipDiv('Sous-type : ', soustypeStr, 'tooltip-soustype'));
+	//tooltipNode.appendChild(createTooltipDiv('Type : ', typeStr, 'tooltip-type'));
+	lineStr += ', ' + typeStr;
 
+	let soustypeStr = item.datasoustype;
+	//tooltipNode.appendChild(createTooltipDiv('Sous-type : ', soustypeStr, 'tooltip-soustype'));
+	lineStr += ', ' + soustypeStr;
+	tooltipNode.appendChild(createTextDiv(lineStr, 'tooltip-line'));
+
+	let line2Str = '';
 	if(item.hasOwnProperty('datagnomen')) {
-		tooltipNode.appendChild(createTooltipDiv('G nomen : ', item.datagnomen, 'tooltip-gnomen'));
+		//tooltipNode.appendChild(createTooltipDiv('G nomen : ', item.datagnomen, 'tooltip-gnomen'));
+		line2Str += item.datagnomen;
 	}
 	if(item.hasOwnProperty('datapnomen')) {
-		tooltipNode.appendChild(createTooltipDiv('P nomen : ', item.datapnomen, 'tooltip-pnomen'));
+		//tooltipNode.appendChild(createTooltipDiv('P nomen : ', item.datapnomen, 'tooltip-pnomen'));
+		line2Str += (line2Str == '' ? '' : ', ') + item.datapnomen;
 	}
 	if(item.hasOwnProperty('datacnomen')) {
-		tooltipNode.appendChild(createTooltipDiv('C nomen : ', item.datacnomen, 'tooltip-cnomen'));
+		//tooltipNode.appendChild(createTooltipDiv('C nomen : ', item.datacnomen, 'tooltip-cnomen'));
+		line2Str += (line2Str == '' ? '' : ', ') + item.datacnomen;
+	}
+	if(line2Str != '') {
+		tooltipNode.appendChild(createTextDiv(line2Str, 'tooltip-line'));
 	}
 
 	if((item.className.includes('type-somatic') || item.className.includes('type-germline') || item.className.includes('type-hd') || item.className.includes('type-fa') || item.className.includes('type-gain') || item.className.includes('type-perte')) && item.hasOwnProperty('dataso')) {
-		let lineStr = item.dataso;
+		let lastLineStr = item.dataso;
 		if(item.hasOwnProperty('datacolonne9')){
-			lineStr = item.datacolonne9 + ', ' + lineStr;
+			lastLineStr = item.datacolonne9 + ', ' + lastLineStr;
 		}
 		if(item.hasOwnProperty('datacolonne8')){
-			lineStr = item.datacolonne8 + ', ' + lineStr;
+			lastLineStr = item.datacolonne8 + ', ' + lastLineStr;
 		}
-		tooltipNode.appendChild(createTooltipDiv('', lineStr, 'tooltip-last-line'));
-		
+		//tooltipNode.appendChild(createTooltipDiv('', lastLineStr, 'tooltip-last-line'));
+		tooltipNode.appendChild(createTextDiv(lastLineStr, 'tooltip-line tooltip-last-line'));
+
 		let soUrl = ' http://www.sequenceontology.org/browser/current_release/term/SO:' + item.dataso.split(':')[1];
 		let linkNode = document.createElement('a');
-		linkNode.className = 'tooltip-link';
+		linkNode.className = 'tooltip-link tooltip-line';
 		linkNode.href = soUrl;
 		linkNode.appendChild(document.createTextNode('Sequence ontology'));
 		tooltipNode.appendChild(linkNode);
