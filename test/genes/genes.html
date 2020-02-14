@@ -11,6 +11,29 @@
 </head>
 
 <body>
+  <div id="settings">
+    <div id="top-btns">
+      <div id="driver-btns"></div>
+      <div id='top-right-btns'>
+        <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+      </div>
+    </div>
+  
+    <p>
+      Filtrer par gènes :
+      <span id="genes-input-warning">Non implémenté</span>
+      <input id="genes-input" accept=".txt" onchange="genesSelect(this)" type="file">
+    </p>
+
+    <div id="genes-filter-container"></div>
+
+  </div>
+
+  <div class="card" id="output-card">
+    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
+    <img id="output">
+  </div>
+
   <div id="to-capture">
     <p id="title">
       <div id="date-title">
@@ -28,11 +51,6 @@
     <div class="card">
       <div id="visualization"></div>
     </div>
-  </div>
-  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
-  <div class="card" id="output-card">
-    <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
-    <img id="output">
   </div>
   
   <script src="genes.js"></script>

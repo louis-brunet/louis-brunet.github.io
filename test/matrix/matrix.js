@@ -689,56 +689,6 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
     });
  }
 
- 
- /**
-  * Analyze items DataSet
-  * Return array of MAX_ITEMS names of genes or patients (depending on rowType),
-  * ordered by avg
-  */
-//  function getRowOrder() {
-//     let res = []; 
-//     if(sortByMutations) { 
-//         if(ROW_TYPE == 'gene'){
-//             getGenesOrder(res);
-//         } else {
-//             getPatientsOrder(res);
-//         }
-//     }
-//     // Otherwise return rows sorted alphabetically if genes, or by patient id value 
-//     else {
-//         if(ROW_TYPE == 'gene') {
-//             res = driver.genes.sort();
-//         } else {
-//             if(patientFilter.length > 0) {
-//                 let sorted = patientFilter.sort( (a, b) => {
-//                     return parseInt(a) - parseInt(b);
-//                 });
-
-//                 for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
-//                     if(checkIntersectionsWithDriverGenes(sorted[i])) {
-//                         res.push(sorted[i]);
-//                     }
-//                 }
-//             } else {
-//                 let sorted = avgPatients.get({
-//                     fields:     ['patient'],
-//                     filter:     i => {
-//                         return checkIntersectionsWithDriverGenes(i.patient);
-//                     },
-//                     order:      (a, b) => {
-//                         return parseInt(a.patient) - parseInt(b.patient);
-//                     }   
-//                 });
-
-//                 for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
-//                     res.push(sorted[i].patient);
-//                 }
-    
-//             }
-//         }
-//     }
-//     return res;
-//  }
 
  /**
   * Fill resultArr with MAX_ITEMS names of patients ordered by avg

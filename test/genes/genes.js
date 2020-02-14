@@ -4,6 +4,27 @@
 var url = 'https://louis-brunet.github.io/test/genes/data.json';
 
 /**
+ * Groupes de gènes
+ */
+var driver;
+var drivers = [{
+	"nom":      "Jay_q_in.05",
+	"genes":    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;HNF1A;BAP1;EEF1A1;IL6ST;DYRK1A;GABRA2;BRD7;APOB;COL11A1;KLF15;SETD2;HMBS;DOCK2;ADAMTS19"
+},{
+	"nom":      "HCA",
+	"genes":    "CTNNB1;HNF1A;IL6ST;JAK1;GNAS;FRK;STAT3;GLI1"
+},{
+	"nom":      "Schulze_p_inf.01",
+	"genes":    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;ATP10B;FGA;MEF2C;HNF1A;ZNRF3;EPHA4;PTEN;TSC1"
+}];
+var allGenes = [];
+
+/**
+ * Affichage des gènes disponibles
+ */
+
+
+/**
  * INITIALISATION DE LA TIMELINE
  */
 
@@ -14,7 +35,6 @@ var GROUP_METH = 10000003;
 
 var groups = [];
 var container = document.getElementById('visualization');
-
 
 var options = {
 	// option groupOrder can be a property name or a sort function
@@ -47,11 +67,8 @@ var options = {
 // Chargement des données
 var timeline;
 var items = [];
-var request = new XMLHttpRequest();
-request.open('GET', url);
-request.responseType = 'json';
-request.send();
-request.onload = createTimeline;
+
+loadDrivers();
 
 
 let today = new Date();
@@ -75,24 +92,161 @@ setInterval(function() {
  * FONCTIONS
  */
 
+/**
+ * UI FUNCTIONS
+ */
 
-function createTimeline() {
-	loadData(request.response);
+function loadDrivers() {
+	allGenes = [];
 
-	groups = new vis.DataSet(groups);
-	timeline = new vis.Timeline(container, items, groups, options);
+    let driverDiv = document.getElementById('driver-btns');
+    driverDiv.innerHTML = '';
+    drivers.forEach(d => {
+        let button = document.createElement('button');
+        button.className = 'driver-btn';
+        button.id = 'driver-' + d.nom.toLowerCase();
+        button.onclick = () => {
+            setDriver(d.nom);
+        };
+        button.appendChild(document.createTextNode(d.nom));
+        driverDiv.appendChild(button);
+
+        let geneArr = d.genes.split(';');
+        for (let i = 0; i < geneArr.length; i++) {
+            const gStr = geneArr[i];
+            if(!allGenes.includes(gStr))
+                allGenes.push(gStr);
+        }
+    });
+    allGenes = allGenes.sort();
+
+    // Reset and fill gene filter div
+    let geneFilterDiv = document.getElementById('genes-filter-container');
+    geneFilterDiv.innerHTML = '';
+    allGenes.forEach(gStr => {
+        let geneFilterBtn = createGeneFilterBtn(gStr);
+        geneFilterDiv.appendChild(geneFilterBtn);
+    });
 }
 
-function loadData(parsedData){
-	loadStructureData(parsedData, items);
-	groups.push(
-		{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
-		{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
-		{id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
-		{id: GROUP_METH, content: 'Méthylation', value: GROUP_METH, className: 'group-meth'}
-	);
-	loadAnomaliesData(parsedData.anomalies, items);
-	items = new vis.DataSet(items);
+function setDriver(dName) {
+	if(driver) {
+        let btn = document.getElementById('driver-' + driver.nom.toLowerCase());
+        btn.className = btn.className.replace(' driver-selected', '');
+    }
+    let d;
+    for (let i = 0; i < drivers.length; i++) {
+        if(drivers[i].nom == dName) {
+            d = drivers[i];
+        }
+    }
+    driver = {
+        nom:    d.nom,
+        genes:  d.genes.split(';')
+    }
+    
+    // Update selected gene filters
+    let btnsToSelect = [];
+    for (let i = 0; i < driver.genes.length; i++) {
+        const gStr = driver.genes[i];
+        btnsToSelect.push('genes-select-' + gStr.toLowerCase());
+    }
+    let geneBtns = document.querySelectorAll('.genes-filter-item');
+    for (let i = 0; i < geneBtns.length; i++) {
+        const btn = geneBtns[i];
+        if(btnsToSelect.includes(btn.id)) {
+            selectGeneBtn(btn.id);
+        } else {
+            unselectGeneBtn(btn.id);
+        }
+    }
+}
+
+function selectGeneBtn(geneBtnId) {
+   let item = document.getElementById(geneBtnId);
+   if(!item.className.includes('genes-selected')){
+	   item.className += ' genes-selected';
+   }
+}
+
+function unselectGeneBtn(geneBtnId) {
+   let item = document.getElementById(geneBtnId);
+   if(item.className.includes('genes-selected')){
+	   item.className = item.className.replace('genes-selected', '');
+   }
+}
+
+function createGeneFilterBtn(gStr) {
+   let res = createTextDiv(gStr, 'genes-filter-item visible');
+   let id = 'genes-select-' + gStr.toLowerCase();
+   res.id = id;
+
+   res.onclick = () => {
+	   loadTimeline();
+   }
+
+   return res;
+}
+
+function toggleGeneSelected(id) {
+   let item = document.getElementById(id);
+   if(item.className.includes('genes-selected')) {
+	   item.className = item.className.replace('genes-selected', '');
+   } else {
+	   item.className += ' genes-selected';
+   }
+}
+
+function createTextDiv(text, className) {
+     let res = document.createElement('div');
+     res.className = className;
+     res.appendChild(document.createTextNode(text));
+     return res;
+}
+
+function genesSelect(input) {
+	document.getElementById('genes-input-warning').style.display = 'inline';
+}
+
+function loadTimeline() {
+	document.getElementById('to-capture').style.display = 'block';
+	createTimeline();
+}
+
+/**
+ * TIMELINE FUNCTIONS
+ */
+
+function createTimeline() {
+	init();
+	loadData();
+}
+
+function init() {
+	items = [];
+	groups = [];
+}
+
+function loadData(){
+	var request = new XMLHttpRequest();
+	request.open('GET', url);
+	request.responseType = 'json';
+	request.send();
+	request.onload = () => {
+		container.innerHTML = '';
+		let parsedData = request.response;
+		loadStructureData(parsedData, items);
+		groups.push(
+			{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
+			{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
+			{id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
+			{id: GROUP_METH, content: 'Méthylation', value: GROUP_METH, className: 'group-meth'}
+		);
+		loadAnomaliesData(parsedData.anomalies, items);
+		items = new vis.DataSet(items);
+		groups = new vis.DataSet(groups);
+		timeline = new vis.Timeline(container, items, groups, options);
+	};
 }
 
 

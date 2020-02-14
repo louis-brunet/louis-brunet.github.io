@@ -2,6 +2,18 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+
+#settings {
+    background-color: rgb(200,200,200);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+#settings p {
+    margin-left: 10px;
+}
+
+
 p#title {
     font-size: 90%;
     margin-bottom: 0;
@@ -167,14 +179,18 @@ a:hover {
     color: blue;
 }
 
+#top-btns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
 #cap-btn {
     margin: 10px;
     padding: 10px;
-    background-color: rgb(10, 17, 119);
+    background-color: green;
     color: white;
-    right: 0;
-    position: absolute;
-    border: none;
 }
 
 #close-btn {
@@ -183,11 +199,12 @@ a:hover {
     color: white;
     float: right;
     margin-bottom: 4px;
-    border: none;
 }
 
 button {
     transition: box-shadow 0.6s linear;
+    cursor: pointer;
+    border: none;
 }
 
 button:focus {
@@ -223,4 +240,69 @@ button:hover {
     font-weight: bold;
     margin: auto;
     margin-bottom: 10px;
+}
+
+#to-capture {
+    display: none;
+}
+
+#genes-input-warning {
+    color: red;
+    display: none;
+}
+
+
+#driver-btns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.driver-btn {
+    background-color: rgb(110, 15, 15);
+    flex-shrink: 1;
+    color: white;
+    min-width: 100px;
+    max-height: 40px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.driver-btn.driver-selected, .driver-btn:hover {
+    background-color: rgb(231, 199, 157);
+    color: rgb(110, 15, 15);
+    box-shadow: none;
+    transition: background-color 0.17s linear, color 0.17s linear;
+
+}
+
+
+#genes-filter-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.genes-filter-item {
+    padding: 4px;
+    margin: 2px;
+    cursor: pointer;
+
+}
+
+.genes-filter-item, .genes-filter-item.genes-selected:active  {
+    background-color: rgb(180, 180, 180);
+    color: black;
+}
+
+.genes-filter-item.genes-selected:hover, .genes-filter-item:hover  {
+    background-color: rgb(211, 188, 159);
+    color: black;
+}
+
+.genes-filter-item.genes-selected, .genes-filter-item:active {
+    background-color: rgb(231, 199, 157);
+    color: rgb(110, 15, 15);
 }

@@ -6,7 +6,7 @@
 	"end":		"352673",
 	"strand":	"-",
 	"ref":		"http://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000103126;r=16:287440-352723",
-	"components":[
+    "components":[
     {
 		"start":"287440",
 		"end":	"352659",
