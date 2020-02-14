@@ -20,6 +20,7 @@ var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
 
 var patientFilter = [];
+document.getElementById('patient-select').value = '';
 var genesFilter = [];
 var allGenes = [];
 var sortByMutations = false;
@@ -454,6 +455,7 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
   */
  function loadDrivers(driverArray) {
     drivers = driverArray;
+    allGenes = [];
 
     let driverDiv = document.getElementById('driver-btns');
     driverDiv.innerHTML = '';
@@ -466,7 +468,45 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
         };
         button.appendChild(document.createTextNode(d.nom));
         driverDiv.appendChild(button);
+
+        let geneArr = d.genes.split(';');
+        for (let i = 0; i < geneArr.length; i++) {
+            const gStr = geneArr[i];
+            if(!allGenes.includes(gStr))
+                allGenes.push(gStr);
+        }
     });
+    allGenes = allGenes.sort();
+
+    // Reset and fill gene filter div
+    let geneFilterDiv = document.getElementById('genes-filter-container');
+    geneFilterDiv.innerHTML = '';
+    allGenes.forEach(gStr => {
+        let geneFilterBtn = createGeneFilterBtn(gStr);
+        geneFilterDiv.appendChild(geneFilterBtn);
+    });
+    
+ }
+
+ function createGeneFilterBtn(gStr) {
+    let res = createTextDiv(gStr, 'genes-filter-item');
+    let id = 'gene-select-' + gStr.toLowerCase();
+    res.id = id;
+
+    res.onclick = () => {
+        toggleGeneSelected(id);
+    }
+
+    return res;
+ }
+
+ function toggleGeneSelected(id) {
+    let item = document.getElementById(id);
+    if(item.className.includes('genes-selected')) {
+        item.className = item.className.replace('genes-selected', '');
+    } else {
+        item.className += ' genes-selected';
+    }
  }
 
  

@@ -86,10 +86,10 @@ function createTimeline() {
 function loadData(parsedData){
 	loadStructureData(parsedData, items);
 	groups.push(
-		{id: GROUP_MUT, content: 'Mut.', value: GROUP_MUT, className: 'group-mut'},
-		{id: GROUP_CNV, content: 'CNv', value: GROUP_CNV, className: 'group-copy'},
-		{id: GROUP_EXPR, content: 'Exp.', value: GROUP_EXPR, className: 'group-expr'},
-		{id: GROUP_METH, content: 'Mét.', value: GROUP_METH, className: 'group-meth'}
+		{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
+		{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
+		{id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
+		{id: GROUP_METH, content: 'Méthylation', value: GROUP_METH, className: 'group-meth'}
 	);
 	loadAnomaliesData(parsedData.anomalies, items);
 	items = new vis.DataSet(items);

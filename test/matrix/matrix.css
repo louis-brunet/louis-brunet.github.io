@@ -373,6 +373,36 @@ strong {
     flex-direction: row;
 }
 
+#genes-filter-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.genes-filter-item {
+    padding: 4px;
+    margin: 2px;
+    cursor: pointer;
+    transition: background-color 0.17s linear, color 0.17s linear;
+
+}
+
+.genes-filter-item {
+    background-color: rgb(180, 180, 180);
+    color: black;
+}
+
+.genes-filter-item.genes-selected:hover, .genes-filter-item:hover  {
+    background-color: rgb(211, 188, 159);
+    color: black;
+}
+
+.genes-filter-item.genes-selected {
+    background-color: rgb(231, 199, 157);
+    color: rgb(110, 15, 15);
+}
+
 
 
 @media screen and (max-width: 800px) {
