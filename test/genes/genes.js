@@ -30,7 +30,7 @@ var allGenes = [];
 
 var GROUP_MUT = 10000000;
 var GROUP_CNV = 10000001;
-var GROUP_EXPR = 10000002;
+//var GROUP_EXPR = 10000002;
 var GROUP_METH = 10000003;
 
 var groups = [];
@@ -66,7 +66,8 @@ var options = {
 
 // Chargement des données
 var timeline;
-var items = [];
+var items; // DataSet
+var expressions; // Array
 
 loadDrivers();
 
@@ -80,7 +81,7 @@ document.getElementById('date-du-jour').innerHTML = day + '-' + (today.getMonth(
 
 // Création des tooltips
 var tooltipsCreated = false;
-setInterval(function() {
+setInterval( () => {
 	if((!tooltipsCreated) && document.querySelectorAll('.anomalie-item').length > 1) {
 		createTooltips();
 		tooltipsCreated = true;
@@ -225,6 +226,7 @@ function createTimeline() {
 function init() {
 	items = [];
 	groups = [];
+	expressions = [];
 }
 
 function loadData(){
@@ -239,14 +241,31 @@ function loadData(){
 		groups.push(
 			{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
 			{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
-			{id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
+			// {id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
 			{id: GROUP_METH, content: 'Méthylation', value: GROUP_METH, className: 'group-meth'}
 		);
 		loadAnomaliesData(parsedData.anomalies, items);
 		items = new vis.DataSet(items);
 		groups = new vis.DataSet(groups);
 		timeline = new vis.Timeline(container, items, groups, options);
+
+		buildExpressionsDiv();
 	};
+}
+
+function buildExpressionsDiv() {
+	let exprDiv = document.getElementById('expressions-div');
+	for (let i = 0; i < expressions.length; i++) {
+		const expr = expressions[i];
+		exprDiv.appendChild(createExprDiv(expr.datacolonne8, expr.datatype, expr.datasoustype));
+	}
+}
+
+function createExprDiv(chc, type, val) {
+	let res = createTextDiv(chc + ' = ', 'expression');
+	res.appendChild(createSpan(type, 'expr-' + type));
+	res.appendChild(document.createTextNode('('+val+')'));
+	return res;
 }
 
 
@@ -265,6 +284,7 @@ function loadAnomaliesData(parsedArray, loadedItems) {
 /**
  * Create exploitable item based on parsedItem,
  * put it in itemArray
+ * If item is expression, store it in expressions Array
  */
 function loadAnomalie(parsedItem, itemArray) {
 	let item = {
@@ -285,8 +305,8 @@ function loadAnomalie(parsedItem, itemArray) {
 		case 'copy':
 			item.group = GROUP_CNV;
 			break;
-		case'expr':
-			item.group = GROUP_EXPR;
+		// case'expr':
+		// 	item.group = GROUP_EXPR;
 			break
 		case'meth':
 			item.group = GROUP_METH;
@@ -372,10 +392,12 @@ function loadAnomalie(parsedItem, itemArray) {
 		item.datacolonne9 = parsedItem.colonne9;
 	}
 	
-
-
-	item.className += ' anomalie-item';
-	itemArray.push(item);
+	if(parsedItem.famille == 'expr') {
+		expressions.push(item);
+	} else {
+		item.className += ' anomalie-item';
+		itemArray.push(item);
+	}
 }
 
 function createTooltips() {
