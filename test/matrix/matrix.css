@@ -40,7 +40,7 @@ a.graph-item {
 }
 
 .graph-row-labels .graph-label.graph-top-left {
-    min-height: 28px;
+    min-height: 27px;
     min-width: 40px;
     outline: none;
 }
@@ -126,6 +126,13 @@ a.graph-item {
 
 #visualization {
     display: flex;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.graph-pane {
+    display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
     margin: auto;
@@ -187,7 +194,8 @@ strong {
 .driver-btn.driver-selected, .driver-btn:hover {
     background-color: rgb(231, 199, 157);
     color: rgb(110, 15, 15);
-    transition: box-shadow 0.3s ease-in, background-color 0.17s linear, color 0.17s linear;
+    box-shadow: none;
+    transition: background-color 0.17s linear, color 0.17s linear;
 
 }
 
@@ -198,8 +206,10 @@ strong {
 .close-btn {
     background-color: red;
     color: white;
+    font-weight: bold;
     padding: 4px;
     margin: 4px;
+    border-radius: 30%;
 }
 
 #filter-wipe-btn {
@@ -317,3 +327,41 @@ strong {
 .radio input {
     margin: 0;
 }
+
+.page-number {
+    cursor: pointer;
+    background-color: rgb(110, 15, 15);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    color: white;
+    text-align: center;
+    padding: 4px;
+    margin: 4px;
+    transition: background-color 0.17s linear, color 0.17s linear;
+}
+
+.page-number.current, .page-number:hover {
+    background-color: rgb(231, 199, 157);
+    color: rgb(110, 15, 15);
+    transition: background-color 0.17s linear, color 0.17s linear;
+}
+
+.page-number.empty {
+    cursor: initial;
+}
+
+.row-page-numbers, .column-page-numbers {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.row-page-numbers {
+    flex-direction: column;
+}
+
+.column-page-numbers {
+    flex-direction: row;
+}
+

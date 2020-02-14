@@ -21,8 +21,18 @@ var anomalies; // DataSet {id, patient, gene, famille, type}
 
 var patientFilter = [];
 var sortByMutations = false;
-var rowOrder = [];
-var columnOrder = [];
+var pagesInfo = {
+    rows:   {
+        order:      [],
+        page:       0,
+        nbPages:    0
+    },
+    columns:{
+        order:    [],
+        page:       0,
+        nbPages:    0
+    }
+};
 
 var items; // DataSet [{patient: '000', gene: 'nom', nbTotal: 4, nbMutSomatic: 1, nbMutGermline: 1, nbCopy: 3, ... }, ... ]
 var avgGenes = new vis.DataSet(); // DataSet [{gene, avg}, ... ]
@@ -290,6 +300,9 @@ request.onload = () => {
     avgGenes = new vis.DataSet();
     avgPatients = new vis.DataSet();
 
+    pagesInfo.rows.page = 0;
+    pagesInfo.columns.page = 0;
+
     setTimeout( () => {
         setRowType();
         setSorting();
@@ -297,6 +310,9 @@ request.onload = () => {
 
         calculateAvgGenes();
         calculateAvgPatients();
+        calculateRowOrder();
+        calculateColumnOrder();
+
         createGraphic();
     }, 400);
  }
@@ -520,50 +536,50 @@ request.onload = () => {
   * Return array of MAX_ITEMS names of genes or patients (depending on rowType),
   * ordered by avg
   */
- function getRowOrder() {
-    let res = []; 
-    if(sortByMutations) { 
-        if(ROW_TYPE == 'gene'){
-            getGenesOrder(res);
-        } else {
-            getPatientsOrder(res);
-        }
-    }
-    // Otherwise return rows sorted alphabetically if genes, or by patient id value 
-    else {
-        if(ROW_TYPE == 'gene') {
-            res = driver.genes.sort();
-        } else {
-            if(patientFilter.length > 0) {
-                let sorted = patientFilter.sort( (a, b) => {
-                    return parseInt(a) - parseInt(b);
-                });
+//  function getRowOrder() {
+//     let res = []; 
+//     if(sortByMutations) { 
+//         if(ROW_TYPE == 'gene'){
+//             getGenesOrder(res);
+//         } else {
+//             getPatientsOrder(res);
+//         }
+//     }
+//     // Otherwise return rows sorted alphabetically if genes, or by patient id value 
+//     else {
+//         if(ROW_TYPE == 'gene') {
+//             res = driver.genes.sort();
+//         } else {
+//             if(patientFilter.length > 0) {
+//                 let sorted = patientFilter.sort( (a, b) => {
+//                     return parseInt(a) - parseInt(b);
+//                 });
 
-                for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
-                    if(checkIntersectionsWithDriverGenes(sorted[i])) {
-                        res.push(sorted[i]);
-                    }
-                }
-            } else {
-                let sorted = avgPatients.get({
-                    fields:     ['patient'],
-                    filter:     i => {
-                        return checkIntersectionsWithDriverGenes(i.patient);
-                    },
-                    order:      (a, b) => {
-                        return parseInt(a.patient) - parseInt(b.patient);
-                    }   
-                });
+//                 for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+//                     if(checkIntersectionsWithDriverGenes(sorted[i])) {
+//                         res.push(sorted[i]);
+//                     }
+//                 }
+//             } else {
+//                 let sorted = avgPatients.get({
+//                     fields:     ['patient'],
+//                     filter:     i => {
+//                         return checkIntersectionsWithDriverGenes(i.patient);
+//                     },
+//                     order:      (a, b) => {
+//                         return parseInt(a.patient) - parseInt(b.patient);
+//                     }   
+//                 });
 
-                for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
-                    res.push(sorted[i].patient);
-                }
+//                 for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+//                     res.push(sorted[i].patient);
+//                 }
     
-            }
-        }
-    }
-    return res;
- }
+//             }
+//         }
+//     }
+//     return res;
+//  }
 
  /**
   * Fill resultArr with MAX_ITEMS names of patients ordered by avg
@@ -578,11 +594,14 @@ request.onload = () => {
             return checkIntersectionsWithDriverGenes(i.patient);
         },
         order:      (a, b) => {
+            if(a.totalSomatic == b.totalSomatic){
+                return (a.gene < b.gene ? -1 : 1);
+            }
             return b.totalSomatic - a.totalSomatic;
         }   
     });
 
-    for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+    for (let i = 0; i < sorted.length; i++) {
         resultArr.push(sorted[i].patient);
     }
  }
@@ -597,11 +616,14 @@ request.onload = () => {
             return driver.genes.includes(i.gene);
         },
         order:      (a, b) => {
+            if(a.totalSomatic == b.totalSomatic){
+                return (a.gene < b.gene ? -1 : 1);
+            }
             return b.totalSomatic - a.totalSomatic;
         }   
     });
 
-    for (let i = 0; i < sorted.length && i < MAX_ITEMS; i++) {
+    for (let i = 0; i < sorted.length; i++) {
         resultArr.push(sorted[i].gene);
     }
  }
@@ -610,7 +632,7 @@ request.onload = () => {
     return self.indexOf(value) === index;
  }
 
- function checkIntersectionsWithDriverGenes(pStr) {
+function checkIntersectionsWithDriverGenes(pStr) {
     let bool = false;
     for (let i = 0; i < driver.genes.length && !bool; i++) {
         const gStr = driver.genes[i];
@@ -621,12 +643,12 @@ request.onload = () => {
     }
 
     return bool;
- }
+}
 
  /**
   * Calculte avg of somatic mutations for each gene
   */
- function calculateAvgGenes() {
+function calculateAvgGenes() {
     driver.genes.forEach(gStr => {
         let exists = avgGenes.distinct('gene').includes(gStr);
         if(!exists){
@@ -658,12 +680,12 @@ request.onload = () => {
             }
         }
     });
- }
+}
 
  /**
   * Calculte avg of somatic mutations for each patient
   */
- function calculateAvgPatients() {
+function calculateAvgPatients() {
     let allPatients = items.distinct('patient');
 
     // For each, if it isn't already created, avg all nbTotal in items DataSet
@@ -699,7 +721,80 @@ request.onload = () => {
 
     document.getElementById('nb-patients-span').style.display = 'inline';
     document.getElementById('nb-patients-val').innerHTML = avgPatients.length;
- }
+}
+
+function calculateRowOrder() {
+    let res = []; 
+    if(sortByMutations) { 
+        if(ROW_TYPE == 'gene'){
+            getGenesOrder(res);
+        } else {
+            getPatientsOrder(res);
+        }
+    }
+    // Otherwise return rows sorted alphabetically if genes, or by patient id value 
+    else {
+        if(ROW_TYPE == 'gene') {
+            res = driver.genes.sort();
+        } else {
+            if(patientFilter.length > 0) {
+                let sorted = patientFilter.sort( (a, b) => {
+                    return parseInt(a) - parseInt(b);
+                });
+
+                for (let i = 0; i < sorted.length; i++) {
+                    if(checkIntersectionsWithDriverGenes(sorted[i])) {
+                        res.push(sorted[i]);
+                    }
+                }
+            } else {
+                let sorted = avgPatients.get({
+                    fields:     ['patient'],
+                    filter:     i => {
+                        return checkIntersectionsWithDriverGenes(i.patient);
+                    },
+                    order:      (a, b) => {
+                        return parseInt(a.patient) - parseInt(b.patient);
+                    }   
+                });
+
+                for (let i = 0; i < sorted.length; i++) {
+                    res.push(sorted[i].patient);
+                }
+    
+            }
+        }
+    }
+    pagesInfo.rows.order = res;
+    pagesInfo.rows.nbPages = Math.ceil(res.length / MAX_ITEMS); 
+}
+
+function calculateColumnOrder() {
+    let res = [];
+
+    if(ROW_TYPE == 'gene') {
+       getPatientsOrder(res);
+    } else {
+       getGenesOrder(res);
+    }
+
+    pagesInfo.columns.order = res;
+    pagesInfo.columns.nbPages = Math.ceil(res.length / MAX_ITEMS);
+}
+
+// Takes pagesInfo.rows or .columns as arg
+function getCurrentPageOrder(axis) {
+    let res = [];
+
+    let start = axis.page * MAX_ITEMS
+    let count = 0;
+    for (let i = start; i < axis.order.length && count < MAX_ITEMS; i++, count++) {
+        const str = axis.order[i];
+        res.push(str);
+    }
+
+    return res;
+}
 
  /**
   * Analyze items DataSet
@@ -796,45 +891,65 @@ request.onload = () => {
 
 //     return res;
 //  }
+/**
+ * 
+ */
+// function getColumnOrder() {
+//     let res = [];
 
- function getColumnOrder() {
-     let res = [];
+//     if(ROW_TYPE == 'gene') {
+//     getPatientsOrder(res);
+//     } else {
+//     getGenesOrder(res);
+//     }
 
-     if(ROW_TYPE == 'gene') {
-        getPatientsOrder(res);
-     } else {
-        getGenesOrder(res);
-     }
-
-     return res;
- }
+//     return res;
+//  }
 
 
- /**
+/**
   * Create graphic based on items DataSet and in the given order
   */
- function createGraphic() {
-    let rowOrder = getRowOrder();  
-    let columnOrder = getColumnOrder();
+function createGraphic() {
+     //TODO take rowOrder and columnOrder from pagesInfo.rows & .columns
+    let rowOrder = getCurrentPageOrder(pagesInfo.rows);  
+    let columnOrder = getCurrentPageOrder(pagesInfo.columns);
+
+
     // Empty container
     container.innerHTML = '';
     document.getElementById('loader').style.display = 'none';
+
+    // Column page numbers
+    let columnPageNumbersDiv = createColumnPageNumbersDiv();
+    container.appendChild(columnPageNumbersDiv);
+
+    // Graph pane
+    let graphPane = createDiv('graph-pane');
+    
+    // Create row page numbers
+    let rowPageNumbersDiv = createRowPageNumbersDiv();
+    graphPane.appendChild(rowPageNumbersDiv);
+
     // Create row labels
     let rowLabelDiv = createRowLabelDiv(rowOrder);
-    container.appendChild(rowLabelDiv);
+    graphPane.appendChild(rowLabelDiv);
     
-    // Create right div including column labels and content div
+    // rightDiv includes column labels and content div
     let rightDiv = createDiv('graph-right');
+    
     let colLabelDiv = createColLabelDiv(columnOrder);
     rightDiv.appendChild(colLabelDiv);
 
     let contentDiv = createDiv('graph-content');
     fillContent(contentDiv, rowOrder, columnOrder);
     rightDiv.appendChild(contentDiv);
-    container.appendChild(rightDiv);
- }
+    graphPane.appendChild(rightDiv);
 
- function createDiv(className) {
+    container.appendChild(graphPane);
+}
+
+function createDiv(className) {
     let res = document.createElement('div');
     res.className = className;
     return res;
@@ -847,14 +962,14 @@ function createLink(url, className) {
     return res;
 }
 
- function createTextDiv(text, className) {
+function createTextDiv(text, className) {
      let res = document.createElement('div');
      res.className = className;
      res.appendChild(document.createTextNode(text));
      return res;
- }
+}
 
- function createRowLabelDiv(rowOrder) {
+function createRowLabelDiv(rowOrder) {
     let res = createDiv('graph-row-labels');
     res.appendChild(createTextDiv(' ', 'graph-label graph-top-left'));
     for (let i = 0; i < rowOrder.length; i++) {
@@ -887,9 +1002,9 @@ function createLink(url, className) {
         res.appendChild(titleDiv);
     }
     return res;
- }
+}
 
- function createColLabelDiv(columnOrder) {
+function createColLabelDiv(columnOrder) {
     let res = createDiv('graph-col-labels graph-row');
 
     for (let i = 0; i < columnOrder.length; i++) {
@@ -924,12 +1039,197 @@ function createLink(url, className) {
     }
 
     return res;
+}
+
+function createRowPageNumbersDiv() {
+    let res = createDiv('row-page-numbers');
+    if(pagesInfo.rows.nbPages > 10) {
+        createOverflownPageNumbers(res, pagesInfo.rows, 'page-number-row');
+    } else if(pagesInfo.rows.nbPages > 1) {
+        for (let i = 0; i < pagesInfo.rows.nbPages; i++) {
+            let numberDiv = createTextDiv('' + (i + 1), 'page-number page-number-row');
+            if(i == pagesInfo.rows.page) {
+                numberDiv.className += ' current';
+            } else {
+                numberDiv.onclick = () => {
+                    pagesInfo.rows.page = i;
+                    document.getElementById('loader').style.display = 'block';
+                    document.getElementById('visualization').innerHTML = '';
+                    
+                    setTimeout(createGraphic, 50);
+                }
+            }
+            
+            res.appendChild(numberDiv);
+        }
+    }
+
+    return res;
+}
+
+function createColumnPageNumbersDiv() {
+    let res = createDiv('column-page-numbers');
+
+    if(pagesInfo.columns.nbPages > 10) {
+        createOverflownPageNumbers(res, pagesInfo.columns, 'page-number-column');
+    } else if(pagesInfo.columns.nbPages > 1) {
+        for (let i = 0; i < pagesInfo.columns.nbPages; i++) {
+            let numberDiv = createTextDiv('' + (i + 1), 'page-number page-number-column');
+            if(i == pagesInfo.columns.page) {
+                numberDiv.className += ' current';
+            } else {
+                numberDiv.onclick = () => {
+                    showColumnPage(i);
+                }
+            }
+            res.appendChild(numberDiv);
+            
+        }
+    }
+
+    return res;
  }
 
- /**
+ function showRowPage(i) {
+     pagesInfo.rows.page = i;
+     document.getElementById('loader').style.display = 'block';
+     document.getElementById('visualization').innerHTML = '';
+     
+     setTimeout(createGraphic, 50);
+ }
+
+ function showColumnPage(i) {
+     pagesInfo.columns.page = i;
+     document.getElementById('loader').style.display = 'block';
+     document.getElementById('visualization').innerHTML = '';
+     
+     setTimeout(createGraphic, 50);
+ }
+
+function createOverflownPageNumbers(div, axisObj, itemClass) {
+    let res = div;
+
+    // start, start + 1
+    let oneDiv = createTextDiv('1', 'page-number ' + itemClass);
+    if( axisObj.page == 0 ) {
+        oneDiv.className += ' current';
+    } else {
+        if(itemClass.includes('row')) {
+            oneDiv.onclick = () => {
+                showRowPage(0);
+            }
+        } else {
+            oneDiv.onclick = () => {
+                showColumnPage(0);
+            }
+        }
+    }
+    res.appendChild(oneDiv);
+
+    let twoDiv = createTextDiv('2', 'page-number ' + itemClass);
+    if( axisObj.page == 1 ) {
+        twoDiv.className += ' current';
+    } else {
+        if(itemClass.includes('row')) {
+            twoDiv.onclick = () => {
+                showRowPage(1);
+            }
+        } else {
+            twoDiv.onclick = () => {
+                showColumnPage(1);
+            }
+        }
+    }
+    res.appendChild(twoDiv);
+
+    // empty
+    if( axisObj.page > 3 ) {
+        let emptyDiv = createTextDiv(' ', 'page-number empty ' + itemClass);
+        res.appendChild(emptyDiv);
+    }
+
+    // current - 1
+    if( axisObj.page > 2 && axisObj.page < axisObj.nbPages - 1 ) {
+        let prevPageDiv = createTextDiv('' + axisObj.page, 'page-number ' + itemClass);
+        if(itemClass.includes('row')) {
+            prevPageDiv.onclick = () => {
+                showRowPage(axisObj.page - 1);
+            }
+        } else {
+            prevPageDiv.onclick = () => {
+                showColumnPage(axisObj.page - 1);
+            }
+        }
+        res.appendChild(prevPageDiv);
+    }
+
+    // current
+    if ( axisObj.page > 1 && axisObj.page < axisObj.nbPages - 2 ) {
+        let currentPageDiv = createTextDiv('' + (axisObj.page + 1), 'page-number current ' + itemClass);
+        res.appendChild(currentPageDiv);
+    }
+    
+    // current + 1
+    if( axisObj.page > 0 && axisObj.page < axisObj.nbPages - 3 ) {
+        let nextPageDiv = createTextDiv('' + (axisObj.page + 2), 'page-number ' + itemClass);
+        if(itemClass.includes('row')) {
+            nextPageDiv.onclick = () => {
+                showRowPage(axisObj.page + 1);
+            }
+        } else {
+            nextPageDiv.onclick = () => {
+                showColumnPage(axisObj.page + 1);
+            }
+        }
+        res.appendChild(nextPageDiv);
+    }
+
+    
+    // empty
+    if( axisObj.page < axisObj.nbPages - 4 ) {
+        let emptyDiv = createTextDiv(' ', 'page-number empty ' + itemClass);
+        res.appendChild(emptyDiv);
+    }
+
+    // end -1
+    let penultimateDiv = createTextDiv('' + (axisObj.nbPages - 1), 'page-number ' + itemClass);
+    if( axisObj.page == axisObj.nbPages - 2) {
+        penultimateDiv.className += ' current';
+    } else {
+        if(itemClass.includes('row')) {
+            penultimateDiv.onclick = () => {
+                showRowPage(axisObj.nbPages - 2);
+            }
+        } else {
+            penultimateDiv.onclick = () => {
+                showColumnPage(axisObj.nbPages - 2);
+            }
+        }
+    }
+    res.appendChild(penultimateDiv);
+
+    // last page
+    let lastPageDiv = createTextDiv('' + axisObj.nbPages, 'page-number ' + itemClass);
+    if( axisObj.page == axisObj.nbPages - 1) {
+        lastPageDiv.className += ' current';
+    } else {
+        if(itemClass.includes('row')) {
+            lastPageDiv.onclick = () => {
+                showRowPage(axisObj.nbPages - 1);
+            }
+        } else {
+            lastPageDiv.onclick = () => {
+                showColumnPage(axisObj.nbPages - 1);
+            }
+        }
+    }
+    res.appendChild(lastPageDiv);
+}
+
+/**
   * Fill contentDiv with graph-row divs containing graph-item divs containing relevant info
   */
- function fillContent(contentDiv, rowOrder, columnOrder) {
+function fillContent(contentDiv, rowOrder, columnOrder) {
     for (let i = 0; i < rowOrder.length; i++) {
         const rowTitle = rowOrder[i];
 
@@ -950,9 +1250,9 @@ function createLink(url, className) {
 
         contentDiv.appendChild(newRow);
     }
- }
+}
 
- function createIntersectDiv(intersectItem, itemDiv) {
+function createIntersectDiv(intersectItem, itemDiv) {
     let mutDiv = createDiv('graph-mut');
     let somaticDiv = createTextDiv(''+intersectItem.nbMutSomatic, 'somatic');
     let germlineDiv = createTextDiv(''+intersectItem.nbMutGermline, 'germline');
@@ -994,12 +1294,12 @@ function createLink(url, className) {
     itemDiv.appendChild(copyDiv);
     itemDiv.appendChild(exprDiv);
     itemDiv.appendChild(methDiv);
- }
+}
 
- /**
+/**
   * Create tooltip in div containing anomArray's items if anomArray.length > 0
   */
- function createTooltip(div, anomArray) {
+function createTooltip(div, anomArray) {
     if(anomArray.length > 0) {
         div.className += ' tooltip';
         let tooltipText = createDiv('tooltip-text');
@@ -1018,13 +1318,13 @@ function createLink(url, className) {
 
         div.appendChild(tooltipText);
     }
- }
+}
  
- /**
+/**
   * Return item matching pair gene, patient or patien, gene (depending on ROW_TYPE)
   * IF GENE IS IN DRIVER'S LIST, else return undefined
   */
- function getIntersection(rowTitle, colTitle) {
+function getIntersection(rowTitle, colTitle) {
     let matched = items.get({
         filter: i => {
             if(driver.genes.includes(i.gene)){
@@ -1039,7 +1339,7 @@ function createLink(url, className) {
     });
 
     return matched[0];
- }
+}
 
 
 /**
