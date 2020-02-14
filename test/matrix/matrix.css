@@ -402,7 +402,14 @@ strong {
     color: rgb(110, 15, 15);
 }
 
+#genes-input-warning {
+    color: red;
+    display: none;
+}
 
+#driver-info-span {
+    display: none;
+}
 
 @media screen and (max-width: 800px) {
     #top-right-btns {

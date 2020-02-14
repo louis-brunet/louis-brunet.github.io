@@ -188,6 +188,10 @@ request.onload = () => {
     }
  }
 
+ function genesSelect(input) {
+    document.getElementById('genes-input-warning').style.display = 'inline';
+ }
+
  /**
   * Check if anomaly is already counted for a patient, gene, famille, type, region
   * Only using mutation & gnomen for now
@@ -431,7 +435,7 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
     }
     // Update graph title 
     document.getElementById('driver-name').innerHTML = driver.nom;
-    document.getElementById('driver-genes').innerHTML = driver.genes.join(', ');
+    document.getElementById('driver-genes').innerHTML = driver.genes.sort().join(', ');
     document.getElementById('driver-' + d.nom.toLowerCase()).className += ' driver-selected';
 
     // Update selected gene filters
@@ -1391,10 +1395,10 @@ function getIntersection(rowTitle, colTitle) {
  */
 function capture() {
 	// hide tooltips
-	// let tooltips = document.querySelectorAll('.tooltip-text');
-	// tooltips.forEach(function (t) {
-	// 	t.style.display = 'none';
-	// });
+	let tooltips = document.querySelectorAll('.tooltip-text');
+	tooltips.forEach(function (t) {
+		t.style.display = 'none';
+	});
 
 	// Display screencap of #to-capture elem
 	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
@@ -1406,9 +1410,9 @@ function capture() {
 	});
 
 	// show tooltips
-	// tooltips.forEach(function (t) {
-	// 	t.style.display = 'block';
-	// });
+	tooltips.forEach(function (t) {
+		t.style.display = 'block';
+	});
 }
 
  /**

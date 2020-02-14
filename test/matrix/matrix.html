@@ -58,16 +58,17 @@
       <input id="computed-select" onchange="computedSelect(this)" type="file" accept=".json" title="Items calculés HCA | JSON"> > Items calculés | JSON
     </p> -->
     <p>
-      Filtrer par une liste de patients :  
+      Filtrer par patients :  
       <button class="close-btn" id="filter-wipe-btn" onclick="resetFilters(this);this.style.display = 'none';">X</button>
       <input id="patient-select" accept=".txt,.csv,.json" onchange="patientSelect(this)" type="file">
     </p>
     <p>
-      Filtrer par gènes : 
-      <div id="genes-filter-container">
-
-      </div>
+      Filtrer par gènes :
+      <span id="genes-input-warning">Non implémenté</span>
+      <input id="genes-input" accept=".txt" onchange="genesSelect(this)" type="file">
     </p>
+
+    <div id="genes-filter-container"></div>
 
   </div>
   <div class="card" id="output-card">
@@ -83,8 +84,10 @@
         <span class="label">Nombre de patients : </span>
         <span id="nb-patients-val"></span>
       </span>
-      <span class="label">Driver : </span><span id="driver-name"></span>
-      <span class="label">Gènes : </span><span id="driver-genes"></span>
+      <span id="driver-info-span">
+        <span class="label">Driver : </span><span id="driver-name"></span>
+        <span class="label">Gènes : </span><span id="driver-genes"></span>
+      </span>
     </p>
     
     <hr>
