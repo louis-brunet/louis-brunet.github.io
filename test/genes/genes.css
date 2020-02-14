@@ -103,27 +103,43 @@ a:hover {
 
 .type-somatic, .vis-selected.type-somatic, .type-fa, .vis-selected.type-fa, .type-up, .vis-selected.type-up, .type-hyper, .vis-selected.type-hyper {
     border-color: red;
-    color: red;
+    /* color: red; */
+}
+
+.type-somatic .tooltip-text, .type-fa .tooltip-text, .type-up .tooltip-text, .type-hyper .tooltip-text{
+    background-color: red;
 }
 
 .type-germline, .vis-selected.type-germline, .type-hd, .vis-selected.type-hd {
     border-color: orangered;
-    color: orangered;
+    /* color: orangered; */
+}
+
+.type-germline .tooltip-text, .type-hd .tooltip-text{
+    background-color: orangered;
 }
 
 .type-gain, .vis-selected.type-gain, .type-down, .vis-selected.type-down, .type-hypo, .vis-selected.type-hypo {
     border-color: blue;
-    color: blue;
+    /* color: blue; */
+}
+
+.type-gain .tooltip-text, .type-down .tooltip-text, .type-hypo .tooltip-text {
+    background-color: blue;
 }
 
 .type-no-diff, .vis-selected.type-no-diff {
     border-color: black;
-    color: black;
+    /* color: black; */
+}
+
+.type-no-diff .tooltip-text {
+    background-color: black;
 }
 
 .type-perte, .vis-selected.type-perte {
     border-color: green;
-    color: green;
+    /* color: green; */
 }
 
 .vis-odd.vis-minor {
@@ -132,7 +148,7 @@ a:hover {
 
 .vis-range.anomalie-item.non-present {
     border-color: green;
-    color: green;
+    /* color: green; */
 }
 
 .anomalie-item.non-present:hover .tooltip-text {
@@ -155,7 +171,7 @@ a:hover {
     
 
     background-color: rgb(220, 220, 220);
-    padding: 4px 4px 4px 4px;
+    padding: 4px 4px 2px 4px;
     border-radius: 6px;
     min-width: max-content;
     /* margin-left: -110px; */
@@ -177,6 +193,10 @@ a:hover {
 
 .tooltip-last-line {
     color: blue;
+}
+
+.tooltip-link {
+    margin-bottom: 8px;
 }
 
 
