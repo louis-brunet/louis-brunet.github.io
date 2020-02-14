@@ -247,6 +247,7 @@ function init() {
 	items = [];
 	groups = [];
 	expressions = [];
+	document.getElementById('expressions-div').innerHTML = '';
 }
 
 function loadData(){
@@ -297,7 +298,6 @@ function buildExpressionsDiv() {
 			exprItemDiv.appendChild(valSpan);
 		});
 		exprDiv.appendChild(exprItemDiv);
-		exprDiv.appendChild(document.createTextNode(';'));
 	})	
 }
 

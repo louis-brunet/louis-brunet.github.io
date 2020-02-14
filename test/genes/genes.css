@@ -216,15 +216,20 @@ a:hover {
 }
 
 #close-btn {
-    font-weight: bold;
     background-color: red;
     color: white;
+    font-weight: bold;
+    padding: 4px;
+    margin: 0 0 4px 0;
+    border-radius: 30%;
     float: right;
-    margin-bottom: 4px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
 }
 
 button {
-    transition: box-shadow 0.6s linear;
+    transition: box-shadow 0.17s linear;
     cursor: pointer;
     border: none;
 }
@@ -352,4 +357,5 @@ button:hover {
 
 .expression {
     margin-bottom: 4px;
+    margin-right: 14px;
 }
