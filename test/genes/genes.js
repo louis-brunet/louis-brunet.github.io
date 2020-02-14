@@ -67,7 +67,7 @@ var options = {
 // Chargement des données
 var timeline;
 var items; // DataSet
-var expressions; // Array
+var expressions; // DataSet
 
 loadDrivers();
 
@@ -104,10 +104,27 @@ function loadDrivers() {
     driverDiv.innerHTML = '';
     drivers.forEach(d => {
         let button = document.createElement('button');
-        button.className = 'driver-btn';
-        button.id = 'driver-' + d.nom.toLowerCase();
+		button.className = 'driver-btn';
+		let btnId = 'driver-' + d.nom.toLowerCase();
+		button.id = btnId;
+		let dNom = d.nom;
         button.onclick = () => {
-            setDriver(d.nom);
+			if(driver != undefined && driver.nom == dNom) {
+				let thisBtn = document.getElementById(btnId);
+				thisBtn.className = thisBtn.className.replace('driver-selected', '');
+				// unselect btns
+				let btnsToUnselect = [];
+				for (let i = 0; i < driver.genes.length; i++) {
+					const gStr = driver.genes[i];
+					btnsToUnselect.push('genes-select-' + gStr.toLowerCase());
+				}
+				btnsToUnselect.forEach(btnId => {
+					unselectGeneBtn(btnId);
+				});
+				driver = undefined;
+			} else {
+				setDriver(d.nom);
+			}
         };
         button.appendChild(document.createTextNode(d.nom));
         driverDiv.appendChild(button);
@@ -134,7 +151,10 @@ function setDriver(dName) {
 	if(driver) {
         let btn = document.getElementById('driver-' + driver.nom.toLowerCase());
         btn.className = btn.className.replace(' driver-selected', '');
-    }
+	}
+	
+	document.getElementById('driver-' + dName.toLowerCase()).className += ' driver-selected';
+
     let d;
     for (let i = 0; i < drivers.length; i++) {
         if(drivers[i].nom == dName) {
@@ -248,24 +268,37 @@ function loadData(){
 		items = new vis.DataSet(items);
 		groups = new vis.DataSet(groups);
 		timeline = new vis.Timeline(container, items, groups, options);
-
+		expressions = new vis.DataSet(expressions);
 		buildExpressionsDiv();
 	};
 }
 
 function buildExpressionsDiv() {
 	let exprDiv = document.getElementById('expressions-div');
-	for (let i = 0; i < expressions.length; i++) {
-		const expr = expressions[i];
-		exprDiv.appendChild(createExprDiv(expr.datacolonne8, expr.datatype, expr.datasoustype));
-	}
-}
+	// Find all CHC ids in expr dataset
+	let chcs = expressions.distinct('datacolonne8');
 
-function createExprDiv(chc, type, val) {
-	let res = createTextDiv(chc + ' = ', 'expression');
-	res.appendChild(createSpan(type, 'expr-' + type));
-	res.appendChild(document.createTextNode('('+val+')'));
-	return res;
+	chcs.forEach(chc => {
+		// Find expressions matching each CHC
+		let matched = expressions.get({
+			fields: ['datatype', 'datasoustype'],
+			filter: e => {
+				return e.datacolonne8 == chc;
+			},
+			order: (a, b) => {
+				return (a.datatype < b.datatype? -1 : 1);
+			}
+		});
+
+		let exprItemDiv = createTextDiv(chc + ' = ', 'expression');
+		matched.forEach(e => {
+			exprItemDiv.appendChild(createSpan(e.datatype, 'expr-' + e.datatype));
+			let valSpan = createSpan('('+e.datasoustype+')', 'expr-val');
+			exprItemDiv.appendChild(valSpan);
+		});
+		exprDiv.appendChild(exprItemDiv);
+		exprDiv.appendChild(document.createTextNode(';'));
+	})	
 }
 
 
@@ -393,6 +426,7 @@ function loadAnomalie(parsedItem, itemArray) {
 	}
 	
 	if(parsedItem.famille == 'expr') {
+		item.id = expressions.length;
 		expressions.push(item);
 	} else {
 		item.className += ' anomalie-item';
@@ -479,7 +513,7 @@ function createTooltip(item, container) {
 	}
 
 	if((item.className.includes('type-somatic') || item.className.includes('type-germline') || item.className.includes('type-hd') || item.className.includes('type-fa') || item.className.includes('type-gain') || item.className.includes('type-perte')) && item.hasOwnProperty('dataso')) {
-		let lastLineStr = item.dataso;
+		let lastLineStr = '';
 		if(item.hasOwnProperty('datacolonne9')){
 			lastLineStr = item.datacolonne9 + ', ' + lastLineStr;
 		}
@@ -487,14 +521,15 @@ function createTooltip(item, container) {
 			lastLineStr = item.datacolonne8 + ', ' + lastLineStr;
 		}
 		//tooltipNode.appendChild(createTooltipDiv('', lastLineStr, 'tooltip-last-line'));
-		tooltipNode.appendChild(createTextDiv(lastLineStr, 'tooltip-line tooltip-last-line'));
+		let lastLineDiv = createTextDiv(lastLineStr, 'tooltip-line tooltip-last-line');
 
 		let soUrl = ' http://www.sequenceontology.org/browser/current_release/term/SO:' + item.dataso.split(':')[1];
 		let linkNode = document.createElement('a');
-		linkNode.className = 'tooltip-link tooltip-line';
+		linkNode.className = 'tooltip-link';
 		linkNode.href = soUrl;
-		linkNode.appendChild(document.createTextNode('Sequence ontology'));
-		tooltipNode.appendChild(linkNode);
+		linkNode.appendChild(document.createTextNode(item.dataso));
+		lastLineDiv.appendChild(linkNode);
+		tooltipNode.appendChild(lastLineDiv);
 	}
 
 	container.appendChild(tooltipNode);
