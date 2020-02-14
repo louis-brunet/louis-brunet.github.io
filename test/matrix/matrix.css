@@ -384,11 +384,10 @@ strong {
     padding: 4px;
     margin: 2px;
     cursor: pointer;
-    transition: background-color 0.17s linear, color 0.17s linear;
 
 }
 
-.genes-filter-item {
+.genes-filter-item, .genes-filter-item.genes-selected:active  {
     background-color: rgb(180, 180, 180);
     color: black;
 }
@@ -398,7 +397,7 @@ strong {
     color: black;
 }
 
-.genes-filter-item.genes-selected {
+.genes-filter-item.genes-selected, .genes-filter-item:active {
     background-color: rgb(231, 199, 157);
     color: rgb(110, 15, 15);
 }

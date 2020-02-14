@@ -429,10 +429,26 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
         nom:    d.nom,
         genes:  d.genes.split(';')
     }
+    // Update graph title 
     document.getElementById('driver-name').innerHTML = driver.nom;
     document.getElementById('driver-genes').innerHTML = driver.genes.join(', ');
     document.getElementById('driver-' + d.nom.toLowerCase()).className += ' driver-selected';
 
+    // Update selected gene filters
+    let btnsToSelect = [];
+    for (let i = 0; i < driver.genes.length; i++) {
+        const gStr = driver.genes[i];
+        btnsToSelect.push('genes-select-' + gStr.toLowerCase());
+    }
+    let geneBtns = document.querySelectorAll('.genes-filter-item');
+    for (let i = 0; i < geneBtns.length; i++) {
+        const btn = geneBtns[i];
+        if(btnsToSelect.includes(btn.id)) {
+            selectGeneBtn(btn.id);
+        } else {
+            unselectGeneBtn(btn.id);
+        }
+    }
 
     // Replace items dataset with driver's computed items
     let itemsRequest = new XMLHttpRequest();
@@ -489,8 +505,8 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
  }
 
  function createGeneFilterBtn(gStr) {
-    let res = createTextDiv(gStr, 'genes-filter-item');
-    let id = 'gene-select-' + gStr.toLowerCase();
+    let res = createTextDiv(gStr, 'genes-filter-item visible');
+    let id = 'genes-select-' + gStr.toLowerCase();
     res.id = id;
 
     res.onclick = () => {
@@ -509,7 +525,39 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
     }
  }
 
- 
+ function selectGeneBtn(geneBtnId) {
+    let item = document.getElementById(geneBtnId);
+    if(!item.className.includes('genes-selected')){
+        item.className += ' genes-selected';
+    }
+ }
+
+ function unselectGeneBtn(geneBtnId) {
+    let item = document.getElementById(geneBtnId);
+    if(item.className.includes('genes-selected')){
+        item.className = item.className.replace('genes-selected', '');
+    }
+ }
+
+ function makeVisible(geneBtnId) {
+    let item = document.getElementById(geneBtnId);
+    if(! item.className.includes('visible')) {
+        item.className += ' visible';
+    }
+    if(item.className.includes('hidden')) {
+        item.className = item.className.replace('hidden', '');
+    }
+ }
+
+ function hide(geneBtnId) {
+    let item = document.getElementById(geneBtnId);
+    if(! item.className.includes('hidden')) {
+        item.className += ' hidden';
+    }
+    if(item.className.includes('visible')) {
+        item.className = item.className.replace('visible', '');
+    }
+ }
 
  /**
   * Initialise the items DataSet from anomalies
