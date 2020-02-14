@@ -1305,7 +1305,7 @@ function createTooltip(div, anomArray) {
         let tooltipText = createDiv('tooltip-text');
         for (let i = 0; i < anomArray.length; i++) {
             const anom = anomArray[i];
-            let lineStr = anom.famille + ', ' + anom.type
+            let lineStr = anom.type
             if(anom.hasOwnProperty('gnomen')) {
                 lineStr += ', ' + anom.gnomen;
             }
