@@ -177,7 +177,7 @@ a:hover {
     /* margin-left: -110px; */
     text-align: center;
 
-    top: -50%; 
+    top: -30px; 
     left: calc(100% + 6px);
     position: absolute;
     z-index: 99;
@@ -335,4 +335,8 @@ button:hover {
 
 .expr-down {
     color: blue;
+}
+
+#expressions-div {
+    font-size: 90%;
 }
