@@ -1417,8 +1417,8 @@ function capture() {
 
 function captureGenes() {
 	// hide tooltips
-	let tooltips = document.querySelectorAll('.tooltip-text');
-	tooltips.forEach(function (t) {
+	let tooltips = document.querySelectorAll('.genes-tooltip-text');
+	tooltips.forEach(t => {
 		t.style.display = 'none';
 	});
 
@@ -1432,7 +1432,7 @@ function captureGenes() {
 	});
 
 	// show tooltips
-	tooltips.forEach(function (t) {
+	tooltips.forEach(t => {
 		t.style.display = 'block';
 	});
 }

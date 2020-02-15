@@ -143,6 +143,8 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 
     transition: box-shadow 0.3s ease-in;
 }
@@ -202,10 +204,12 @@ strong {
 .close-btn {
     background-color: red;
     color: white;
-    font-weight: bold;
+    font-weight: bolder;
     padding: 4px;
     margin: 4px;
     border-radius: 30%;
+    width: 20px;
+    height: 20px;
 }
 
 #filter-wipe-btn {
@@ -229,10 +233,10 @@ strong {
 }
 
 #cap-btn, #genes-cap-btn {
-    background-color: green
+    background-color: green;
 }
 
-#output {
+#output, #genes-output {
     max-width: 100%;
 }
 
@@ -454,7 +458,6 @@ strong {
     }
     #cap-btn {
         margin-bottom: 10px;
-        margin-top: 10px;
     }
 
     #settings p {
