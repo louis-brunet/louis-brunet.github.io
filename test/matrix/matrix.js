@@ -12,7 +12,7 @@ if (!window.File || !window.FileReader) {
 /**
  * CONSTANTS & GLOBAL VARIABLES
  */
-var container = document.getElementById('visualization');
+var container = document.getElementById('matrix');
 var MAX_ITEMS = 15;
 var ROW_TYPE = 'gene'; // 'gene' or 'patient'
 var driver; // {nom: 'txt', genes: ['gene1','gene2',...]}
@@ -321,7 +321,7 @@ request.onload = () => {
 
 
         calculateAvgGenes();
-        calculateAvgPatients();
+        optimisedCalculateAvgPatients();
         calculateRowOrder();
         calculateColumnOrder();
 
@@ -589,9 +589,14 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
   * If it doesn't already exist
   */
  function countAnomalies(geneStr, patientStr) {
+    let bool = false;
     let exists = items.get({
         filter: i => {
-            return i.gene == geneStr && i.patient == patientStr;
+            if(!bool & i.gene == geneStr && i.patient == patientStr){
+                bool = true;
+                return true;
+            }
+            return false;
         }
     }).length > 0;
     if(exists) return;
@@ -690,17 +695,18 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
  }
 
 
+
  /**
-  * Fill resultArr with MAX_ITEMS names of patients ordered by avg
+  * Fill resultArr with names of patients ordered by totalSomatic
   */
  function getPatientsOrder(resultArr) {
     let sorted = avgPatients.get({
         fields:     ['patient'],
         filter:     i => {
             if(patientFilter.length > 0) {
-                return patientFilter.includes(i.patient) && checkIntersectionsWithDriverGenes(i.patient);
+                return patientFilter.includes(i.patient); /*&& checkIntersectionsWithDriverGenes(i.patient);*/
             }
-            return checkIntersectionsWithDriverGenes(i.patient);
+            return true;/*checkIntersectionsWithDriverGenes(i.patient)*/
         },
         order:      (a, b) => {
             if(a.totalSomatic == b.totalSomatic){
@@ -716,7 +722,7 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
  }
 
  /**
-  * Fill resultArr with MAX_ITEMS names of genes ordered by avg
+  * Fill resultArr with names of genes ordered by totalSomatic
   */
  function getGenesOrder(resultArr) {
     let sorted = avgGenes.get({
@@ -799,7 +805,8 @@ function calculateAvgPatients() {
 
     // For each, if it isn't already created, avg all nbTotal in items DataSet
     allPatients.forEach(pStr => {
-        if((patientFilter.length > 0 && !patientFilter.includes(pStr)) || avgPatients.distinct('patient').includes(pStr)) 
+        let countedPatients = avgPatients.distinct('patient');
+        if((patientFilter.length > 0 && !patientFilter.includes(pStr)) || countedPatients.includes(pStr)) 
             return;
         
         let total = 0;
@@ -822,6 +829,42 @@ function calculateAvgPatients() {
                 id:             avgPatients.length,
                 patient:        pStr,
                 avg:            moy,
+                totalSomatic:   total
+            });
+
+        }
+    });
+
+    document.getElementById('nb-patients-span').style.display = 'inline';
+    document.getElementById('nb-patients-val').innerHTML = avgPatients.length;
+}
+
+function optimisedCalculateAvgPatients() {
+    let allPatients = items.distinct('patient');
+
+    let createdAvgs = [];
+    // For each sum all nbMutSomatic in items DataSet
+    allPatients.forEach(pStr => {
+        if(patientFilter.length > 0 && !patientFilter.includes(pStr)) 
+            return;
+        
+        let total = 0;
+        let count = 0;
+        items.get({
+            filter: i => {
+                return i.patient == pStr;
+            },
+            fields: ['nbMutSomatic']
+        }).forEach(i => {
+            total += i.nbMutSomatic;
+            count++;
+        });
+
+        if(count > 0) {
+            // Add item to avgPatients DataSet
+            avgPatients.add({
+                id:             pStr,
+                patient:        pStr,
                 totalSomatic:   total
             });
 
@@ -1052,7 +1095,7 @@ function createRowPageNumbersDiv() {
                 numberDiv.onclick = () => {
                     pagesInfo.rows.page = i;
                     document.getElementById('loader').style.display = 'block';
-                    document.getElementById('visualization').innerHTML = '';
+                    container.innerHTML = '';
                     
                     setTimeout(createGraphic, 50);
                 }
@@ -1091,7 +1134,7 @@ function createColumnPageNumbersDiv() {
  function showRowPage(i) {
      pagesInfo.rows.page = i;
      document.getElementById('loader').style.display = 'block';
-     document.getElementById('visualization').innerHTML = '';
+     container.innerHTML = '';
      
      setTimeout(createGraphic, 50);
  }
@@ -1235,10 +1278,12 @@ function fillContent(contentDiv, rowOrder, columnOrder) {
 
         for (let j = 0; j < columnOrder.length; j++) {
             const colTitle = columnOrder[j];
-            let newItem = createLink('https://louis-brunet.github.io/test/genes/genes.html', 'graph-item');
-
+            //let newItem = createLink('https://louis-brunet.github.io/test/genes/genes.html', 'graph-item');
+            let newItem = createDiv('graph-item');
             let intersectItem = getIntersection(rowTitle, colTitle);
             if(intersectItem) {
+                newItem.style.cursor = 'pointer';
+                newItem.onclick = matrixCreateTimeline;
                 createIntersectDiv(intersectItem, newItem);
             }
 
@@ -1248,6 +1293,11 @@ function fillContent(contentDiv, rowOrder, columnOrder) {
 
         contentDiv.appendChild(newRow);
     }
+}
+
+function matrixCreateTimeline() {
+    document.getElementById('gene-window-container').style.display = 'block';
+    createTimeline();
 }
 
 function createIntersectDiv(intersectItem, itemDiv) {

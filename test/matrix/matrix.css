@@ -3,10 +3,6 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-a.graph-item {
-    text-decoration: none;
-}
-
 .label {
     font-weight: bold;
 }
@@ -411,6 +407,28 @@ strong {
     display: none;
 }
 
+
+
+#gene-window-container {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#gene-window {
+    box-sizing: border-box;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+
+
 @media screen and (max-width: 800px) {
     #top-right-btns {
         flex-direction: column-reverse;
@@ -424,3 +442,4 @@ strong {
         max-width: 80%;
     }
 }
+

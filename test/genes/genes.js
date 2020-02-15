@@ -1,13 +1,13 @@
 /**
  * Entrée json
  */
-var url = 'https://louis-brunet.github.io/test/genes/data.json';
+var genesUrl = 'https://louis-brunet.github.io/test/genes/data.json';
 
 /**
  * Groupes de gènes
  */
-var driver;
-var drivers = [{
+var genesDriver;
+var genesDrivers = [{
 	"nom":      "Jay_q_in.05",
 	"genes":    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;HNF1A;BAP1;EEF1A1;IL6ST;DYRK1A;GABRA2;BRD7;APOB;COL11A1;KLF15;SETD2;HMBS;DOCK2;ADAMTS19"
 },{
@@ -17,7 +17,7 @@ var drivers = [{
 	"nom":      "Schulze_p_inf.01",
 	"genes":    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;ATP10B;FGA;MEF2C;HNF1A;ZNRF3;EPHA4;PTEN;TSC1"
 }];
-var allGenes = [];
+var genesAllGenes = [];
 
 /**
  * Affichage des gènes disponibles
@@ -33,10 +33,10 @@ var GROUP_CNV = 10000001;
 //var GROUP_EXPR = 10000002;
 var GROUP_METH = 10000003;
 
-var groups = [];
-var container = document.getElementById('visualization');
+var genesGroups = [];
+var genesContainer = document.getElementById('visualization');
 
-var options = {
+var genesOptions = {
 	// option groupOrder can be a property name or a sort function
 	// the sort function must compare two groups and return a value
 	//     > 0 when a > b
@@ -65,11 +65,11 @@ var options = {
 };
 
 // Chargement des données
-var timeline;
-var items; // DataSet
-var expressions; // DataSet
+var genesTimeline;
+var genesItems; // DataSet
+var genesExpressions; // DataSet
 
-loadDrivers();
+genesLoadDrivers();
 
 
 let today = new Date();
@@ -80,11 +80,11 @@ if(day<10) {
 document.getElementById('date-du-jour').innerHTML = day + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
 
 // Création des tooltips
-var tooltipsCreated = false;
+var genesTooltipsCreated = false;
 setInterval( () => {
-	if((!tooltipsCreated) && document.querySelectorAll('.anomalie-item').length > 1) {
-		createTooltips();
-		tooltipsCreated = true;
+	if((!genesTooltipsCreated) && document.querySelectorAll('.anomalie-item').length > 1) {
+		genesCreateTooltips();
+		genesTooltipsCreated = true;
 	}
 },1500);
 
@@ -97,33 +97,33 @@ setInterval( () => {
  * UI FUNCTIONS
  */
 
-function loadDrivers() {
-	allGenes = [];
+function genesLoadDrivers() {
+	genesAllGenes = [];
 
     let driverDiv = document.getElementById('driver-btns');
     driverDiv.innerHTML = '';
-    drivers.forEach(d => {
+    genesDrivers.forEach(d => {
         let button = document.createElement('button');
 		button.className = 'driver-btn';
 		let btnId = 'driver-' + d.nom.toLowerCase();
 		button.id = btnId;
 		let dNom = d.nom;
         button.onclick = () => {
-			if(driver != undefined && driver.nom == dNom) {
+			if(genesDriver != undefined && genesDriver.nom == dNom) {
 				let thisBtn = document.getElementById(btnId);
 				thisBtn.className = thisBtn.className.replace('driver-selected', '');
 				// unselect btns
 				let btnsToUnselect = [];
-				for (let i = 0; i < driver.genes.length; i++) {
-					const gStr = driver.genes[i];
+				for (let i = 0; i < genesDriver.genes.length; i++) {
+					const gStr = genesDriver.genes[i];
 					btnsToUnselect.push('genes-select-' + gStr.toLowerCase());
 				}
 				btnsToUnselect.forEach(btnId => {
-					unselectGeneBtn(btnId);
+					genesUnselectGeneBtn(btnId);
 				});
-				driver = undefined;
+				genesDriver = undefined;
 			} else {
-				setDriver(d.nom);
+				genesSetDriver(d.nom);
 			}
         };
         button.appendChild(document.createTextNode(d.nom));
@@ -132,73 +132,73 @@ function loadDrivers() {
         let geneArr = d.genes.split(';');
         for (let i = 0; i < geneArr.length; i++) {
             const gStr = geneArr[i];
-            if(!allGenes.includes(gStr))
-                allGenes.push(gStr);
+            if(!genesAllGenes.includes(gStr))
+                genesAllGenes.push(gStr);
         }
     });
-    allGenes = allGenes.sort();
+    genesAllGenes = genesAllGenes.sort();
 
     // Reset and fill gene filter div
     let geneFilterDiv = document.getElementById('genes-filter-container');
     geneFilterDiv.innerHTML = '';
-    allGenes.forEach(gStr => {
-        let geneFilterBtn = createGeneFilterBtn(gStr);
+    genesAllGenes.forEach(gStr => {
+        let geneFilterBtn = genesCreateGeneFilterBtn(gStr);
         geneFilterDiv.appendChild(geneFilterBtn);
     });
 }
 
-function setDriver(dName) {
-	if(driver) {
-        let btn = document.getElementById('driver-' + driver.nom.toLowerCase());
+function genesSetDriver(dName) {
+	if(genesDriver) {
+        let btn = document.getElementById('driver-' + genesDriver.nom.toLowerCase());
         btn.className = btn.className.replace(' driver-selected', '');
 	}
 	
 	document.getElementById('driver-' + dName.toLowerCase()).className += ' driver-selected';
 
     let d;
-    for (let i = 0; i < drivers.length; i++) {
-        if(drivers[i].nom == dName) {
-            d = drivers[i];
+    for (let i = 0; i < genesDrivers.length; i++) {
+        if(genesDrivers[i].nom == dName) {
+            d = genesDrivers[i];
         }
     }
-    driver = {
+    genesDriver = {
         nom:    d.nom,
         genes:  d.genes.split(';')
     }
     
     // Update selected gene filters
     let btnsToSelect = [];
-    for (let i = 0; i < driver.genes.length; i++) {
-        const gStr = driver.genes[i];
+    for (let i = 0; i < genesDriver.genes.length; i++) {
+        const gStr = genesDriver.genes[i];
         btnsToSelect.push('genes-select-' + gStr.toLowerCase());
     }
     let geneBtns = document.querySelectorAll('.genes-filter-item');
     for (let i = 0; i < geneBtns.length; i++) {
         const btn = geneBtns[i];
         if(btnsToSelect.includes(btn.id)) {
-            selectGeneBtn(btn.id);
+            genesSelectGeneBtn(btn.id);
         } else {
-            unselectGeneBtn(btn.id);
+            genesUnselectGeneBtn(btn.id);
         }
     }
 }
 
-function selectGeneBtn(geneBtnId) {
+function genesSelectGeneBtn(geneBtnId) {
    let item = document.getElementById(geneBtnId);
    if(!item.className.includes('genes-selected')){
 	   item.className += ' genes-selected';
    }
 }
 
-function unselectGeneBtn(geneBtnId) {
+function genesUnselectGeneBtn(geneBtnId) {
    let item = document.getElementById(geneBtnId);
    if(item.className.includes('genes-selected')){
 	   item.className = item.className.replace('genes-selected', '');
    }
 }
 
-function createGeneFilterBtn(gStr) {
-   let res = createTextDiv(gStr, 'genes-filter-item visible');
+function genesCreateGeneFilterBtn(gStr) {
+   let res = genesCreateTextDiv(gStr, 'genes-filter-item visible');
    let id = 'genes-select-' + gStr.toLowerCase();
    res.id = id;
 
@@ -209,7 +209,7 @@ function createGeneFilterBtn(gStr) {
    return res;
 }
 
-function toggleGeneSelected(id) {
+function genesToggleGeneSelected(id) {
    let item = document.getElementById(id);
    if(item.className.includes('genes-selected')) {
 	   item.className = item.className.replace('genes-selected', '');
@@ -218,14 +218,14 @@ function toggleGeneSelected(id) {
    }
 }
 
-function createTextDiv(text, className) {
+function genesCreateTextDiv(text, className) {
      let res = document.createElement('div');
      res.className = className;
      res.appendChild(document.createTextNode(text));
      return res;
 }
 
-function genesSelect(input) {
+function genesGenesSelect(input) {
 	document.getElementById('genes-input-warning').style.display = 'inline';
 }
 
@@ -239,37 +239,37 @@ function loadTimeline() {
  */
 
 function createTimeline() {
-	init();
-	loadData();
+	genesInit();
+	genesLoadData();
 }
 
-function init() {
-	items = [];
-	groups = [];
-	expressions = [];
+function genesInit() {
+	genesItems = [];
+	genesGroups = [];
+	genesExpressions = [];
 	document.getElementById('expressions-div').innerHTML = '';
 }
 
-function loadData(){
+function genesLoadData(){
 	var request = new XMLHttpRequest();
-	request.open('GET', url);
+	request.open('GET', genesUrl);
 	request.responseType = 'json';
 	request.send();
 	request.onload = () => {
-		container.innerHTML = '';
+		genesContainer.innerHTML = '';
 		let parsedData = request.response;
-		loadStructureData(parsedData, items);
-		groups.push(
+		loadStructureData(parsedData, genesItems);
+		genesGroups.push(
 			{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
 			{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
 			// {id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
-			{id: GROUP_METH, content: 'Méthylation', value: GROUP_METH, className: 'group-meth'}
+			{id: GROUP_METH, content: 'Méthylations', value: GROUP_METH, className: 'group-meth'}
 		);
-		loadAnomaliesData(parsedData.anomalies, items);
-		items = new vis.DataSet(items);
-		groups = new vis.DataSet(groups);
-		timeline = new vis.Timeline(container, items, groups, options);
-		expressions = new vis.DataSet(expressions);
+		loadAnomaliesData(parsedData.anomalies, genesItems);
+		genesItems = new vis.DataSet(genesItems);
+		genesGroups = new vis.DataSet(genesGroups);
+		genesTimeline = new vis.Timeline(genesContainer, genesItems, genesGroups, genesOptions);
+		genesExpressions = new vis.DataSet(genesExpressions);
 		buildExpressionsDiv();
 	};
 }
@@ -277,11 +277,11 @@ function loadData(){
 function buildExpressionsDiv() {
 	let exprDiv = document.getElementById('expressions-div');
 	// Find all CHC ids in expr dataset
-	let chcs = expressions.distinct('datacolonne8');
+	let chcs = genesExpressions.distinct('datacolonne8');
 
 	chcs.forEach(chc => {
 		// Find expressions matching each CHC
-		let matched = expressions.get({
+		let matched = genesExpressions.get({
 			fields: ['datatype', 'datasoustype'],
 			filter: e => {
 				return e.datacolonne8 == chc;
@@ -291,10 +291,10 @@ function buildExpressionsDiv() {
 			}
 		});
 
-		let exprItemDiv = createTextDiv(chc + ' = ', 'expression');
+		let exprItemDiv = genesCreateTextDiv(chc + ' = ', 'expression');
 		matched.forEach(e => {
-			exprItemDiv.appendChild(createSpan(e.datatype, 'expr-' + e.datatype));
-			let valSpan = createSpan('('+e.datasoustype+')', 'expr-val');
+			exprItemDiv.appendChild(genesCreateSpan(e.datatype, 'expr-' + e.datatype));
+			let valSpan = genesCreateSpan('('+e.datasoustype+')', 'expr-val');
 			exprItemDiv.appendChild(valSpan);
 		});
 		exprDiv.appendChild(exprItemDiv);
@@ -426,17 +426,17 @@ function loadAnomalie(parsedItem, itemArray) {
 	}
 	
 	if(parsedItem.famille == 'expr') {
-		item.id = expressions.length;
-		expressions.push(item);
+		item.id = genesExpressions.length;
+		genesExpressions.push(item);
 	} else {
 		item.className += ' anomalie-item';
 		itemArray.push(item);
 	}
 }
 
-function createTooltips() {
+function genesCreateTooltips() {
 	// Find items w/ className contains anomalie-item
-	let tooltipItems = items.get({
+	let tooltipItems = genesItems.get({
 		filter: function(i) {
 			return i.className.includes('anomalie-item');
 		}
@@ -453,7 +453,7 @@ function createTooltips() {
 	for (let i = 0; i < tooltipItems.length; i++) {
 		for (let j = 0; j < tooltipContainers.length; j++) {  
 			if(tooltipItems[i].id == tooltipContainers[j].dataset.dataid ){
-				createTooltip(tooltipItems[i], tooltipContainers[j]);
+				genesCreateTooltip(tooltipItems[i], tooltipContainers[j]);
 
 				break;
 			}
@@ -464,8 +464,8 @@ function createTooltips() {
 function setSelectOnHover(containers) {
 	containers.forEach(function(cont){
 		cont.addEventListener('mouseover',function(e) {
-			timeline.setSelection([]);
-			timeline.setSelection(cont.dataset.dataid);
+			genesTimeline.setSelection([]);
+			genesTimeline.setSelection(cont.dataset.dataid);
 		});
 	});
 }
@@ -473,9 +473,9 @@ function setSelectOnHover(containers) {
 /**
  * Create DOM elements in container based on item's properties
  */
-function createTooltip(item, container) {
+function genesCreateTooltip(item, container) {
 	let tooltipNode = document.createElement('div');
-	tooltipNode.className = 'tooltip-text';
+	tooltipNode.className = 'genes-tooltip-text';
 
 	let lineStr = '';
 
@@ -493,7 +493,7 @@ function createTooltip(item, container) {
 	let soustypeStr = item.datasoustype;
 	//tooltipNode.appendChild(createTooltipDiv('Sous-type : ', soustypeStr, 'tooltip-soustype'));
 	lineStr += ', ' + soustypeStr;
-	tooltipNode.appendChild(createTextDiv(lineStr, 'tooltip-line'));
+	tooltipNode.appendChild(genesCreateTextDiv(lineStr, 'genes-tooltip-line'));
 
 	let line2Str = '';
 	if(item.hasOwnProperty('datagnomen')) {
@@ -509,7 +509,7 @@ function createTooltip(item, container) {
 		line2Str += (line2Str == '' ? '' : ', ') + item.datacnomen;
 	}
 	if(line2Str != '') {
-		tooltipNode.appendChild(createTextDiv(line2Str, 'tooltip-line'));
+		tooltipNode.appendChild(genesCreateTextDiv(line2Str, 'genes-tooltip-line'));
 	}
 
 	if((item.className.includes('type-somatic') || item.className.includes('type-germline') || item.className.includes('type-hd') || item.className.includes('type-fa') || item.className.includes('type-gain') || item.className.includes('type-perte')) && item.hasOwnProperty('dataso')) {
@@ -521,11 +521,11 @@ function createTooltip(item, container) {
 			lastLineStr = item.datacolonne8 + ', ' + lastLineStr;
 		}
 		//tooltipNode.appendChild(createTooltipDiv('', lastLineStr, 'tooltip-last-line'));
-		let lastLineDiv = createTextDiv(lastLineStr, 'tooltip-line tooltip-last-line');
+		let lastLineDiv = genesCreateTextDiv(lastLineStr, 'genes-tooltip-line genes-tooltip-last-line');
 
 		let soUrl = ' http://www.sequenceontology.org/browser/current_release/term/SO:' + item.dataso.split(':')[1];
 		let linkNode = document.createElement('a');
-		linkNode.className = 'tooltip-link';
+		linkNode.className = 'genes-tooltip-link';
 		linkNode.href = soUrl;
 		linkNode.appendChild(document.createTextNode(item.dataso));
 		lastLineDiv.appendChild(linkNode);
@@ -538,17 +538,17 @@ function createTooltip(item, container) {
 /**
  * Return new div Element containing a label span and a val span
  */
-function createTooltipDiv(label, text, className) {
+function genesCreateTooltipDiv(label, text, className) {
 	let res = document.createElement('div');
 	res.className = className;
 	if(label != '') {
-		res.appendChild(createSpan(label, 'tooltip-label'));
+		res.appendChild(genesCreateSpan(label, 'tooltip-label'));
 	}
-	res.appendChild(createSpan(text, 'tooltip-val'));
+	res.appendChild(genesCreateSpan(text, 'tooltip-val'));
 	return res;
 }
 
-function createSpan(text, className) {
+function genesCreateSpan(text, className) {
 	let res = document.createElement('span');
 	res.className = className;
 	res.appendChild(document.createTextNode(text));
@@ -580,8 +580,8 @@ function loadStructureData(parsedData, loadedItems) {
 
 function loadComponent(component, exonArray) {
 	// create component group
-	let groupId = groups.length + 1;
-	groups.push(
+	let groupId = genesGroups.length + 1;
+	genesGroups.push(
 		{
 			id: groupId,
 			content: '<div class="comp-type ' + component.type + (component.hasOwnProperty('ref') ? '':' noref' )+'">&lt;'+component.type+'&gt;</div>' + (component.hasOwnProperty('ref') ? '<div class="comp-ref">'+component.ref+'</div>' : ''),
@@ -592,7 +592,7 @@ function loadComponent(component, exonArray) {
 	let exons = component.exons.split(';');
 	for (let i = 0; i < exons.length; i++) {
 		const exon = exons[i];
-		let createdItem = createItem(exon, groupId, component.type, exonArray.length);
+		let createdItem = genesCreateItem(exon, groupId, component.type, exonArray.length);
 		if(createdItem.className.includes('protein_coding') && ! component.hasOwnProperty('ref')) {
 			createdItem.className += ' noref';
 		}
@@ -604,7 +604,7 @@ function loadComponent(component, exonArray) {
 	createLines(exonArray, groupId);
 }
 
-function createItem(exon, groupId, compType, nbItems) {
+function genesCreateItem(exon, groupId, compType, nbItems) {
 	let period = exon.split('-');
 
 	let item = {
