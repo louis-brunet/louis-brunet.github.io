@@ -1,7 +1,7 @@
 /**
  * Entrée json
  */
-var genesUrl = 'https://louis-brunet.github.io/test/genes/datagood.json';
+var genesUrl = 'https://louis-brunet.github.io/test/genes/data.json';
 
 /**
  * Groupes de gènes

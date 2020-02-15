@@ -228,7 +228,7 @@ strong {
     display: none;
 }
 
-#cap-btn {
+#cap-btn, #genes-cap-btn {
     background-color: green
 }
 
@@ -428,7 +428,25 @@ strong {
     margin-top: 100px;
 }
 
+#genes-cap-btn {
+    float: right;
+}
 
+#viewer-btn {
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(100,100,100);
+    color: white;
+}
+
+#viewer-btn:hover {
+    color: red;
+}
+
+#genes-output-card {
+    display: none;
+    background-color: rgb(150, 150, 150);
+}
 
 @media screen and (max-width: 800px) {
     #top-right-btns {

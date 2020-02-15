@@ -1415,6 +1415,28 @@ function capture() {
 	});
 }
 
+function captureGenes() {
+	// hide tooltips
+	let tooltips = document.querySelectorAll('.tooltip-text');
+	tooltips.forEach(function (t) {
+		t.style.display = 'none';
+	});
+
+	// Display screencap of #to-capture elem
+	html2canvas(document.getElementById('genes-to-capture')).then(function(canvas) {
+		document.getElementById('genes-output-card').style.display = 'block';
+		// Export the canvas to its data URI representation
+		var base64image = canvas.toDataURL("image/jpeg");
+		// Display image in #output element
+		document.getElementById('genes-output').src = base64image;
+	});
+
+	// show tooltips
+	tooltips.forEach(function (t) {
+		t.style.display = 'block';
+	});
+}
+
  /**
   * Toggle between genes and patients for rows
   */
