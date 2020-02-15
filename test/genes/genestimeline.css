@@ -94,12 +94,20 @@ a:hover {
     background-color: red;
 }
 
-.type-germline, .vis-selected.type-germline, .type-hd, .vis-selected.type-hd {
+.type-germline, .vis-selected.type-germline {
+    border-color: blue;
+}
+
+.type-germline .genes-tooltip-text {
+    background-color: blue;
+}
+
+.type-hd, .vis-selected.type-hd {
     border-color: orange;
     /* color: orangered; */
 }
 
-.type-germline .genes-tooltip-text, .type-hd .genes-tooltip-text{
+.type-hd .genes-tooltip-text{
     background-color: orange;
 }
 
