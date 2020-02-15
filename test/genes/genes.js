@@ -20,9 +20,9 @@ var genesDrivers = [{
 var genesAllGenes = [];
 
 /**
- * Affichage des gènes disponibles
+ * Keep track of anomalies familles for each CHC.
  */
-
+var genesChcList = []; // [{chc: CHCXXXX, mutation: boolean, expr: boolean, copy: boolean, meth: boolean},...]
 
 /**
  * INITIALISATION DE LA TIMELINE
@@ -348,6 +348,8 @@ function loadAnomaliesData(parsedArray, loadedItems) {
 			loadAnomalie(parsedArray[i], loadedItems);
 		}
 	}
+
+	updateChcListDisplay();
 }
 
 /**
@@ -367,6 +369,14 @@ function loadAnomalie(parsedItem, itemArray) {
 		datatype: parsedItem.type,
 		datasoustype: parsedItem.soustype
 	};
+
+	
+	if(parsedItem.hasOwnProperty('colonne8')) {
+		item.datacolonne8 = parsedItem.colonne8;
+		// if famille not yet counted for this chc, count it in genesChcList
+		countInChcList(item.datacolonne8, item.datafamille);
+	}
+
 
 	switch(parsedItem.famille) {
 		case 'mutation':
@@ -453,21 +463,95 @@ function loadAnomalie(parsedItem, itemArray) {
 	if(parsedItem.hasOwnProperty('so')) {
 		item.dataso = parsedItem.so;
 	}
-
-	if(parsedItem.hasOwnProperty('colonne8')) {
-		item.datacolonne8 = parsedItem.colonne8;
-	}
-
+	
 	if(parsedItem.hasOwnProperty('colonne9')) {
 		item.datacolonne9 = parsedItem.colonne9;
+		
 	}
+
 	
+	// If is expression, push to genesExpressions, else push to items
 	if(parsedItem.famille == 'expr') {
 		item.id = genesExpressions.length;
 		genesExpressions.push(item);
 	} else {
 		item.className += ' anomalie-item';
 		itemArray.push(item);
+	}
+}
+
+/**
+ * TODO
+ */
+function updateChcListDisplay() {
+	let chcListDiv = document.getElementById('materiel-exploite');
+
+	genesChcList.forEach( chcItem => {
+		let lineStr = chcItem.chc + '( ';
+
+		if(chcItem.mutation)
+			lineStr += 'Mut. ';
+		if(chcItem.copy)
+			lineStr += 'CN ';
+		if(chcItem.meth)
+			lineStr += 'Mét. '
+		if(chcItem.expr)
+			lineStr += 'Exp. ';
+		
+		lineStr += ')';
+
+		chcListDiv.appendChild(genesCreateSpan(lineStr, 'chc-item'));
+		// TODO
+	});
+}
+
+function countInChcList(chc, famille) {
+	let added = false;
+	for (let i = 0; i < genesChcList.length; i++) {
+		let listElem = genesChcList[i];
+		if(listElem.chc == chc) {
+			switch(famille) {
+				case 'mutation':
+					listElem.mutation = true;
+					break;
+				case 'expr':
+					listElem.expr = true;
+					break;
+				case 'copy':
+					listElem.copy = true;
+					break;
+				case 'meth':
+					listElem.meth = true;
+					break;
+				
+			}
+			added = true;
+		}
+	}
+	if(!added) {
+		let newItem = {
+			chc:		chc,
+			mutation:	false,
+			expr: 		false,
+			meth:		false,
+			copy:		false
+		};
+		switch(famille) {
+			case 'mutation':
+				newItem.mutation = true;
+				break;
+			case 'expr':
+				newItem.expr = true;
+				break;
+			case 'copy':
+				newItem.copy = true;
+				break;
+			case 'meth':
+				newItem.meth = true;
+				break;	
+		}
+
+		genesChcList.push(newItem);
 	}
 }
 
@@ -696,7 +780,7 @@ function captureVis() {
 	});
 
 	// Display screencap of #to-capture elem
-	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
+	html2canvas(document.getElementById('to-capture')).then( canvas => {
 		document.getElementById('output-card').style.display = 'block';
 		// Export the canvas to its data URI representation
 		var base64image = canvas.toDataURL("image/jpeg");
