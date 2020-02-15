@@ -312,17 +312,6 @@ strong {
     padding: 2px 4px 2px 4px;
 }
 
-#sort-radio-btns {
-    /* outline: 1px dashed green; */
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start; */
-}
-/* #sort-radio-btns > * {
-    outline: 1px dashed magenta;
-} */
-
 .radio {
     padding: 4px;
 }
@@ -434,13 +423,6 @@ strong {
 
 #genes-cap-btn {
     float: right;
-}
-
-#viewer-btn {
-    padding: 10px;
-    margin: 10px;
-    background-color: rgb(100,100,100);
-    color: white;
 }
 
 #viewer-btn:hover {

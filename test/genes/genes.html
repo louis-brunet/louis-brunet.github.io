@@ -16,6 +16,7 @@
     <div id="top-btns">
       <div id="driver-btns"></div>
       <div id='top-right-btns'>
+        <a id="viewer-btn" href="http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]">Viewer</a>
         <button id="cap-btn" onclick="captureVis();this.style.display = 'none'">JPEG</button>
       </div>
     </div>
@@ -36,14 +37,14 @@
   </div>
 
   <div id="to-capture">
-    <p id="genes-title">
+    <div id="genes-title">
       <div id="date-title">
         Synthèse génomique du patient <span id="patient">XXXX</span> à la date du <span id="date-du-jour"></span>
       </div>
       <div id="mat-title">
         Matériels exploités = <span id="materiel-exploite"></span>
       </div>
-    </p>
+    </div>
     <span class="label">Gène&nbsp;:&nbsp;</span><span id="name">name</span> 
     <span class="label">Ch&nbsp;:&nbsp;</span><span id="ch">ch</span>
     <span class="label">Position&nbsp;:&nbsp;</span><span id="start">start</span> - <span id="end">end</span>

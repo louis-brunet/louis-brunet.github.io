@@ -1,12 +1,26 @@
-p#genes-title {
+#genes-title {
     font-size: 90%;
     margin-bottom: 0;
     text-align:  center;
+    margin-top: 10px;
+    margin-bottom: 10px;
     
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+#date-title {
+    max-width: 80%;
+    text-align: center;
+    font-weight: bold;
+    /* margin: auto;
+    margin-bottom: 10px; */
+}
+
+#mat-title {
+    margin-left: 10px;
 }
 
 a {
@@ -218,13 +232,6 @@ a:hover {
     border-color: rgb(220,220,220);
 }
 
-#date-title {
-    max-width: 80%;
-    text-align: center;
-    font-weight: bold;
-    /* margin: auto;
-    margin-bottom: 10px; */
-}
 
 #expressions-div {
     font-size: 85%;
@@ -255,4 +262,17 @@ a:hover {
 
 .expr-down {
     color: blue;
+}
+
+
+
+#viewer-btn {
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(100,100,100);
+    color: white;
+}
+
+#viewer-btn:hover {
+    color: red;
 }
