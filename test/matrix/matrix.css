@@ -357,16 +357,17 @@ strong {
 
 .row-page-numbers, .column-page-numbers {
     display: flex;
-    justify-content: center;
     flex-wrap: nowrap;
 }
 
 .row-page-numbers {
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 .column-page-numbers {
     flex-direction: row;
+    justify-content: center;
 }
 
 #genes-filter-container {
