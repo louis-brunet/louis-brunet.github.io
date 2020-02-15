@@ -290,7 +290,7 @@ function buildExpressionsDiv() {
 				return (a.datatype < b.datatype? -1 : 1);
 			}
 		});
-
+		//TODO GROUP VALUES BY SOUSTYPE & COLONNE9 ()
 		let exprItemDiv = genesCreateTextDiv(chc + ' = ', 'expression');
 		matched.forEach(e => {
 			exprItemDiv.appendChild(genesCreateSpan(e.datatype, 'expr-' + e.datatype));
@@ -327,6 +327,7 @@ function loadAnomalie(parsedItem, itemArray) {
 		content: '',
 		start: new Date(parseInt(parsedItem.start)),
 		end: new Date(parseInt(parsedItem.end)),
+		datafamille: parsedItem.famille,
 		datatype: parsedItem.type,
 		datasoustype: parsedItem.soustype
 	};

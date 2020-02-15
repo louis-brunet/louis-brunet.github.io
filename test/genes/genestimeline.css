@@ -95,12 +95,12 @@ a:hover {
 }
 
 .type-germline, .vis-selected.type-germline, .type-hd, .vis-selected.type-hd {
-    border-color: orangered;
+    border-color: orange;
     /* color: orangered; */
 }
 
 .type-germline .genes-tooltip-text, .type-hd .genes-tooltip-text{
-    background-color: orangered;
+    background-color: orange;
 }
 
 .type-gain, .vis-selected.type-gain, .type-down, .vis-selected.type-down, .type-hypo, .vis-selected.type-hypo {
