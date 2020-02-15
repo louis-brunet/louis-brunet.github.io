@@ -16,7 +16,7 @@
     <div id="top-btns">
       <div id="driver-btns"></div>
       <div id='top-right-btns'>
-        <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+        <button id="cap-btn" onclick="captureVis();this.style.display = 'none'">JPEG</button>
       </div>
     </div>
   
@@ -40,13 +40,16 @@
       <div id="date-title">
         Synthèse génomique du patient <span id="patient">XXXX</span> à la date du <span id="date-du-jour"></span>
       </div>
-      <span class="label">Gène&nbsp;:&nbsp;</span><span id="name">name</span> 
-      <span class="label">Ch&nbsp;:&nbsp;</span><span id="ch">ch</span>
-      <span class="label">Position&nbsp;:&nbsp;</span><span id="start">start</span> - <span id="end">end</span>
-      <span class="label">Strand&nbsp;:&nbsp;</span><span id="strand">strand</span>
-      <span class="label">Réf.&nbsp;:&nbsp;</span><a href="" id="ref">http://www.ensembl.org/</a>
+      <div id="mat-title">
+        Matériels exploités = <span id="materiel-exploite"></span>
+      </div>
     </p>
-
+    <span class="label">Gène&nbsp;:&nbsp;</span><span id="name">name</span> 
+    <span class="label">Ch&nbsp;:&nbsp;</span><span id="ch">ch</span>
+    <span class="label">Position&nbsp;:&nbsp;</span><span id="start">start</span> - <span id="end">end</span>
+    <span class="label">Strand&nbsp;:&nbsp;</span><span id="strand">strand</span>
+    <span class="label">Réf.&nbsp;:&nbsp;</span><a href="" id="ref">http://www.ensembl.org/</a>
+    
     <hr>
 
     <div class="card">

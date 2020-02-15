@@ -307,7 +307,7 @@
             "end":		"351000",
             "strand":	"-",
             "famille":	"copy",
-            "presence": "non",
+            "presence": "oui",
             "type":		"fa",
             "soustype":	"99",
             "so":       "",

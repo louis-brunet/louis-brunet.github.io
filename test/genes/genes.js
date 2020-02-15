@@ -688,9 +688,9 @@ function createLineItem(exonItem, nextExonItem, nbItems) {
 /**
  * Afficher une capture d'ecran du graphe
  */
-function capture() {
+function captureVis() {
 	// hide tooltips
-	let tooltips = document.querySelectorAll('.tooltip-text');
+	let tooltips = document.querySelectorAll('.genes-tooltip-text');
 	tooltips.forEach(function (t) {
 		t.style.display = 'none';
 	});
