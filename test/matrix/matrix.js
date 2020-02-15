@@ -743,10 +743,6 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
     }
  }
 
- function uniqueFilter(value, index, self) {
-    return self.indexOf(value) === index;
- }
-
 function checkIntersectionsWithDriverGenes(pStr) {
     let bool = false;
     for (let i = 0; i < driver.genes.length && !bool; i++) {

@@ -281,45 +281,62 @@ function buildExpressionsDiv() {
 
 	chcs.forEach(chc => {
 		// Find expressions matching each CHC, sorted by type
-		let matched = genesExpressions.get({
-			fields: ['datatype', 'datasoustype'],
+		let matched = new vis.DataSet(genesExpressions.get({
+			fields: ['id', 'datatype', 'datasoustype', 'datacolonne9'],
 			filter: e => {
 				return e.datacolonne8 == chc;
 			},
 			order: (a, b) => {
 				return (a.datatype < b.datatype? -1 : 1);
 			}
-		});
-		//TODO GROUP VALUES BY TYPE & COLONNE9 (miseq, fluidigm)
-		let countedTypes = [];
-		let exprItemDiv = genesCreateTextDiv(chc + ' = ', 'expression');
-		matched.forEach(exp => {
-			if(countedTypes.includes(exp.datatype)) return;
+		}));
+		let exprItemDiv = genesCreateTextDiv(chc + ' : ', 'expression');
 
-			// Find all expressions in matched with same type
-			let values = [];
-			let thisIndex = matched.indexOf(exp);
-			for (let i = thisIndex; i < matched.length && matched[i].datatype == exp.datatype; i++) {
-				values.push(matched[i].datasoustype);
-			}
-			if(values.length > 0){
-				// Build val str
-				let valStr = '' + values[0];
-				for (let i = 1; i < values.length; i++) {
-					const val = values[i];
-					valStr += '; ' + val;
+		//GROUP VALUES BY COLONNE9 (e.g. miseq, fluidigm)
+		// Find distinct datacolonne9 in matched
+		let col9Array = matched.distinct('datacolonne9');
+		for (let i = 0; i < col9Array.length; i++) {
+			const col9 = col9Array[i];
+			
+			exprItemDiv.appendChild(genesCreateSpan(col9 + ' = ', 'expr-col9'));
+
+			let subMatched = matched.get({
+				filter: m => {
+					return m.datacolonne9 == col9;
 				}
-				// Append to CHC line
-				exprItemDiv.appendChild(genesCreateSpan(exp.datatype, 'expr-' + exp.datatype));
-				let valSpan = genesCreateSpan('(' + valStr + ') ', 'expr-val');
-				exprItemDiv.appendChild(valSpan);
-				countedTypes.push(exp.datatype);
-			}
-		});
+			});
+
+			let countedTypes = [];
+			subMatched.forEach(exp => {
+				if(countedTypes.includes(exp.datatype)) return;
+
+				// Find all expressions in matched with same type
+				let values = [];
+				let thisIndex = subMatched.indexOf(exp);
+				for (let i = thisIndex; i < subMatched.length && subMatched[i].datatype == exp.datatype; i++) {
+					values.push(subMatched[i].datasoustype);
+				}
+				if(values.length > 0){
+					// Build val str
+					let valStr = '' + values[0];
+					for (let i = 1; i < values.length; i++) {
+						const val = values[i];
+						valStr += '; ' + val;
+					}
+					// Append to CHC line
+					exprItemDiv.appendChild(genesCreateSpan(exp.datatype, 'expr-' + exp.datatype));
+					let valSpan = genesCreateSpan('(' + valStr + ') ', 'expr-val');
+					exprItemDiv.appendChild(valSpan);
+					countedTypes.push(exp.datatype);
+				}
+			});
+		}
+
+
+		
 		exprDiv.appendChild(exprItemDiv);
 	})	
 }
-
 
 /****
  * FCTS - ANOMALIES
