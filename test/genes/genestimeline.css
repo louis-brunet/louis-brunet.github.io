@@ -131,7 +131,7 @@ a:hover {
 }
 
 .vis-range.anomalie-item.non-present {
-    border-color: green;
+    border-color: grey;
     /* color: green; */
 }
 

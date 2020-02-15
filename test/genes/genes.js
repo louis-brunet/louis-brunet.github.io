@@ -280,7 +280,7 @@ function buildExpressionsDiv() {
 	let chcs = genesExpressions.distinct('datacolonne8');
 
 	chcs.forEach(chc => {
-		// Find expressions matching each CHC
+		// Find expressions matching each CHC, sorted by type
 		let matched = genesExpressions.get({
 			fields: ['datatype', 'datasoustype'],
 			filter: e => {
@@ -290,12 +290,31 @@ function buildExpressionsDiv() {
 				return (a.datatype < b.datatype? -1 : 1);
 			}
 		});
-		//TODO GROUP VALUES BY SOUSTYPE & COLONNE9 ()
+		//TODO GROUP VALUES BY TYPE & COLONNE9 (miseq, fluidigm)
+		let countedTypes = [];
 		let exprItemDiv = genesCreateTextDiv(chc + ' = ', 'expression');
-		matched.forEach(e => {
-			exprItemDiv.appendChild(genesCreateSpan(e.datatype, 'expr-' + e.datatype));
-			let valSpan = genesCreateSpan('('+e.datasoustype+')', 'expr-val');
-			exprItemDiv.appendChild(valSpan);
+		matched.forEach(exp => {
+			if(countedTypes.includes(exp.datatype)) return;
+
+			// Find all expressions in matched with same type
+			let values = [];
+			let thisIndex = matched.indexOf(exp);
+			for (let i = thisIndex; i < matched.length && matched[i].datatype == exp.datatype; i++) {
+				values.push(matched[i].datasoustype);
+			}
+			if(values.length > 0){
+				// Build val str
+				let valStr = '' + values[0];
+				for (let i = 1; i < values.length; i++) {
+					const val = values[i];
+					valStr += '; ' + val;
+				}
+				// Append to CHC line
+				exprItemDiv.appendChild(genesCreateSpan(exp.datatype, 'expr-' + exp.datatype));
+				let valSpan = genesCreateSpan('(' + valStr + ') ', 'expr-val');
+				exprItemDiv.appendChild(valSpan);
+				countedTypes.push(exp.datatype);
+			}
 		});
 		exprDiv.appendChild(exprItemDiv);
 	})	
