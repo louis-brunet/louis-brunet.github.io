@@ -227,12 +227,12 @@
             "strand":	"-",
             "famille":	"mutation",
             "presence": "non",
-            "type":		,
-            "soustype":	,
-            "gnomen":	,
-            "pnomen":	,
-            "cnomen":	,
-            "so":       ,
+            "type":		"",
+            "soustype":	"",
+            "gnomen":	"",
+            "pnomen":	"",
+            "cnomen":	"",
+            "so":       "",
             "colonne7": "MiSeq_Panel1 HCC 01/01/2016",
             "colonne8": "CHC2452T",
             "colonne9": "miseq"
@@ -250,7 +250,7 @@
             "presence": "oui",
             "type":		"fa",
             "soustype":	"100",
-            "so":       ,
+            "so":       "",
             "colonne7": "MiSeq_Panel1 HCC 01/01/2016",
             "colonne8": "CHC2452T",
             "colonne9": "miseq"
@@ -265,7 +265,7 @@
             "presence": "oui",
             "type":		"hd",
             "soustype":	"50",
-            "so":       ,
+            "so":       "",
             "colonne7": "MiSeq_Panel1 HCC 01/01/2016",
             "colonne8": "CHC2452T",
             "colonne9": "miseq"
@@ -280,7 +280,7 @@
             "presence": "oui",
             "type":		"perte",
             "soustype":	"50",
-            "so":       ,
+            "so":       "",
             "colonne7": "MiSeq_Panel1 HCC 01/01/2016",
             "colonne8": "CHC2452T",
             "colonne9": "miseq"
@@ -295,7 +295,7 @@
             "presence": "oui",
             "type":		"gain",
             "soustype":	"75",
-            "so":       ,
+            "so":       "",
             "colonne7": "MiSeq_Panel1 HCC 01/01/2016",
             "colonne8": "CHC2452T",
             "colonne9": "miseq"
@@ -310,7 +310,7 @@
             "presence": "non",
             "type":		"fa",
             "soustype":	"99",
-            "so":       ,
+            "so":       "",
             "colonne7": "MiSeq_Panel1 HCC 01/01/2016",
             "colonne8": "CHC2452T",
             "colonne9": "miseq"
