@@ -46,7 +46,7 @@ request.open('GET', url);
 request.responseType = 'json';
 request.send();
 request.onload = () => {
-    loadDrivers(request.response[0]);
+    loadDrivers(request.response);
 }
 
 /**
