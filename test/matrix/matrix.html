@@ -59,7 +59,7 @@
     <p>
       Filtrer par patients :  
       <button class="close-btn" id="filter-wipe-btn" onclick="resetFilters(this);this.style.display = 'none';">X</button>
-      <input id="patient-select" accept=".txt,.csv,.json" onchange="patientSelect(this)" type="file">
+      <input id="patient-select" accept=".txt" onchange="patientSelect(this)" type="file">
     </p>
     <p>
       Filtrer par gènes :
@@ -107,16 +107,20 @@
       </div>
 
       <div id="genes-to-capture">
-        <p id="genes-title">
+        <div id="genes-title">
           <div id="date-title">
             Synthèse génomique du patient <span id="patient">XXXX</span> à la date du <span id="date-du-jour"></span>
           </div>
-          <span class="label">Gène&nbsp;:&nbsp;</span><span id="name">name</span> 
-          <span class="label">Ch&nbsp;:&nbsp;</span><span id="ch">ch</span>
-          <span class="label">Position&nbsp;:&nbsp;</span><span id="start">start</span> - <span id="end">end</span>
-          <span class="label">Strand&nbsp;:&nbsp;</span><span id="strand">strand</span>
-          <span class="label">Réf.&nbsp;:&nbsp;</span><a href="" id="ref">http://www.ensembl.org/</a>
-        </p>
+          <div id="mat-title">
+            Matériels exploités = <span id="materiel-exploite"></span>
+          </div>
+        </div>
+        <span class="label">Gène&nbsp;:&nbsp;</span><span id="name">name</span> 
+        <span class="label">Ch&nbsp;:&nbsp;</span><span id="ch">ch</span>
+        <span class="label">Position&nbsp;:&nbsp;</span><span id="start">start</span> - <span id="end">end</span>
+        <span class="label">Strand&nbsp;:&nbsp;</span><span id="strand">strand</span>
+        <span class="label">Réf.&nbsp;:&nbsp;</span><a href="" id="ref">http://www.ensembl.org/</a>
+        
 
         <hr>
 

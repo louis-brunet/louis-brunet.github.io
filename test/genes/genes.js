@@ -247,6 +247,7 @@ function genesInit() {
 	genesItems = [];
 	genesGroups = [];
 	genesExpressions = [];
+	document.getElementById('materiel-exploite').innerHTML = '';
 	document.getElementById('expressions-div').innerHTML = '';
 }
 
