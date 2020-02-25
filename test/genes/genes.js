@@ -153,10 +153,11 @@ function genesCreateDriverBtn(div, driver) {
 	let dNom = driver.nom;
 
     button.onclick = () => {
+    	// unselect if already selected
 		if(genesDriver != undefined && genesDriver.nom == dNom) {
 			let thisBtn = document.getElementById(btnId);
 			thisBtn.className = thisBtn.className.replace('driver-selected', '');
-			// unselect btns
+			// unselect gene btns
 			let btnsToUnselect = [];
 			for (let i = 0; i < genesDriver.genes.length; i++) {
 				const gStr = genesDriver.genes[i];
@@ -182,15 +183,13 @@ function genesCreateDriverBtn(div, driver) {
     }
 }
 
-// TODO 
 function genesCreateCarteBtn(div, carte) {
 	let button = document.createElement('button');
 	button.className = 'carte-btn';
 	let btnId = 'driver-' + carte.nom.toLowerCase();
 	button.id = btnId;
-	let cNom = carte.nom; // TODO change
+	let cNom = carte.nom; 
 
-	//TODO change
     button.onclick = () => {
 		if(genesDriver != undefined && genesDriver.nom == cNom) {
 			let thisBtn = document.getElementById(btnId);
