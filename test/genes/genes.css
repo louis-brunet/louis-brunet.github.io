@@ -79,15 +79,14 @@ button:hover {
 }
 
 
-#driver-btns {
+#driver-btns, #carte-btns {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
 }
 
-.driver-btn {
-    background-color: rgb(110, 15, 15);
+.driver-btn, .carte-btn {
     flex-shrink: 1;
     color: white;
     min-width: 100px;
@@ -96,12 +95,26 @@ button:hover {
     padding: 10px;
 }
 
+.driver-btn {
+    background-color: rgb(110, 15, 15);
+}
+
+.carte-btn {
+    background-color: blue;
+}
+
 .driver-btn.driver-selected, .driver-btn:hover {
     background-color: rgb(231, 199, 157);
     color: rgb(110, 15, 15);
     box-shadow: none;
     transition: background-color 0.17s linear, color 0.17s linear;
+}
 
+.carte-btn.driver-selected, .carte-btn:hover {
+    background-color: #b2b2ff;
+    color: blue;
+    box-shadow: none;
+    transition: background-color 0.17s linear, color 0.17s linear;
 }
 
 

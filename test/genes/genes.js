@@ -8,16 +8,33 @@ var genesUrl = 'https://louis-brunet.github.io/test/genes/data.json';
  */
 var genesDriver;
 var genesDrivers = [{
-	"nom":      "Jay_q_in.05",
-	"genes":    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;HNF1A;BAP1;EEF1A1;IL6ST;DYRK1A;GABRA2;BRD7;APOB;COL11A1;KLF15;SETD2;HMBS;DOCK2;ADAMTS19"
+	nom:      "Jay_q_in.05",
+	genes:    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;HNF1A;BAP1;EEF1A1;IL6ST;DYRK1A;GABRA2;BRD7;APOB;COL11A1;KLF15;SETD2;HMBS;DOCK2;ADAMTS19"
 },{
-	"nom":      "HCA",
-	"genes":    "CTNNB1;HNF1A;IL6ST;JAK1;GNAS;FRK;STAT3;GLI1"
+	nom:      "HCA",
+	genes:    "CTNNB1;HNF1A;IL6ST;JAK1;GNAS;FRK;STAT3;GLI1"
 },{
-	"nom":      "Schulze_p_inf.01",
-	"genes":    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;ATP10B;FGA;MEF2C;HNF1A;ZNRF3;EPHA4;PTEN;TSC1"
+	nom:      "Schulze_p_inf.01",
+	genes:    "TP53;CTNNB1;AXIN1;ALB;ARID2;ARID1A;ACVR2A;NFE2L2;RPS6KA3;KEAP1;RPL22;CDKN2A;CDKN1A;RB1;TSC2;ATP10B;FGA;MEF2C;HNF1A;ZNRF3;EPHA4;PTEN;TSC1"
 }];
 var genesAllGenes = [];
+
+// TODO
+var genesCartes = [{
+	nom: 	'5-gene-score',
+	classes: [{
+		nom: 	'P1-P2',
+		type: 	'expr',
+		genes: 	'JPT1;KRT19;RAMP3;RAN;TAF9'
+	}]
+},{
+	nom: 	'G1-G6-groups',
+	classes: [{
+		nom: 	'G1-G6',
+		type: 	'expr',
+		genes: 	'AFP;CDH2;CYP2C9;EPHA1;G0S2;HAMP;JPT1;IGF2;LAMA3;MERTK;NRAS;PAK2;PIR;RAB1A;RAMP3;REG3A;SAE1'
+	}]
+}];
 
 /**
  * Keep track of anomalies familles for each CHC.
@@ -97,45 +114,26 @@ setInterval( () => {
  * UI FUNCTIONS
  */
 
+
 function genesLoadDrivers() {
 	genesAllGenes = [];
 
     let driverDiv = document.getElementById('driver-btns');
     driverDiv.innerHTML = '';
-    genesDrivers.forEach(d => {
-        let button = document.createElement('button');
-		button.className = 'driver-btn';
-		let btnId = 'driver-' + d.nom.toLowerCase();
-		button.id = btnId;
-		let dNom = d.nom;
-        button.onclick = () => {
-			if(genesDriver != undefined && genesDriver.nom == dNom) {
-				let thisBtn = document.getElementById(btnId);
-				thisBtn.className = thisBtn.className.replace('driver-selected', '');
-				// unselect btns
-				let btnsToUnselect = [];
-				for (let i = 0; i < genesDriver.genes.length; i++) {
-					const gStr = genesDriver.genes[i];
-					btnsToUnselect.push('genes-select-' + gStr.toLowerCase());
-				}
-				btnsToUnselect.forEach(btnId => {
-					genesUnselectGeneBtn(btnId);
-				});
-				genesDriver = undefined;
-			} else {
-				genesSetDriver(d.nom);
-			}
-        };
-        button.appendChild(document.createTextNode(d.nom));
-        driverDiv.appendChild(button);
 
-        let geneArr = d.genes.split(';');
-        for (let i = 0; i < geneArr.length; i++) {
-            const gStr = geneArr[i];
-            if(!genesAllGenes.includes(gStr))
-                genesAllGenes.push(gStr);
-        }
+    genesDrivers.forEach(d => {
+        genesCreateDriverBtn(driverDiv, d);
     });
+
+
+    let cartesDiv = document.getElementById('carte-btns');
+    cartesDiv.innerHTML = '';
+
+    genesCartes.forEach(c => {
+    	genesAddDriver(c);
+    	genesCreateCarteBtn(cartesDiv, c);
+    });
+
     genesAllGenes = genesAllGenes.sort();
 
     // Reset and fill gene filter div
@@ -147,10 +145,111 @@ function genesLoadDrivers() {
     });
 }
 
+function genesCreateDriverBtn(div, driver) {
+	let button = document.createElement('button');
+	button.className = 'driver-btn';
+	let btnId = 'driver-' + driver.nom.toLowerCase();
+	button.id = btnId;
+	let dNom = driver.nom;
+
+    button.onclick = () => {
+		if(genesDriver != undefined && genesDriver.nom == dNom) {
+			let thisBtn = document.getElementById(btnId);
+			thisBtn.className = thisBtn.className.replace('driver-selected', '');
+			// unselect btns
+			let btnsToUnselect = [];
+			for (let i = 0; i < genesDriver.genes.length; i++) {
+				const gStr = genesDriver.genes[i];
+				btnsToUnselect.push('genes-select-' + gStr.toLowerCase());
+			}
+			btnsToUnselect.forEach(btnId => {
+				genesUnselectGeneBtn(btnId);
+			});
+			genesDriver = undefined;
+		} else {
+			genesSetDriver(d.nom);
+		}
+    };
+
+    button.appendChild(document.createTextNode(driver.nom));
+    div.appendChild(button);
+
+    let geneArr = driver.genes.split(';');
+    for (let i = 0; i < geneArr.length; i++) {
+        const gStr = geneArr[i];
+        if(!genesAllGenes.includes(gStr))
+            genesAllGenes.push(gStr);
+    }
+}
+
+// TODO 
+function genesCreateCarteBtn(div, carte) {
+	let button = document.createElement('button');
+	button.className = 'carte-btn';
+	let btnId = 'driver-' + carte.nom.toLowerCase();
+	button.id = btnId;
+	let cNom = carte.nom; // TODO change
+
+	//TODO change
+    button.onclick = () => {
+		if(genesDriver != undefined && genesDriver.nom == cNom) {
+			let thisBtn = document.getElementById(btnId);
+			thisBtn.className = thisBtn.className.replace('driver-selected', '');
+			// unselect btns
+			let btnsToUnselect = [];
+			for (let i = 0; i < genesDriver.genes.length; i++) {
+				const gStr = genesDriver.genes[i];
+				btnsToUnselect.push('genes-select-' + gStr.toLowerCase());
+			}
+			btnsToUnselect.forEach(btnId => {
+				genesUnselectGeneBtn(btnId);
+			});
+			genesDriver = undefined;
+		} else {
+			genesSetDriver(d.nom);
+		}
+    };
+
+    button.appendChild(document.createTextNode(carte.nom)); 
+    div.appendChild(button);
+
+
+    carte.classes.forEach(classe => {
+    	let geneArr = classe.genes.split(';');
+	    for (let i = 0; i < geneArr.length; i++) {
+	        const gStr = geneArr[i];
+	        if(!genesAllGenes.includes(gStr))
+	            genesAllGenes.push(gStr);
+	    }
+    });  
+}
+
+/**
+ * Create driver from item in genesCartes array
+ */
+function genesAddDriver(carte) {
+	let driver = {
+		nom: 	carte.nom,
+		genes: 	''
+	}
+
+	carte.classes.forEach(classe => {
+		let genes = classe.genes.split(';');
+
+		for (let i = 0; i < genes.length; i++) {
+			if(!driver.genes.includes(genes[i])){
+				driver.genes += ';' + genes[i];
+			}
+		}
+	});
+
+	genesDrivers.push(driver);
+}
+
 function genesSetDriver(dName) {
 	if(genesDriver) {
         let btn = document.getElementById('driver-' + genesDriver.nom.toLowerCase());
-        btn.className = btn.className.replace(' driver-selected', '');
+        btn.className = btn.className.replace('driver-selected', '');
 	}
 	
 	document.getElementById('driver-' + dName.toLowerCase()).className += ' driver-selected';
