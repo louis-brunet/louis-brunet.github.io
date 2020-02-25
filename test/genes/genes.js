@@ -34,6 +34,80 @@ var genesCartes = [{
 		type: 	'expr',
 		genes: 	'AFP;CDH2;CYP2C9;EPHA1;G0S2;HAMP;JPT1;IGF2;LAMA3;MERTK;NRAS;PAK2;PIR;RAB1A;RAMP3;REG3A;SAE1'
 	}]
+},{
+	nom: 	'56-gene-score',
+	classes: [{
+		nom: 	'G1-G6',
+		type: 	'expr',
+		genes: 	'AFP;CDH2;CYP2C9;EPHA1;G0S2;HAMP;JPT1;IGF2;LAMA3;MERTK;NRAS;PAK2;PIR;RAB1A;RAMP3;REG3A;SAE1'
+	},{
+		nom: 	'P1-P2',
+		type: 	'expr',
+		genes: 	'JPT1;KRT19;RAMP3;RAN;TAF9'
+	}, {
+		nom: 	'hepatocellular tumor',
+		type: 	'expr',
+		genes: 	'AFP;C8A;CYP3A7;EPCAM;FABP1;GNMT;HAL;HNF4A;TFRC;HNF1A;SERPINA1'
+	}, {
+		nom: 	'malignant HCC',
+		type: 	'expr',
+		genes: 	'AFP;CAP2;LCAT;ANGPT2;AURKA;CDC20;DHRS2;LYVE1;ADM'
+	}, {
+		nom: 	'benign FNH',
+		type: 	'expr',
+		genes: 	'HAL;ANGPTL7;GLUL;ANGPT1;HMGB3;GMNN;RAMP3;RHBG;UGT2B7;LGR5;RARRES2;RBM47;GIMAP5'
+	},{
+		nom: 	'benign HCA',
+		type: 	'expr',
+		genes: 	'HAL;CYP3A7;LCAT;LYVE1;AKR1B10;GLS2;KRT19;ESR1;SDS;MERTK;EPHA1;CCL5;CYP2C9'
+	},{
+		nom: 	'HNF1A',
+		type: 	'expr',
+		genes: 	'ANGPT2;FABP1;UGT2B7;DHRS2;ANGPTL7'
+	},{
+		nom: 	'inflammation',
+		type: 	'expr',
+		genes: 	'ANGPT2;EPHA1;CCL5;HAMP;SAA2;NRCAM;KRT19'
+	},{
+		nom: 	'Wnt/betacatenin',
+		type: 	'expr',
+		genes: 	'TFRC;HAL;CAP2;GLUL;HMGB3;LGR5;GIMAP5;AKR1B10;REG3A;AMACR;TAF9;LAPTM4B;IGF2BP3'
+	},]
+},{
+	nom: 	'benign tumors',
+	classes:[{
+		nom: 	'B vs. M',
+		type: 	'expr',
+		genes: 	'AKR1B10;C8A;CAP2;CYP2C19;CYP3A7;DPP8;ESR1;GMNN;GPC3;GSN;HSPA4;LAPTM4B;LCAT;LYVE1;NEK7;RRM2;STEAP3;CDC20;TERT;MKI67;AURKA;PCNA;BIRC5'
+	},{
+		nom: 	'benign FNH',
+		type: 	'expr',
+		genes: 	'HAL;ANGPTL7;GLUL;ANGPT1;HMGB3;GMNN;RAMP3;RHBG;UGT2B7;LGR5;RARRES2;RBM47;GIMAP5;ANGPT2;ACKR3;GADD45B;ID2;NTS;variable-ANGPT1/ANGPT2 ratio;variable-NTS/HAL ratio'
+	},{
+		nom: 	'benign HCA',
+		type: 	'expr',
+		genes: 	'HAL;CYP3A7;LCAT;LYVE1;AKR1B10;GLS2;KRT19;ESR1;SDS;MERTK;EPHA1;CCL5;CYP2C9'
+	},{
+		nom: 	'HNF1A',
+		type: 	'expr',
+		genes: 	'ANGPT2;FABP1;UGT2B7;DHRS2;ANGPTL7'
+	},{
+		nom: 	'inflammation',
+		type: 	'expr',
+		genes: 	'ANGPT2;EPHA1;CCL5;HAMP;SAA2;NRCAM;KRT19;GLS2;DHRS2;GNMT;CRP;SPINK1;MME;SLC16A1'
+	},{
+		nom: 	'Wnt/betacatenin',
+		type: 	'expr',
+		genes: 	'TFRC;HAL;CAP2;HMGB3;GIMAP5;AKR1B10;REG3A;AMACR;TAF9;LAPTM4B;IGF2BP3;GLUL;LGR5;AXIN2;LAMA3;TBX3;RHBG;SLPI'
+	},{
+		nom: 	'sonic Hedgehog (sh)',
+		type: 	'expr',
+		genes: 	'FCRLA;GLI1;ADGRG3;HHIP;TNNC1;PTCH1;PTGDS'
+	},{
+		nom: 	'differentiation',
+		type: 	'expr',
+		genes: 	'AFP;EPCAM;GPC3;PROM1;SALL4;THY1;KRT19;SOX9;CYP2A6;CDH1;ALB;APOF;CYP1A1'
+	},]
 }];
 
 /**
