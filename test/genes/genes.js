@@ -167,7 +167,7 @@ function genesCreateDriverBtn(div, driver) {
 			});
 			genesDriver = undefined;
 		} else {
-			genesSetDriver(d.nom);
+			genesSetDriver(driver.nom);
 		}
     };
 
@@ -206,7 +206,7 @@ function genesCreateCarteBtn(div, carte) {
 			});
 			genesDriver = undefined;
 		} else {
-			genesSetDriver(d.nom);
+			genesSetDriver(carte.nom);
 		}
     };
 
