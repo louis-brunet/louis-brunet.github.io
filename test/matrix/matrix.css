@@ -165,7 +165,7 @@ strong {
     display: none;
 }
 
-#top-btns, #top-right-btns, #top-left-btns {
+#top-btns, #matrix-top-btns, #top-right-btns, #matrix-top-right-btns, #top-left-btns, #matrix-left-btns {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -251,6 +251,7 @@ strong {
     margin-left: auto;
     margin-right: auto;
     margin-top: 60px;
+    margin-bottom: 60px;
 }
   
 @keyframes spin {
@@ -258,7 +259,7 @@ strong {
     100% { transform: rotate(360deg); }
 }
 
-#settings {
+#settings, #matrix-settings {
     background-color: rgb(200,200,200);
     border-radius: 8px;
     padding: 8px;

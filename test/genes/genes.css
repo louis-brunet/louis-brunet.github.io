@@ -161,6 +161,10 @@ button:hover {
 
 
 
+/* #matrix-window-container * {
+    outline: 1px solid magenta;
+} */
+
 #matrix-btn {
     background-color: #E69500;
     color: white;
@@ -197,5 +201,13 @@ button:hover {
 
 
 #matrix {
-    overflow: hidden;
+    overflow: scroll;
+}
+
+#matrix .graph-item {
+    cursor: initial;
+}
+
+.graph-pane {
+    margin-top: 5px;
 }

@@ -239,7 +239,7 @@ function genesCreateDriverBtn(div, driver) {
 			let btnsToUnselect = [];
 			for (let i = 0; i < genesDriver.genes.length; i++) {
 				const gStr = genesDriver.genes[i];
-				btnsToUnselect.push('genes-select-' + gStr.toLowerCase());
+				btnsToUnselect.push('genes-genes-select-' + gStr.toLowerCase());
 			}
 			btnsToUnselect.forEach(btnId => {
 				genesUnselectGeneBtn(btnId);
@@ -276,7 +276,7 @@ function genesCreateCarteBtn(div, carte) {
 			let btnsToUnselect = [];
 			for (let i = 0; i < genesDriver.genes.length; i++) {
 				const gStr = genesDriver.genes[i];
-				btnsToUnselect.push('genes-select-' + gStr.toLowerCase());
+				btnsToUnselect.push('genes-genes-select-' + gStr.toLowerCase());
 			}
 			btnsToUnselect.forEach(btnId => {
 				genesUnselectGeneBtn(btnId);
@@ -346,7 +346,7 @@ function genesSetDriver(dName) {
     let btnsToSelect = [];
     for (let i = 0; i < genesDriver.genes.length; i++) {
         const gStr = genesDriver.genes[i];
-        btnsToSelect.push('genes-select-' + gStr.toLowerCase());
+        btnsToSelect.push('genes-genes-select-' + gStr.toLowerCase());
     }
     let geneBtns = document.querySelectorAll('.genes-select-item');
     for (let i = 0; i < geneBtns.length; i++) {
@@ -375,7 +375,7 @@ function genesUnselectGeneBtn(geneBtnId) {
 
 function genesCreateGeneFilterBtn(gStr) {
    let res = genesCreateTextDiv(gStr, 'genes-select-item visible');
-   let id = 'genes-select-' + gStr.toLowerCase();
+   let id = 'genes-genes-select-' + gStr.toLowerCase();
    res.id = id;
 
    res.onclick = () => {

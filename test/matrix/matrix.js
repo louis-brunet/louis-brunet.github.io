@@ -1283,7 +1283,9 @@ function fillContent(contentDiv, rowOrder, columnOrder) {
             let newItem = createDiv('graph-item');
             let intersectItem = getIntersection(rowTitle, colTitle);
             if(intersectItem) {
-                newItem.style.cursor = 'pointer';
+                if(document.title.includes('Matrix')) {
+                    newItem.style.cursor = 'pointer';
+                }
                 newItem.onclick = matrixCreateTimeline;
                 createIntersectDiv(intersectItem, newItem);
             }

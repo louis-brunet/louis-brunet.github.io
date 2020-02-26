@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gènes | Synthèse</title>
 
   <script src="../vis-timeline-graph2d.min.js"></script>
@@ -71,7 +72,7 @@
   <div id="matrix-window-container">
     <div class="card" id="matrix-window">
       <button class="close-btn" onclick="document.getElementById('matrix-window-container').style.display = 'none';document.getElementById('matrix-output-card').style.display = 'none'">X</button>
-      <button id="matrix-cap-btn" onclick="captureMatrixWindow()">JPEG</button>
+      <!-- <button id="matrix-cap-btn" onclick="captureMatrixWindow()">JPEG</button> -->
 
       <div class="card" id="matrix-output-card">
         <button class="close-btn" id="matrix-close-btn" onclick="document.getElementById('matrix-output-card').style.display = 'none';document.getElementById('matrix-cap-btn').style.display = 'inline-block'">X</button>
@@ -102,7 +103,7 @@
             <div id="driver-btns"></div>
             <div id='top-right-btns'>
               <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
-              <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+              <button id="matrix-cap-btn" onclick="captureMatrixWindow();this.style.display = 'none'">JPEG</button>
             </div>
           </div>
           <p>
