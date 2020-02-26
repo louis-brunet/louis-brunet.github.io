@@ -314,8 +314,6 @@ function createItem(parsedItem, id) {
   }
 
   if (parsedItem.hasOwnProperty('text') ){
-    // res.title = parsedItem.text;
-
     res.className = res.className + ' tooltip';
     res['tooltip'] = parsedItem.text;
   } else {
