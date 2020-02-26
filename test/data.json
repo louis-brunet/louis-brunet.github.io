@@ -190,5 +190,22 @@
 	"content":"TDM", 
 	"className":"examen",
 	"start":"2020-02-01"
+},
+{
+	"content":"CHIEF", 
+	"className":"inclusion",
+	"start":"2018-11-01",
+	"end":"",
+	"text":{
+		"normal":"XXXXXXXX"
+	}
+},
+{
+	"content":"SG", 
+	"className":"crb",
+	"start":"2014-02-10",
+	"text":{
+		"normal":"20ml / référence XXXX"
+	}
 }]
 

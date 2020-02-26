@@ -1,3 +1,5 @@
+let url = 'https://louis-brunet.github.io/test/data.json';
+
 /**
  * INITIALISATION DE LA TIMELINE
  */
@@ -9,7 +11,9 @@ var groups = new vis.DataSet([
       {id: 3, content: 'Consultations', value: 1},
       {id: 4, content: 'Pathologies non tumorales', value: 3},
       {id: 5, content: 'Complications', value: 6},
-      {id: 6, content: 'Traitements systémiques', value: 5}
+      {id: 6, content: 'Traitements systémiques', value: 5},
+      {id: 7, content: 'Inclusions', value: 8},
+      {id: 8, content: 'Prélèvement CRB', value: 9}
     ]);
 
 // create visualization
@@ -39,7 +43,6 @@ var options = {
 
 // Chargement des données
 var timeline;
-let url = 'https://louis-brunet.github.io/test/data.json';
 var request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
@@ -293,6 +296,12 @@ function createItem(parsedItem, id) {
       break;
     case 'traitement-s':
       res.group = 6;
+      break;
+    case 'inclusion':
+      res.group = 7;
+      break;
+    case 'crb':
+      res.group = 8;
       break;
   }
 
