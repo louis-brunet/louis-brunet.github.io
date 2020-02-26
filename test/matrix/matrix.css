@@ -1,5 +1,5 @@
 body {
-    font-size: 90%;
+    font-size: 80%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -136,9 +136,9 @@ body {
 }
 
 button {
-    margin: auto;
-    margin-right: 10px;
-    padding: 10px;
+    max-height: 30px;
+    margin: 6px;
+    padding: 6px;
     background-color: rgb(10, 17, 119);
     color: white;
     border: none;

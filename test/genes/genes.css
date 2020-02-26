@@ -1,5 +1,6 @@
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 80%;
 }
 
 
@@ -23,8 +24,6 @@ body {
 }
 
 #cap-btn {
-    margin: 10px;
-    padding: 10px;
     background-color: green;
     color: white;
 }
@@ -48,6 +47,10 @@ button {
     border: none;
 }
 
+button, #viewer-btn {
+    max-height: 30px;
+}
+
 button:focus {
     outline:none;
 }
@@ -55,6 +58,10 @@ button:focus {
 button:hover {
     box-shadow: 0 0 4px rgba(0, 0, 0, 1);
 }
+
+/* #viewer-btn {
+    display: inline-block;
+} */
 
 #output-card {
     display:none;
@@ -79,70 +86,116 @@ button:hover {
 }
 
 
-#driver-btns, #carte-btns {
+#genes-driver-btns, #genes-carte-btns {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
 }
 
-.driver-btn, .carte-btn {
+.genes-driver-btn, .genes-carte-btn {
     flex-shrink: 1;
     color: white;
     min-width: 100px;
-    max-height: 40px;
-    margin: 10px;
-    padding: 10px;
+    /* max-height: 40px; */
 }
 
-.driver-btn {
+.genes-driver-btn, .genes-carte-btn, #cap-btn, a#viewer-btn, #matrix-btn {
+    margin: 6px;
+    padding: 6px;
+}
+
+.genes-driver-btn {
     background-color: rgb(110, 15, 15);
 }
 
-.carte-btn {
+.genes-carte-btn {
     background-color: blue;
 }
 
-.driver-btn.driver-selected, .driver-btn:hover {
+.genes-driver-btn.driver-selected, .genes-driver-btn:hover {
     background-color: rgb(231, 199, 157);
     color: rgb(110, 15, 15);
     box-shadow: none;
     transition: background-color 0.17s linear, color 0.17s linear;
 }
 
-.carte-btn.driver-selected, .carte-btn:hover {
+.genes-carte-btn.driver-selected, .genes-carte-btn:hover {
     background-color: #b2b2ff;
     color: blue;
     box-shadow: none;
     transition: background-color 0.17s linear, color 0.17s linear;
 }
 
-
-#genes-filter-container {
+#genes-select-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.genes-filter-item {
-    padding: 4px;
+.genes-select-item {
+    padding: 2px;
     margin: 2px;
     cursor: pointer;
 
 }
 
-.genes-filter-item, .genes-filter-item.genes-selected:active  {
+.genes-select-item, .genes-select-item.genes-selected:active  {
     background-color: rgb(180, 180, 180);
     color: black;
 }
 
-.genes-filter-item.genes-selected:hover, .genes-filter-item:hover  {
+.genes-select-item.genes-selected:hover, .genes-select-item:hover  {
     background-color: rgb(211, 188, 159);
     color: black;
 }
 
-.genes-filter-item.genes-selected, .genes-filter-item:active {
+.genes-select-item.genes-selected, .genes-select-item:active {
     background-color: rgb(231, 199, 157);
     color: rgb(110, 15, 15);
+}
+
+
+
+
+
+
+#matrix-btn {
+    background-color: #E69500;
+    color: white;
+}
+
+
+#matrix-window-container {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#matrix-window {
+    box-sizing: border-box;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+#matrix-cap-btn {
+    float: right;
+}
+
+
+#matrix-output-card {
+    display: none;
+    background-color: rgb(150, 150, 150);
+}
+
+
+#matrix {
+    overflow: hidden;
 }

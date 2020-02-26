@@ -7,6 +7,8 @@
   <script src="../vis-timeline-graph2d.min.js"></script>
   <link href="../vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
   
+  <link rel="stylesheet" type="text/css" href="../matrix/matrix.css">
+
   <link rel="stylesheet" type="text/css" href="genes.css">
   <link rel="stylesheet" type="text/css" href="genestimeline.css">
 </head>
@@ -14,9 +16,10 @@
 <body>
   <div id="settings">
     <div id="top-btns">
-      <div id="driver-btns"></div>
-      <div id="carte-btns"></div>
+      <div id="genes-driver-btns"></div>
+      <div id="genes-carte-btns"></div>
       <div id='top-right-btns'>
+        <button id="matrix-btn" onclick="showPatientMatrix()">Matrice</button>
         <a id="viewer-btn" href="http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]">Viewer</a>
         <button id="cap-btn" onclick="captureVis();this.style.display = 'none'">JPEG</button>
       </div>
@@ -28,7 +31,7 @@
       <input id="genes-input" accept=".txt" onchange="genesSelect(this)" type="file">
     </p>
 
-    <div id="genes-filter-container"></div>
+    <div id="genes-select-container"></div>
 
   </div>
 
@@ -63,7 +66,78 @@
       <div id="expressions-div"></div>
     </div>
   </div>
+
+
+  <div id="matrix-window-container">
+    <div class="card" id="matrix-window">
+      <button class="close-btn" onclick="document.getElementById('matrix-window-container').style.display = 'none';document.getElementById('matrix-output-card').style.display = 'none'">X</button>
+      <button id="matrix-cap-btn" onclick="captureMatrixWindow()">JPEG</button>
+
+      <div class="card" id="matrix-output-card">
+        <button class="close-btn" id="matrix-close-btn" onclick="document.getElementById('matrix-output-card').style.display = 'none';document.getElementById('matrix-cap-btn').style.display = 'inline-block'">X</button>
+        <img id="matrix-output">
+      </div>
+      <div id="matrix-content">
+
+        <div id="matrix-settings">
+          <div id="matrix-top-btns">
+            <div id="matrix-top-left-btns">
+              <div style="visibility: hidden;">
+                <input id="patients-btn" type="radio" name="row-type-btn" value="patient" checked> 
+              </div>
+              <div id="sort-radio-btns">
+                <div class="label">Tri</div>
+                <div>
+                  <div class="radio">
+                    <input id="mutations-btn" type="radio" name="sorting-btn" value="mutations" checked> 
+                    <label for="mutations-btn">Par mutations</label>
+                  </div>
+                  <div class="radio">
+                    <input id="default-btn" type="radio" name="sorting-btn" value="default">
+                    <label for="default-btn">Par défaut</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="driver-btns"></div>
+            <div id='top-right-btns'>
+              <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
+              <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+            </div>
+          </div>
+          <p>
+            Filtrer par gènes :
+            <span id="genes-input-warning">Non implémenté</span>
+            <input id="genes-input" accept=".txt" onchange="genesSelect(this)" type="file">
+          </p>
+      
+          <div id="genes-filter-container"></div>
+      
+        </div>
+        <div class="card" id="output-card">
+          <button class="close-btn" id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'inline-block'">X</button>
+          <img id="output">
+        </div>
+      
+      
+        <div id="matrix-to-capture">
+          <p id="matrix-title">
+            <span id="nb-patients-span">
+              <span class="label">Patient </span>
+              <span id="patient-id-val"></span>
+            </span>
+          </p>
+          
+          <hr>
+          
+          <div id="loader"></div>
+          <div id="matrix"></div>  
+        </div>
+      </div>
+    </div>
+  </div>
   
+  <script src="../matrix/matrix.js"></script>
   <script src="genes.js"></script>
   <script type="text/javascript" src="../html2canvas.min.js"></script>
 </body>

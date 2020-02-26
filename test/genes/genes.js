@@ -3,6 +3,10 @@
  */
 var genesUrl = 'https://louis-brunet.github.io/test/genes/data.json';
 
+var patientId = '10';
+if(patientFilter != undefined)
+	patientFilter = [patientId];
+
 /**
  * Groupes de gènes
  */
@@ -192,7 +196,7 @@ setInterval( () => {
 function genesLoadDrivers() {
 	genesAllGenes = [];
 
-    let driverDiv = document.getElementById('driver-btns');
+    let driverDiv = document.getElementById('genes-driver-btns');
     driverDiv.innerHTML = '';
 
     genesDrivers.forEach(d => {
@@ -200,7 +204,7 @@ function genesLoadDrivers() {
     });
 
 
-    let cartesDiv = document.getElementById('carte-btns');
+    let cartesDiv = document.getElementById('genes-carte-btns');
     cartesDiv.innerHTML = '';
 
     genesCartes.forEach(c => {
@@ -211,7 +215,7 @@ function genesLoadDrivers() {
     genesAllGenes = genesAllGenes.sort();
 
     // Reset and fill gene filter div
-    let geneFilterDiv = document.getElementById('genes-filter-container');
+    let geneFilterDiv = document.getElementById('genes-select-container');
     geneFilterDiv.innerHTML = '';
     genesAllGenes.forEach(gStr => {
         let geneFilterBtn = genesCreateGeneFilterBtn(gStr);
@@ -221,8 +225,8 @@ function genesLoadDrivers() {
 
 function genesCreateDriverBtn(div, driver) {
 	let button = document.createElement('button');
-	button.className = 'driver-btn';
-	let btnId = 'driver-' + driver.nom.toLowerCase();
+	button.className = 'genes-driver-btn';
+	let btnId = 'genes-driver-' + driver.nom.toLowerCase();
 	button.id = btnId;
 	let dNom = driver.nom;
 
@@ -259,8 +263,8 @@ function genesCreateDriverBtn(div, driver) {
 
 function genesCreateCarteBtn(div, carte) {
 	let button = document.createElement('button');
-	button.className = 'carte-btn';
-	let btnId = 'driver-' + carte.nom.toLowerCase();
+	button.className = 'genes-carte-btn';
+	let btnId = 'genes-driver-' + carte.nom.toLowerCase();
 	button.id = btnId;
 	let cNom = carte.nom; 
 
@@ -321,11 +325,11 @@ function genesAddDriver(carte) {
 
 function genesSetDriver(dName) {
 	if(genesDriver) {
-        let btn = document.getElementById('driver-' + genesDriver.nom.toLowerCase());
+        let btn = document.getElementById('genes-driver-' + genesDriver.nom.toLowerCase());
         btn.className = btn.className.replace('driver-selected', '');
 	}
 	
-	document.getElementById('driver-' + dName.toLowerCase()).className += ' driver-selected';
+	document.getElementById('genes-driver-' + dName.toLowerCase()).className += ' driver-selected';
 
     let d;
     for (let i = 0; i < genesDrivers.length; i++) {
@@ -344,7 +348,7 @@ function genesSetDriver(dName) {
         const gStr = genesDriver.genes[i];
         btnsToSelect.push('genes-select-' + gStr.toLowerCase());
     }
-    let geneBtns = document.querySelectorAll('.genes-filter-item');
+    let geneBtns = document.querySelectorAll('.genes-select-item');
     for (let i = 0; i < geneBtns.length; i++) {
         const btn = geneBtns[i];
         if(btnsToSelect.includes(btn.id)) {
@@ -370,7 +374,7 @@ function genesUnselectGeneBtn(geneBtnId) {
 }
 
 function genesCreateGeneFilterBtn(gStr) {
-   let res = genesCreateTextDiv(gStr, 'genes-filter-item visible');
+   let res = genesCreateTextDiv(gStr, 'genes-select-item visible');
    let id = 'genes-select-' + gStr.toLowerCase();
    res.id = id;
 
@@ -966,3 +970,10 @@ function captureVis() {
 		t.style.display = 'block';
 	});
 }
+
+
+
+function showPatientMatrix() {
+	document.getElementById('matrix-window-container').style.display = 'block';
+}
+

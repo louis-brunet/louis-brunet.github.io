@@ -3,12 +3,6 @@
  */
  var url = 'https://louis-brunet.github.io/test/matrix/datanew.json';
 
-
-
-if (!window.File || !window.FileReader) {
-    alert('The File APIs are not fully supported in this browser.');
- }
-
 /**
  * CONSTANTS & GLOBAL VARIABLES
  */
@@ -20,7 +14,11 @@ var drivers; // [{nom: 'txt', genes: 'gene1;gene2;...'},...]
 var anomalies; // DataSet {id, patient, gene, famille, type}
 
 var patientFilter = [];
-document.getElementById('patient-select').value = '';
+let patientFileInput = document.getElementById('patient-select');
+if(patientFileInput != undefined) {
+    patientFileInput.value = '';
+}
+
 var genesFilter = [];
 var allGenes = [];
 var sortByMutations = false;
@@ -433,9 +431,6 @@ function mergeAnomalies(item1Anomalies, item2Anomalies) {
         nom:    d.nom,
         genes:  d.genes.split(';')
     }
-    // Update graph title 
-    document.getElementById('driver-name').innerHTML = driver.nom;
-    document.getElementById('driver-genes').innerHTML = driver.genes.sort().join(', ');
     document.getElementById('driver-' + d.nom.toLowerCase()).className += ' driver-selected';
 
     // Update selected gene filters
@@ -863,12 +858,22 @@ function optimisedCalculateAvgPatients() {
                 patient:        pStr,
                 totalSomatic:   total
             });
-
         }
     });
 
-    document.getElementById('nb-patients-span').style.display = 'inline';
-    document.getElementById('nb-patients-val').innerHTML = avgPatients.length;
+    let span = document.getElementById('nb-patients-span')
+    if(span != undefined) {
+        span.style.display = 'inline';
+    }
+    let val = document.getElementById('nb-patients-val')
+    if(val != undefined) {
+        val.innerHTML = avgPatients.length;
+    }
+
+    let id = document.getElementById('patient-id-val');
+    if (id != undefined) {
+        id.innerHTML = patientFilter[0];
+    }
 }
 
 function calculateRowOrder() {
@@ -1397,12 +1402,12 @@ function capture() {
 	});
 
 	// Display screencap of #to-capture elem
-	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
+	html2canvas(document.getElementById('matrix-to-capture')).then(function(canvas) {
 		document.getElementById('output-card').style.display = 'block';
 		// Export the canvas to its data URI representation
-		var base64image = canvas.toDataURL("image/jpeg");
+		var img = canvas.toDataURL("image/jpeg");
 		// Display image in #output element
-		document.getElementById('output').src = base64image;
+		document.getElementById('output').src = img;
 	});
 
 	// show tooltips
@@ -1458,3 +1463,5 @@ function resetFilters(input) {
     document.getElementById('nb-patients-span').style.display = 'none';
     document.getElementById('patient-select').value = ''
 }
+
+
