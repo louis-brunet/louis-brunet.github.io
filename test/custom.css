@@ -106,22 +106,25 @@ p#title * {
   color: #333;
   padding: 5px;
   border-radius: 6px;
-  min-width: 140px;
-  margin-left: -70px;
+  min-width: max-content;
+  /* margin-left: -70px; */
   text-align: center;
   border: 1px solid black;
 
   position: absolute;
+  right: calc(100% + 8px);
 }
 
 .tooltip-text.up {
-  bottom: 120%; 
-  left: 50%;
+  /* bottom: 120%; 
+  left: 50%; */
+  bottom: 0;
 } 
 
 .tooltip-text.down {
-  top: 120%; 
-  left: 50%;
+  /* top: 120%; 
+  left: 50%; */
+  top: 0;
 }
 
 /* .tooltip-val {
@@ -148,6 +151,12 @@ p#title * {
 }
 .tooltip-anorm {
   color: red;
+}
+
+.synthese-line {
+  padding: 4px;
+  margin: 2px;
+  /* background-color: rgb(200, 200, 200); */
 }
 
 /*.tooltip-text * {
