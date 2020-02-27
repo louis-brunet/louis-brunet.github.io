@@ -81,6 +81,11 @@ p#title * {
   border-color: rgba(180,180, 0,0.5);
 }
 
+.vis-item.crb, .vis-item.inclusion {
+  background-color: white;
+  color: black;
+  border-color: rgba(0,0,0,0.5);
+}
 .link {
   cursor: pointer;
 }

@@ -196,7 +196,15 @@
 	"className":"inclusion",
 	"start":"2018-11-01",
 	"text":{
-		"normal":"XXXXXXXX"
+		"normal":"chief-text"
+	}
+},
+{
+	"content":"CHIEF", 
+	"className":"inclusion",
+	"end":"2019-08-10",
+	"text":{
+		"normal":"chief-text"
 	}
 },
 {

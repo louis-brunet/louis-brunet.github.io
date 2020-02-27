@@ -271,9 +271,12 @@ function createItem(parsedItem, id) {
     dataId: id,
     group: null,
     className: parsedItem.className,
-    content: parsedItem.content,
-    start: new Date(parsedItem.start)
+    content: parsedItem.content
   };
+
+  if(parsedItem.hasOwnProperty('start')) {
+    res.start = new Date(parsedItem.start);
+  }
 
   switch (res.className) {
     case 'consultation':
@@ -305,7 +308,14 @@ function createItem(parsedItem, id) {
       break;
   }
 
-  if (parsedItem.hasOwnProperty('end') && (parsedItem['end'] != parsedItem['start'])) {
+  let isInclusionEnd = parsedItem.className == 'inclusion' && !parsedItem.hasOwnProperty('start') && parsedItem.hasOwnProperty('end');
+  let isInclusionStart = parsedItem.className == 'inclusion' && !parsedItem.hasOwnProperty('end') && parsedItem.hasOwnProperty('start');
+  if(isInclusionStart) {
+    res.content += ' &#8679;'
+  }else if(isInclusionEnd) {
+    res.start = new Date(parsedItem.end);
+    res.content += ' &#8681;'
+  } else if (parsedItem.hasOwnProperty('end') && (parsedItem['end'] != parsedItem['start'])) {
     if(parsedItem.end != "" && parsedItem.end != " ")
       res.end = new Date(parsedItem.end);
     else {
