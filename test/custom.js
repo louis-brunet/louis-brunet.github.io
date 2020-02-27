@@ -311,10 +311,10 @@ function createItem(parsedItem, id) {
   let isInclusionEnd = parsedItem.className == 'inclusion' && !parsedItem.hasOwnProperty('start') && parsedItem.hasOwnProperty('end');
   let isInclusionStart = parsedItem.className == 'inclusion' && !parsedItem.hasOwnProperty('end') && parsedItem.hasOwnProperty('start');
   if(isInclusionStart) {
-    res.content += ' &#8679;'
+    res.content += ' &#8679;' // add up arrow
   }else if(isInclusionEnd) {
     res.start = new Date(parsedItem.end);
-    res.content += ' &#8681;'
+    res.content += ' &#8681;' // add down arrow
   } else if (parsedItem.hasOwnProperty('end') && (parsedItem['end'] != parsedItem['start'])) {
     if(parsedItem.end != "" && parsedItem.end != " ")
       res.end = new Date(parsedItem.end);
