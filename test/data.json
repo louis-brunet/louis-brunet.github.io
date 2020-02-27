@@ -211,8 +211,27 @@
 	"content":"SG", 
 	"className":"crb",
 	"start":"2014-02-10",
+	"reference":"XXXX",
 	"text":{
-		"normal":"20ml / référence XXXX"
+		"normal":"20ml"
+	}
+},
+{
+	"content":"Ti", 
+	"className":"crb",
+	"start":"2018-10-20",
+	"reference":"XXXX",
+	"text":{
+		"normal":"FT et FNT"
+	}
+},
+{
+	"content":"SG", 
+	"className":"crb",
+	"start":"2015-06-10",
+	"reference":"XXXX",
+	"text":{
+		"normal":"10ml"
 	}
 }]
 
