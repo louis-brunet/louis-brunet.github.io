@@ -88,8 +88,8 @@
 	"className":"traitement-l",
 	"start":"2018-11-25",
 	"end":"2018-11-25",
-	"text":{
-		"normal":"VIII"
+	"synthese_traitement_i":{
+		"tumeurs":"T1"
 	}
 },
 
@@ -169,8 +169,9 @@
 	"className":"traitement-l",
 	"start":"2019-07-30",
 	"end":"2019-07-30",
-	"text":{
-		"normal":"V"
+	"synthese_traitement_i":{
+		"segments":"V",
+		"tumeurs":"T2"
 	}
 
 },
@@ -179,8 +180,9 @@
 	"className":"traitement-l",
 	"start":"2019-08-30",
 	"end":"2019-08-30",
-	"text":{
-		"normal":"V,VI"
+	"synthese_traitement_i":{
+		"segments":"V, VIII",
+		"tumeurs":"T2, T3, T4"
 	}
 
 },
@@ -189,8 +191,9 @@
 	"className":"traitement-l",
 	"start":"2019-09-30",
 	"end":"2019-09-30",
-	"text":{
-		"normal":"VII"
+	"synthese_traitement_i":{
+		"segments":"VIII",
+		"tumeurs":"T3, T4"
 	}
 
 },

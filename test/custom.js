@@ -334,17 +334,18 @@ function createItem(parsedItem, id) {
   let hasSyntheseTraitementI = parsedItem.hasOwnProperty('synthese_traitement_i');
   let hasSyntheseTraitementS = parsedItem.hasOwnProperty('synthese_traitement_s'); 
 
-  if(parsedItem.className.includes('path-t')) {
-    let pause;
-  }
 
   // Load relevant tooltip data
   if (parsedItem.hasOwnProperty('text') || 
       (parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) ||
       hasSynthesePathT || hasSynthesePathNT || hasSyntheseComp || hasSyntheseTraitementI || hasSyntheseTraitementS ){
     res.className = res.className + ' tooltip';
-    res['tooltip'] = parsedItem.text;
     
+    if(parsedItem.hasOwnProperty('text')) {
+      res.tooltip = parsedItem.text;
+    } else {
+      res.tooltip = {};
+    }
     // If is CRB, add réf. to last line of val-norm
     if(parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) {
       if(res.tooltip.normal == undefined) {
@@ -473,7 +474,6 @@ function createTooltip(tooltipObj, container) {
   if(tooltipObj.tooltip.hasOwnProperty('normal')){
     // Valeurs normales
     valNorm = tooltipObj.tooltip.normal.split(';');
-
   } else if(typeof tooltipObj.tooltip === 'string') {
     valNorm = [tooltipObj.tooltip];
   }
@@ -499,7 +499,7 @@ function createTooltip(tooltipObj, container) {
   node.appendChild(dateDiv);
 
   // Val anormales
-  if(valAnorm != undefined && tooltipObj.tooltip['anormal'] ) {
+  if(valAnorm != undefined && tooltipObj.tooltip.hasOwnProperty('anormal') ) {
     let anormNode = document.createElement('div');
     anormNode.className = 'tooltip-anorm tooltip-line';
 
@@ -514,18 +514,21 @@ function createTooltip(tooltipObj, container) {
     node.appendChild(anormNode);
   }
   // Val normales
-  let normNode = document.createElement('div');
-  normNode.className = 'tooltip-norm tooltip-line';
+  if(tooltipObj.tooltip.hasOwnProperty('normal')) {
+    let normNode = document.createElement('div');
+    normNode.className = 'tooltip-norm tooltip-line';
 
-  for (let k = 0; k < valNorm.length; k++) {
-    let normValue = document.createElement('div');
-    normValue.className = 'tooltip-val';
+    for (let k = 0; k < valNorm.length; k++) {
+      let normValue = document.createElement('div');
+      normValue.className = 'tooltip-val';
 
-    let text = document.createTextNode(valNorm[k]);
-    normValue.appendChild(text);
-    normNode.appendChild(normValue);
+      let text = document.createTextNode(valNorm[k]);
+      normValue.appendChild(text);
+      normNode.appendChild(normValue);
+    }
+    node.appendChild(normNode);
   }
-  node.appendChild(normNode);
+  
 
 
   // Synthèses
@@ -594,7 +597,26 @@ function createSyntheseCompPathNtNode(synthese) {
 }
 
 function createSyntheseTraitementINode(synthese) {
+  let res = document.createElement('div');
+  res.className = 'synthese';
 
+  if(synthese.hasOwnProperty('segments')) {
+    let segmentsDiv = document.createElement('div');
+    segmentsDiv.className = 'synthese-line';
+    let text = document.createTextNode(synthese.segments);
+    segmentsDiv.appendChild(text);
+    res.appendChild(segmentsDiv);
+  }
+
+  if(synthese.hasOwnProperty('tumeurs')) {
+    let listDiv = document.createElement('div');
+    listDiv.className = 'synthese-line';
+    let text = document.createTextNode(synthese.tumeurs);
+    listDiv.appendChild(text);
+    res.appendChild(listDiv);
+  }
+
+  return res;
 }
 
 function createSyntheseTraitementSNode(synthese) {
