@@ -100,7 +100,6 @@ p#title * {
 
 .tooltip-text {
   box-sizing: border-box;
-  max-width: 30px;
   display: none;/*
   background-color: rgba(230,230,230,0.8);*/
   background-color: white;
@@ -111,11 +110,9 @@ p#title * {
   margin-left: -70px;
   text-align: center;
   border: 1px solid black;
-  
 
   position: absolute;
-/*      overflow: visible;
-*/    }
+}
 
 .tooltip-text.up {
   bottom: 120%; 
@@ -127,10 +124,10 @@ p#title * {
   left: 50%;
 }
 
-.tooltip-val {
-  /*border-bottom: 1px solid rgba(0,0,0,0.3);
-  box-sizing: border-box;*/
-}
+/* .tooltip-val {
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  box-sizing: border-box;
+} */
 /*.tooltip .tooltiptext::after {
   content: " ";
   position: absolute;
