@@ -63,7 +63,7 @@
 	},
 	"synthese_path_t":{
 		"nbTumeurs":"2",
-		"tumeurs":"T1,CHC,33mm,VIII,N,VP0 ; T2, Ind,8mm,V,N,VP0",
+		"tumeurs":"T1-CHC-33mm-VIII-N-VP0; T2-Ind-8mm-V-N-VP0",
 		"scores":"AFP= , Milan= , BCL= "
 	}
 },
@@ -116,7 +116,7 @@
 	},
 	"synthese_path_t":{
 		"nbTumeurs":"3",
-		"tumeurs":"T2,CHC,18mm,V,N,VP0 ; T3,12mm,VIII,N,VP0 ; T4,10mm,VIII,N,VP1",
+		"tumeurs":"T2-CHC-18mm-V-N-VP0; T3-12mm-VIII-N-VP0; T4-10mm-VIII-N-VP1",
 		"scores":"AFP= , Milan= , BCL= "
 	}
 },

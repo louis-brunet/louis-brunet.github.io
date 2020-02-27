@@ -278,6 +278,7 @@ function createItem(parsedItem, id) {
     res.start = new Date(parsedItem.start);
   }
 
+  // Assign group
   switch (res.className) {
     case 'consultation':
       res.group = 3;
@@ -308,6 +309,7 @@ function createItem(parsedItem, id) {
       break;
   }
 
+  // Add arrows to inclusion starts & end dates
   let isInclusionEnd = parsedItem.className == 'inclusion' && !parsedItem.hasOwnProperty('start') && parsedItem.hasOwnProperty('end');
   let isInclusionStart = parsedItem.className == 'inclusion' && !parsedItem.hasOwnProperty('end') && parsedItem.hasOwnProperty('start');
   if(isInclusionStart) {
@@ -315,7 +317,9 @@ function createItem(parsedItem, id) {
   }else if(isInclusionEnd) {
     res.start = new Date(parsedItem.end);
     res.content += ' &#8681;' // add down arrow
-  } else if (parsedItem.hasOwnProperty('end') && (parsedItem['end'] != parsedItem['start'])) {
+  } 
+  // Handle presence of attribute 'end'
+  else if (parsedItem.hasOwnProperty('end') && (parsedItem['end'] != parsedItem['start'])) {
     if(parsedItem.end != "" && parsedItem.end != " ")
       res.end = new Date(parsedItem.end);
     else {
@@ -324,10 +328,24 @@ function createItem(parsedItem, id) {
   }
 
 
-  if (parsedItem.hasOwnProperty('text') || (parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) ){
+  let hasSynthesePathT = parsedItem.hasOwnProperty('synthese_path_t');
+  let hasSynthesePathNT = parsedItem.hasOwnProperty('synthese_path_nt');
+  let hasSyntheseComp = parsedItem.hasOwnProperty('synthese_comp');
+  let hasSyntheseTraitementI = parsedItem.hasOwnProperty('synthese_traitement_i');
+  let hasSyntheseTraitementS = parsedItem.hasOwnProperty('synthese_traitement_s'); 
+
+  if(parsedItem.className.includes('path-t')) {
+    let pause;
+  }
+
+  // Load relevant tooltip data
+  if (parsedItem.hasOwnProperty('text') || 
+      (parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) ||
+      hasSynthesePathT || hasSynthesePathNT || hasSyntheseComp || hasSyntheseTraitementI || hasSyntheseTraitementS ){
     res.className = res.className + ' tooltip';
     res['tooltip'] = parsedItem.text;
     
+    // If is CRB, add réf. to last line of val-norm
     if(parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) {
       if(res.tooltip.normal == undefined) {
         res.tooltip.normal = '';
@@ -336,6 +354,26 @@ function createItem(parsedItem, id) {
       }
       
       res.tooltip.normal += 'réf. ' + parsedItem.reference;
+    }
+
+    if(hasSynthesePathT) {
+      res.tooltip.synthese_path_t = parsedItem.synthese_path_t;
+    }
+
+    if(hasSynthesePathNT) {
+      res.tooltip.synthese_path_nt = parsedItem.synthese_path_nt;
+    }
+
+    if(hasSyntheseComp) {
+      res.tooltip.synthese_comp = parsedItem.synthese_comp;
+    }
+
+    if(hasSyntheseTraitementI) {
+      res.tooltip.synthese_traitement_i = parsedItem.synthese_traitement_i;
+    }
+
+    if(hasSyntheseTraitementS) {
+      res.tooltip.synthese_traitement_s = parsedItem.synthese_traitement_s;
     }
   }
 
@@ -379,7 +417,6 @@ function createAllTooltips() {
 
   for (let i = 0; i < tooltips.length; i++) {
     for (let j = 0; j < containers.length; j++) {
-      
       if(tooltips[i].id == containers[j].dataset.dataid ){
         // Créer sous-élément .tooltip-text contenant le texte à afficher
         createTooltip(tooltips[i], containers[j]);
@@ -482,23 +519,23 @@ function createTooltip(tooltipObj, container) {
 
 
   // Synthèses
-  if(tooltipObj.hasOwnProperty('synthese_path-t')) {
+  if(tooltipObj.tooltip.hasOwnProperty('synthese_path_t')) {
     // TODO
-    let syntheseNode = createSynthesePathTNode(tooltipObj['synthese_path-t']);
+    let syntheseNode = createSynthesePathTNode(tooltipObj.tooltip.synthese_path_t);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.hasOwnProperty('synthese_path-nt')) {
-    let syntheseNode = createSyntheseCompPathNtNode(tooltipObj['synthese_path-nt']);
+  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_path_nt')) {
+    let syntheseNode = createSyntheseCompPathNtNode(tooltipObj.tooltip.synthese_path_nt);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.hasOwnProperty('synthese_comp')) {
-    let syntheseNode = createSyntheseCompPathNtNode(tooltipObj['synthese_comp']);
+  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_comp')) {
+    let syntheseNode = createSyntheseCompPathNtNode(tooltipObj.tooltip.synthese_comp);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.hasOwnProperty('synthese_traitement-i')) {
+  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_traitement_i')) {
     // TODO
-    let syntheseNode = createSyntheseTraitementINode(tooltipObj['synthese_traitement-i']);
+    let syntheseNode = createSyntheseTraitementINode(tooltipObj.tooltip.synthese_traitement_i);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.hasOwnProperty('synthese_traitement-s')) {
+  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_traitement_s')) {
     // TODO
-    let syntheseNode = createSyntheseTraitementSNode(tooltipObj['synthese_path-t']);
+    let syntheseNode = createSyntheseTraitementSNode(tooltipObj.tooltip.synthese_traitement_s);
     node.appendChild(syntheseNode);
   } 
 
