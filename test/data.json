@@ -58,9 +58,6 @@
 	"className":"path-t",
 	"start":"2018-10-15",
 	"end":"2018-12-30",
-	"text":{
-		"normal":"VIII=10mm"
-	},
 	"synthese_path_t":{
 		"nbTumeurs":"2",
 		"tumeurs":"T1-CHC-33mm-VIII-N-VP0; T2-Ind-8mm-V-N-VP0",
@@ -111,9 +108,6 @@
 	"className":"path-t",
 	"start":"2019-06-30",
 	"end":" ",
-	"text":{
-		"normal":"V=11;V=3;VI=10;VII=9"
-	},
 	"synthese_path_t":{
 		"nbTumeurs":"3",
 		"tumeurs":"T2-CHC-18mm-V-N-VP0; T3-12mm-VIII-N-VP0; T4-10mm-VIII-N-VP1",
