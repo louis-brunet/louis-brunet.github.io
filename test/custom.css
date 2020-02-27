@@ -153,9 +153,8 @@ p#title * {
   color: red;
 }
 
-.synthese-line {
-  padding: 4px;
-  margin: 2px;
+.synthese-line, .tooltip-line {
+  margin: 3px;
   /* background-color: rgb(200, 200, 200); */
 }
 

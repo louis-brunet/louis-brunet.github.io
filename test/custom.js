@@ -404,7 +404,7 @@ function createTimeline() {
 function createAllTooltips() {
   // Array of objects {id, className, tooltip}
   let tooltips = items.get({
-    fields: ['id','className','tooltip'],
+    fields: ['id','className','tooltip', 'start', 'end'],
     filter: function (i) {
       return i.hasOwnProperty('tooltip');
     }
@@ -487,11 +487,21 @@ function createTooltip(tooltipObj, container) {
   // create tooltip text
   let node = document.createElement('div');
   node.className = 'tooltip-text';
-  
+
+  // Date
+  let dateDiv = document.createElement('div');
+  dateDiv.className = 'tooltip-date tooltip-line';
+  let dateStr = tooltipObj.start.getFullYear() + '-' + (tooltipObj.start.getMonth() + 1) + '-' + tooltipObj.start.getDate();
+  if(tooltipObj.end != undefined) {
+    dateStr += ' – ' + tooltipObj.end.getFullYear() + '-' + (tooltipObj.end.getMonth() + 1 ) + '-' + tooltipObj.end.getDate();
+  }
+  dateDiv.appendChild(document.createTextNode(dateStr));
+  node.appendChild(dateDiv);
+
   // Val anormales
   if(valAnorm != undefined && tooltipObj.tooltip['anormal'] ) {
     let anormNode = document.createElement('div');
-    anormNode.className = 'tooltip-anorm';
+    anormNode.className = 'tooltip-anorm tooltip-line';
 
     for (let k = 0; k < valAnorm.length; k++) {
       let anormValue = document.createElement('div');
@@ -505,7 +515,7 @@ function createTooltip(tooltipObj, container) {
   }
   // Val normales
   let normNode = document.createElement('div');
-  normNode.className = 'tooltip-norm';
+  normNode.className = 'tooltip-norm tooltip-line';
 
   for (let k = 0; k < valNorm.length; k++) {
     let normValue = document.createElement('div');
@@ -555,7 +565,7 @@ function createSynthesePathTNode(synthese) {
   if(synthese.hasOwnProperty('nbTumeurs')) {
     let nbDiv = document.createElement('div');
     nbDiv.className = 'synthese-line';
-    let text = document.createTextNode('Nb de tumeurs : ' + synthese.nbTumeurs);
+    let text = document.createTextNode('Nombre de tumeurs : ' + synthese.nbTumeurs);
     nbDiv.appendChild(text);
     res.appendChild(nbDiv);
   }
