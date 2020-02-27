@@ -129,6 +129,15 @@
 		"normal":"Bilirubine T=11.3 µmol/l;AFP=951 ng/ml;Creatinémie=93.0 µmol/l",
 		"anormal":"Albumine=55.0 g/L TP=85 %;Plaquettes=66.0 mm3"
 	}
+},{
+	"content":"Bio",
+	"className":"examen",
+	"start":"2019-09-10",
+	"end":"2019-09-10",
+	"text":{
+		"normal":"Bilirubine T=11.3 µmol/l;AFP=951 ng/ml;Creatinémie=93.0 µmol/l",
+		"anormal":"AFP=1000 ng/ml"
+	}
 },
 {
 	"content":"Cli",
@@ -144,6 +153,22 @@
 	"content":"RCP", 
 	"className":"consultation",
 	"start":"2019-07-10"
+},{
+	"content":"Cs", 
+	"className":"consultation",
+	"start":"2018-09-15"
+},{
+	"content":"Cs", 
+	"className":"consultation",
+	"start":"2018-12-15"
+},{
+	"content":"Cs", 
+	"className":"consultation",
+	"start":"2019-07-10"
+},{
+	"content":"Cs", 
+	"className":"consultation",
+	"start":"2019-08-28"
 },
 {
 	"content":"CEL", 
@@ -200,6 +225,10 @@
 	"content":"tdm", 
 	"className":"examen",
 	"start":"2020-02-01"
+},{
+	"content":"tdm", 
+	"className":"examen",
+	"start":"2018-12-15"
 },
 {
 	"content":"CHIEF", 

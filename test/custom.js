@@ -335,7 +335,7 @@ function createItem(parsedItem, id) {
         res.tooltip.normal += ' | ';
       }
       
-      res.tooltip.normal += 'référence ' + parsedItem.reference;
+      res.tooltip.normal += 'réf. ' + parsedItem.reference;
     }
   }
 
