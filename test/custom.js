@@ -323,12 +323,22 @@ function createItem(parsedItem, id) {
     }
   }
 
-  if (parsedItem.hasOwnProperty('text') ){
+
+  if (parsedItem.hasOwnProperty('text') || (parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) ){
     res.className = res.className + ' tooltip';
     res['tooltip'] = parsedItem.text;
-  } else {
-    res.title = res.content; // TODO remove ?
+    
+    if(parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) {
+      if(res.tooltip.normal == undefined) {
+        res.tooltip.normal = '';
+      } else {
+        res.tooltip.normal += ' | ';
+      }
+      
+      res.tooltip.normal += 'référence ' + parsedItem.reference;
+    }
   }
+
 
   if(parsedItem.hasOwnProperty('link')) {
     res.link = parsedItem.link;

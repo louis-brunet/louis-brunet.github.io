@@ -196,7 +196,7 @@
 	"className":"inclusion",
 	"start":"2018-11-01",
 	"text":{
-		"normal":"chief-text"
+		"normal":"texte début chief"
 	}
 },
 {
@@ -204,7 +204,7 @@
 	"className":"inclusion",
 	"end":"2019-08-10",
 	"text":{
-		"normal":"chief-text"
+		"normal":"texte fin chief"
 	}
 },
 {
