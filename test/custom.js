@@ -437,7 +437,7 @@ function createTooltip(tooltipObj, container) {
     // Valeurs normales
     valNorm = tooltipObj.tooltip.normal.split(';');
 
-  } else if(typeof tooltipObj.tooltip === "string") {
+  } else if(typeof tooltipObj.tooltip === 'string') {
     valNorm = [tooltipObj.tooltip];
   }
 
@@ -447,7 +447,7 @@ function createTooltip(tooltipObj, container) {
     valAnorm = tooltipObj.tooltip.anormal.split(';');
   }
 
-  // create sub-element
+  // create tooltip text
   let node = document.createElement('div');
   node.className = 'tooltip-text';
   
@@ -478,18 +478,81 @@ function createTooltip(tooltipObj, container) {
     normValue.appendChild(text);
     normNode.appendChild(normValue);
   }
+  node.appendChild(normNode);
+
+
+  // Synthèses
+  if(tooltipObj.hasOwnProperty('synthese_path-t')) {
+    // TODO
+    let syntheseNode = createSynthesePathTNode(tooltipObj['synthese_path-t']);
+    node.appendChild(syntheseNode);
+  } else if(tooltipObj.hasOwnProperty('synthese_path-nt')) {
+    let syntheseNode = createSyntheseCompPathNtNode(tooltipObj['synthese_path-nt']);
+    node.appendChild(syntheseNode);
+  } else if(tooltipObj.hasOwnProperty('synthese_comp')) {
+    let syntheseNode = createSyntheseCompPathNtNode(tooltipObj['synthese_comp']);
+    node.appendChild(syntheseNode);
+  } else if(tooltipObj.hasOwnProperty('synthese_traitement-i')) {
+    // TODO
+    let syntheseNode = createSyntheseTraitementINode(tooltipObj['synthese_traitement-i']);
+    node.appendChild(syntheseNode);
+  } else if(tooltipObj.hasOwnProperty('synthese_traitement-s')) {
+    // TODO
+    let syntheseNode = createSyntheseTraitementSNode(tooltipObj['synthese_path-t']);
+    node.appendChild(syntheseNode);
+  } 
 
   if(tooltipObj.className.includes('consultation') ||
    tooltipObj.className.includes('path-t') ) {
     node.className += ' down';
   } else node.className += ' up';
 
-  node.appendChild(normNode);
   container.appendChild(node);
 
 }
 
+function createSynthesePathTNode(synthese) {
+  let res = document.createElement('div');
+  res.className = 'synthese';
 
+  if(synthese.hasOwnProperty('nbTumeurs')) {
+    let nbDiv = document.createElement('div');
+    nbDiv.className = 'synthese-line';
+    let text = document.createTextNode('Nb de tumeurs : ' + synthese.nbTumeurs);
+    nbDiv.appendChild(text);
+    res.appendChild(nbDiv);
+  }
+
+  if(synthese.hasOwnProperty('tumeurs')) {
+    let listDiv = document.createElement('div');
+    listDiv.className = 'synthese-line';
+    let text = document.createTextNode(synthese.tumeurs);
+    listDiv.appendChild(text);
+    res.appendChild(listDiv);
+  }
+
+  if(synthese.hasOwnProperty('scores')) {
+    let scoreDiv = document.createElement('div');
+    scoreDiv.className = 'synthese-line';
+    let text = document.createTextNode(synthese.scores);
+    scoreDiv.appendChild(text);
+    res.appendChild(scoreDiv);
+  }
+
+  return res;
+}
+
+function createSyntheseCompPathNtNode(synthese) {
+
+}
+
+function createSyntheseTraitementINode(synthese) {
+
+}
+
+function createSyntheseTraitementSNode(synthese) {
+
+}
 
 /**
  * Afficher une capture d'ecran du graphe
