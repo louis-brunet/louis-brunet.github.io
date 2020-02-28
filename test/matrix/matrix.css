@@ -176,17 +176,20 @@ strong {
     flex-shrink: 2;
 }
 
-#driver-btns {
+#driver-btns, #carte-btns {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
+}
+
+.driver-btn, .carte-btn {
+    flex-shrink: 1;
+    min-width: 100px;
 }
 
 .driver-btn {
     background-color: rgb(110, 15, 15);
-    flex-shrink: 1;
-
 }
 
 .driver-btn.driver-selected, .driver-btn:hover {
@@ -194,8 +197,20 @@ strong {
     color: rgb(110, 15, 15);
     box-shadow: none;
     transition: background-color 0.17s linear, color 0.17s linear;
-
 }
+
+
+.carte-btn {
+    background-color: blue;
+}
+
+.carte-btn.driver-selected, .carte-btn:hover {
+    background-color: #b2b2ff;
+    color: blue;
+    box-shadow: none;
+    transition: background-color 0.17s linear, color 0.17s linear;
+}
+
 
 #close-btn {
     float: right;
@@ -435,9 +450,10 @@ strong {
     background-color: rgb(150, 150, 150);
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
     #top-right-btns {
         flex-direction: column-reverse;
+        justify-content: flex-end;
     }
     #cap-btn {
         margin-bottom: 10px;
@@ -446,5 +462,9 @@ strong {
     #settings p {
         max-width: 80%;
     }
+
+    /* #driver-btns, #carte-btns {
+        flex-wrap: wrap;
+    } */
 }
 

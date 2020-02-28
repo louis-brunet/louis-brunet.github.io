@@ -576,7 +576,7 @@ function createSynthesePathTNode(synthese) {
   if(synthese.hasOwnProperty('tumeurs')) {
     let listDiv = document.createElement('div');
     listDiv.className = 'synthese-line';
-    let text = document.createTextNode(synthese.tumeurs);
+    let text = document.createTextNode('Tumeurs : ' + synthese.tumeurs);
     listDiv.appendChild(text);
     res.appendChild(listDiv);
   }
@@ -584,7 +584,7 @@ function createSynthesePathTNode(synthese) {
   if(synthese.hasOwnProperty('scores')) {
     let scoreDiv = document.createElement('div');
     scoreDiv.className = 'synthese-line';
-    let text = document.createTextNode(synthese.scores);
+    let text = document.createTextNode('Scores : ' + synthese.scores);
     scoreDiv.appendChild(text);
     res.appendChild(scoreDiv);
   }
@@ -603,7 +603,7 @@ function createSyntheseTraitementINode(synthese) {
   if(synthese.hasOwnProperty('segments')) {
     let segmentsDiv = document.createElement('div');
     segmentsDiv.className = 'synthese-line';
-    let text = document.createTextNode(synthese.segments);
+    let text = document.createTextNode('Segments : ' + synthese.segments);
     segmentsDiv.appendChild(text);
     res.appendChild(segmentsDiv);
   }
@@ -611,7 +611,7 @@ function createSyntheseTraitementINode(synthese) {
   if(synthese.hasOwnProperty('tumeurs')) {
     let listDiv = document.createElement('div');
     listDiv.className = 'synthese-line';
-    let text = document.createTextNode(synthese.tumeurs);
+    let text = document.createTextNode('Tumeurs : ' + synthese.tumeurs);
     listDiv.appendChild(text);
     res.appendChild(listDiv);
   }
@@ -627,11 +627,17 @@ function createSyntheseTraitementSNode(synthese) {
  * Afficher une capture d'ecran du graphe
  */
 function capture() {
+  let tolerance = document.querySelector('.tolerance');
+  let initDisplay = '' + tolerance.style.display;
+  tolerance.style.display = 'none';
+
 	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
 		document.getElementById('output-card').style.display = 'block';
 		// Export the canvas to its data URI representation
 		var base64image = canvas.toDataURL("image/jpeg");
 		// Display image in #output element
 		document.getElementById('output').src = base64image;
-	});
+  });
+  
+  tolerance.style.display = initDisplay;
 }

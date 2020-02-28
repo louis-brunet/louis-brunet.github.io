@@ -3,9 +3,7 @@
  */
 var genesUrl = 'https://louis-brunet.github.io/test/genes/data.json';
 
-var patientId = '10';
-if(patientFilter != undefined)
-	patientFilter = [patientId];
+var patientId = '10';	
 
 /**
  * Groupes de gènes
@@ -163,9 +161,10 @@ var genesOptions = {
 var genesTimeline;
 var genesItems; // DataSet
 var genesExpressions; // DataSet
-
-genesLoadDrivers();
-
+if(document.title.includes('Gènes')) {
+	patientFilter = [patientId];
+	genesLoadDrivers();
+}
 
 let today = new Date();
 let day = today.getDate();
@@ -197,20 +196,21 @@ function genesLoadDrivers() {
 	genesAllGenes = [];
 
     let driverDiv = document.getElementById('genes-driver-btns');
-    driverDiv.innerHTML = '';
+    if(driverDiv) {
+		driverDiv.innerHTML = '';
+	}
+	genesDrivers.forEach(d => {
+		genesCreateDriverBtn(driverDiv, d);
+	});
 
-    genesDrivers.forEach(d => {
-        genesCreateDriverBtn(driverDiv, d);
-    });
+	
+	let cartesDiv = document.getElementById('genes-carte-btns');
+	cartesDiv.innerHTML = '';
 
-
-    let cartesDiv = document.getElementById('genes-carte-btns');
-    cartesDiv.innerHTML = '';
-
-    genesCartes.forEach(c => {
-    	genesAddDriver(c);
-    	genesCreateCarteBtn(cartesDiv, c);
-    });
+	genesCartes.forEach(c => {
+		genesAddDriver(c);
+		genesCreateCarteBtn(cartesDiv, c);
+	});
 
     genesAllGenes = genesAllGenes.sort();
 
