@@ -38,10 +38,12 @@ var options = {
   multiselect: false,
   hiddenDates: [],
   end: initEnd,
-  dataAttributes: ['dataId', 'tooltip']
+  dataAttributes: ['dataId', 'tooltip'],
+  showCustomTime: true
 };
 
 // Chargement des données
+var death;
 var timeline;
 var request = new XMLHttpRequest();
 request.open('GET', url);
@@ -397,7 +399,9 @@ function createTimeline() {
   // AFfichage
   timeline = new vis.Timeline(container, items, groups, options);
   timeline.on('select', onSelect);
-  
+  if(death != undefined) {
+    timeline.addCustomTime(death);
+  }
   hideAllEmptySpace(document.getElementById('tolerance').value);
 }
 
@@ -441,12 +445,16 @@ function loadData(parsedData) {
     document.getElementById('lname').innerHTML = '<strong>'+parsedData[0].nom+'</strong>';
     
     document.getElementById('sexe').innerHTML =
-     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Masculin' : 'Féminin';
+     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Masculin' : 'Fémin0i.decesn;';
     document.getElementById('ipp').innerHTML = '<strong>'+parsedData[0].ipp+'</strong>';
     document.getElementById('ddn').innerHTML = parsedData[0].ddn;
 
     let age = new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
     document.getElementById('age').innerHTML = '('+ age +' ans)';
+
+    if(parsedData[0].hasOwnProperty('deces') && parsedData[0].deces != ''){
+      death = new Date(parsedData[0].deces);
+    }
   }
 
   for (; i < parsedData.length; i++) {
@@ -592,6 +600,7 @@ function createSynthesePathTNode(synthese) {
   return res;
 }
 
+//TODO
 function createSyntheseCompPathNtNode(synthese) {
 
 }
@@ -619,6 +628,7 @@ function createSyntheseTraitementINode(synthese) {
   return res;
 }
 
+//TODO
 function createSyntheseTraitementSNode(synthese) {
 
 }

@@ -262,3 +262,19 @@ button:hover {
   box-sizing: border-box;
   max-width: 100%;
 }
+
+div.vis-current-time {
+  border: 1px dashed blue;
+  box-sizing: border-box;
+  width: 2px;
+  background-color: rgba(1,1,1,0);
+}
+
+div.vis-custom-time {
+  border: 1px dashed red;
+  box-sizing: border-box;
+  width: 2px;
+  background-color: rgba(1,1,1,0);
+  pointer-events: none;
+  cursor: initial;
+}
