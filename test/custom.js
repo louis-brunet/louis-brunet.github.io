@@ -461,6 +461,10 @@ function loadData(parsedData) {
 
     if(parsedData[0].hasOwnProperty('deces') && parsedData[0].deces != ''){
       death = new Date(parsedData[0].deces);
+      let deadTitle = document.getElementById('dead')
+      if(deadTitle != undefined) {
+        deadTitle.style.display = 'inline';
+      }
     }
   }
 

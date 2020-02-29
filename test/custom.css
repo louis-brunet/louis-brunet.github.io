@@ -15,6 +15,11 @@ p#title * {
   margin-right: 10px;
 }
 
+#dead {
+  display: none;
+  color: red;
+}
+
 #visualization {
   width: 100%;
   margin-top: 5px;
