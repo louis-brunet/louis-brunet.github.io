@@ -13,6 +13,7 @@
 <body>
 
   <!-- <p id="title">Suivi longitudinal de <span id="civilite">Monsieur</span> <span id="fname">___</span> <span id="lname">____</span> - <span id="ipp"></span></p> -->
+  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
 
 
 
@@ -36,7 +37,6 @@
     <div id="visualization"></div>
   </div>
 
-  <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
   <div class="card" id="output-card">
     <button id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'block'">X</button>
     <img id="output">
