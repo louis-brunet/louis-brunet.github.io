@@ -219,5 +219,5 @@ div.graph-pane {
 }
 
 #matrix {
-    overflow-x: scroll;
+    overflow-x: auto;
 }
