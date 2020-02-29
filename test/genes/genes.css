@@ -180,7 +180,7 @@ a#viewer-btn {
 
 #matrix-window-container {
     display: none;
-    /* background-color: rgba(0, 0, 0, 0.7); */
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -218,6 +218,7 @@ div.graph-pane {
     justify-content: flex-start;
 }
 
-#matrix {
+div#matrix {
     overflow-x: auto;
+    overflow-y: hidden;
 }
