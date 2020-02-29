@@ -217,3 +217,7 @@ div.graph-pane {
     margin-top: 5px;
     justify-content: center;
 }
+
+#matrix {
+    overflow-x: scroll;
+}
