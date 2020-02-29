@@ -270,8 +270,8 @@ div.vis-current-time {
   background-color: rgba(1,1,1,0);
 }
 
-div.vis-custom-time {
-  border: 1px dashed red;
+div.vis-custom-time.deces {
+  border: 1px solid red;
   box-sizing: border-box;
   width: 2px;
   background-color: rgba(1,1,1,0);

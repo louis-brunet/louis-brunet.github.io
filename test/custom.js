@@ -190,6 +190,9 @@ function redrawTimeline() {
   timeline.destroy();
   timeline = new vis.Timeline(container, items, groups, options);
   timeline.on('select', onSelect);
+  if(death != undefined) {
+    timeline.addCustomTime(death, 'deces');
+  }
   tooltipsCreated = false;
 }
 
@@ -325,7 +328,11 @@ function createItem(parsedItem, id) {
     if(parsedItem.end != "" && parsedItem.end != " ")
       res.end = new Date(parsedItem.end);
     else {
-      res.end = new Date();
+      if(death == undefined) {
+        res.end = new Date();
+      } else {
+        res.end = death;
+      }
     }
   }
 
@@ -400,7 +407,7 @@ function createTimeline() {
   timeline = new vis.Timeline(container, items, groups, options);
   timeline.on('select', onSelect);
   if(death != undefined) {
-    timeline.addCustomTime(death);
+    timeline.addCustomTime(death, 'deces');
   }
   hideAllEmptySpace(document.getElementById('tolerance').value);
 }
