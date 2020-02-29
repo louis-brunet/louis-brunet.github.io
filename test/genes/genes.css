@@ -215,7 +215,7 @@ a#viewer-btn {
 
 div.graph-pane {
     margin-top: 5px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #matrix {
