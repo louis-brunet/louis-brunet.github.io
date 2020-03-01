@@ -1183,6 +1183,13 @@ function showPatientMatrix() {
 
 
 async function createDriverPDF() {
+	if(genesDriver == undefined) {
+		alert('Aucun driver choisi');
+		return;
+	}
+
+	document.getElementById('pdf-loader').style.display = 'block';
+
 	let pdf = new jsPDF('landscape');
 
 	let toCapture = document.getElementById('hidden-to-capture');
@@ -1212,7 +1219,8 @@ async function createDriverPDF() {
 		} else alert('no genes found in driver');
 	}
 	
-
+	
+	document.getElementById('pdf-loader').style.display = 'none';
 }
 
 async function addGeneToPDF(gStr, pdf, toCapture) {

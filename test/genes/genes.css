@@ -231,3 +231,23 @@ div#matrix {
     visibility: hidden;
     opacity: 0;
 }
+
+
+
+.loader {
+    box-sizing: border-box;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid rgb(10, 17, 119); /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4px;
+    /* margin-bottom: 60px; */
+}
+
+#pdf-loader {
+    display: none;
+}
