@@ -345,13 +345,13 @@ function createItem(parsedItem, id) {
 
 
   // Load relevant tooltip data
-  if (parsedItem.hasOwnProperty('text') || 
+  if (parsedItem.hasOwnProperty('evaluation_examen') || 
       (parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) ||
       hasSynthesePathT || hasSynthesePathNT || hasSyntheseComp || hasSyntheseTraitementI || hasSyntheseTraitementS ){
     res.className = res.className + ' tooltip';
     
-    if(parsedItem.hasOwnProperty('text')) {
-      res.tooltip = parsedItem.text;
+    if(parsedItem.hasOwnProperty('evaluation_examen')) {
+      res.tooltip = parsedItem.evaluation_examen;
     } else {
       res.tooltip = {};
     }

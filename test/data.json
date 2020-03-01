@@ -29,7 +29,7 @@
 	"className":"examen",
 	"start":"2016-03-31",
 	"end":"2016-03-31",
-	"text":{
+	"evaluation_examen":{
 		"normal":"Bilirubine T=11.3 µmol/l;AFP=4.4 ng/ml ;Creatinémie=93.0 µmol/l",
 		"anormal":"Albumine=33.0 g/L TP=85 %;Plaquettes=66.0 mm3"
 	}
@@ -39,7 +39,7 @@
 	"className":"examen",
 	"start":"2016-03-10",
 	"end":"2016-03-10",
-	"text":{
+	"evaluation_examen":{
 		"normal":"IMC=32 (obésité modéré);OMS=0"
 	}
 },
@@ -50,7 +50,7 @@
 	"className":"comp",
 	"start":"2017-05-15",
 	"end":"2017-07-31",
-	"text":{
+	"evaluation_examen":{
 		"normal":"traité par ponction"
 	}
 },
@@ -80,7 +80,7 @@
 	"content":"Pbh", 
 	"className":"examen",
 	"start":"2018-11-05",
-	"text":{
+	"evaluation_examen":{
 		"normal":"S=1;A=2;F=4"
 	}
 },
@@ -120,7 +120,7 @@
 	"className":"examen",
 	"start":"2019-06-30",
 	"end":"2019-06-30",
-	"text":{
+	"evaluation_examen":{
 		"normal":"Bilirubine T=11.3 µmol/l;AFP=951 ng/ml;Creatinémie=93.0 µmol/l",
 		"anormal":"Albumine=55.0 g/L TP=85 %;Plaquettes=66.0 mm3"
 	}
@@ -129,7 +129,7 @@
 	"className":"examen",
 	"start":"2019-09-10",
 	"end":"2019-09-10",
-	"text":{
+	"evaluation_examen":{
 		"normal":"Bilirubine T=11.3 µmol/l;AFP=951 ng/ml;Creatinémie=93.0 µmol/l",
 		"anormal":"AFP=1000 ng/ml"
 	}
@@ -139,7 +139,7 @@
 	"className":"examen",
 	"start":"2019-06-30",
 	"end":"2019-06-30",
-	"text":{
+	"evaluation_examen":{
 		"normal":"IMC=22 (corpulence normale);OMS=1"
 	}
 },
@@ -203,7 +203,7 @@
 	"className":"traitement-s",
 	"start":"2019-09-30",
 	"end":"",
-	"text":{
+	"evaluation_examen":{
 		"normal":"Sorafenib"
 	}
 
@@ -232,7 +232,7 @@
 	"content":"CHIEF", 
 	"className":"inclusion",
 	"start":"2018-11-01",
-	"text":{
+	"evaluation_examen":{
 		"normal":"texte début chief"
 	}
 },
@@ -240,7 +240,7 @@
 	"content":"CHIEF", 
 	"className":"inclusion",
 	"end":"2019-08-10",
-	"text":{
+	"evaluation_examen":{
 		"normal":"texte fin chief"
 	}
 },
@@ -249,7 +249,7 @@
 	"className":"crb",
 	"start":"2014-02-10",
 	"reference":"XXXX",
-	"text":{
+	"evaluation_examen":{
 		"normal":"20ml"
 	}
 },
@@ -258,7 +258,7 @@
 	"className":"crb",
 	"start":"2018-10-20",
 	"reference":"XXXX",
-	"text":{
+	"evaluation_examen":{
 		"normal":"FT et FNT"
 	}
 },
@@ -267,7 +267,7 @@
 	"className":"crb",
 	"start":"2015-06-10",
 	"reference":"XXXX",
-	"text":{
+	"evaluation_examen":{
 		"normal":"10ml"
 	}
 }]
