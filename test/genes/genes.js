@@ -1184,7 +1184,7 @@ function showPatientMatrix() {
 
 async function createDriverPDF() {
 	if(genesDriver == undefined) {
-		alert('Aucun driver choisi');
+		alert('Aucun driver selectionné.');
 		return;
 	}
 
@@ -1205,14 +1205,6 @@ async function createDriverPDF() {
 				pdf.addPage();
 			}
 		}
-
-		// genesDriver.genes.forEach( async (gStr) => {
-		// 	await addGeneToPDF(gStr, pdf, toCapture);
-		// 	count++;
-		// 	if(count < length) {
-		// 		pdf.addPage();
-		// 	}
-		// });
 
 		if(count > 0) {
 			pdf.save('test.pdf');
