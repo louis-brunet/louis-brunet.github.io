@@ -1,6 +1,5 @@
-#genes-title {
+#genes-title, #hidden-genes-title {
     font-size: 90%;
-    margin-bottom: 0;
     text-align:  center;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -11,7 +10,7 @@
     flex-wrap: wrap;
 }
 
-#date-title {
+#date-title, #hidden-date-title {
     max-width: 80%;
     text-align: center;
     font-weight: bold;
@@ -19,7 +18,7 @@
     margin-bottom: 10px; */
 }
 
-#mat-title {
+#mat-title, #hidden-mat-title {
     margin-left: 10px;
 }
 
@@ -84,7 +83,7 @@ a:hover {
     margin-top: 10px;
 }
 
-#visualization {
+#visualization, #hidden-visualization {
     background-color: white;
     border-radius: 8px;
     font-size: small;
@@ -233,7 +232,7 @@ a:hover {
 }
 
 
-#expressions-div {
+#expressions-div, #hidden-expressions-div {
     font-size: 85%;
     /* display: flex;
     flex-direction: row;
@@ -277,3 +276,4 @@ a:hover {
 #viewer-btn:hover {
     color: red;
 }
+

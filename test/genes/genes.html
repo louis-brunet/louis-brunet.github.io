@@ -20,7 +20,7 @@
       <div id="genes-driver-btns"></div>
       <div id="genes-carte-btns"></div>
       <div id='top-right-btns'>
-        <button id="prepare-pdf-btn" onclick="createDriverPdf()">Télécharger&nbsp;PDF</button>
+        <button id="prepare-pdf-btn" onclick="createDriverPDF()">Télécharger&nbsp;PDF&nbsp;Driver</button>
         <button id="matrix-btn" onclick="showPatientMatrix()">Matrice</button>
         <a id="viewer-btn" href="http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]">Viewer</a>
         <button id="cap-btn" onclick="captureVis();this.style.display = 'none'">JPEG</button>
@@ -70,7 +70,32 @@
   </div>
 
 
-  <div id="hidden-to-capture"></div>
+  <div id="hidden-to-capture">
+    <div id="hidden-genes-title">
+      <div id="hidden-date-title">
+        Synthèse génomique du patient <span id="hidden-patient">XXXX</span> à la date du <span id="hidden-date-du-jour"></span>
+      </div>
+      <div id="hidden-mat-title">
+        Matériels exploités = <span id="hidden-materiel-exploite"></span>
+      </div>
+    </div>
+    <span class="label">Gène&nbsp;:&nbsp;</span><span id="hidden-name">name</span> 
+    <span class="label">Ch&nbsp;:&nbsp;</span><span id="hidden-ch">ch</span>
+    <span class="label">Position&nbsp;:&nbsp;</span><span id="hidden-start">start</span> - <span id="hidden-end">end</span>
+    <span class="label">Strand&nbsp;:&nbsp;</span><span id="hidden-strand">strand</span>
+    <span class="label">Réf.&nbsp;:&nbsp;</span><a href="" id="hidden-ref">http://www.ensembl.org/</a>
+    
+    <hr>
+
+    <div class="card">
+      <div id="hidden-visualization"></div>
+    </div>
+    <div class="card">
+      <div class="label">Expressions</div>
+      <hr>
+      <div id="hidden-expressions-div"></div>
+    </div>
+  </div>
 
 
   <div id="matrix-window-container">

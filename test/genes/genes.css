@@ -224,3 +224,10 @@ div#matrix {
     overflow-x: auto;
     overflow-y: hidden;
 }
+
+#hidden-to-capture {
+    max-width: 277mm;
+    max-height: 190mm;
+    visibility: hidden;
+    opacity: 0;
+}

@@ -5,6 +5,8 @@ var genesUrl = 'https://louis-brunet.github.io/test/genes/data.json';
 
 var patientId = '10';	
 
+var timeoutDone;
+var timeoutStarted;
 /**
  * Groupes de gènes
  */
@@ -120,14 +122,28 @@ var genesChcList = []; // [{chc: CHCXXXX, mutation: boolean, expr: boolean, copy
 /**
  * INITIALISATION DE LA TIMELINE
  */
-
+/**
+ * Mutations group
+ */
 var GROUP_MUT = 10000000;
+/**
+ * Copy number group
+ */
 var GROUP_CNV = 10000001;
 //var GROUP_EXPR = 10000002;
+/**
+ * Methylation groups
+ */
 var GROUP_METH = 10000003;
 
 var genesGroups = [];
 var genesContainer = document.getElementById('visualization');
+
+var genesContainerHidden = document.getElementById('hidden-visualization');
+var genesGroupsHidden = [];
+var genesItemsHidden;
+var genesExpressionsHidden;
+var genesTimelineHidden;
 
 var genesOptions = {
 	// option groupOrder can be a property name or a sort function
@@ -171,7 +187,9 @@ let day = today.getDate();
 if(day<10) {
 	day = '0'+day;
 } 
-document.getElementById('date-du-jour').innerHTML = day + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+let formattedDate = day + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+document.getElementById('date-du-jour').innerHTML = formattedDate;
+document.getElementById('hidden-date-du-jour').innerHTML = formattedDate;
 
 // Création des tooltips
 var genesTooltipsCreated = false;
@@ -437,24 +455,157 @@ function genesLoadData(){
 	};
 }
 
+function genesLoadGene(gStr){
+	let genesDataGeneUrl = 'https://louis-brunet.github.io/test/genes/' + gStr.toLowerCase() + '.json';
+	var request = new XMLHttpRequest();
+	request.open('GET', genesDataGeneUrl);
+	request.responseType = 'json';
+	request.send();
+	request.onload = () => {
+		genesRedrawTimeline(request.response);
+	};
+}
+
+/**
+ * Load data corresponding to gStr, then create hidden timeline. 
+ * TODO customize url depending on gStr. 
+ */
+async function genesLoadGeneHidden(gStr){
+	//let genesDataGeneUrl = 'https://louis-brunet.github.io/test/genes/' + gStr.toLowerCase() + '.json';
+	let genesDataGeneUrl = 'https://louis-brunet.github.io/test/genes/axin1.json';
+
+	let response = await fetch(genesDataGeneUrl); 
+	let json = await response.json();
+	await genesRedrawTimelineHidden(json);
+
+	// var request = new XMLHttpRequest();
+	// request.open('GET', genesDataGeneUrl);
+	// request.responseType = 'json';
+	// request.send();
+	// request.onload = () => {
+	// 	genesRedrawTimelineHidden(request.response);
+	// };
+}
+
+/**
+ * Build timeline corresponding to data in genesContainerHidden.
+ */
+async function genesRedrawTimelineHidden(data) {
+	genesContainerHidden.innerHTML = '';
+
+	genesInitHidden();
+
+	let parsedData = data;
+	loadStructureData(parsedData, genesItemsHidden, true);
+	genesGroupsHidden.push(
+		{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
+		{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
+		// {id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
+		{id: GROUP_METH, content: 'Méthylations', value: GROUP_METH, className: 'group-meth'}
+	);
+	loadAnomaliesData(parsedData.anomalies, genesItemsHidden, true);
+	genesItemsHidden = new vis.DataSet(genesItemsHidden);
+	genesGroupsHidden = new vis.DataSet(genesGroupsHidden);
+	genesTimelineHidden = new vis.Timeline(genesContainerHidden, genesItemsHidden, genesGroupsHidden, genesOptions);
+	// setTimeout( () => {	
+	// 	document.querySelector('#hidden-visualization .vis-timeline.vis-bottom.vis-ltr').style.visibility = 'hidden';
+	// }, 1);
+
+	genesExpressionsHidden = new vis.DataSet(genesExpressionsHidden);
+	buildExpressionsDivHidden();
+
+	return;
+}
+
+function genesInitHidden() {
+	genesItemsHidden = [];
+	genesGroupsHidden = [];
+	genesExpressionsHidden = [];
+	document.getElementById('hidden-materiel-exploite').innerHTML = '';
+	document.getElementById('hidden-expressions-div').innerHTML = '';
+}
+
 function genesRedrawTimeline(data) {
 	genesContainer.innerHTML = '';
 	genesGroups = [];
 
 	let parsedData = data;
-	loadStructureData(parsedData, genesItems);
+	loadStructureData(parsedData, genesItems, false);
 	genesGroups.push(
 		{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
 		{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
 		// {id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
 		{id: GROUP_METH, content: 'Méthylations', value: GROUP_METH, className: 'group-meth'}
 	);
-	loadAnomaliesData(parsedData.anomalies, genesItems);
+	loadAnomaliesData(parsedData.anomalies, genesItems, false);
 	genesItems = new vis.DataSet(genesItems);
 	genesGroups = new vis.DataSet(genesGroups);
 	genesTimeline = new vis.Timeline(genesContainer, genesItems, genesGroups, genesOptions);
 	genesExpressions = new vis.DataSet(genesExpressions);
 	buildExpressionsDiv();
+}
+
+function buildExpressionsDivHidden() {
+	let exprDiv = document.getElementById('hidden-expressions-div');
+	// Find all CHC ids in expr dataset
+	let chcs = genesExpressionsHidden.distinct('datacolonne8');
+
+	chcs.forEach(chc => {
+		// Find expressions matching each CHC, sorted by type
+		let matched = new vis.DataSet(genesExpressionsHidden.get({
+			fields: ['id', 'datatype', 'datasoustype', 'datacolonne9'],
+			filter: e => {
+				return e.datacolonne8 == chc;
+			},
+			order: (a, b) => {
+				return (a.datatype < b.datatype? -1 : 1);
+			}
+		}));
+		let exprItemDiv = genesCreateTextDiv(chc + ' : ', 'expression');
+
+		//GROUP VALUES BY COLONNE9 (e.g. miseq, fluidigm)
+		// Find distinct datacolonne9 in matched
+		let col9Array = matched.distinct('datacolonne9');
+		for (let i = 0; i < col9Array.length; i++) {
+			const col9 = col9Array[i];
+			
+			exprItemDiv.appendChild(genesCreateSpan(col9 + ' = ', 'expr-col9'));
+
+			let subMatched = matched.get({
+				filter: m => {
+					return m.datacolonne9 == col9;
+				}
+			});
+
+			let countedTypes = [];
+			subMatched.forEach(exp => {
+				if(countedTypes.includes(exp.datatype)) return;
+
+				// Find all expressions in matched with same type
+				let values = [];
+				let thisIndex = subMatched.indexOf(exp);
+				for (let i = thisIndex; i < subMatched.length && subMatched[i].datatype == exp.datatype; i++) {
+					values.push(subMatched[i].datasoustype);
+				}
+				if(values.length > 0){
+					// Build val str
+					let valStr = '' + values[0];
+					for (let i = 1; i < values.length; i++) {
+						const val = values[i];
+						valStr += '; ' + val;
+					}
+					// Append to CHC line
+					exprItemDiv.appendChild(genesCreateSpan(exp.datatype, 'expr-' + exp.datatype));
+					let valSpan = genesCreateSpan('(' + valStr + ') ', 'expr-val');
+					exprItemDiv.appendChild(valSpan);
+					countedTypes.push(exp.datatype);
+				}
+			});
+		}
+
+		exprDiv.appendChild(exprItemDiv);
+	});
+
 }
 
 function buildExpressionsDiv() {
@@ -525,22 +676,22 @@ function buildExpressionsDiv() {
  * FCTS - ANOMALIES
  */
 
-function loadAnomaliesData(parsedArray, loadedItems) {
+function loadAnomaliesData(parsedArray, loadedItems, isHidden) {
 	if(Array.isArray(parsedArray) ) {
 		for (let i = 0; i < parsedArray.length; i++) {
-			loadAnomalie(parsedArray[i], loadedItems);
+			loadAnomalie(parsedArray[i], loadedItems, isHidden);
 		}
 	}
 
-	updateChcListDisplay();
+	updateChcListDisplay(isHidden);
 }
 
 /**
  * Create exploitable item based on parsedItem,
- * put it in itemArray
- * If item is expression, store it in expressions Array
+ * put it in itemArray.
+ * If item is expression, store it in expressions Array.
  */
-function loadAnomalie(parsedItem, itemArray) {
+function loadAnomalie(parsedItem, itemArray, isHidden) {
 	let item = {
 		id: itemArray.length,
 		dataid: itemArray.length,
@@ -655,8 +806,13 @@ function loadAnomalie(parsedItem, itemArray) {
 	
 	// If is expression, push to genesExpressions, else push to items
 	if(parsedItem.famille == 'expr') {
-		item.id = genesExpressions.length;
-		genesExpressions.push(item);
+		if(isHidden) {
+			item.id = genesExpressionsHidden.length;
+			genesExpressionsHidden.push(item);
+		} else {
+			item.id = genesExpressions.length;
+			genesExpressions.push(item);
+		}
 	} else {
 		item.className += ' anomalie-item';
 		itemArray.push(item);
@@ -666,9 +822,13 @@ function loadAnomalie(parsedItem, itemArray) {
 /**
  * TODO
  */
-function updateChcListDisplay() {
-	let chcListDiv = document.getElementById('materiel-exploite');
-
+function updateChcListDisplay(isHidden) {
+	let chcListDiv;
+	if(isHidden) {
+		chcListDiv = document.getElementById('hidden-materiel-exploite');
+	} else {
+		chcListDiv = document.getElementById('materiel-exploite');
+	}
 	genesChcList.forEach( chcItem => {
 		let lineStr = chcItem.chc + '( ';
 
@@ -739,6 +899,9 @@ function countInChcList(chc, famille) {
 }
 
 function genesCreateTooltips() {
+	if(genesItems == undefined) return;
+
+
 	// Find items w/ className contains anomalie-item
 	let tooltipItems = genesItems.get({
 		filter: function(i) {
@@ -864,34 +1027,62 @@ function genesCreateSpan(text, className) {
  * FCTS - STRUCTURE
  */
 
-function loadStructureData(parsedData, loadedItems) {
-
-	document.getElementById('patient').innerHTML = parsedData.patient;
-	document.getElementById('name').innerHTML = parsedData.name;
-	document.getElementById('ch').innerHTML = parsedData.ch;
-	document.getElementById('start').innerHTML = parsedData.start;
-	document.getElementById('end').innerHTML = parsedData.end;
-	document.getElementById('strand').innerHTML = parsedData.strand;
-	document.getElementById('ref').innerHTML = parsedData.ref;
-	document.getElementById('ref').href = parsedData.ref;
-
+/**
+ * Load structure data from parsed json input into loadedItems
+ */
+function loadStructureData(parsedData, loadedItems, isHidden) {
+	if(isHidden === true) {
+		document.getElementById('hidden-patient').innerHTML = parsedData.patient;
+		document.getElementById('hidden-name').innerHTML = parsedData.name;
+		document.getElementById('hidden-ch').innerHTML = parsedData.ch;
+		document.getElementById('hidden-start').innerHTML = parsedData.start;
+		document.getElementById('hidden-end').innerHTML = parsedData.end;
+		document.getElementById('hidden-strand').innerHTML = parsedData.strand;
+		document.getElementById('hidden-ref').innerHTML = parsedData.ref;
+		document.getElementById('hidden-ref').href = parsedData.ref;	
+	} else {
+		document.getElementById('patient').innerHTML = parsedData.patient;
+		document.getElementById('name').innerHTML = parsedData.name;
+		document.getElementById('ch').innerHTML = parsedData.ch;
+		document.getElementById('start').innerHTML = parsedData.start;
+		document.getElementById('end').innerHTML = parsedData.end;
+		document.getElementById('strand').innerHTML = parsedData.strand;
+		document.getElementById('ref').innerHTML = parsedData.ref;
+		document.getElementById('ref').href = parsedData.ref;	
+	}
 	if(Array.isArray(parsedData.components) ) {
 		for (let i = 0; i < parsedData.components.length; i++) {
-			loadComponent(parsedData.components[i], loadedItems);
+			loadComponent(parsedData.components[i], loadedItems, isHidden);
 		}
 	}
 }
 
-function loadComponent(component, exonArray) {
+/**
+ * Create group corresponding to component 
+ * (if hidden is true, create the group in genesGroupsHidden instead).
+ * Push items into exonArray.
+ */
+function loadComponent(component, exonArray, isHidden) {
+	let groupId;
+	if(isHidden === true) {
+		groupId = genesGroupsHidden.length + 1;
+		genesGroupsHidden.push(
+			{
+				id: groupId,
+				content: '<div class="comp-type ' + component.type + (component.hasOwnProperty('ref') ? '':' noref' )+'">&lt;'+component.type+'&gt;</div>' + (component.hasOwnProperty('ref') ? '<div class="comp-ref">'+component.ref+'</div>' : ''),
+				value: groupId
+			});
+	} else {
+		groupId = genesGroups.length + 1;
+		genesGroups.push(
+			{
+				id: groupId,
+				content: '<div class="comp-type ' + component.type + (component.hasOwnProperty('ref') ? '':' noref' )+'">&lt;'+component.type+'&gt;</div>' + (component.hasOwnProperty('ref') ? '<div class="comp-ref">'+component.ref+'</div>' : ''),
+				value: groupId
+			});
+	}	
 	// create component group
-	let groupId = genesGroups.length + 1;
-	genesGroups.push(
-		{
-			id: groupId,
-			content: '<div class="comp-type ' + component.type + (component.hasOwnProperty('ref') ? '':' noref' )+'">&lt;'+component.type+'&gt;</div>' + (component.hasOwnProperty('ref') ? '<div class="comp-ref">'+component.ref+'</div>' : ''),
-			value: groupId
-		});
-
+	
 	// load exons
 	let exons = component.exons.split(';');
 	for (let i = 0; i < exons.length; i++) {
@@ -908,6 +1099,9 @@ function loadComponent(component, exonArray) {
 	createLines(exonArray, groupId);
 }
 
+/**
+ * Create item  corresponding to one exon and exploitable by timeline.
+ */
 function genesCreateItem(exon, groupId, compType, nbItems) {
 	let period = exon.split('-');
 
@@ -925,7 +1119,7 @@ function genesCreateItem(exon, groupId, compType, nbItems) {
 }
 
 /**
- * For each item, find next recent item if if exists
+ * For each item, find next recent item if if exists.
  * Link them
  * */	
 function createLines(exonArray, groupId) {
@@ -941,6 +1135,9 @@ function createLines(exonArray, groupId) {
 	}
 }
 
+/**
+ * Return timeline exploitable item for a linking line between exonItem and nextExonItem
+ */
 function createLineItem(exonItem, nextExonItem, nbItems) {
 	return {
 		id: nbItems,
@@ -985,45 +1182,64 @@ function showPatientMatrix() {
 
 
 
-function createDriverPdf() {
+async function createDriverPDF() {
 	let pdf = new jsPDF('landscape');
+
+	let toCapture = document.getElementById('hidden-to-capture');
+
+	if(Array.isArray(genesDriver.genes) ) {
+		let count = 0;
+		let length = genesDriver.genes.length;
+
+		for (const gStr of genesDriver.genes) {
+			await addGeneToPDF(gStr, pdf, toCapture);
+			count++;
+			if(count < length) {
+				pdf.addPage();
+			}
+		}
+
+		// genesDriver.genes.forEach( async (gStr) => {
+		// 	await addGeneToPDF(gStr, pdf, toCapture);
+		// 	count++;
+		// 	if(count < length) {
+		// 		pdf.addPage();
+		// 	}
+		// });
+
+		if(count > 0) {
+			pdf.save('test.pdf');
+		} else alert('no genes found in driver');
+	}
 	
-	
-	// hide tooltips
-	let tooltips = document.querySelectorAll('.genes-tooltip-text');
-	tooltips.forEach(function (t) {
-		t.style.display = 'none';
-	});
-
-	let toCapture = document.getElementById('to-capture');
-
-	let initWidth = 'initial';
-	let initHeight = 'initial';
-	toCapture.style.maxWidth = '277mm';
-	toCapture.style.maxHeight = '190mm';
-	//toCapture.trigger('resize');
-
-	setTimeout(() => {
-		captureHiddenTimeline(toCapture, initWidth, initHeight, pdf, tooltips);
-	}, 1000);
 
 }
 
-function captureHiddenTimeline(toCapture, initWidth, initHeight, pdf, tooltips) {
-	html2canvas(toCapture).then( canvas => {
-		// Export the canvas to its data URI representation
-		var base64image = canvas.toDataURL("image/png");
-
-		pdf.addImage(base64image, 'PNG', 10, 10);
-
-		pdf.save('test.pdf');
-	});
-
-	toCapture.style.maxWidth = initWidth;
-	toCapture.style.maxHeight = initHeight;
-	// show tooltips
-	tooltips.forEach(function (t) {
-		t.style.display = 'block';
-	});	
+async function addGeneToPDF(gStr, pdf, toCapture) {
+	// Create timeline in hidden div
+	await genesLoadGeneHidden(gStr);
+	await sleep(1000);
+	await addHiddenTimelineToPDF(toCapture, pdf);	
 }
 
+/**
+ * Capture given element. Put image in top left of PDF's current page.
+ */
+async function addHiddenTimelineToPDF(toCapture, pdf) {
+	const canvas = await html2canvas(toCapture, {
+		onclone: clonedDoc => {
+			clonedDoc.getElementById('hidden-to-capture').style.visibility = 'visible';
+			clonedDoc.getElementById('hidden-to-capture').style.opacity = '1';
+		}
+	});
+	
+	// Export the canvas to its data URI representation
+	var base64image = canvas.toDataURL("image/png");
+	pdf.addImage(base64image, 'PNG', 10, 10);
+	
+}
+
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
