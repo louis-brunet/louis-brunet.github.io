@@ -433,22 +433,28 @@ function genesLoadData(){
 	request.responseType = 'json';
 	request.send();
 	request.onload = () => {
-		genesContainer.innerHTML = '';
-		let parsedData = request.response;
-		loadStructureData(parsedData, genesItems);
-		genesGroups.push(
-			{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
-			{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
-			// {id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
-			{id: GROUP_METH, content: 'Méthylations', value: GROUP_METH, className: 'group-meth'}
-		);
-		loadAnomaliesData(parsedData.anomalies, genesItems);
-		genesItems = new vis.DataSet(genesItems);
-		genesGroups = new vis.DataSet(genesGroups);
-		genesTimeline = new vis.Timeline(genesContainer, genesItems, genesGroups, genesOptions);
-		genesExpressions = new vis.DataSet(genesExpressions);
-		buildExpressionsDiv();
+		genesRedrawTimeline(request.response);
 	};
+}
+
+function genesRedrawTimeline(data) {
+	genesContainer.innerHTML = '';
+	genesGroups = [];
+
+	let parsedData = data;
+	loadStructureData(parsedData, genesItems);
+	genesGroups.push(
+		{id: GROUP_MUT, content: 'Mutations', value: GROUP_MUT, className: 'group-mut'},
+		{id: GROUP_CNV, content: 'Copy number', value: GROUP_CNV, className: 'group-copy'},
+		// {id: GROUP_EXPR, content: 'Expression', value: GROUP_EXPR, className: 'group-expr'},
+		{id: GROUP_METH, content: 'Méthylations', value: GROUP_METH, className: 'group-meth'}
+	);
+	loadAnomaliesData(parsedData.anomalies, genesItems);
+	genesItems = new vis.DataSet(genesItems);
+	genesGroups = new vis.DataSet(genesGroups);
+	genesTimeline = new vis.Timeline(genesContainer, genesItems, genesGroups, genesOptions);
+	genesExpressions = new vis.DataSet(genesExpressions);
+	buildExpressionsDiv();
 }
 
 function buildExpressionsDiv() {
@@ -975,5 +981,49 @@ function captureVis() {
 
 function showPatientMatrix() {
 	document.getElementById('matrix-window-container').style.display = 'block';
+}
+
+
+
+function createDriverPdf() {
+	let pdf = new jsPDF('landscape');
+	
+	
+	// hide tooltips
+	let tooltips = document.querySelectorAll('.genes-tooltip-text');
+	tooltips.forEach(function (t) {
+		t.style.display = 'none';
+	});
+
+	let toCapture = document.getElementById('to-capture');
+
+	let initWidth = 'initial';
+	let initHeight = 'initial';
+	toCapture.style.maxWidth = '277mm';
+	toCapture.style.maxHeight = '190mm';
+	//toCapture.trigger('resize');
+
+	setTimeout(() => {
+		captureHiddenTimeline(toCapture, initWidth, initHeight, pdf, tooltips);
+	}, 1000);
+
+}
+
+function captureHiddenTimeline(toCapture, initWidth, initHeight, pdf, tooltips) {
+	html2canvas(toCapture).then( canvas => {
+		// Export the canvas to its data URI representation
+		var base64image = canvas.toDataURL("image/png");
+
+		pdf.addImage(base64image, 'PNG', 10, 10);
+
+		pdf.save('test.pdf');
+	});
+
+	toCapture.style.maxWidth = initWidth;
+	toCapture.style.maxHeight = initHeight;
+	// show tooltips
+	tooltips.forEach(function (t) {
+		t.style.display = 'block';
+	});	
 }
 
