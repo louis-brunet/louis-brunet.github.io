@@ -611,9 +611,26 @@ function createSynthesePathTNode(synthese) {
   return res;
 }
 
-//TODO
 function createSyntheseCompPathNtNode(synthese) {
+  let res = document.createElement('div');
+  res.className = 'synthese';
 
+  if(synthese.hasOwnProperty('details')) {
+    let nbDiv = document.createElement('div');
+    nbDiv.className = 'synthese-line';
+    let text = document.createTextNode(synthese.details);
+    nbDiv.appendChild(text);
+    res.appendChild(nbDiv);
+  }
+
+  if(synthese.hasOwnProperty('traitePar')) {
+    let listDiv = document.createElement('div');
+    listDiv.className = 'synthese-line';
+    let text = document.createTextNode('Traité par : ' + synthese.traitePar);
+    listDiv.appendChild(text);
+    res.appendChild(listDiv);
+  }
+  return res;
 }
 
 function createSyntheseTraitementINode(synthese) {
@@ -639,9 +656,57 @@ function createSyntheseTraitementINode(synthese) {
   return res;
 }
 
-//TODO
 function createSyntheseTraitementSNode(synthese) {
+  let res = document.createElement('div');
+  res.className = 'synthese';
 
+  if(synthese.hasOwnProperty('drug')) {
+    let nbDiv = document.createElement('div');
+    nbDiv.className = 'synthese-line';
+    let text = document.createTextNode(synthese.drug);
+    nbDiv.appendChild(text);
+    res.appendChild(nbDiv);
+  }
+
+  if(synthese.hasOwnProperty('nbCycles')) {
+    let listDiv = document.createElement('div');
+    listDiv.className = 'synthese-line';
+    let text = document.createTextNode('Nombre de cycles : ' + synthese.nbCycles);
+    listDiv.appendChild(text);
+    res.appendChild(listDiv);
+  }
+
+  if(synthese.hasOwnProperty('dose')) {
+    let scoreDiv = document.createElement('div');
+    scoreDiv.className = 'synthese-line';
+    let text = document.createTextNode('Dose par jour : ' + synthese.dose);
+    scoreDiv.appendChild(text);
+    res.appendChild(scoreDiv);
+  }
+
+  return res;
+}
+
+function createSynthesePbhNode(synthese) {
+  let res = document.createElement('div');
+  res.className = 'synthese';
+
+  if(synthese.hasOwnProperty('ft')) {
+    let nbDiv = document.createElement('div');
+    nbDiv.className = 'synthese-line';
+    let text = document.createTextNode('FT : ' + synthese.ft);
+    nbDiv.appendChild(text);
+    res.appendChild(nbDiv);
+  }
+
+  if(synthese.hasOwnProperty('fnt')) {
+    let listDiv = document.createElement('div');
+    listDiv.className = 'synthese-line';
+    let text = document.createTextNode('FNT : ' + synthese.fnt);
+    listDiv.appendChild(text);
+    res.appendChild(listDiv);
+  }
+  return res;
 }
 
 /**
