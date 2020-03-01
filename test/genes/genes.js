@@ -1215,10 +1215,13 @@ async function createDriverPDF() {
 	document.getElementById('pdf-loader').style.display = 'none';
 }
 
+/**
+ * Load gene data corresponding to gStr in toCapture, wait 1.5s, then screenshot it and add it to pdf.
+ */
 async function addGeneToPDF(gStr, pdf, toCapture) {
 	// Create timeline in hidden div
 	await genesLoadGeneHidden(gStr);
-	await sleep(1000);
+	await sleep(1500);
 	await addHiddenTimelineToPDF(toCapture, pdf);	
 }
 
