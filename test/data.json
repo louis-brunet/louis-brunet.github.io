@@ -101,6 +101,10 @@
 	"evaluation_examen":{
 		"normal":"S=1;A=2;F=4"
 	},
+	"synthese_pbh": {
+		"ft":" A7H5-CHC",
+		"fnt":"7750-cirrhose ; 8866-VHC"
+	},
 	"liens_examen":{
 		"cr":		"document.pdf",
 		"images":	"",
@@ -115,10 +119,6 @@
 	"end":"2018-11-25",
 	"synthese_traitement_i":{
 		"tumeurs":"T1"
-	},
-	"synthese_pbh": {
-		"ft":" A7H5-CHC",
-		"fnt":"7750-cirrhose ; 8866-VHC"
 	}
 },
 
