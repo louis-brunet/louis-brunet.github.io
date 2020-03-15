@@ -74,7 +74,13 @@
 {
 	"content":"tdm", 
 	"className":"examen",
-	"start":"2018-10-15"
+	"start":"2018-10-15",
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
+	}
 },
 {
 	"content":"Pbh", 
@@ -82,6 +88,12 @@
 	"start":"2018-11-05",
 	"evaluation_examen":{
 		"normal":"S=1;A=2;F=4"
+	},
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
 	}
 },
 {
@@ -101,12 +113,24 @@
 {
 	"content":"tdm", 
 	"className":"examen",
-	"start":"2019-03-30"
+	"start":"2019-03-30",
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
+	}
 },
 {
 	"content":"tdm", 
 	"className":"examen",
-	"start":"2019-06-30"
+	"start":"2019-06-30",
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
+	}
 },
 {
 	"content":"CHC",
@@ -215,7 +239,8 @@
 {
 	"content":"tdm", 
 	"className":"examen",
-	"start":"2019-10-15"
+	"start":"2019-10-15",
+
 },
 {
 	"content":"RCP", 

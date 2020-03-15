@@ -342,12 +342,14 @@ function createItem(parsedItem, id) {
   let hasSyntheseComp = parsedItem.hasOwnProperty('synthese_comp');
   let hasSyntheseTraitementI = parsedItem.hasOwnProperty('synthese_traitement_i');
   let hasSyntheseTraitementS = parsedItem.hasOwnProperty('synthese_traitement_s'); 
-  let hasSynthePbh = parsedItem.hasOwnProperty('synthese_pbh');
+  let hasSynthesePbh = parsedItem.hasOwnProperty('synthese_pbh');
+  let hasLiensExamen = parsedItem.hasOwnProperty('liens_examen');
 
   // Load relevant tooltip data
   if (parsedItem.hasOwnProperty('evaluation_examen') || 
       (parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) ||
-      hasSynthesePathT || hasSynthesePathNT || hasSyntheseComp || hasSyntheseTraitementI || hasSyntheseTraitementS || hasSynthePbh){
+      hasSynthesePathT || hasSynthesePathNT || hasSyntheseComp || hasSyntheseTraitementI || 
+      hasSyntheseTraitementS || hasSynthesePbh || hasLiensExamen){
     res.className = res.className + ' tooltip';
     
     if(parsedItem.hasOwnProperty('evaluation_examen')) {
@@ -386,8 +388,12 @@ function createItem(parsedItem, id) {
       res.tooltip.synthese_traitement_s = parsedItem.synthese_traitement_s;
     }
 
-    if(hasSynthePbh) {
+    if(hasSynthesePbh) {
       res.tooltip.synthese_pbh = parsedItem.synthese_pbh;
+    }
+
+    if(hasLiensExamen) {
+      res.tooltip.liens_examen = parsedItem.liens_examen;
     }
   }
 
@@ -416,7 +422,6 @@ function createTimeline() {
   hideAllEmptySpace(document.getElementById('tolerance').value);
 }
 
-// TODO
 function createAllTooltips() {
   // Array of objects {id, className, tooltip}
   let tooltips = items.get({
@@ -436,67 +441,12 @@ function createAllTooltips() {
       if(tooltips[i].id == containers[j].dataset.dataid ){
         // Créer sous-élément .tooltip-text contenant le texte à afficher
         createTooltip(tooltips[i], containers[j]);
-
         break;
       }
-     
    } 
-
   }
-
-  
 }
 
-function loadData(parsedData) {
-  let loadedItems = [];
-  let i = 0;
-  if(parsedData[0].hasOwnProperty('nom')) {
-    i = 1;
-    document.getElementById('fname').innerHTML = '<strong>'+parsedData[0].prenom+'</strong>';
-    document.getElementById('lname').innerHTML = '<strong>'+parsedData[0].nom+'</strong>';
-    
-    document.getElementById('sexe').innerHTML =
-     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Masculin' : 'Fémin0i.decesn;';
-    document.getElementById('ipp').innerHTML = '<strong>'+parsedData[0].ipp+'</strong>';
-    document.getElementById('ddn').innerHTML = parsedData[0].ddn;
-
-    let ageTitle = document.getElementById('age');
-
-    if(parsedData[0].hasOwnProperty('deces') && parsedData[0].deces != ''){
-      death = new Date(parsedData[0].deces);
-      let deadTitle = document.getElementById('dead');
-      if(deadTitle != undefined) {
-        deadTitle.style.display = 'inline';
-      }
-      ageTitle.style.display = 'none';
-      document.getElementById('date-death').innerHTML = parsedData[0].deces;
-    } else {
-      let age = new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
-      ageTitle.innerHTML = '('+ age +' ans)';
-    }
-
-  }
-
-  document.getElementById('date-today').innerHTML = '' +now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
-
-  for (; i < parsedData.length; i++) {
-    let parsedItem = createItem(parsedData[i], i);
-
-    loadedItems.push(parsedItem);
-
-  }
-
-  items = new vis.DataSet(loadedItems);
-}
-
-function setSelectOnHover(containers) {
-  containers.forEach(function(cont){
-    cont.addEventListener("mouseover",function(e) {
-      timeline.setSelection([]);
-      timeline.setSelection(cont.dataset.dataid);
-    });
-  });
-}
 
 function createTooltip(tooltipObj, container) {
   var valNorm;
@@ -591,6 +541,12 @@ function createTooltip(tooltipObj, container) {
     node.appendChild(syntheseNode);
   } 
 
+  // Liens Examen
+  if(tooltipObj.tooltip.hasOwnProperty('liens_examen')) {
+    // TODO 
+    node.appendChild(createLiensExamensNode(tooltipObj.tooltip.liens_examen)); 
+  }
+
   if(tooltipObj.className.includes('consultation') ||
    tooltipObj.className.includes('path-t') ) {
     node.className += ' down';
@@ -598,6 +554,79 @@ function createTooltip(tooltipObj, container) {
 
   container.appendChild(node);
 
+}
+
+function createLiensExamensNode(liens_examens) {
+  let res = document.createElement('div');
+  res.className = 'liens-examen';
+
+  let crLink = createLink('lien-cr', liens_examens.cr);
+  let imgLink = createLink('lien-images', liens_examens.images);
+  let radiomicsLink = createLink('lien-radiomics', liens_examens.radiomics);
+  let viewerLink = createLink('lien-viewer', liens_examens.viewer);
+
+  res.appendChild(crLink);
+  res.appendChild(imgLink);
+  res.appendChild(radiomicsLink);
+  res.appendChild(viewerLink);
+
+  return res;
+}
+
+function createLink(className, href) {
+  let res = document.createElement('a');
+  res.className = className;
+  res.href = href;
+  return res;
+}
+
+
+function loadData(parsedData) {
+  let loadedItems = [];
+  let i = 0;
+  if(parsedData[0].hasOwnProperty('nom')) {
+    i = 1;
+    document.getElementById('fname').innerHTML = '<strong>'+parsedData[0].prenom+'</strong>';
+    document.getElementById('lname').innerHTML = '<strong>'+parsedData[0].nom+'</strong>';
+    
+    document.getElementById('sexe').innerHTML =
+     (parsedData[0].sexe == 'h') || (parsedData[0].sexe == 'H') ? 'Masculin' : 'Fémin0i.decesn;';
+    document.getElementById('ipp').innerHTML = '<strong>'+parsedData[0].ipp+'</strong>';
+    document.getElementById('ddn').innerHTML = parsedData[0].ddn;
+
+    let ageTitle = document.getElementById('age');
+
+    if(parsedData[0].hasOwnProperty('deces') && parsedData[0].deces != ''){
+      death = new Date(parsedData[0].deces);
+      let deadTitle = document.getElementById('dead');
+      if(deadTitle != undefined) {
+        deadTitle.style.display = 'inline';
+      }
+      ageTitle.style.display = 'none';
+      document.getElementById('date-death').innerHTML = parsedData[0].deces;
+    } else {
+      let age = new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
+      ageTitle.innerHTML = '('+ age +' ans)';
+    }
+  }
+
+  document.getElementById('date-today').innerHTML = '' +now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
+
+  for (; i < parsedData.length; i++) {
+    let parsedItem = createItem(parsedData[i], i);
+    loadedItems.push(parsedItem);
+  }
+
+  items = new vis.DataSet(loadedItems);
+}
+
+function setSelectOnHover(containers) {
+  containers.forEach(function(cont){
+    cont.addEventListener("mouseover",function(e) {
+      timeline.setSelection([]);
+      timeline.setSelection(cont.dataset.dataid);
+    });
+  });
 }
 
 function createSynthesePathTNode(synthese) {
