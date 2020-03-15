@@ -257,7 +257,7 @@ div#matrix {
 } 
 
 .pdf-creation-window {
-    max-width: 80%;
+    max-width: 200px;
     box-shadow: 0 0 16px 16px rgba(0, 0, 0, 0.7);
     margin: auto;
     margin-top: calc(50vh - 50%);
