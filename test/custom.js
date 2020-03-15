@@ -611,7 +611,7 @@ function loadData(parsedData) {
     }
   }
 
-  document.getElementById('date-today').innerHTML = '' +now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
+  document.getElementById('date-today').innerHTML = '' +now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
 
   for (; i < parsedData.length; i++) {
     let parsedItem = createItem(parsedData[i], i);
