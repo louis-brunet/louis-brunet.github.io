@@ -767,6 +767,12 @@ function capture() {
   let initDisplay = '' + tolerance.style.display;
   tolerance.style.display = 'none';
 
+  // hide tooltips
+	let tooltips = document.querySelectorAll('.tooltip-text');
+	tooltips.forEach(function (t) {
+		t.style.display = 'none';
+	});
+
 	html2canvas(document.getElementById('to-capture')).then(function(canvas) {
 		document.getElementById('output-card').style.display = 'block';
 		// Export the canvas to its data URI representation
@@ -774,6 +780,10 @@ function capture() {
 		// Display image in #output element
 		document.getElementById('output').src = base64image;
   });
+  // show tooltips
+	tooltips.forEach(function (t) {
+		t.style.display = 'block';
+	});
   
   tolerance.style.display = initDisplay;
 }
