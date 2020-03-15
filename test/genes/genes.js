@@ -187,7 +187,7 @@ let day = today.getDate();
 if(day<10) {
 	day = '0'+day;
 } 
-let formattedDate = day + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+var formattedDate = day + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
 document.getElementById('date-du-jour').innerHTML = formattedDate;
 document.getElementById('hidden-date-du-jour').innerHTML = formattedDate;
 
@@ -1180,6 +1180,21 @@ function showPatientMatrix() {
 	document.getElementById('matrix-window-container').style.display = 'block';
 }
 
+function showPdfCreationWindow() {
+	if(genesDriver == undefined) {
+		alert('Aucun driver selectionné.');
+		return;
+	}
+	document.getElementById('pdf-creation-driver').innerHTML = genesDriver.nom;
+	document.getElementById('pdf-creation-duration').innerHTML = formatTime(genesDriver.genes.length * 6);
+	document.getElementById('pdf-creation-question').style.display = 'block';
+	document.getElementById('pdf-creation-loader').style.display = 'none';
+	document.getElementById('pdf-creation-window-container').style.display = 'block';
+}
+
+function formatTime(secondCount) {
+	return new Date(secondCount * 1000).toISOString().substr(11, 8);
+}
 
 
 async function createDriverPDF() {
@@ -1188,7 +1203,7 @@ async function createDriverPDF() {
 		return;
 	}
 
-	document.getElementById('pdf-loader').style.display = 'block';
+	document.getElementById('pdf-creation-loader').style.display = 'block';
 
 	let pdf = new jsPDF();
 
@@ -1205,15 +1220,18 @@ async function createDriverPDF() {
 			if(!isFirstOfPage && count < length) {
 				pdf.addPage();
 			}
+			document.getElementById('pdf-creation-duration').innerHTML = formatTime((length - count) * 6);
+
 		}
 
 		if(count > 0) {
-			pdf.save('test.pdf');
-		} else alert('no genes found in driver');
+			let pdfName = '10-'+ genesDriver.nom + '-' + formattedDate;
+			pdf.save(pdfName + '.pdf');
+		} else alert('No genes found in driver.');
 	}
 	
 	
-	document.getElementById('pdf-loader').style.display = 'none';
+	document.getElementById('pdf-creation-loader').style.display = 'none';
 }
 
 /**

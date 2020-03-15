@@ -20,8 +20,7 @@
       <div id="genes-driver-btns"></div>
       <div id="genes-carte-btns"></div>
       <div id='top-right-btns'>
-        <div class="loader" id="pdf-loader"></div>
-        <button id="prepare-pdf-btn" onclick="createDriverPDF()">Driver&nbsp;PDF</button>
+        <button id="prepare-pdf-btn" onclick="showPdfCreationWindow()">Driver&nbsp;PDF</button>
         <button id="matrix-btn" onclick="showPatientMatrix()">Matrice</button>
         <a id="viewer-btn" href="http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]">Viewer</a>
         <button id="cap-btn" onclick="captureVis();this.style.display = 'none'">JPEG</button>
@@ -166,6 +165,21 @@
           <div id="matrix"></div>  
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="pdf-creation-window-container">
+    <div class="card pdf-creation-window">
+      <div class="pdf-creation-message">
+        Générer un PDF correspondant au driver <span id="pdf-creation-driver">DRIVER </span>
+        prendra environ <span id="pdf-creation-duration">DUREE</span>. 
+      </div>
+      <div id="pdf-creation-question">
+        Continuer&nbsp;?
+        <button onclick="createDriverPDF();document.getElementById('pdf-creation-question').style.display = 'none'">OUI</button> 
+        <button onclick="document.getElementById('pdf-creation-window-container').style.display = 'none'">NON</button>
+      </div>
+      <div class="loader" id="pdf-creation-loader"></div>
     </div>
   </div>
   

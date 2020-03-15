@@ -180,7 +180,7 @@ a#viewer-btn {
 }
 
 
-#matrix-window-container {
+#matrix-window-container, #pdf-creation-window-container{
     display: none;
     background-color: rgba(0, 0, 0, 0.7);
     width: 100vw;
@@ -248,6 +248,17 @@ div#matrix {
     /* margin-bottom: 60px; */
 }
 
-#pdf-loader {
+#pdf-creation-loader {
     display: none;
+}
+
+#pdf-creation-driver, #pdf-creation-duration {
+    color: blue;
+} 
+
+.pdf-creation-window {
+    max-width: 80%;
+    box-shadow: 0 0 16px 16px rgba(0, 0, 0, 0.7);
+    margin: auto;
+    margin-top: calc(50vh - 50%);
 }
