@@ -1205,7 +1205,7 @@ async function createDriverPDF() {
 
 	document.getElementById('pdf-creation-loader').style.display = 'block';
 
-	let pdf = new jsPDF();
+	let pdf = new jsPDF('landscape');
 
 	let toCapture = document.getElementById('hidden-to-capture');
 
@@ -1214,10 +1214,10 @@ async function createDriverPDF() {
 		let length = genesDriver.genes.length;
 
 		for (const gStr of genesDriver.genes) {
-			let isFirstOfPage = (count % 2 == 0);
-			await addGeneToPDF(gStr, pdf, toCapture, (isFirstOfPage ? 0 : 1));
+			// let isFirstOfPage = (count % 2 == 0);
+			await addGeneToPDF(gStr, pdf, toCapture, /*(isFirstOfPage ? 0 : 1)*/0);
 			count++;
-			if(!isFirstOfPage && count < length) {
+			if(/*!isFirstOfPage &&*/ count < length) {
 				pdf.addPage();
 			}
 			document.getElementById('pdf-creation-duration').innerHTML = formatTime((length - count) * 6);
@@ -1248,6 +1248,7 @@ async function addGeneToPDF(gStr, pdf, toCapture, screenshotsInPage) {
  * Capture given element. Put image in top left of PDF's current page.
  */
 async function addHiddenTimelineToPDF(toCapture, pdf, screenshotsInPage) {
+
 	const canvas = await html2canvas(toCapture, {
 		onclone: clonedDoc => {
 			clonedDoc.getElementById('hidden-to-capture').style.visibility = 'visible';
@@ -1257,11 +1258,44 @@ async function addHiddenTimelineToPDF(toCapture, pdf, screenshotsInPage) {
 	
 	// Export the canvas to its data URI representation
 	let base64image = canvas.toDataURL("image/png");
-	let height = 10 + (screenshotsInPage * 130);
+
+	//let resized = await resizeImage(base64image, 277, 95);
+
+	let height = 10 + (screenshotsInPage * 95);
 	pdf.addImage(base64image, 'PNG', 10, height);
 	
 }
 
+const resizeImage = (base64Str, maxWidth, maxHeight) => {
+	return new Promise((resolve) => {
+	  let img = new Image()
+	  img.src = base64Str
+	  img.onload = () => {
+		let canvas = document.createElement('canvas')
+		const MAX_WIDTH = maxWidth
+		const MAX_HEIGHT = maxHeight
+		let width = img.width
+		let height = img.height
+  
+		if (width > height) {
+		  if (width > MAX_WIDTH) {
+			height *= MAX_WIDTH / width
+			width = MAX_WIDTH
+		  }
+		} else {
+		  if (height > MAX_HEIGHT) {
+			width *= MAX_HEIGHT / height
+			height = MAX_HEIGHT
+		  }
+		}
+		canvas.width = width
+		canvas.height = height
+		let ctx = canvas.getContext('2d')
+		ctx.drawImage(img, 0, 0, width, height)
+		resolve(canvas.toDataURL())
+	  }
+	})
+  }
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
