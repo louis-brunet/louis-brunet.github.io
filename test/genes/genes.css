@@ -226,8 +226,8 @@ div#matrix {
 }
 
 #hidden-to-capture {
-    max-width: 277mm;
-    max-height: 190mm;
+    max-width: 190mm;
+    max-height: 130mm;
     visibility: hidden;
     opacity: 0;
 }

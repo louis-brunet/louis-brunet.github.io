@@ -1190,7 +1190,7 @@ async function createDriverPDF() {
 
 	document.getElementById('pdf-loader').style.display = 'block';
 
-	let pdf = new jsPDF('landscape');
+	let pdf = new jsPDF();
 
 	let toCapture = document.getElementById('hidden-to-capture');
 
@@ -1199,9 +1199,10 @@ async function createDriverPDF() {
 		let length = genesDriver.genes.length;
 
 		for (const gStr of genesDriver.genes) {
-			await addGeneToPDF(gStr, pdf, toCapture);
+			let isFirstOfPage = (count % 2 == 0);
+			await addGeneToPDF(gStr, pdf, toCapture, (isFirstOfPage ? 0 : 1));
 			count++;
-			if(count < length) {
+			if(!isFirstOfPage && count < length) {
 				pdf.addPage();
 			}
 		}
@@ -1218,17 +1219,17 @@ async function createDriverPDF() {
 /**
  * Load gene data corresponding to gStr in toCapture, wait 1.6s, then screenshot it and add it to pdf.
  */
-async function addGeneToPDF(gStr, pdf, toCapture) {
+async function addGeneToPDF(gStr, pdf, toCapture, screenshotsInPage) {
 	// Create timeline in hidden div
 	await genesLoadGeneHidden(gStr);
 	await sleep(1600);
-	await addHiddenTimelineToPDF(toCapture, pdf);	
+	await addHiddenTimelineToPDF(toCapture, pdf, screenshotsInPage);	
 }
 
 /**
  * Capture given element. Put image in top left of PDF's current page.
  */
-async function addHiddenTimelineToPDF(toCapture, pdf) {
+async function addHiddenTimelineToPDF(toCapture, pdf, screenshotsInPage) {
 	const canvas = await html2canvas(toCapture, {
 		onclone: clonedDoc => {
 			clonedDoc.getElementById('hidden-to-capture').style.visibility = 'visible';
@@ -1237,8 +1238,9 @@ async function addHiddenTimelineToPDF(toCapture, pdf) {
 	});
 	
 	// Export the canvas to its data URI representation
-	var base64image = canvas.toDataURL("image/png");
-	pdf.addImage(base64image, 'PNG', 10, 10);
+	let base64image = canvas.toDataURL("image/png");
+	let height = 10 + (screenshotsInPage * 130);
+	pdf.addImage(base64image, 'PNG', 10, height);
 	
 }
 
