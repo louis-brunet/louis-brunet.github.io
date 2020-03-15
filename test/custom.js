@@ -5,15 +5,15 @@ let url = 'https://louis-brunet.github.io/test/data.json';
  */
 
 var groups = new vis.DataSet([
-      {id: 0, content: 'Pathologies tumorales', value: 2},
+      {id: 0, content: 'Pathologies T', value: 2},
       {id: 1, content: 'Examens', value: 7},
-      {id: 2, content: 'Traitements locaux', value: 4},
+      {id: 2, content: 'Tts locaux', value: 4},
       {id: 3, content: 'Consultations', value: 1},
-      {id: 4, content: 'Pathologies non tumorales', value: 3},
+      {id: 4, content: 'Pathologies NT', value: 3},
       {id: 5, content: 'Complications', value: 6},
-      {id: 6, content: 'Traitements systémiques', value: 5},
+      {id: 6, content: 'Tts systémiques', value: 5},
       {id: 7, content: 'Inclusions', value: 8},
-      {id: 8, content: 'Prélèvement CRB', value: 9}
+      {id: 8, content: 'CRB', value: 9}
     ]);
 
 // create visualization
@@ -342,12 +342,12 @@ function createItem(parsedItem, id) {
   let hasSyntheseComp = parsedItem.hasOwnProperty('synthese_comp');
   let hasSyntheseTraitementI = parsedItem.hasOwnProperty('synthese_traitement_i');
   let hasSyntheseTraitementS = parsedItem.hasOwnProperty('synthese_traitement_s'); 
-
+  let hasSynthePbh = parsedItem.hasOwnProperty('synthese_pbh');
 
   // Load relevant tooltip data
   if (parsedItem.hasOwnProperty('evaluation_examen') || 
       (parsedItem.className == 'crb' && parsedItem.hasOwnProperty('reference')) ||
-      hasSynthesePathT || hasSynthesePathNT || hasSyntheseComp || hasSyntheseTraitementI || hasSyntheseTraitementS ){
+      hasSynthesePathT || hasSynthesePathNT || hasSyntheseComp || hasSyntheseTraitementI || hasSyntheseTraitementS || hasSynthePbh){
     res.className = res.className + ' tooltip';
     
     if(parsedItem.hasOwnProperty('evaluation_examen')) {
@@ -384,6 +384,10 @@ function createItem(parsedItem, id) {
 
     if(hasSyntheseTraitementS) {
       res.tooltip.synthese_traitement_s = parsedItem.synthese_traitement_s;
+    }
+
+    if(hasSynthePbh) {
+      res.tooltip.synthese_pbh = parsedItem.synthese_pbh;
     }
   }
 
@@ -456,17 +460,24 @@ function loadData(parsedData) {
     document.getElementById('ipp').innerHTML = '<strong>'+parsedData[0].ipp+'</strong>';
     document.getElementById('ddn').innerHTML = parsedData[0].ddn;
 
-    let age = new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
-    document.getElementById('age').innerHTML = '('+ age +' ans)';
+    let ageTitle = document.getElementById('age');
 
     if(parsedData[0].hasOwnProperty('deces') && parsedData[0].deces != ''){
       death = new Date(parsedData[0].deces);
-      let deadTitle = document.getElementById('dead')
+      let deadTitle = document.getElementById('dead');
       if(deadTitle != undefined) {
         deadTitle.style.display = 'inline';
       }
+      ageTitle.style.display = 'none';
+      document.getElementById('date-death').innerHTML = parsedData[0].deces;
+    } else {
+      let age = new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
+      ageTitle.innerHTML = '('+ age +' ans)';
     }
+
   }
+
+  document.getElementById('date-today').innerHTML = '' +now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
 
   for (; i < parsedData.length; i++) {
     let parsedItem = createItem(parsedData[i], i);
@@ -555,19 +566,28 @@ function createTooltip(tooltipObj, container) {
     // TODO
     let syntheseNode = createSynthesePathTNode(tooltipObj.tooltip.synthese_path_t);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_path_nt')) {
+  }
+  if(tooltipObj.tooltip.hasOwnProperty('synthese_path_nt')) {
     let syntheseNode = createSyntheseCompPathNtNode(tooltipObj.tooltip.synthese_path_nt);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_comp')) {
+  }
+  if(tooltipObj.tooltip.hasOwnProperty('synthese_comp')) {
     let syntheseNode = createSyntheseCompPathNtNode(tooltipObj.tooltip.synthese_comp);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_traitement_i')) {
+  }
+  if(tooltipObj.tooltip.hasOwnProperty('synthese_traitement_i')) {
     // TODO
     let syntheseNode = createSyntheseTraitementINode(tooltipObj.tooltip.synthese_traitement_i);
     node.appendChild(syntheseNode);
-  } else if(tooltipObj.tooltip.hasOwnProperty('synthese_traitement_s')) {
+  }
+  if(tooltipObj.tooltip.hasOwnProperty('synthese_traitement_s')) {
     // TODO
     let syntheseNode = createSyntheseTraitementSNode(tooltipObj.tooltip.synthese_traitement_s);
+    node.appendChild(syntheseNode);
+  } 
+  if(tooltipObj.tooltip.hasOwnProperty('synthese_pbh')) {
+    // TODO
+    let syntheseNode = createSynthesePbhNode(tooltipObj.tooltip.synthese_pbh);
     node.appendChild(syntheseNode);
   } 
 
