@@ -113,15 +113,23 @@ p#title > * {
 
 
 .tooltip:hover .tooltip-text {
-  display: block;
+  /* display: block; */
+  visibility: visible;
+  opacity: 1;
   /*flex-wrap: wrap;
   flex-flow: row;
   justify-content: space-between;*/
 }
 
 .tooltip-text {
-  box-sizing: border-box;
-  display: none;/*
+  /* box-sizing: border-box;
+  display: none; */
+   
+  transition: opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  
+  /*
   background-color: rgba(230,230,230,0.8);*/
   background-color: white;
   color: #333;
@@ -298,4 +306,33 @@ div.vis-custom-time.deces {
   background-color: rgba(1,1,1,0);
   pointer-events: none;
   cursor: initial;
+}
+
+.liens-examen {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.liens-examen > a {
+  width: 45%;
+  text-decoration: none;
+  color: black;
+}
+
+.lien-cr {
+  background-color: rgba(0, 128, 0, 0.5);
+}
+
+.lien-images {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.lien-radiomics {
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+.lien-viewer {
+  background-color: rgba(255, 255, 0, 0.5);
 }

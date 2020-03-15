@@ -560,10 +560,10 @@ function createLiensExamensNode(liens_examens) {
   let res = document.createElement('div');
   res.className = 'liens-examen';
 
-  let crLink = createLink('lien-cr', liens_examens.cr);
-  let imgLink = createLink('lien-images', liens_examens.images);
-  let radiomicsLink = createLink('lien-radiomics', liens_examens.radiomics);
-  let viewerLink = createLink('lien-viewer', liens_examens.viewer);
+  let crLink = createLink('CR', 'lien-cr', liens_examens.cr);
+  let imgLink = createLink('Images','lien-images', liens_examens.images);
+  let radiomicsLink = createLink('Radiomics','lien-radiomics', liens_examens.radiomics);
+  let viewerLink = createLink('Viewer','lien-viewer', liens_examens.viewer);
 
   res.appendChild(crLink);
   res.appendChild(imgLink);
@@ -573,10 +573,11 @@ function createLiensExamensNode(liens_examens) {
   return res;
 }
 
-function createLink(className, href) {
+function createLink(text, className, href) {
   let res = document.createElement('a');
   res.className = className;
   res.href = href;
+  res.innerHTML = text;
   return res;
 }
 
