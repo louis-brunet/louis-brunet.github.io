@@ -32,6 +32,12 @@
 	"evaluation_examen":{
 		"normal":"Bilirubine T=11.3 µmol/l;AFP=4.4 ng/ml ;Creatinémie=93.0 µmol/l",
 		"anormal":"Albumine=33.0 g/L TP=85 %;Plaquettes=66.0 mm3"
+	},
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
 	}
 },
 {
@@ -41,6 +47,12 @@
 	"end":"2016-03-10",
 	"evaluation_examen":{
 		"normal":"IMC=32 (obésité modéré);OMS=0"
+	},
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
 	}
 },
 
@@ -151,6 +163,12 @@
 	"evaluation_examen":{
 		"normal":"Bilirubine T=11.3 µmol/l;AFP=951 ng/ml;Creatinémie=93.0 µmol/l",
 		"anormal":"Albumine=55.0 g/L TP=85 %;Plaquettes=66.0 mm3"
+	},
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
 	}
 },{
 	"content":"Bio",
@@ -160,6 +178,12 @@
 	"evaluation_examen":{
 		"normal":"Bilirubine T=11.3 µmol/l;AFP=951 ng/ml;Creatinémie=93.0 µmol/l",
 		"anormal":"AFP=1000 ng/ml"
+	},
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
 	}
 },
 {
@@ -169,6 +193,12 @@
 	"end":"2019-06-30",
 	"evaluation_examen":{
 		"normal":"IMC=22 (corpulence normale);OMS=1"
+	},
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
 	}
 },
 
@@ -239,7 +269,13 @@
 {
 	"content":"tdm", 
 	"className":"examen",
-	"start":"2019-10-15"
+	"start":"2019-10-15",
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
+	}
 
 },
 {
@@ -251,11 +287,23 @@
 {
 	"content":"tdm", 
 	"className":"examen",
-	"start":"2020-02-01"
+	"start":"2020-02-01",
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
+	}
 },{
 	"content":"tdm", 
 	"className":"examen",
-	"start":"2018-12-15"
+	"start":"2018-12-15",
+	"liens_examen":{
+		"cr":		"document.pdf",
+		"images":	"",
+		"radiomics":"radiomics.html",
+		"viewer":	"http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]"
+	}
 },
 {
 	"content":"CHIEF", 
