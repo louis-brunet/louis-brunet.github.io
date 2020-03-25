@@ -605,8 +605,10 @@ function loadData(parsedData) {
       }
       ageTitle.style.display = 'none';
       document.getElementById('date-death').innerHTML = parsedData[0].deces;
+      let age = getAge(new Date(parsedData[0].ddn), death);
+      document.getElementById('age-death').innerHTML = age;
     } else {
-      let age = new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
+      let age = getAge(new Date(parsedData[0].ddn), new Date());// new Date(new Date().getTime() - new Date(parsedData[0].ddn).getTime()).getFullYear() - 1970;
       ageTitle.innerHTML = '('+ age +' ans)';
     }
   }
@@ -619,6 +621,10 @@ function loadData(parsedData) {
   }
 
   items = new vis.DataSet(loadedItems);
+}
+
+function getAge(birthDate, endDate) {
+  return new Date(endDate.getTime() - birthDate.getTime()).getFullYear() - 1970;
 }
 
 function setSelectOnHover(containers) {
