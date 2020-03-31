@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="application.bootstrap">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <title>Webswing.org console</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" href="favicon.ico" />
+    <script>
+      __WEBSWING_URL = "..";
+    </script>
+  <link href="css/style.css" rel="stylesheet"></head>
+  <body>
+    <ws-login></ws-login>
+    <ws-navbar navigation="true" branding="Webswing.org"></ws-navbar>
+    <ws-sidebar>
+      <div data-ui-view></div>
+    </ws-sidebar>
+    <ws-messages></ws-messages>
+    <!-- <div id="loading" class="webswing-element">
+      <div class="ws-modal-container">
+        <div class="ws-login">
+          <div class="ws-login-content">
+            <div class="ws-spinner">
+              <div class="ws-spinner-dot-1"></div>
+              <div class="ws-spinner-dot-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <script
+      src="../javascript/webswing-embed.js"
+      data-webswing-global-var="webswingadmin"
+    ></script>
+  <script type="text/javascript" src="js/main-bundle-f2e3603eb91efec41a0e.js"></script></body>
+</html>
