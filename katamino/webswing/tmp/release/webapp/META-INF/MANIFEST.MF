@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+commitTime: 03.03.2020 @ 14:10:40 UTC
+Built-By: root
+commitId: 27e8247bfac44eb51d319e074f67a611dd7171d2
+branch: master
+version: 2.7.5
+Main-Class: main.Main
+Ant-Version: Apache Ant 1.8.2
+Ignore-Scanning-Packages: com,org,net
+buildTime: 03.03.2020 @ 15:08:55 UTC
+describe: 2.7.5
+remoteOriginUrl: https://bitbucket.org/webswing/webswing-home.git
+Created-By: Apache Maven 3.6.1
+Build-Jdk: 11.0.3
+
