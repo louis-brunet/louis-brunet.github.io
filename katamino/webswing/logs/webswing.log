@@ -1,0 +1,978 @@
+2020-03-31 15:25:25,100 INFO  [main] (StackLocator.java:71) Initializing Webswing...
+2020-03-31 15:25:26,573 INFO  [main] (StackLocator.java:71) Using Temp folder:D:\Documents\louis-brunet.github.io\katamino\webswing\tmp\release
+2020-03-31 15:25:26,574 INFO  [main] (StackLocator.java:71) Using Root folder:D:\Documents\louis-brunet.github.io\katamino\webswing
+2020-03-31 15:25:26,577 INFO  [main] (StackLocator.java:71) Using War file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing-server.war
+2020-03-31 15:25:26,578 INFO  [main] (StackLocator.java:71) Using Config file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing.config
+2020-03-31 15:25:27,316 INFO  [main] (StackLocator.java:71) Starting service JmsServiceImpl
+2020-03-31 15:25:27,774 INFO  [main] (StackLocator.java:71) Starting service WebSocketServiceImpl
+2020-03-31 15:25:34,303 INFO  [main] (StackLocator.java:71) Starting service ConfigurationServiceImpl
+2020-03-31 15:25:34,596 INFO  [main] (StackLocator.java:71) Starting service ExtensionServiceImpl
+2020-03-31 15:25:34,596 INFO  [main] (StackLocator.java:71) Initializing extension provider org.webswing.server.extension.DefaultExtensionProvider
+2020-03-31 15:25:34,598 INFO  [main] (StackLocator.java:71) Starting service StatisticsLoggerServiceImpl
+2020-03-31 15:25:34,601 INFO  [main] (StackLocator.java:71) Starting service SwingProcessServiceImpl
+2020-03-31 15:25:34,601 INFO  [main] (StackLocator.java:71) Starting SecurityManagerServiceImpl
+2020-03-31 15:25:35,586 INFO  [main] (StackLocator.java:71) Loading configured Applications.
+2020-03-31 15:25:35,640 INFO  [main] (StackLocator.java:71) Installing application /swingset3
+2020-03-31 15:25:35,644 INFO  [main] (StackLocator.java:71) Installing application /netbeans
+2020-03-31 15:25:35,646 INFO  [main] (StackLocator.java:71) Installing application /applet
+2020-03-31 15:25:35,647 INFO  [main] (StackLocator.java:71) Installing application /javafx
+2020-03-31 15:25:36,098 INFO  [main] (StackLocator.java:71) Loading master security module.({module=EMBEDED, config={users=[{username=admin, password=pwd, roles=[admin]}, {username=support, password=pwd, roles=[support]}, {username=user, password=pwd}]}, classPath=[]}).
+2020-03-31 15:26:16,246 ERROR [qtp105704967-46] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:26:16,320 ERROR [qtp105704967-46] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:26:18,959 ERROR [qtp105704967-45] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:26:18,985 ERROR [qtp105704967-45] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:26:22,311 ERROR [qtp105704967-43] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:26:22,339 ERROR [qtp105704967-43] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:26:24,205 ERROR [qtp105704967-43] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:26:24,228 ERROR [qtp105704967-43] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:26:32,584 ERROR [qtp105704967-16] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:26:32,611 ERROR [qtp105704967-16] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:27:11,697 ERROR [qtp105704967-16] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:27:11,723 ERROR [qtp105704967-16] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:28:12,481 ERROR [qtp105704967-42] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:28:12,512 ERROR [qtp105704967-42] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:28:17,830 ERROR [qtp105704967-19] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:28:17,853 ERROR [qtp105704967-19] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:32:12,139 INFO  [qtp105704967-19] (StackLocator.java:71) App configuration for path '/swingset3' changed.
+2020-03-31 15:32:12,141 INFO  [qtp105704967-19] (StackLocator.java:71) App configuration for path '/netbeans' changed.
+2020-03-31 15:32:12,142 INFO  [qtp105704967-19] (StackLocator.java:71) App configuration for path '/applet' changed.
+2020-03-31 15:32:12,143 INFO  [qtp105704967-19] (StackLocator.java:71) App configuration for path '/javafx' changed.
+2020-03-31 15:32:12,144 INFO  [qtp105704967-19] (StackLocator.java:71) Installing application /katamino
+2020-03-31 15:32:12,311 INFO  [qtp105704967-19] (StackLocator.java:71) App configuration for path '/katamino' changed.
+2020-03-31 15:32:12,341 INFO  [qtp105704967-19] (StackLocator.java:71) App configuration for path '/katamino' changed.
+2020-03-31 15:36:01,315 INFO  [qtp105704967-19] (StackLocator.java:71) App configuration for path '/katamino' changed.
+2020-03-31 15:36:15,484 ERROR [qtp105704967-53] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:36:15,499 ERROR [qtp105704967-53] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:36:18,301 ERROR [qtp105704967-16] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:36:18,332 ERROR [qtp105704967-16] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:40:12,072 ERROR [qtp105704967-165] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:40:12,100 ERROR [qtp105704967-165] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:43:38,435 INFO  [qtp105704967-164] (StackLocator.java:71) App configuration for path '/katamino' changed.
+2020-03-31 15:44:43,713 INFO  [qtp105704967-198] (StackLocator.java:71) Loading master security module.({module=EMBEDED, config={users=[{roles=[admin], password=$hashed$9crQPd7hkQt7jS8tom2hzhd5Hm5vXld0Z-dHCTX2heY, username=admin}, {roles=[support], password=$hashed$JwcdncUhM9b49BSND3_uRIYLN0FpeqCfH2ZQH47r5mg, username=support}, {roles=[], password=$hashed$E1gTF5g2lrvNCynEI71n2DqATevC6qjOXRAuAQB5RsI, username=user}, {roles=[], password=$hashed$AyuZ-TUjqI-H3mGSCGjxIb6dUjcmON7cp2OJAp5zZ_Q, username=user1}], extensions=[]}, classPath=[]}).
+2020-03-31 15:44:43,718 INFO  [qtp105704967-198] (StackLocator.java:71) App configuration for path '/' changed.
+2020-03-31 15:50:05,020 ERROR [qtp105704967-53] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:50:05,049 ERROR [qtp105704967-53] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:50:07,941 ERROR [qtp105704967-164] (StackLocator.java:71) Java version 13.0.1 not supported in this version of Webswing.
+2020-03-31 15:50:07,950 ERROR [qtp105704967-164] (StackLocator.java:71) Failed to create Application instance.
+org.webswing.server.model.exception.WsException: Failed to create App instance.
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:149) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceServiceImpl.create(SwingInstanceServiceImpl.java:32) ~[classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.startSwingInstance(SwingInstanceManagerImpl.java:141) [classes/:?]
+	at org.webswing.server.services.swingmanager.SwingInstanceManagerImpl.connectView(SwingInstanceManagerImpl.java:127) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketUrlHandlerImpl.onMessage(WebSocketUrlHandlerImpl.java:108) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onMessage(WebSocketAtmosphereHandler.java:55) [classes/:?]
+	at org.webswing.server.services.websocket.WebSocketAtmosphereHandler.onRequest(WebSocketAtmosphereHandler.java:148) [classes/:?]
+	at org.atmosphere.cpr.AsynchronousProcessor.action(AsynchronousProcessor.java:225) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AsynchronousProcessor.suspended(AsynchronousProcessor.java:114) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.AbstractJetty9AsyncSupportWithWebSocket.service(AbstractJetty9AsyncSupportWithWebSocket.java:171) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9AsyncSupportWithWebSocket.service(Jetty9AsyncSupportWithWebSocket.java:35) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.cpr.AtmosphereFramework.doCometSupport(AtmosphereFramework.java:2300) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.secureServe(SecuredAtmosphereFramework.java:50) [classes/:?]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl$1.call(SecurityManagerServiceImpl.java:81) [classes/:?]
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83) [shiro-core-1.3.2.jar:1.3.2]
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383) [shiro-core-1.3.2.jar:1.3.2]
+	at org.webswing.server.services.security.SecurityManagerServiceImpl.secure(SecurityManagerServiceImpl.java:78) [classes/:?]
+	at org.webswing.server.services.websocket.SecuredAtmosphereFramework.doCometSupport(SecuredAtmosphereFramework.java:45) [classes/:?]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:594) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor$3.run(DefaultWebSocketProcessor.java:345) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.util.VoidExecutorService.execute(VoidExecutorService.java:101) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.dispatch(DefaultWebSocketProcessor.java:340) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.websocket.DefaultWebSocketProcessor.invokeWebSocketProtocol(DefaultWebSocketProcessor.java:481) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.atmosphere.container.Jetty9WebSocketHandler.onWebSocketBinary(Jetty9WebSocketHandler.java:76) [atmosphere-runtime-2.4.30.jar:2.4.30]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryMessage(JettyListenerEventDriver.java:82) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.message.SimpleBinaryMessage.messageComplete(SimpleBinaryMessage.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.appendMessage(AbstractEventDriver.java:65) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.JettyListenerEventDriver.onBinaryFrame(JettyListenerEventDriver.java:68) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:145) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:319) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.AbstractExtension.nextIncomingFrame(AbstractExtension.java:147) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.nextIncomingFrame(PerMessageDeflateExtension.java:112) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.CompressExtension.forwardIncoming(CompressExtension.java:142) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension.incomingFrame(PerMessageDeflateExtension.java:92) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:201) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:226) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:255) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:581) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:434) [WEB-INF_server-lib_websocket-common-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:117) [WEB-INF_server-lib_jetty-io-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:698) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:804) [WEB-INF_server-lib_jetty-util-9.4.18.v20190429.jar:9.4.18.v20190429]
+	at java.lang.Thread.run(Thread.java:830) [?:?]
+Caused by: java.lang.Exception: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:673) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+Caused by: java.lang.RuntimeException: Java version not supported. (Versions starting with 1.8 and 11 are supported.)
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.start(SwingInstanceImpl.java:572) ~[classes/:?]
+	at org.webswing.server.services.swinginstance.SwingInstanceImpl.<init>(SwingInstanceImpl.java:145) ~[classes/:?]
+	... 50 more
+2020-03-31 15:53:03,701 INFO  [main] (WebswingServlet.java:35) Initializing Webswing...
+2020-03-31 15:53:04,746 INFO  [main] (DefaultInitializer.java:29) Using Temp folder:D:\Documents\louis-brunet.github.io\katamino\webswing\tmp\release
+2020-03-31 15:53:04,747 INFO  [main] (DefaultInitializer.java:33) Using Root folder:D:\Documents\louis-brunet.github.io\katamino\webswing
+2020-03-31 15:53:04,755 INFO  [main] (DefaultInitializer.java:43) Using War file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing-server.war
+2020-03-31 15:53:04,756 INFO  [main] (DefaultInitializer.java:47) Using Config file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing.config
+2020-03-31 15:53:06,469 INFO  [main] (StartupServiceImpl.java:33) Starting service JmsServiceImpl
+2020-03-31 15:53:06,900 INFO  [main] (StartupServiceImpl.java:33) Starting service WebSocketServiceImpl
+2020-03-31 15:53:12,791 INFO  [main] (StartupServiceImpl.java:33) Starting service ConfigurationServiceImpl
+2020-03-31 15:53:13,260 INFO  [main] (StartupServiceImpl.java:33) Starting service ExtensionServiceImpl
+2020-03-31 15:53:13,261 INFO  [main] (ExtensionServiceImpl.java:40) Initializing extension provider org.webswing.server.extension.DefaultExtensionProvider
+2020-03-31 15:53:13,265 INFO  [main] (StartupServiceImpl.java:33) Starting service StatisticsLoggerServiceImpl
+2020-03-31 15:53:13,267 INFO  [main] (StartupServiceImpl.java:33) Starting service SwingProcessServiceImpl
+2020-03-31 15:53:13,269 INFO  [main] (SecurityManagerServiceImpl.java:43) Starting SecurityManagerServiceImpl
+2020-03-31 15:53:14,650 INFO  [main] (GlobalUrlHandler.java:162) Loading configured Applications.
+2020-03-31 15:53:14,727 INFO  [main] (GlobalUrlHandler.java:180) Installing application /swingset3
+2020-03-31 15:53:14,733 INFO  [main] (GlobalUrlHandler.java:180) Installing application /netbeans
+2020-03-31 15:53:14,736 INFO  [main] (GlobalUrlHandler.java:180) Installing application /applet
+2020-03-31 15:53:14,737 INFO  [main] (GlobalUrlHandler.java:180) Installing application /javafx
+2020-03-31 15:53:14,740 INFO  [main] (GlobalUrlHandler.java:180) Installing application /katamino
+2020-03-31 15:53:15,291 INFO  [main] (GlobalUrlHandler.java:150) Loading master security module.({module=EMBEDED, config={users=[{roles=[admin], password=$hashed$9crQPd7hkQt7jS8tom2hzhd5Hm5vXld0Z-dHCTX2heY, username=admin}, {roles=[support], password=$hashed$JwcdncUhM9b49BSND3_uRIYLN0FpeqCfH2ZQH47r5mg, username=support}, {roles=[], password=$hashed$E1gTF5g2lrvNCynEI71n2DqATevC6qjOXRAuAQB5RsI, username=user}, {roles=[], password=$hashed$AyuZ-TUjqI-H3mGSCGjxIb6dUjcmON7cp2OJAp5zZ_Q, username=user1}], extensions=[]}, classPath=[]}).
+2020-03-31 15:53:25,437 INFO  [qtp1919892312-41] (SwingProcessImpl.java:80) Starting application process [katamino_admin_77f99a253e76_1585662804047] from [D:\Documents\louis-brunet.github.io\katamino\webswing] :[D:\Program, Files\Java\jre1.8.0_241\bin\java, -Xbootclasspath/a:D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-api-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-java8-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_java.desktop.modpatch-1.jar, -noverify, -Dwebswing.allowAutoDownload=true, -Dwebswing.initialUrl=http://localhost:8080/katamino/, -Dwebswing.sessionTimeoutIfInactive=false, -Dawt.toolkit=org.webswing.toolkit.WebToolkit8, -Dwebswing.tempDirPath=file:/D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/, -Dwebswing.printerJobDelegate=org.webswing.toolkit.WebPrinterJob, -Dwebswing.allowJsLink=true, -Dwebswing.transparentFileSave=true, -Dwebswing.allowUpload=true, -Dwebswing.directdraw.supported=true, -Dwebswing.sessionTimeoutSec=300, -Dwebswing.screenHeight=977, -Dwebswing.isolatedFs=false, -Dwebswing.allowDownload=true, -Dwebswing.transparentFileOpen=true, -Dwebswing.jmsUrl=nio://127.0.0.1:34455, -Dwebswing.allowDelete=true, -Dwebswing.clientId=katamino_admin_77f99a253e76_1585662804047, -Dwebswing.mainClass=katamino.Katamino, -Dwebswing.applicationHome=D:\Documents\louis-brunet.github.io\katamino\webswing, -Dwebswing.compositingWindowManager=false, -Dwebswing.screenWidth=1858, -Djava.awt.printerjob=org.webswing.toolkit.WebPrinterJobWrapper, -Dwebswing.allowLocalClipboard=true, -Dwebswing.messagingApiTopicName=msgApiSharedTopic/katamino, -Dwebswing.classPath=Katamino.jar, -Dwebswing.appId=/katamino, -Dwebswing.directdraw=true, -Dwebswing.transfer.dir=D:\Documents\louis-brunet.github.io\katamino\webswing\admin\upload, -Dwebswing.theme=Murrine, -Djava.awt.graphicsenv=org.webswing.toolkit.ge.WebGraphicsEnvironment8, -Djava.awt.headless=false, -Dwebswing.jmsQueueId=katamino_admin_77f99a253e76_1585662804047, -Dwebswing.testMode=false, -cp, D:\Documents\louis-brunet.github.io\katamino\webswing\webswing-server.war, main.Main]
+2020-03-31 15:53:30,441 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] INFO: JPDFWriter library not found on classpath, fallback to FreeHEP PDF service.
+2020-03-31 15:53:31,543 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] INFO: ClassModificationRegister: lock acquired.
+2020-03-31 15:53:32,141 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] FATAL: SwingMain:main -> java.lang.ClassNotFoundException: katamino.Katamino
+2020-03-31 15:53:32,142 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at org.webswing.classloader.SwingClassloader.loadClass(SwingClassloader.java:250)
+2020-03-31 15:53:32,154 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at java.lang.ClassLoader.loadClass(Unknown Source)
+2020-03-31 15:53:32,157 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at org.webswing.SwingMain.startSwingApp(SwingMain.java:57)
+2020-03-31 15:53:32,165 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at org.webswing.SwingMain.main(SwingMain.java:46)
+2020-03-31 15:53:32,172 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2020-03-31 15:53:32,175 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2020-03-31 15:53:32,184 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2020-03-31 15:53:32,189 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at java.lang.reflect.Method.invoke(Unknown Source)
+2020-03-31 15:53:32,196 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047] 	at main.Main.main(Main.java:80)
+2020-03-31 15:53:32,198 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585662804047]  | 
+2020-03-31 15:53:32,203 INFO  [Webswing Process Handler] (SwingProcessImpl.java:158) [katamino_admin_77f99a253e76_1585662804047] app process terminated. 
+2020-03-31 15:53:45,803 INFO  [qtp1919892312-40] (SwingProcessImpl.java:80) Starting application process [swingset3_admin_77f99a253e76_1585662825436] from [D:\Documents\louis-brunet.github.io\katamino\webswing\apps\SwingSet3\admin] :[D:\Program, Files\Java\jre1.8.0_241\bin\java, -Xbootclasspath/a:D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-api-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-java8-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_java.desktop.modpatch-1.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-fx-2.7.5-java11.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-fx-java8-2.7.5.jar;D:\Program Files\Java\jre1.8.0_241\lib\ext\jfxrt.jar, -noverify, -Xmx128m, -DauthorizedUser=admin, -Dwebswing.allowAutoDownload=true, -Dwebswing.initialUrl=http://localhost:8080/swingset3/, -Dwebswing.sessionTimeoutIfInactive=false, -Dawt.toolkit=org.webswing.toolkit.WebToolkit8, -Dwebswing.tempDirPath=file:/D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/, -Dwebswing.printerJobDelegate=org.webswing.toolkit.WebPrinterJob, -Dwebswing.allowJsLink=true, -Dwebswing.transparentFileSave=true, -Dwebswing.allowUpload=true, -Dwebswing.directdraw.supported=true, -Dwebswing.sessionTimeoutSec=300, -Dwebswing.screenHeight=977, -Dwebswing.isolatedFs=true, -Dwebswing.allowDownload=true, -Dprism.lcdtext=false, -Dwebswing.transparentFileOpen=true, -Dwebswing.jmsUrl=nio://127.0.0.1:34455, -Dprism.text=t2k, -Dwebswing.allowDelete=true, -Dwebswing.clientId=swingset3_admin_77f99a253e76_1585662825436, -Dwebswing.mainClass=com.sun.swingset3.SwingSet3, -Dwebswing.applicationHome=D:\Documents\louis-brunet.github.io\katamino\webswing\apps\SwingSet3, -Dwebswing.compositingWindowManager=false, -Dwebswing.screenWidth=1858, -Djava.awt.printerjob=org.webswing.toolkit.WebPrinterJobWrapper, -Dwebswing.fxToolkitFactory=org.webswing.javafx.toolkit.WebsinwgFxToolkitFactory8, -Dwebswing.allowLocalClipboard=true, -Dwebswing.messagingApiTopicName=msgApiSharedTopic/swingset3, -Dglass.platform=Web, -Dwebswing.classPath=D:\Documents\louis-brunet.github.io\katamino\webswing/apps/SwingSet3/SwingSet3.jar;D:\Documents\louis-brunet.github.io\katamino\webswing/apps/SwingSet3/*.jar, -Dwebswing.appId=/swingset3, -Dwebswing.directdraw=true, -Dsun.awt.fontconfig=D:\Documents\louis-brunet.github.io\katamino\webswing\tmp\release\fontconfig-swingset3_admin_77f99a253e76_1585662825436.properties, -Dprism.order=web, -Dwebswing.transfer.dir=D:\Documents\louis-brunet.github.io\katamino\webswing\apps\SwingSet3\admin\upload, -Dwebswing.theme=Murrine, -Djava.awt.graphicsenv=org.webswing.toolkit.ge.WebGraphicsEnvironment8, -Djava.awt.headless=false, -Dwebswing.jmsQueueId=swingset3_admin_77f99a253e76_1585662825436, -Dwebswing.testMode=false, -Djavafx.live.resize=false, -cp, D:\Documents\louis-brunet.github.io\katamino\webswing\webswing-server.war, main.Main]
+2020-03-31 15:53:47,028 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662825436] INFO: JPDFWriter library not found on classpath, fallback to FreeHEP PDF service.
+2020-03-31 15:53:48,227 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662825436] INFO: ClassModificationRegister: lock acquired.
+2020-03-31 15:53:52,228 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [swingset3_admin_77f99a253e76_1585662825436] Mar 31, 2020 3:53:52 PM com.sun.swingset3.SwingSet3 createDemo
+2020-03-31 15:53:52,229 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [swingset3_admin_77f99a253e76_1585662825436] WARNING: demo class not found:
+2020-03-31 15:54:26,528 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662825436] BasicDnDDemo:dragEnter:
+2020-03-31 15:54:26,627 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662825436] BasicDnDDemo:dragOver
+2020-03-31 15:54:26,627 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662825436] BasicDnDDemo:dragOver
+2020-03-31 15:54:26,728 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662825436] BasicDnDDemo:dragOver
+2020-03-31 15:54:26,730 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662825436] BasicDnDDemo:exit
+2020-03-31 15:56:33,827 INFO  [Webswing Process Handler] (SwingProcessImpl.java:158) [swingset3_admin_77f99a253e76_1585662825436] app process terminated. 
+2020-03-31 15:56:33,851 INFO  [Webswing Process Handler] (SwingInstanceImpl.java:421) Transfer dir for session [swingset3_admin_77f99a253e76_1585662825436] cleared. [D:\Documents\louis-brunet.github.io\katamino\webswing\apps\SwingSet3\admin\upload]
+2020-03-31 15:56:37,153 INFO  [qtp1919892312-12] (SwingProcessImpl.java:80) Starting application process [swingset3_admin_77f99a253e76_1585662997090] from [D:\Documents\louis-brunet.github.io\katamino\webswing\apps\SwingSet3\admin] :[D:\Program, Files\Java\jre1.8.0_241\bin\java, -Xbootclasspath/a:D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-api-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-java8-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_java.desktop.modpatch-1.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-fx-2.7.5-java11.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-fx-java8-2.7.5.jar;D:\Program Files\Java\jre1.8.0_241\lib\ext\jfxrt.jar, -noverify, -Xmx128m, -DauthorizedUser=admin, -Dwebswing.allowAutoDownload=true, -Dwebswing.initialUrl=http://localhost:8080/swingset3/, -Dwebswing.sessionTimeoutIfInactive=false, -Dawt.toolkit=org.webswing.toolkit.WebToolkit8, -Dwebswing.tempDirPath=file:/D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/, -Dwebswing.printerJobDelegate=org.webswing.toolkit.WebPrinterJob, -Dwebswing.allowJsLink=true, -Dwebswing.transparentFileSave=true, -Dwebswing.allowUpload=true, -Dwebswing.directdraw.supported=true, -Dwebswing.sessionTimeoutSec=300, -Dwebswing.screenHeight=977, -Dwebswing.isolatedFs=true, -Dwebswing.allowDownload=true, -Dprism.lcdtext=false, -Dwebswing.transparentFileOpen=true, -Dwebswing.jmsUrl=nio://127.0.0.1:34455, -Dprism.text=t2k, -Dwebswing.allowDelete=true, -Dwebswing.clientId=swingset3_admin_77f99a253e76_1585662997090, -Dwebswing.mainClass=com.sun.swingset3.SwingSet3, -Dwebswing.applicationHome=D:\Documents\louis-brunet.github.io\katamino\webswing\apps\SwingSet3, -Dwebswing.compositingWindowManager=false, -Dwebswing.screenWidth=1858, -Djava.awt.printerjob=org.webswing.toolkit.WebPrinterJobWrapper, -Dwebswing.fxToolkitFactory=org.webswing.javafx.toolkit.WebsinwgFxToolkitFactory8, -Dwebswing.allowLocalClipboard=true, -Dwebswing.messagingApiTopicName=msgApiSharedTopic/swingset3, -Dglass.platform=Web, -Dwebswing.classPath=D:\Documents\louis-brunet.github.io\katamino\webswing/apps/SwingSet3/SwingSet3.jar;D:\Documents\louis-brunet.github.io\katamino\webswing/apps/SwingSet3/*.jar, -Dwebswing.appId=/swingset3, -Dwebswing.directdraw=true, -Dsun.awt.fontconfig=D:\Documents\louis-brunet.github.io\katamino\webswing\tmp\release\fontconfig-swingset3_admin_77f99a253e76_1585662997090.properties, -Dprism.order=web, -Dwebswing.transfer.dir=D:\Documents\louis-brunet.github.io\katamino\webswing\apps\SwingSet3\admin\upload, -Dwebswing.theme=Murrine, -Djava.awt.graphicsenv=org.webswing.toolkit.ge.WebGraphicsEnvironment8, -Djava.awt.headless=false, -Dwebswing.jmsQueueId=swingset3_admin_77f99a253e76_1585662997090, -Dwebswing.testMode=false, -Djavafx.live.resize=false, -cp, D:\Documents\louis-brunet.github.io\katamino\webswing\webswing-server.war, main.Main]
+2020-03-31 15:56:38,279 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662997090] INFO: JPDFWriter library not found on classpath, fallback to FreeHEP PDF service.
+2020-03-31 15:56:39,781 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662997090] INFO: ClassModificationRegister: lock acquired.
+2020-03-31 15:56:40,581 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [swingset3_admin_77f99a253e76_1585662997090] Mar 31, 2020 3:56:40 PM com.sun.swingset3.SwingSet3 createDemo
+2020-03-31 15:56:40,581 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [swingset3_admin_77f99a253e76_1585662997090] WARNING: demo class not found:
+2020-03-31 15:56:48,554 INFO  [qtp1919892312-40] (SwingProcessImpl.java:80) Starting application process [katamino_admin_77f99a253e76_1585663008522] from [D:\Documents\louis-brunet.github.io\katamino\webswing] :[D:\Program, Files\Java\jre1.8.0_241\bin\java, -Xbootclasspath/a:D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-api-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-java8-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_java.desktop.modpatch-1.jar, -noverify, -Dwebswing.allowAutoDownload=true, -Dwebswing.initialUrl=http://localhost:8080/katamino/, -Dwebswing.sessionTimeoutIfInactive=false, -Dawt.toolkit=org.webswing.toolkit.WebToolkit8, -Dwebswing.tempDirPath=file:/D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/, -Dwebswing.printerJobDelegate=org.webswing.toolkit.WebPrinterJob, -Dwebswing.allowJsLink=true, -Dwebswing.transparentFileSave=true, -Dwebswing.allowUpload=true, -Dwebswing.directdraw.supported=true, -Dwebswing.sessionTimeoutSec=300, -Dwebswing.screenHeight=977, -Dwebswing.isolatedFs=false, -Dwebswing.allowDownload=true, -Dwebswing.transparentFileOpen=true, -Dwebswing.jmsUrl=nio://127.0.0.1:34455, -Dwebswing.allowDelete=true, -Dwebswing.clientId=katamino_admin_77f99a253e76_1585663008522, -Dwebswing.mainClass=katamino.Katamino, -Dwebswing.applicationHome=D:\Documents\louis-brunet.github.io\katamino\webswing, -Dwebswing.compositingWindowManager=false, -Dwebswing.screenWidth=1858, -Djava.awt.printerjob=org.webswing.toolkit.WebPrinterJobWrapper, -Dwebswing.allowLocalClipboard=true, -Dwebswing.messagingApiTopicName=msgApiSharedTopic/katamino, -Dwebswing.classPath=Katamino.jar, -Dwebswing.appId=/katamino, -Dwebswing.directdraw=true, -Dwebswing.transfer.dir=D:\Documents\louis-brunet.github.io\katamino\webswing\admin\upload, -Dwebswing.theme=Murrine, -Djava.awt.graphicsenv=org.webswing.toolkit.ge.WebGraphicsEnvironment8, -Djava.awt.headless=false, -Dwebswing.jmsQueueId=katamino_admin_77f99a253e76_1585663008522, -Dwebswing.testMode=false, -cp, D:\Documents\louis-brunet.github.io\katamino\webswing\webswing-server.war, main.Main]
+2020-03-31 15:56:50,175 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] INFO: JPDFWriter library not found on classpath, fallback to FreeHEP PDF service.
+2020-03-31 15:56:51,676 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] INFO: ClassModificationRegister: lock acquired.
+2020-03-31 15:56:51,676 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] FATAL: SwingMain:main -> java.lang.ClassNotFoundException: katamino.Katamino
+2020-03-31 15:56:51,679 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at org.webswing.classloader.SwingClassloader.loadClass(SwingClassloader.java:250)
+2020-03-31 15:56:51,680 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at java.lang.ClassLoader.loadClass(Unknown Source)
+2020-03-31 15:56:51,680 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at org.webswing.SwingMain.startSwingApp(SwingMain.java:57)
+2020-03-31 15:56:51,681 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at org.webswing.SwingMain.main(SwingMain.java:46)
+2020-03-31 15:56:51,681 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2020-03-31 15:56:51,682 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2020-03-31 15:56:51,683 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2020-03-31 15:56:51,684 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at java.lang.reflect.Method.invoke(Unknown Source)
+2020-03-31 15:56:51,684 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522] 	at main.Main.main(Main.java:80)
+2020-03-31 15:56:51,685 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663008522]  | 
+2020-03-31 15:56:51,686 INFO  [Webswing Process Handler] (SwingProcessImpl.java:158) [katamino_admin_77f99a253e76_1585663008522] app process terminated. 
+2020-03-31 15:57:51,780 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662997090] WARNING: Session inactive for 60 seconds.
+2020-03-31 15:58:51,881 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662997090] WARNING: Session inactive for 120 seconds.
+2020-03-31 15:59:52,080 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [swingset3_admin_77f99a253e76_1585662997090] WARNING: Session inactive for 180 seconds.
+2020-03-31 16:00:22,466 INFO  [qtp1919892312-43] (SwingProcessImpl.java:80) Starting application process [katamino_admin_77f99a253e76_1585663222433] from [D:\Documents\louis-brunet.github.io\katamino\webswing] :[D:\Program, Files\Java\jre1.8.0_241\bin\java, -Xbootclasspath/a:D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-api-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-java8-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_java.desktop.modpatch-1.jar, -noverify, -Dwebswing.allowAutoDownload=true, -Dwebswing.initialUrl=http://localhost:8080/katamino/, -Dwebswing.sessionTimeoutIfInactive=false, -Dawt.toolkit=org.webswing.toolkit.WebToolkit8, -Dwebswing.tempDirPath=file:/D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/, -Dwebswing.printerJobDelegate=org.webswing.toolkit.WebPrinterJob, -Dwebswing.allowJsLink=true, -Dwebswing.transparentFileSave=true, -Dwebswing.allowUpload=true, -Dwebswing.directdraw.supported=true, -Dwebswing.sessionTimeoutSec=300, -Dwebswing.screenHeight=977, -Dwebswing.isolatedFs=false, -Dwebswing.allowDownload=true, -Dwebswing.transparentFileOpen=true, -Dwebswing.jmsUrl=nio://127.0.0.1:34455, -Dwebswing.allowDelete=true, -Dwebswing.clientId=katamino_admin_77f99a253e76_1585663222433, -Dwebswing.mainClass=katamino.Katamino, -Dwebswing.applicationHome=D:\Documents\louis-brunet.github.io\katamino\webswing, -Dwebswing.compositingWindowManager=false, -Dwebswing.screenWidth=1858, -Djava.awt.printerjob=org.webswing.toolkit.WebPrinterJobWrapper, -Dwebswing.allowLocalClipboard=true, -Dwebswing.messagingApiTopicName=msgApiSharedTopic/katamino, -Dwebswing.classPath=Katamino.jar, -Dwebswing.appId=/katamino, -Dwebswing.directdraw=true, -Dwebswing.transfer.dir=D:\Documents\louis-brunet.github.io\katamino\webswing\admin\upload, -Dwebswing.theme=Murrine, -Djava.awt.graphicsenv=org.webswing.toolkit.ge.WebGraphicsEnvironment8, -Djava.awt.headless=false, -Dwebswing.jmsQueueId=katamino_admin_77f99a253e76_1585663222433, -Dwebswing.testMode=false, -cp, D:\Documents\louis-brunet.github.io\katamino\webswing\webswing-server.war, main.Main]
+2020-03-31 16:00:23,902 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663222433] INFO: JPDFWriter library not found on classpath, fallback to FreeHEP PDF service.
+2020-03-31 16:00:25,402 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663222433] INFO: ClassModificationRegister: lock acquired.
+2020-03-31 16:00:26,102 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663222433] 2529 [main] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Logical font Dialog not defined in font configuration. Using default browser counterpart.
+2020-03-31 16:00:26,203 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663222433] 2574 [main] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Logical font Dialog not defined in font configuration. Using default browser counterpart.
+2020-03-31 16:00:26,402 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663222433] 2793 [AWT-EventQueue-0] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Font Verdana not defined in font configuration. Falling back to glyph rendering.
+2020-03-31 16:00:26,502 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663222433] 2876 [AWT-EventQueue-0] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Font Verdana Bold not defined in font configuration. Falling back to glyph rendering.
+2020-03-31 16:00:48,340 INFO  [main] (WebswingServlet.java:35) Initializing Webswing...
+2020-03-31 16:00:49,526 INFO  [main] (DefaultInitializer.java:29) Using Temp folder:D:\Documents\louis-brunet.github.io\katamino\webswing\tmp\release
+2020-03-31 16:00:49,527 INFO  [main] (DefaultInitializer.java:33) Using Root folder:D:\Documents\louis-brunet.github.io\katamino\webswing
+2020-03-31 16:00:49,530 INFO  [main] (DefaultInitializer.java:43) Using War file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing-server.war
+2020-03-31 16:00:49,536 INFO  [main] (DefaultInitializer.java:47) Using Config file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing.config
+2020-03-31 16:00:50,851 INFO  [main] (StartupServiceImpl.java:33) Starting service JmsServiceImpl
+2020-03-31 16:00:51,317 INFO  [main] (StartupServiceImpl.java:33) Starting service WebSocketServiceImpl
+2020-03-31 16:00:57,176 INFO  [main] (StartupServiceImpl.java:33) Starting service ConfigurationServiceImpl
+2020-03-31 16:00:57,489 INFO  [main] (StartupServiceImpl.java:33) Starting service ExtensionServiceImpl
+2020-03-31 16:00:57,490 INFO  [main] (ExtensionServiceImpl.java:40) Initializing extension provider org.webswing.server.extension.DefaultExtensionProvider
+2020-03-31 16:00:57,491 INFO  [main] (StartupServiceImpl.java:33) Starting service StatisticsLoggerServiceImpl
+2020-03-31 16:00:57,493 INFO  [main] (StartupServiceImpl.java:33) Starting service SwingProcessServiceImpl
+2020-03-31 16:00:57,493 INFO  [main] (SecurityManagerServiceImpl.java:43) Starting SecurityManagerServiceImpl
+2020-03-31 16:00:58,710 INFO  [main] (GlobalUrlHandler.java:162) Loading configured Applications.
+2020-03-31 16:00:58,768 INFO  [main] (GlobalUrlHandler.java:180) Installing application /swingset3
+2020-03-31 16:00:58,773 INFO  [main] (GlobalUrlHandler.java:180) Installing application /netbeans
+2020-03-31 16:00:58,774 INFO  [main] (GlobalUrlHandler.java:180) Installing application /applet
+2020-03-31 16:00:58,776 INFO  [main] (GlobalUrlHandler.java:180) Installing application /javafx
+2020-03-31 16:00:58,779 INFO  [main] (GlobalUrlHandler.java:180) Installing application /katamino
+2020-03-31 16:00:59,220 INFO  [main] (GlobalUrlHandler.java:150) Loading master security module.({module=EMBEDED, config={users=[{roles=[admin], password=$hashed$9crQPd7hkQt7jS8tom2hzhd5Hm5vXld0Z-dHCTX2heY, username=admin}, {roles=[support], password=$hashed$JwcdncUhM9b49BSND3_uRIYLN0FpeqCfH2ZQH47r5mg, username=support}, {roles=[], password=$hashed$E1gTF5g2lrvNCynEI71n2DqATevC6qjOXRAuAQB5RsI, username=user}, {roles=[], password=$hashed$AyuZ-TUjqI-H3mGSCGjxIb6dUjcmON7cp2OJAp5zZ_Q, username=user1}], extensions=[]}, classPath=[]}).
+2020-03-31 16:01:00,381 ERROR [qtp1919892312-12] (WebSocketUrlHandler.java:26) Websocket connection failed: Invalid CSRF token. Received:null Expected:pB30qZ2eC7bW6Ay1mKghzxcBfQ5/+ppTr44JWP4FMO4=
+2020-03-31 16:01:05,640 INFO  [qtp1919892312-42] (SwingProcessImpl.java:80) Starting application process [katamino_admin_77f99a253e76_1585663264399] from [D:\Documents\louis-brunet.github.io\katamino\webswing] :[D:\Program, Files\Java\jre1.8.0_241\bin\java, -Xbootclasspath/a:D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-api-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-java8-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_java.desktop.modpatch-1.jar, -noverify, -Dwebswing.allowAutoDownload=true, -Dwebswing.initialUrl=http://localhost:8080/katamino/, -Dwebswing.sessionTimeoutIfInactive=false, -Dawt.toolkit=org.webswing.toolkit.WebToolkit8, -Dwebswing.tempDirPath=file:/D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/, -Dwebswing.printerJobDelegate=org.webswing.toolkit.WebPrinterJob, -Dwebswing.allowJsLink=true, -Dwebswing.transparentFileSave=true, -Dwebswing.allowUpload=true, -Dwebswing.directdraw.supported=true, -Dwebswing.sessionTimeoutSec=300, -Dwebswing.screenHeight=977, -Dwebswing.isolatedFs=false, -Dwebswing.allowDownload=true, -Dwebswing.transparentFileOpen=true, -Dwebswing.jmsUrl=nio://127.0.0.1:34455, -Dwebswing.allowDelete=true, -Dwebswing.clientId=katamino_admin_77f99a253e76_1585663264399, -Dwebswing.mainClass=katamino.Katamino, -Dwebswing.applicationHome=D:\Documents\louis-brunet.github.io\katamino\webswing, -Dwebswing.compositingWindowManager=false, -Dwebswing.screenWidth=1858, -Djava.awt.printerjob=org.webswing.toolkit.WebPrinterJobWrapper, -Dwebswing.allowLocalClipboard=true, -Dwebswing.messagingApiTopicName=msgApiSharedTopic/katamino, -Dwebswing.classPath=Katamino.jar, -Dwebswing.appId=/katamino, -Dwebswing.directdraw=true, -Dwebswing.transfer.dir=D:\Documents\louis-brunet.github.io\katamino\webswing\admin\upload, -Dwebswing.theme=Murrine, -Djava.awt.graphicsenv=org.webswing.toolkit.ge.WebGraphicsEnvironment8, -Djava.awt.headless=false, -Dwebswing.jmsQueueId=katamino_admin_77f99a253e76_1585663264399, -Dwebswing.testMode=false, -cp, D:\Documents\louis-brunet.github.io\katamino\webswing\webswing-server.war, main.Main]
+2020-03-31 16:01:11,374 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] INFO: JPDFWriter library not found on classpath, fallback to FreeHEP PDF service.
+2020-03-31 16:01:12,774 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] INFO: ClassModificationRegister: lock acquired.
+2020-03-31 16:01:13,574 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663264399] 2412 [main] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Logical font Dialog not defined in font configuration. Using default browser counterpart.
+2020-03-31 16:01:13,674 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663264399] 2465 [main] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Logical font Dialog not defined in font configuration. Using default browser counterpart.
+2020-03-31 16:01:13,974 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663264399] 2729 [AWT-EventQueue-0] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Font Verdana not defined in font configuration. Falling back to glyph rendering.
+2020-03-31 16:01:13,975 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585663264399] 2785 [AWT-EventQueue-0] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Font Verdana Bold not defined in font configuration. Falling back to glyph rendering.
+2020-03-31 16:02:52,875 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] WARNING: Session inactive for 60 seconds.
+2020-03-31 16:03:52,974 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] WARNING: Session inactive for 120 seconds.
+2020-03-31 16:04:53,075 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] WARNING: Session inactive for 180 seconds.
+2020-03-31 16:05:52,173 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] WARNING: Session inactive for 240 seconds.
+2020-03-31 16:06:52,233 INFO  [ActiveMQ Session Task-1] (SwingProcessImpl.java:142) Waiting 30000ms for app process katamino_admin_77f99a253e76_1585663264399 to end.
+2020-03-31 16:06:52,275 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] WARNING: Session inactive for 300 seconds.
+2020-03-31 16:06:52,275 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] INFO: (Inactivity) Application Shutdown scheduled. (delayed by 0 seconds).
+2020-03-31 16:06:52,277 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] WARNING: Exiting application due to inactivity for 300 seconds.
+2020-03-31 16:06:52,278 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585663264399] INFO: No shutdown listener found. Using default shutdown procedure.
+2020-03-31 16:06:52,278 INFO  [Webswing Process Handler] (SwingProcessImpl.java:158) [katamino_admin_77f99a253e76_1585663264399] app process terminated. 
+2020-03-31 16:16:32,491 INFO  [main] (WebswingServlet.java:35) Initializing Webswing...
+2020-03-31 16:16:33,147 INFO  [main] (DefaultInitializer.java:29) Using Temp folder:D:\Documents\louis-brunet.github.io\katamino\webswing\tmp\release
+2020-03-31 16:16:33,148 INFO  [main] (DefaultInitializer.java:33) Using Root folder:D:\Documents\louis-brunet.github.io\katamino\webswing
+2020-03-31 16:16:33,152 INFO  [main] (DefaultInitializer.java:43) Using War file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing-server.war
+2020-03-31 16:16:33,155 INFO  [main] (DefaultInitializer.java:47) Using Config file:file:/D:/Documents/louis-brunet.github.io/katamino/webswing/webswing.config
+2020-03-31 16:16:34,084 INFO  [main] (StartupServiceImpl.java:33) Starting service JmsServiceImpl
+2020-03-31 16:16:34,368 INFO  [main] (StartupServiceImpl.java:33) Starting service WebSocketServiceImpl
+2020-03-31 16:16:37,717 INFO  [main] (StartupServiceImpl.java:33) Starting service ConfigurationServiceImpl
+2020-03-31 16:16:37,931 INFO  [main] (StartupServiceImpl.java:33) Starting service ExtensionServiceImpl
+2020-03-31 16:16:37,931 INFO  [main] (ExtensionServiceImpl.java:40) Initializing extension provider org.webswing.server.extension.DefaultExtensionProvider
+2020-03-31 16:16:37,934 INFO  [main] (StartupServiceImpl.java:33) Starting service StatisticsLoggerServiceImpl
+2020-03-31 16:16:37,935 INFO  [main] (StartupServiceImpl.java:33) Starting service SwingProcessServiceImpl
+2020-03-31 16:16:37,936 INFO  [main] (SecurityManagerServiceImpl.java:43) Starting SecurityManagerServiceImpl
+2020-03-31 16:16:38,635 INFO  [main] (GlobalUrlHandler.java:162) Loading configured Applications.
+2020-03-31 16:16:38,718 INFO  [main] (GlobalUrlHandler.java:180) Installing application /swingset3
+2020-03-31 16:16:38,722 INFO  [main] (GlobalUrlHandler.java:180) Installing application /netbeans
+2020-03-31 16:16:38,723 INFO  [main] (GlobalUrlHandler.java:180) Installing application /applet
+2020-03-31 16:16:38,724 INFO  [main] (GlobalUrlHandler.java:180) Installing application /javafx
+2020-03-31 16:16:38,725 INFO  [main] (GlobalUrlHandler.java:180) Installing application /katamino
+2020-03-31 16:16:39,085 INFO  [main] (GlobalUrlHandler.java:150) Loading master security module.({module=EMBEDED, config={users=[{roles=[admin], password=$hashed$9crQPd7hkQt7jS8tom2hzhd5Hm5vXld0Z-dHCTX2heY, username=admin}, {roles=[support], password=$hashed$JwcdncUhM9b49BSND3_uRIYLN0FpeqCfH2ZQH47r5mg, username=support}, {roles=[], password=$hashed$E1gTF5g2lrvNCynEI71n2DqATevC6qjOXRAuAQB5RsI, username=user}, {roles=[], password=$hashed$AyuZ-TUjqI-H3mGSCGjxIb6dUjcmON7cp2OJAp5zZ_Q, username=user1}], extensions=[]}, classPath=[]}).
+2020-03-31 16:16:49,556 INFO  [qtp1919892312-12] (SwingProcessImpl.java:80) Starting application process [katamino_admin_77f99a253e76_1585664209021] from [D:\Documents\louis-brunet.github.io\katamino\webswing] :[D:\Program, Files\Java\jre1.8.0_241\bin\java, -Xbootclasspath/a:D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-api-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-java8-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_webswing-app-toolkit-2.7.5.jar;D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/WEB-INF_swing-boot_java.desktop.modpatch-1.jar, -noverify, -Dwebswing.allowAutoDownload=true, -Dwebswing.initialUrl=http://localhost:8080/katamino/, -Dwebswing.sessionTimeoutIfInactive=false, -Dawt.toolkit=org.webswing.toolkit.WebToolkit8, -Dwebswing.tempDirPath=file:/D:/Documents/louis-brunet.github.io/katamino/webswing/tmp/release/, -Dwebswing.printerJobDelegate=org.webswing.toolkit.WebPrinterJob, -Dwebswing.allowJsLink=true, -Dwebswing.transparentFileSave=true, -Dwebswing.allowUpload=true, -Dwebswing.directdraw.supported=true, -Dwebswing.sessionTimeoutSec=300, -Dwebswing.screenHeight=977, -Dwebswing.isolatedFs=false, -Dwebswing.allowDownload=true, -Dwebswing.transparentFileOpen=true, -Dwebswing.jmsUrl=nio://127.0.0.1:34455, -Dwebswing.allowDelete=true, -Dwebswing.clientId=katamino_admin_77f99a253e76_1585664209021, -Dwebswing.mainClass=katamino.Katamino, -Dwebswing.applicationHome=D:\Documents\louis-brunet.github.io\katamino\webswing, -Dwebswing.compositingWindowManager=false, -Dwebswing.screenWidth=1858, -Djava.awt.printerjob=org.webswing.toolkit.WebPrinterJobWrapper, -Dwebswing.allowLocalClipboard=true, -Dwebswing.messagingApiTopicName=msgApiSharedTopic/katamino, -Dwebswing.classPath=Katamino.jar, -Dwebswing.appId=/katamino, -Dwebswing.directdraw=true, -Dwebswing.transfer.dir=D:\Documents\louis-brunet.github.io\katamino\webswing\admin\upload, -Dwebswing.theme=Murrine, -Djava.awt.graphicsenv=org.webswing.toolkit.ge.WebGraphicsEnvironment8, -Djava.awt.headless=false, -Dwebswing.jmsQueueId=katamino_admin_77f99a253e76_1585664209021, -Dwebswing.testMode=false, -cp, D:\Documents\louis-brunet.github.io\katamino\webswing\webswing-server.war, main.Main]
+2020-03-31 16:16:52,164 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585664209021] INFO: JPDFWriter library not found on classpath, fallback to FreeHEP PDF service.
+2020-03-31 16:16:52,663 INFO  [Webswing Process Handler] (SwingProcessImpl.java:324) [katamino_admin_77f99a253e76_1585664209021] INFO: ClassModificationRegister: lock acquired.
+2020-03-31 16:16:52,963 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585664209021] 887 [main] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Logical font Dialog not defined in font configuration. Using default browser counterpart.
+2020-03-31 16:16:52,963 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585664209021] 901 [main] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Logical font Dialog not defined in font configuration. Using default browser counterpart.
+2020-03-31 16:16:53,063 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585664209021] 964 [AWT-EventQueue-0] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Font Verdana not defined in font configuration. Falling back to glyph rendering.
+2020-03-31 16:16:53,063 ERROR [Webswing Process Handler] (SwingProcessImpl.java:322) [katamino_admin_77f99a253e76_1585664209021] 977 [AWT-EventQueue-0] WARN org.webswing.services.impl.ddutil.FastDirectDrawServicesAdapter - Font Verdana Bold not defined in font configuration. Falling back to glyph rendering.
