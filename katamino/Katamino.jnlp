@@ -1,0 +1,27 @@
+<jnlp
+  spec="1.0+"
+  codebase="http://louis-brunet.github.io/katamino"
+  href="Katamino.jnlp">
+  <information>
+    <title> Katamino Demo </title>
+    <vendor>Me</vendor>
+  </information>
+  <information os="windows">   
+    <title> Katamino Demo on Windows </title>
+<!--     <homepage href="docs/linuxhelp.html"> -->  
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.8+" 
+      href="http://java.sun.com/products/autodl/j2se"
+      java-vm-args="-esa -Xnoclassgc"/>
+    <jar href="Katamino.jar" main="true"/>
+  </resources>
+  <application-desc 
+    name="Katamino Application"
+    main-class="Katamino"/>
+
+  <update check="background" />
+</jnlp> 
