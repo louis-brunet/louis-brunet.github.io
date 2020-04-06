@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Matrix | Synthèse</title>
+
+  <script src="../vis-timeline-graph2d.min.js"></script>
+  <link href="../vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  
+  <link rel="stylesheet" type="text/css" href="matrix.css">
+</head>
+
+<body>
+  <div id="settings">
+    <div id="top-btns">
+      <div id="top-left-btns">
+        <div id="row-type-btns">
+          <div class="label">Lignes</div>
+          <div>
+            <div class="radio">
+              <input id="genes-btn" type="radio" name="row-type-btn" value="gene" checked>
+              <label for="genes-btn">Gènes</label>
+            </div>
+            <div class="radio">
+              <input id="patients-btn" type="radio" name="row-type-btn" value="patient"> 
+              <label for="patients-btn">Patients</label>
+            </div>
+          </div>
+        </div>
+        <div id="sort-radio-btns">
+          <div class="label">Tri</div>
+          <div>
+            <div class="radio">
+              <input id="mutations-btn" type="radio" name="sorting-btn" value="mutations" checked> 
+              <label for="mutations-btn">Par mutations</label>
+            </div>
+            <div class="radio">
+              <input id="default-btn" type="radio" name="sorting-btn" value="default">
+              <label for="default-btn">Par défaut</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="driver-btns"></div>
+      <div id="carte-btns"></div>
+      <div id='top-right-btns'>
+        <button id="create-graph-btn" onclick="recomputeGraphic()">Matrice</button>
+        <button id="cap-btn" onclick="capture();this.style.display = 'none'">JPEG</button>
+      </div>
+    </div>
+    <!-- <p>
+      <input id="file-select" onchange="fileSelect(this)" type="file" accept=".json" title="Drivers & Anomalies | JSON"> > Drivers & Anomalies | JSON 
+    </p>
+    <p>
+      <input id="csv-select" onchange="csvSelect(this)" type="file" accept=".csv" title="Anomalies | CSV"> > Anomalies | CSV
+    </p>
+    <p>
+      <input id="computed-select" onchange="computedSelect(this)" type="file" accept=".json" title="Items calculés HCA | JSON"> > Items calculés | JSON
+    </p> -->
+    <p>
+      Liste patients :  
+      <button class="close-btn" id="filter-wipe-btn" onclick="resetFilters(this);this.style.display = 'none';">X</button>
+      <input id="patient-select" accept=".txt" onchange="patientSelect(this)" type="file">
+      Liste gènes :
+      <span id="genes-input-warning">Non implémenté</span>
+      <input id="genes-input" accept=".txt" onchange="genesSelect(this)" type="file">
+    </p>
+    
+    <div id="genes-filter-container"></div>
+
+  </div>
+  <div class="card" id="output-card">
+    <button class="close-btn" id="close-btn" onclick="document.getElementById('output-card').style.display = 'none';document.getElementById('cap-btn').style.display = 'inline-block'">X</button>
+    <img id="output">
+  </div>
+
+
+  <div id="matrix-to-capture">
+    
+    <p id="title">
+      <span id="nb-patients-span">
+        <span class="label">Nombre de patients : </span>
+        <span id="nb-patients-val"></span>
+      </span>
+    </p>
+    
+    <hr>
+    
+    <div id="loader"></div>
+    <div id="matrix"></div>  
+  </div>
+
+  <div id="gene-window-container">
+    <div class="card" id="gene-window">
+      <button class="close-btn" onclick="document.getElementById('gene-window-container').style.display = 'none';document.getElementById('genes-output-card').style.display = 'none'">X</button>
+      <a id="viewer-btn" href="http://mnd-tert2014.inserm-u1162.fr/viewer/analysis?title=Viewer&params=[{name:%22viewer%22,medias:%22EXT%20CHC%202658T%20HES;EXT%20CHC%202658T%20GPC3;EXT%20CHC%202658T%20HSP70;EXT%20CHC%202658T%20GS;Foie;DICOM;Format-DICOM%22}]">Viewer</a>
+      <button id="genes-cap-btn" onclick="captureGenes()">JPEG</button>
+
+      <div class="card" id="genes-output-card">
+        <button class="close-btn" id="genes-close-btn" onclick="document.getElementById('genes-output-card').style.display = 'none';document.getElementById('genes-cap-btn').style.display = 'inline-block'">X</button>
+        <img id="genes-output">
+      </div>
+
+      <div id="genes-to-capture">
+        <div id="genes-title">
+          <div id="date-title">
+            Synthèse génomique du patient <span id="patient">XXXX</span> à la date du <span id="date-du-jour"></span>
+          </div>
+          <div id="mat-title">
+            Matériels exploités = <span id="materiel-exploite"></span>
+          </div>
+        </div>
+        <span class="label">Gène&nbsp;:&nbsp;</span><span id="name">name</span> 
+        <span class="label">Ch&nbsp;:&nbsp;</span><span id="ch">ch</span>
+        <span class="label">Position&nbsp;:&nbsp;</span><span id="start">start</span> - <span id="end">end</span>
+        <span class="label">Strand&nbsp;:&nbsp;</span><span id="strand">strand</span>
+        <span class="label">Réf.&nbsp;:&nbsp;</span><a href="" id="ref">http://www.ensembl.org/</a>
+        
+
+        <hr>
+
+        <div class="card">
+          <div id="visualization"></div>
+        </div>
+        <div class="card">
+          <div class="label">Expressions</div>
+          <hr>
+          <div id="expressions-div"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" type="text/css" href="../genes/genestimeline.css">
+  <script src="matrix.js"></script>
+  <script src="../genes/genes.js"></script>
+  <script type="text/javascript" src="../html2canvas.min.js"></script>
+</body>
+</html>

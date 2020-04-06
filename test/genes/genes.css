@@ -1,0 +1,264 @@
+@media screen and (max-width: 1100px) {
+    div#genes-driver-btns, div#genes-carte-btns {        
+        flex-wrap: wrap;
+    }
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 80%;
+}
+
+
+#settings {
+    background-color: rgb(200,200,200);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+#settings p {
+    margin-left: 10px;
+}
+
+
+
+#top-btns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+#cap-btn {
+    background-color: green;
+    color: white;
+}
+
+#close-btn {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 4px;
+    margin: 0 0 4px 0;
+    border-radius: 30%;
+    float: right;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+
+button {
+    transition: box-shadow 0.17s linear;
+    cursor: pointer;
+    border: none;
+}
+
+button, a#viewer-btn {
+    max-height: 30px;
+}
+
+button:focus {
+    outline:none;
+}
+
+button:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 1);
+}
+
+a#viewer-btn {
+    /* display: block; */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#output-card {
+    display:none;
+    margin: 4px;
+}
+
+#output {
+    border: 1px solid black;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+
+
+#to-capture {
+    display: none;
+}
+
+#genes-input-warning {
+    color: red;
+    display: none;
+}
+
+
+#genes-driver-btns, #genes-carte-btns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.genes-driver-btn, .genes-carte-btn {
+    flex-shrink: 1;
+    color: white;
+    min-width: 100px;
+    /* max-height: 40px; */
+}
+
+.genes-driver-btn, .genes-carte-btn, #cap-btn, a#viewer-btn, #matrix-btn {
+    margin: 6px;
+    padding: 6px;
+}
+
+.genes-driver-btn {
+    background-color: rgb(110, 15, 15);
+}
+
+.genes-carte-btn {
+    background-color: blue;
+}
+
+.genes-driver-btn.driver-selected, .genes-driver-btn:hover {
+    background-color: rgb(231, 199, 157);
+    color: rgb(110, 15, 15);
+    box-shadow: none;
+    transition: background-color 0.17s linear, color 0.17s linear;
+}
+
+.genes-carte-btn.driver-selected, .genes-carte-btn:hover {
+    background-color: #b2b2ff;
+    color: blue;
+    box-shadow: none;
+    transition: background-color 0.17s linear, color 0.17s linear;
+}
+
+#genes-select-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.genes-select-item {
+    padding: 2px;
+    margin: 2px;
+    cursor: pointer;
+
+}
+
+.genes-select-item, .genes-select-item.genes-selected:active  {
+    background-color: rgb(180, 180, 180);
+    color: black;
+}
+
+.genes-select-item.genes-selected:hover, .genes-select-item:hover  {
+    background-color: rgb(211, 188, 159);
+    color: black;
+}
+
+.genes-select-item.genes-selected, .genes-select-item:active {
+    background-color: rgb(231, 199, 157);
+    color: rgb(110, 15, 15);
+}
+
+
+
+
+
+
+/* #matrix-window-container * {
+    outline: 1px solid magenta;
+} */
+
+#matrix-btn {
+    background-color: #E69500;
+    color: white;
+}
+
+
+#matrix-window-container, #pdf-creation-window-container{
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#matrix-window {
+    box-sizing: border-box;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+
+    box-shadow: 0 0 32px 10px rgba(0,0,0,0.5);
+
+}
+
+#matrix-cap-btn {
+    float: right;
+}
+
+
+#matrix-output-card {
+    display: none;
+    background-color: rgb(150, 150, 150);
+}
+
+#matrix .graph-item {
+    cursor: initial;
+}
+
+div.graph-pane {
+    margin-top: 5px;
+    justify-content: flex-start;
+}
+
+div#matrix {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#hidden-to-capture {
+    max-width: 277mm;
+    /* max-height: 95mm; */
+    visibility: hidden;
+    opacity: 0;
+}
+
+
+
+.loader {
+    box-sizing: border-box;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid rgb(10, 17, 119); /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4px;
+    /* margin-bottom: 60px; */
+}
+
+#pdf-creation-loader {
+    display: none;
+}
+
+#pdf-creation-driver, #pdf-creation-duration {
+    color: blue;
+} 
+
+.pdf-creation-window {
+    max-width: 200px;
+    box-shadow: 0 0 16px 16px rgba(0, 0, 0, 0.7);
+    margin: auto;
+    margin-top: calc(50vh - 50%);
+}
