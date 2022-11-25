@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="text-h3 q-mb-lg">
+        <div class="text-h4 q-mb-lg">
             {{ title }}
         </div>
         <div class="row q-gutter-md justify-around">
