@@ -70,6 +70,9 @@ import { defineComponent, ref } from "vue";
 //import { useQuasar } from "quasar";
 //import localStorageKeys from "src/localStorageKeys";
 
+// import projects from "src/data/projects.js";
+// const projectGroups = Object.freeze(Object.keys(projects));
+
 export default defineComponent({
     name: "Layout",
 
@@ -121,7 +124,7 @@ export default defineComponent({
             return [
                 {
                     title: this.$t("home.title"),
-                    //caption: "Contact me!",
+                    // caption: "Contact me!",
                     icon: "home",
                     link: "/",
                 },
@@ -135,12 +138,12 @@ export default defineComponent({
                     icon: "work",
                     link: "/work",
                 },
-                {
-                    title: this.$t("tools.title"),
-                    caption: "",
-                    icon: "code",
-                    link: "/tools",
-                },
+                // {
+                //     title: this.$t("tools.title"),
+                //     caption: "",
+                //     icon: "code",
+                //     link: "/tools",
+                // },
                 {
                     title: this.$t("projects.title"),
                     caption: "",

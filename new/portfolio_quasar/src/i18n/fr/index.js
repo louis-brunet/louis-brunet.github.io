@@ -1,6 +1,11 @@
 export default {
     greeting: "Bonjour",
-    home: { title: "Accueil" },
+    home: {
+        title: "Accueil",
+        introduction:
+            "Bonjour et bienvenue sur mon site portfolio. Je suis étudiant en ingénierie informatique à l'ENSIMAG (École nationale supérieure d'informatique et de mathématiques appliquées de Grenoble), avec une spécialité en ingénierie des systèmes d'informations.",
+        // status: "",
+    },
     resume: { title: "Curriculum Vitae" },
     projects: {
         title: "Réalisations informatiques",
@@ -20,11 +25,14 @@ export default {
             javaSwing: "Java (bibliothèque graphique Swing)",
             js: "Javascript",
             ajax: "Requêtes AJAX",
-            mysql: "MySQL",
+            mysql: "Base de données MySQL",
             vue: "Vue.js v3",
-            quasar: "Quasar (framework qui utilise Vue.js)",
-            python: "Python v3",
+            quasar: "Quasar (framework au dessus de Vue.js)",
+            python: "Python 3",
             php: "PHP",
+            libgdx: "Java (bibliothèque libGDX de développement de jeux)",
+            iutGuiLib: "Bibliothèque graphique C de l'IUT",
+            ensimagGuiLib: "Java (bibliothèque graphique de l'école)",
         },
         projectInfo: {
             covid: {
@@ -40,21 +48,31 @@ export default {
                 },
             },
             site: {
-                title: "Site personnel",
+                title: "Site portfolio",
                 features: {
                     locale: "Internationalisation avec i18n.",
-                    dark: "Choix persistant entre un mode sombre ou un mode clair.",
+                    dark: "Persistance du choix utilisateur entre le thème sombre ou le thème clair.",
                     spa: "Single Page Application (SPA).",
                 },
             },
             sudoku: {
                 title: "Sudoku: création et résolution automatique",
+                features: {
+                    io: "Importation et exportation de grilles avec des fichiers qui ont un format binaire spécifique.",
+                    resolution:
+                        "Résolution manuelle, ou automatique avec un algorithme de back-tracking.",
+                },
             },
             chess: {
                 title: "Échecs",
             },
             zth: {
                 title: "Zero to Hero: jeu roguelike",
+                features: {
+                    genre: "Jeu de plateformes en vue 2D, avec des éléments rogue-like.",
+                    generation:
+                        "Génération d'une nouvelle séquence de niveaux à chaque nouvelle partie.",
+                },
             },
             invaders: {
                 title: "Space Invaders",
@@ -65,12 +83,22 @@ export default {
             },
             pi: {
                 title: "Approximation de pi par simulation de Monte-Carlo",
+                features: {
+                    ppm2gif:
+                        "Visualisation des étapes de la simulation par des images successives au format PPM, converties en une image animée au format GIF.",
+                },
             },
             snake: {
                 title: "Snake",
             },
             twinstick: {
                 title: "Twinstick shooter",
+            },
+            robotsPompiers: {
+                title: "Simulation d'affectation de robots pompiers à des incendies",
+            },
+            guiLib: {
+                title: "Bibliothèque pour la création d'une interface graphique",
             },
         },
     },
@@ -80,7 +108,7 @@ export default {
         ensimag: {
             date: "Depuis 2021",
             title: "Etudes d'ingénieur en informatique et mathématiques appliquées",
-            desc: "Spécialisation en ingénierie des systèmes d'informations prévue en fin 2022.",
+            desc: "Spécialisation en ingénierie des systèmes d'informations",
             location:
                 "ENSIMAG (École nationale supérieure d'informatique et de mathématiques appliquées de Grenoble)",
         },

@@ -1,4 +1,6 @@
+const keysPrefix = "lb-portfolio-"
+
 export default Object.freeze({
-    darkMode: "dark",
-    locale: "locale",
+    darkMode: keysPrefix+"dark",
+    locale: keysPrefix+"locale",
 });

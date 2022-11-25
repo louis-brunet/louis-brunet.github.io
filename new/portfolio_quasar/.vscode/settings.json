@@ -2,10 +2,15 @@
   "vetur.validation.template": false,
   "vetur.format.enable": false,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
-  
+
 "vetur.experimental.templateInterpolationService": true,
 "prettier.semi": false,
 "prettier.singleQuote": true,
 "prettier.tabWidth": 4,
-"prettier.jsxSingleQuote": true
+"prettier.jsxSingleQuote": true,
+"editor.formatOnSave": true,
+"editor.codeActionsOnSave": [
+    "source.fixAll.eslint"
+],
+"editor.defaultFormatter": "esbenp.prettier-vscode"
 }

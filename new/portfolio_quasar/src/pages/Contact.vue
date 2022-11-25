@@ -1,5 +1,5 @@
 <template>
-    <q-page class="flex flex-center">
+    <q-page padding>
         <h2>{{ $t("contact.title") }}</h2>
         TODO
     </q-page>

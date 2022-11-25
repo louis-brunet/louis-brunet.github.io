@@ -50,6 +50,9 @@ export default {
 
 <style lang="sass" scoped>
 
+.typewriter-text
+    white-space: nowrap
+
 .typewriter-text::after
   content: ''
   width: 0.05em

@@ -2,12 +2,13 @@
   "name": "portfolio",
   "version": "0.0.1",
   "description": "Louis Brunet's portfolio website.",
-  "productName": "Louis Brunet Portfolio",
+  "productName": "Louis Brunet | Portfolio",
   "author": "Louis Brunet <123louisb@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "v": "quasar -v"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

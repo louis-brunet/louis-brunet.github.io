@@ -1,35 +1,41 @@
 <template>
-    <q-card flat bordered>
+    <q-card flat bordered class="column justify-between">
         <q-card-section>
             <div class="text-h5 text-center">{{ title }}</div>
         </q-card-section>
 
         <q-separator />
 
-        <q-card-section v-if="tech?.length > 0">
-            <div class="category-title">{{ $t("projects.techUsed") }} :</div>
-            <div class="row justify-around">
-                <q-chip
-                    v-for="(techItem, index) in tech"
-                    :key="index"
-                    class="tech-used-item"
-                    outline
-                    square
-                >
-                    {{ techItem }}
-                    <!--<template v-if="index < tech.length - 1">, </template>-->
-                </q-chip>
+        <q-card-section class="col-grow">
+            <div v-if="tech?.length > 0">
+                <div class="category-title">
+                    {{ $t("projects.techUsed") }} :
+                </div>
+                <div class="row justify-around">
+                    <q-chip
+                        v-for="(techItem, index) in tech"
+                        :key="index"
+                        class="tech-used-item"
+                        outline
+                        square
+                    >
+                        {{ techItem }}
+                        <!--<template v-if="index < tech.length - 1">, </template>-->
+                    </q-chip>
+                </div>
             </div>
-        </q-card-section>
 
-        <q-card-section v-if="showImgCarousel">
-            <project-carousel :imgs="imgs" />
-        </q-card-section>
+            <div v-if="showImgCarousel">
+                <project-carousel :imgs="imgs" />
+            </div>
 
-        <q-card-section v-if="features?.length > 0">
-            <div class="category-title">{{ $t("projects.features") }} :</div>
-            <div v-for="(feature, index) in features" :key="index">
-                {{ feature }}
+            <div v-if="features?.length > 0">
+                <div class="category-title">
+                    {{ $t("projects.features") }} :
+                </div>
+                <div v-for="(feature, index) in features" :key="index">
+                    {{ feature }}
+                </div>
             </div>
         </q-card-section>
 
