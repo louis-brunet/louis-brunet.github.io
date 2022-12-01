@@ -3,8 +3,12 @@
 
 export default {
     greeting: "Hello",
-    home: { title: "Home" },
+    home: {
+        title: "Home",
+        introduction:
+            "English translation in progress. In the meantime, please select another language.",
+    },
     resume: { title: "Resume" },
-    projects: { title: "Projects (TODO)" },
+    projects: { title: "Projects" },
     contact: { title: "Contact" },
 };

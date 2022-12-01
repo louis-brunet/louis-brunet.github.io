@@ -3,15 +3,20 @@
         <div class="page-content">
             <h3 class="text-center">{{ $t("projects.title") }}</h3>
 
-            <template
-                v-for="(projectGroup, index) in projectGroups"
-                :key="index"
-            >
-                <button @click="scrollToElement(projectGroup.id)">
-                    {{ projectGroup.title }}
-                </button>
-            </template>
-
+            <div class="project-group-btns">
+                <q-btn
+                    v-for="(projectGroup, index) in projectGroups"
+                    :key="index"
+                    :label="projectGroup.title"
+                    outline
+                    rounded
+                    class="q-mr-md q-mb-md"
+                    @click="scrollToElement(projectGroup.id)"
+                />
+                <!-- <button @click="scrollToElement(projectGroup.id)">
+                        {{ projectGroup.title }}
+                    </button> -->
+            </div>
             <q-card flat>
                 <template
                     v-for="(projectGroup, index) in projectGroups"
@@ -22,6 +27,10 @@
                     </q-card-section>
                 </template>
             </q-card>
+
+            <q-page-scroller>
+                <q-btn fab icon="keyboard_arrow_up" color="accent" />
+            </q-page-scroller>
         </div>
     </q-page>
 </template>
@@ -88,3 +97,10 @@ export default {
     },
 };
 </script>
+
+<style scoped lang="sass">
+.project-group-btns
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-start
+</style>
