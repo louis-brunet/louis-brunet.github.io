@@ -13,9 +13,6 @@
                     class="q-mr-md q-mb-md"
                     @click="scrollToElement(projectGroup.id)"
                 />
-                <!-- <button @click="scrollToElement(projectGroup.id)">
-                        {{ projectGroup.title }}
-                    </button> -->
             </div>
             <q-card flat>
                 <template
