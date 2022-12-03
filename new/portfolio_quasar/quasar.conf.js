@@ -91,7 +91,7 @@ module.exports = configure(function (ctx) {
             // directives: [],
 
             // Quasar plugins
-            plugins: ["LocalStorage"],
+            plugins: ["LocalStorage", "Meta"],
 
             screen: { bodyClasses: true },
         },

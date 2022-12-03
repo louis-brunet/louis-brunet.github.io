@@ -17,23 +17,22 @@
     </q-page>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
+import { computed } from "@vue/reactivity";
+import { useMeta } from "quasar";
+import { useI18n } from "vue-i18n";
 
-export default defineComponent({
-    name: "PageContact",
-
-    data() {
-        return {
-            email: "123louisb@gmail.com",
-            phone: "06 17 03 67 10",
-        };
-    },
-
-    computed: {
-        hrefEmail() {
-            return `mailto:${this.email}`;
-        },
-    },
+const title = computed(() => {
+    const { t } = useI18n();
+    return t("contact.title");
 });
+
+useMeta(() => {
+    return {
+        title: `${title.value} | Louis Brunet`,
+    };
+});
+
+const [email, phone] = ["123louisb@gmail.com", "06 17 03 67 10"];
+const hrefEmail = `mailto:${email}`;
 </script>

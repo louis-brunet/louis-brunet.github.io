@@ -26,42 +26,76 @@
     </q-select>
 </template>
 
-<script>
+<script setup>
+import { computed } from "@vue/reactivity";
+import { useQuasar } from "quasar";
 import localStorageKeys from "src/localStorageKeys";
+import { useI18n } from "vue-i18n";
 
-export default {
-    name: "LocaleSelect",
-
-    data() {
-        return {
-            localeOptions: [
-                {
-                    value: "fr",
-                    label: "Français",
-                    img: "france.svg",
-                },
-                {
-                    value: "en-US",
-                    label: "English",
-                    img: "united-states.svg",
-                },
-            ],
-            optionImg(img) {
-                return "img/flags/" + img;
-            },
-        };
+const localeOptions = [
+    {
+        value: "fr",
+        label: "Français",
+        img: "france.svg",
     },
-
-    computed: {
-        locale: {
-            get() {
-                return this.$i18n.locale;
-            },
-            set(l) {
-                this.$q.localStorage.set(localStorageKeys.locale, l);
-                this.$i18n.locale = l;
-            },
-        },
+    {
+        value: "en-US",
+        label: "English",
+        img: "united-states.svg",
     },
-};
+];
+
+function optionImg(img) {
+    return "img/flags/" + img;
+}
+
+const { localStorage } = useQuasar();
+const locale = computed({
+    get() {
+        const $i18n = useI18n();
+        return $i18n.locale;
+    },
+    set(l) {
+        localStorage.set(localStorageKeys.locale, l);
+        $i18n.locale = l;
+    },
+});
+
+// import localStorageKeys from "src/localStorageKeys";
+
+// export default {
+//     name: "LocaleSelect",
+
+//     data() {
+//         return {
+// localeOptions: [
+//     {
+//         value: "fr",
+//         label: "Français",
+//         img: "france.svg",
+//     },
+//     {
+//         value: "en-US",
+//         label: "English",
+//         img: "united-states.svg",
+//     },
+// ],
+//             optionImg(img) {
+//                 return "img/flags/" + img;
+//             },
+//         };
+//     },
+
+//     computed: {
+//         locale: {
+//             get() {
+//                 return this.$i18n.locale;
+//             },
+//             set(l) {
+//                 this.$q.localStorage.set(localStorageKeys.locale, l);
+//                 this.$i18n.locale = l;
+//             },
+//         },
+//     },
+// };
 </script>

@@ -33,17 +33,15 @@
     </q-page>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
 import TypewriterText from "components/TypewriterText.vue";
+import { useMeta } from "quasar";
 
-export default defineComponent({
-    name: "PageIndex",
+const metaData = {
+    title: "Portfolio | Louis Brunet",
+};
 
-    components: {
-        TypewriterText,
-    },
-});
+useMeta(metaData);
 </script>
 
 <style lang="sass" scoped>

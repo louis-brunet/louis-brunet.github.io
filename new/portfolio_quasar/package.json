@@ -8,7 +8,10 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
-    "v": "quasar -v"
+    "v": "quasar -v",
+    "build:ssg": "quasar ssg generate",
+    "dev:ssg": "quasar ssg dev",
+    "serve:ssg": "quasar ssg serve dist/ssg"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -23,7 +26,8 @@
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.0.0",
-    "eslint-webpack-plugin": "^2.4.0"
+    "eslint-webpack-plugin": "^2.4.0",
+    "quasar-app-extension-ssg": "^4.6.0"
   },
   "browserslist": [
     "last 10 Chrome versions",

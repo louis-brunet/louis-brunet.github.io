@@ -32,67 +32,65 @@
     </q-page>
 </template>
 
-<script>
+<script setup>
+import { computed } from "@vue/reactivity";
 import ProjectList from "components/ProjectList.vue";
-import projectGroups from "src/data/projects.js";
+import dataProjectGroups from "src/data/projects.js";
+import { useMeta } from "quasar";
+import { useI18n } from "vue-i18n";
 
-export default {
-    name: "PageProjects",
+const title = computed(() => {
+    const { t } = useI18n();
+    return t("projects.title");
+});
 
-    components: { ProjectList },
+useMeta(() => {
+    return {
+        title: `${title.value} | Louis Brunet`,
+    };
+});
 
-    computed: {
-        projectGroups() {
-            const groups = [];
+function scrollToElement(id) {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
 
-            for (const [groupId, projectInfoArr] of Object.entries(
-                projectGroups
-            )) {
-                const group = {
-                    id: groupId,
-                    title: this.$t(`projects.groups.${groupId}`),
-                    projects: [],
-                };
+const projectGroups = computed(() => {
+    const groups = [];
+    const { t } = useI18n();
 
-                for (const {
-                    id: projectId,
-                    featureIds,
-                    techIds,
-                    src: srcLink,
-                    view: viewLink,
-                    imgs,
-                } of projectInfoArr) {
-                    const i18nKey = `projects.projectInfo.${projectId}`;
+    for (const [groupId, projectInfoArr] of Object.entries(dataProjectGroups)) {
+        const group = {
+            id: groupId,
+            title: t(`projects.groups.${groupId}`),
+            projects: [],
+        };
 
-                    group.projects.push({
-                        title: this.$t(`${i18nKey}.title`),
-                        features: featureIds.map((featureId) =>
-                            this.$t(`${i18nKey}.features.${featureId}`)
-                        ),
-                        tech: techIds.map((techId) =>
-                            this.$t(`projects.tech.${techId}`)
-                        ),
-                        srcLink,
-                        viewLink,
-                        imgs:
-                            imgs?.map((name) => `img/project_imgs/${name}`) ||
-                            [],
-                    });
-                }
+        for (const {
+            id: projectId,
+            featureIds,
+            techIds,
+            src: srcLink,
+            view: viewLink,
+            imgs,
+        } of projectInfoArr) {
+            const i18nKey = `projects.projectInfo.${projectId}`;
 
-                groups.push(group);
-            }
-            return groups;
-            // TODO préciser projets scolaires ou persos, pas professionnels (??)
-        },
-    },
+            group.projects.push({
+                title: t(`${i18nKey}.title`),
+                features: featureIds.map((featureId) =>
+                    t(`${i18nKey}.features.${featureId}`)
+                ),
+                tech: techIds.map((techId) => t(`projects.tech.${techId}`)),
+                srcLink,
+                viewLink,
+                imgs: imgs?.map((name) => `img/project_imgs/${name}`) || [],
+            });
+        }
 
-    methods: {
-        scrollToElement(id) {
-            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-        },
-    },
-};
+        groups.push(group);
+    }
+    return groups;
+});
 </script>
 
 <style scoped lang="sass">
